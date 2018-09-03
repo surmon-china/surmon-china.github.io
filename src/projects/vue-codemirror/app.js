@@ -2,8 +2,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import buildApp from '@/main.js'
+
 // import VueCodemirror from '@components/vue-codemirror/dist/vue-codemirror.js'
 import VueCodemirror from '@components/vue-codemirror/src/index.js'
+
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/addon/merge/merge.css'
 

@@ -21,9 +21,9 @@
       <md-button>HI! Star~</md-button>
     </div>
     <div slot="content">
-      <!-- <example></example> -->
+      <example></example>
       <!-- <br> -->
-      <test></test>
+      <!-- <test></test> -->
       <!-- <size></size> -->
     </div>
   </app-main>
@@ -31,7 +31,7 @@
 
 <script>
   import AppMain from '@/main.vue'
-  // import Example from './Example.vue'
+  import Example from './Example.vue'
   // import Test from './Test.vue'
   import Test from './Test2.vue'
   // import Size from './Size.vue'
@@ -39,7 +39,7 @@
     name: 'app',
     components: {
       AppMain,
-      // Example,
+      Example,
       Test
       // Size
     }

@@ -67,17 +67,23 @@
           }
         }
 
+        > .md-icon {
+          color: white;
+        }
+
         > .md-icon,
         > .project-name {
           float: left;
           height: 30px;
           line-height: 35px;
+          display: inline-block;
         }
 
         > .project-name {
           font-size: 16px;
           text-transform: uppercase;
           margin-left: 10px;
+          font-weight: bold;
         }
       }
 
@@ -92,7 +98,7 @@
       > .banner {
         overflow: hidden;
         text-align: center;
-        background-color: #fafafa;
+        background-color: var(--md-theme-github-background, #fff);
 
         > .title {
           height: 1em;
@@ -121,7 +127,8 @@
     }
 
     > .footer {
-      border-top: 1px solid #eee;
+      // border-top: 1px solid #eee;
+      background-color: var(--md-theme-github-background, #fff);
 
       > .footer-content {
         font-size: 1.1em;

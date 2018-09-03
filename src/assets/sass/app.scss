@@ -1,24 +1,5 @@
 @charset "UTF-8";
 
-/*
-// vue-materia theme
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
-
-@include md-register-theme("default", (
-  primary: md-get-palette-color(blue, A200), // The primary color of your application
-  accent: md-get-palette-color(red, A200) // The accent or secondary color
-));
-
-@import "~vue-material/dist/theme/all";
-
-@import "~vue-material/dist/components/mdCard/theme";
-@import "~vue-material/dist/components/mdIcon/theme";
-@import "~vue-material/dist/components/mdMenu/theme";
-@import "~vue-material/dist/components/mdList/theme";
-@import "~vue-material/dist/components/mdButton/theme";
-@import "~vue-material/dist/components/mdToolbar/theme";
-*/
-
 // variables
 @import "variables.scss";
 

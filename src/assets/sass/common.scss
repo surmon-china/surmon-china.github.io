@@ -17,6 +17,10 @@
   src: url('/static/fonts/DIN-Regular.ttf');
 }
 
+body {
+  background-color: white;
+}
+
 .radio, .checkbox {
   display: inline-block;
   margin-top: 0px;
