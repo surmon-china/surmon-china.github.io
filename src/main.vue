@@ -47,6 +47,9 @@
 </script>
 
 <style lang="scss" scoped>
+  $border: none;
+  // $border: 1px solid rgb(232, 232, 232);
+
    #app {
 
     > .header {
@@ -99,6 +102,7 @@
         overflow: hidden;
         text-align: center;
         background-color: var(--md-theme-github-background, #fff);
+        border-bottom: $border;
 
         > .title {
           height: 1em;
@@ -127,7 +131,7 @@
     }
 
     > .footer {
-      // border-top: 1px solid #eee;
+      border-top: $border;
       background-color: var(--md-theme-github-background, #fff);
 
       > .footer-content {

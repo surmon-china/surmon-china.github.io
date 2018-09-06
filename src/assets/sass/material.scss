@@ -18,3 +18,12 @@
 .md-button+.md-button {
   margin: 5px 10px;
 }
+
+.md-toolbar,
+.md-toolbar-row {
+  min-height: 60px;
+}
+
+.md-button-content {
+  font-weight: bold;
+}

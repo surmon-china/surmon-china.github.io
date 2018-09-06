@@ -59,7 +59,7 @@
         box-shadow: none;
 
         .md-card-actions {
-          background-color: #fafafa;
+          background-color: var(--md-theme-github-background, #fafafa);
           justify-content: space-between;
 
           .md-subhead {

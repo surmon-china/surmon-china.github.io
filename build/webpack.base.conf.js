@@ -10,30 +10,28 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const project = process.argv[6]
-let projectEnrey = null
+const project = require('./webpack.project')
+let projectEntry = null
 
 if (!project) {
   console.log('没有指定项目名称！\n\n npm run dev vue-xxx-xxx\n')
   process.exit(0)
   return false
 } else {
-  projectEnrey = resolve(`src/projects/${project}/app.js`)
-  if (fs.existsSync(projectEnrey)) {
-    console.log(`> ${projectEnrey}`)
+  projectEntry = resolve(`src/projects/${project}/app.js`)
+  if (fs.existsSync(projectEntry)) {
+    console.log(`Project Entry: > ${projectEntry}\n`)
   } else {
-    console.log(`文件：${projectEnrey} 并不存在！\n`)
+    console.log(`文件：${projectEntry} 并不存在！\n`)
     process.exit(0)
     return false
   }
 }
 
-console.log('projectEnrey', projectEnrey)
-
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: projectEnrey
+    app: projectEntry
   },
   output: {
     path: config.build.assetsRoot,
