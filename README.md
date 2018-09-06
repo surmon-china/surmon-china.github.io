@@ -1,6 +1,14 @@
 # vue-example
 
-> A Vue.js project
+> Vue components example.
+
+-  [vue-video-player](https://github.com/surmon-china/vue-video-player)
+-  [vue-quill-editor](https://github.com/surmon-china/vue-quill-editor)
+-  [vue-codemirror](https://github.com/surmon-china/vue-codemirror)
+-  [vue-awesome-swiper](https://github.com/surmon-china/vue-awesome-swiper)
+-  [vue-touch-ripple](https://github.com/surmon-china/vue-touch-ripple)
+-  [vue-drag-zone](https://github.com/surmon-china/vue-drag-zone)
+-  [naivebayes](https://github.com/surmon-china/naivebayes)
 
 ## Build Setup
 
