@@ -5,6 +5,12 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 vueLoaderConfig.loaders.html = path.resolve(__dirname, 'static-cdn-loader')
+/*
+vueLoaderConfig.loaders.scss.push({
+  loader: path.resolve(__dirname, 'scss-cdn-loader')
+})
+*/
+// console.log('vueLoaderConfig', vueLoaderConfig.loaders)
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -56,6 +62,11 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
+      },
+      {
+        test: /\.scss$/,
+        loader: path.resolve(__dirname, 'scss-cdn-loader'),
+        // options: vueLoaderConfig
       },
       {
         test: /\.js$/,

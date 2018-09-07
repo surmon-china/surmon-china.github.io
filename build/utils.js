@@ -18,6 +18,8 @@ exports.cssLoaders = function (options) {
   const cssLoader = {
     loader: 'css-loader',
     options: {
+      // url: false,
+      // root: '/static',
       sourceMap: options.sourceMap
     }
   }
@@ -35,6 +37,10 @@ exports.cssLoaders = function (options) {
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
+
+    loaders.push({
+      loader: path.resolve(__dirname, 'scss-cdn-loader')
+    })
 
     if (loader) {
       loaders.push({
