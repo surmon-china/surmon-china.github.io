@@ -2,7 +2,7 @@
   "name": "vue-component-example",
   "version": "1.0.0",
   "description": "A Vue components example project",
-  "author": "Surmon <surmon@foxmail.com>",
+  "author": "Surmon <https://github.com/surmon-china>",
   "private": false,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

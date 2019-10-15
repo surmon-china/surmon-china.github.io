@@ -11,12 +11,13 @@
     <md-card-media>
       <div class="quill-editor-example">
         <!-- quill-editor -->
-        <quill-editor ref="myTextEditor"
-                      :options="editorOption1"
-                      v-model="content"
-                      @blur="onEditorBlur($event)"
-                      @focus="onEditorFocus($event)"
-                      @ready="onEditorReady($event)">
+        <quill-editor
+          ref="myTextEditor"
+          :options="editorOption1"
+          v-model="content"
+          @blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)"
+          @ready="onEditorReady($event)">
         </quill-editor>
         <!-- <quill-editor v-model="content"
                       :options="editorOption"

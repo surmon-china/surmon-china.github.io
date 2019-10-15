@@ -3,7 +3,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import buildApp from '@/main.js'
 
-import VueQuillEditorSSR from '@components/vue-quill-editor/src/ssr.js'
+// import VueQuillEditorSSR from '@components/vue-quill-editor/src/ssr.js'
 import VueQuillEditor, { quillEditor } from '@components/vue-quill-editor/src/index.js'
 
 // import VueQuillEditor, { quillEditor } from 'vue-quill-editor'
@@ -25,5 +25,5 @@ const defaultOptions = {
 }
 
 Vue.use(VueQuillEditor, defaultOptions)
-Vue.use(VueQuillEditorSSR, defaultOptions)
+// Vue.use(VueQuillEditorSSR, defaultOptions)
 buildApp(App)

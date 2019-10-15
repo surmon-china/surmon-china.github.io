@@ -1,6 +1,10 @@
 <template>
   <div class="examples">
-    <div class="example" v-for="(value, key) in examples" :class="{ 'vue': key === 'exampleVue' }">
+    <div
+      class="example"
+      :key="key"
+      v-for="(value, key) in examples"
+      :class="{ 'vue': key === 'exampleVue' }">
       <component :is="key"></component>
     </div>
   </div>
