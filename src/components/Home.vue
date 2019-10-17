@@ -208,6 +208,7 @@
 
         .adswrapper {
           min-height: 10rem;
+          max-height: 20rem;
         }
 
         .repo-list {
