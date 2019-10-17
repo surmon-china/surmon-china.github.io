@@ -8307,6 +8307,14 @@ vue-eslint-parser@^5.0.0:
     esquery "^1.0.1"
     lodash "^4.17.11"
 
+vue-google-adsense@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.npm.taobao.org/vue-google-adsense/download/vue-google-adsense-1.7.0.tgz#b269b6ac7515b26100838d8413e4edf515d7b445"
+  integrity sha1-smm2rHUVsmEAg42EE+Tt9RXXtEU=
+  dependencies:
+    vue "^2.6.10"
+    vue-script2 "2.1.0"
+
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.4.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-hot-reload-api%2Fdownload%2Fvue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
@@ -8327,6 +8335,11 @@ vue-router@^3.0.3:
   version "3.1.3"
   resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.1.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-router%2Fdownload%2Fvue-router-3.1.3.tgz#e6b14fabc0c0ee9fda0e2cbbda74b350e28e412b"
   integrity sha1-5rFPq8DA7p/aDiy72nSzUOKOQSs=
+
+vue-script2@2.1.0, vue-script2@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npm.taobao.org/vue-script2/download/vue-script2-2.1.0.tgz#8e480dc6052c8cdf2aa0ec112efc80f31ddc3522"
+  integrity sha1-jkgNxgUsjN8qoOwRLvyA8x3cNSI=
 
 vue-style-loader@^4.1.0:
   version "4.1.2"
