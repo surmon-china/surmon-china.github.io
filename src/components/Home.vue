@@ -62,7 +62,6 @@
         </ul>
       </main>
     </div>
-    <el-backtop target=".detail" />
   </div>
 </template>
 
