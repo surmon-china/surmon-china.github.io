@@ -39,13 +39,12 @@
           </li>
         </ul>
         <hr>
-        <!-- <Adsense
+        <Adsense
           data-ad-client="ca-pub-4710915636313788"
           data-ad-slot="8733527061"
-          data-ad-format="auto"
           :data-full-width-responsive="true"
         >
-        </Adsense> -->
+        </Adsense>
         <h3>My Projects</h3>
         <p>GitHub repositories that I've built.</p>
         <ul class="repo-list">
