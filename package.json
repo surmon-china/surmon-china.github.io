@@ -7,6 +7,16 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "author": {
+    "name": "Surmon",
+    "email": "surmon@foxmail.com",
+    "url": "https://github.com/surmon-china"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/surmon-china/surmon-china.github.io"
+  },
+  "homepage": "https://surmon-china.github.io",
   "dependencies": {
     "axios": "^0.19.0",
     "element-ui": "^2.12.0",
@@ -49,6 +59,8 @@
   },
   "browserslist": [
     "> 1%",
+    "IE >= 11",
+    "Chrome >= 60",
     "last 2 versions"
   ]
 }
