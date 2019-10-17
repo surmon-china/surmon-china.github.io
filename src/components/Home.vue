@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-page">
     <div class="container">
       <aside class="aside">
         <div class="gravatar">
@@ -126,7 +126,7 @@
     }
   }
 
-  .home {
+  .home-page {
     position: absolute;
     left: 0;
     top: 0;
@@ -206,6 +206,10 @@
           background-color: #8e8e8e;
         }
 
+        .adswrapper {
+          min-height: 10rem;
+        }
+
         .repo-list {
           list-style-type: square;
 
@@ -240,6 +244,28 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+
+
+  @media screen and (max-width: 1000px), screen and (max-height: 600px) {
+    .home-page {
+      position: relative;
+
+      .container {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+
+        .aside {
+          width: 100%;
+          height: auto;
+        }
+
+        .detail {
+          overflow: hidden;
         }
       }
     }
