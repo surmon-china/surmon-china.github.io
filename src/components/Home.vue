@@ -3,7 +3,7 @@
     <div class="container">
       <aside class="aside">
         <div class="gravatar">
-          <el-avatar class="image" :size="120" src="@/assets/images/logo.png">
+          <el-avatar class="image" :size="120">
             <img class="image" :draggable="false" :src="userInfo.avatar_url">
           </el-avatar>
           <h2>{{ userInfo.name || '-' }}</h2>
