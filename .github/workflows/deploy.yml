@@ -22,6 +22,9 @@ jobs:
     - name: build
       run: yarn build
 
+    - name: copy to 404
+      run: cp ./dist/index.html ./dist/404.html
+
     - name: deploy
       uses: peaceiris/actions-gh-pages@v2.5.0
       env:

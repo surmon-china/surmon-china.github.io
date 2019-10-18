@@ -40,6 +40,7 @@
         </ul>
         <hr>
         <Adsense
+          v-if="enableAd"
           data-ad-client="ca-pub-4710915636313788"
           data-ad-slot="8733527061"
           :data-full-width-responsive="true"
@@ -79,7 +80,8 @@
       return {
         uid: 'surmon-china',
         userInfo: {},
-        repos: []
+        repos: [],
+        enableAd: false
       }
     },
     computed: {
@@ -96,6 +98,10 @@
           this.repos = data
             .filter(repo => !repo.fork)
             .sort((a, b) => b.stargazers_count - a.stargazers_count)
+          setTimeout(() => {
+            this.enableAd = true
+            console.log('this', this)
+          }, 1000)
         })
       }
     },
