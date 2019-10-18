@@ -8,6 +8,7 @@
           </el-avatar>
           <h2>{{ userInfo.name || '-' }}</h2>
           <p>{{ userInfo.bio || '-' }}</p>
+          <github-button href="https://github.com/users/surmon-china/sponsorship" data-size="large" aria-label="Sponsor @surmon-china on GitHub">Sponsor</github-button>
         </div>
         <div class="profile">
           <a class="item" target="_blank" v-if="userInfo.html_url" :href="userInfo.html_url">
@@ -74,8 +75,13 @@
 
 <script>
   import * as api from '@/services/api'
+  import GithubButton from 'vue-github-button'
+
   export default {
     name: 'home',
+    components: {
+      GithubButton
+    },
     data() {
       return {
         uid: 'surmon-china',
