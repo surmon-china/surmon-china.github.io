@@ -8,23 +8,32 @@
           </el-avatar>
           <h2>{{ userInfo.name || '-' }}</h2>
           <p>{{ userInfo.bio || '-' }}</p>
-          <github-button href="https://github.com/users/surmon-china/sponsorship" data-size="large" aria-label="Sponsor @surmon-china on GitHub">Sponsor</github-button>
+          <client-only>
+            <github-button
+              :href="`https://github.com/users/${uid}/sponsorship`"
+              :aria-label="`Sponsor @${uid} on GitHub`"
+              data-icon="octicon-heart"
+              data-size="large"
+            >
+              Sponsor
+            </github-button>
+          </client-only>
         </div>
         <div class="profile">
           <a class="item" target="_blank" v-if="userInfo.html_url" :href="userInfo.html_url">
-            <svg height="20" class="icon octicon-mark-github v-align-middle" fill="#ffffff" aria-label="GitHub" viewBox="0 0 16 16" version="1.1" width="20" role="img"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+            <svg height="20" class="icon octicon-mark-github v-align-middle" fill="#fff" aria-label="GitHub" viewBox="0 0 16 16" version="1.1" width="20" role="img"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
             <span class="text">@{{ userInfo.login }}</span>
           </a>
           <a class="item" target="_blank" v-if="userInfo.email" :href="'mailto://' + userInfo.email">
-            <svg height="20" class="icon octicon-mail v-align-middle" fill="#ffffff" aria-label="email" viewBox="0 0 14 16" version="1.1" width="17" role="img"><path fill-rule="evenodd" d="M0 4v8c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H1c-.55 0-1 .45-1 1zm13 0L7 9 1 4h12zM1 5.5l4 3-4 3v-6zM2 12l3.5-3L7 10.5 8.5 9l3.5 3H2zm11-.5l-4-3 4-3v6z"></path></svg>
+            <svg height="20" class="icon octicon-mail v-align-middle" fill="#fff" aria-label="email" viewBox="0 0 14 16" version="1.1" width="17" role="img"><path fill-rule="evenodd" d="M0 4v8c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H1c-.55 0-1 .45-1 1zm13 0L7 9 1 4h12zM1 5.5l4 3-4 3v-6zM2 12l3.5-3L7 10.5 8.5 9l3.5 3H2zm11-.5l-4-3 4-3v6z"></path></svg>
             <span class="text">{{ userInfo.email }}</span>
           </a>
           <a class="item" target="_blank" v-if="userInfo.blog" :href="userInfo.blog">
-            <svg height="20" class="icon octicon-link v-align-middle" fill="#ffffff" aria-label="Website" viewBox="0 0 16 16" version="1.1" width="20" role="img"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>
+            <svg height="20" class="icon octicon-link v-align-middle" fill="#fff" aria-label="Website" viewBox="0 0 16 16" version="1.1" width="20" role="img"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg>
             <span class="text">{{ userInfo.blog }}</span>
           </a>
           <span class="item" v-if="userInfo.location">
-            <svg height="20" class="icon octicon-location v-align-middle" fill="#ffffff" aria-label="Location" viewBox="0 0 12 16" version="1.1" width="15" role="img"><path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
+            <svg height="20" class="icon octicon-location v-align-middle" fill="#fff" aria-label="Location" viewBox="0 0 12 16" version="1.1" width="15" role="img"><path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
             <span class="text">{{ userInfo.location }}</span>
           </span>
         </div>
@@ -40,13 +49,7 @@
           </li>
         </ul>
         <hr>
-        <Adsense
-          v-if="enableAd"
-          data-ad-client="ca-pub-4710915636313788"
-          data-ad-slot="8733527061"
-          :data-full-width-responsive="true"
-        >
-        </Adsense>
+        <adsense-responsive-1 v-if="enableAd" />
         <h3>My Projects</h3>
         <p>GitHub repositories that I've built.</p>
         <ul class="repo-list">
@@ -74,23 +77,20 @@
 </template>
 
 <script>
-  import * as api from '@/services/api'
-  import GithubButton from 'vue-github-button'
-
+  import * as api from '~/services/api'
   export default {
-    name: 'home',
-    components: {
-      GithubButton
-    },
+    name: 'index',
     data() {
       return {
-        uid: 'surmon-china',
         userInfo: {},
         repos: [],
         enableAd: false
       }
     },
     computed: {
+      uid() {
+        return this.$store.state.github_uid
+      },
       exampleRepos() {
         return this.repos.filter(repo => !!repo.homepage)
       }
@@ -104,10 +104,9 @@
           this.repos = data
             .filter(repo => !repo.fork)
             .sort((a, b) => b.stargazers_count - a.stargazers_count)
-          setTimeout(() => {
+          this.$nextTick(() => {
             this.enableAd = true
-            console.log('this', this)
-          }, 1000)
+          })
         })
       }
     },
@@ -121,7 +120,7 @@
   ::-webkit-scrollbar {
     width: .5rem;
     height: .5rem;
-    background: #fff;
+    background: $white;
   }
 
   ::-webkit-scrollbar-track {
@@ -130,11 +129,11 @@
 
   ::-webkit-scrollbar-thumb {
     border-radius: 0;
-    background-color: #30363c;
+    background-color: $github-secondary;
     transition: background-color .15s;
 
     &:hover {
-      background-color: #24292e;
+      background-color: $github-primary;
     }
   }
 
@@ -148,20 +147,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e8e1da;
+    background-color: $body-bg;
 
     .container {
       height: 90%;
       width: 60rem;
       overflow: hidden;
-      background-color: #eee;
+      background-color: $module-bg;
       display: flex;
 
       .aside {
         width: 24%;
         height: 100%;
-        background-color: #30363c;
-        color: #fff;
+        background-color: $github-secondary;
+        color: $white;
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
@@ -174,10 +173,10 @@
           padding: 1rem;
           padding-top: 2rem;
           text-align: center;
-          background-color: #24292e;
+          background-color: $github-primary;
 
           .image {
-            border: 3px solid #fff;
+            border: 3px solid $white;
           }
         }
 
@@ -187,7 +186,7 @@
           .item {
             display: block;
             margin-bottom: 1rem;
-            color: #fff;
+            color: $white;
 
             &[href] {
               text-decoration: unset;
@@ -209,18 +208,13 @@
         flex-grow: 1;
         padding: 2rem;
         overflow-y: auto;
-        background: #fafbfc;
+        background: $module-bg;
 
         hr {
           height: 1px;
           border: 0;
           margin-top: 2rem;
           background-color: #8e8e8e;
-        }
-
-        .adswrapper {
-          min-height: 10rem;
-          max-height: 20rem;
         }
 
         .repo-list {
@@ -241,13 +235,13 @@
             margin-top: 2rem;
 
             .name {
-              color: #000;
+              color: $link-color;
             }
 
             .desc,
             .meta {
               font-size: 14px;
-              color: #333;
+              color: $text-color;
             }
 
             .meta {

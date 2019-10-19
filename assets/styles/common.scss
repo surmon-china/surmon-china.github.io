@@ -6,7 +6,19 @@
 
 body {
   font-family: 'DINRegular';
-  background-color: white;
+  background-color: $body-bg;
+  color: $text-color;
+}
+
+a {
+  color: $link-color;
+}
+
+.mammon {
+  background-color: #eee;
+  width: 100%;
+  height: auto;
+  margin: 1rem 0;
 }
 
 .radio, .checkbox {

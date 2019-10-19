@@ -1,11 +1,14 @@
 {
   "name": "surmon-china.github.io",
   "version": "1.0.0",
-  "private": true,
+  "description": "Surmon's github repository pages.",
+  "private": false,
+  "homepage": "https://github.surmon.me",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "author": {
     "name": "Surmon",
@@ -16,54 +19,19 @@
     "type": "git",
     "url": "https://github.com/surmon-china/surmon-china.github.io"
   },
-  "homepage": "https://github.surmon.me",
   "dependencies": {
+    "@nuxtjs/sitemap": "^2.0.0",
+    "@nuxtjs/style-resources": "^1.0.0",
     "axios": "^0.19.0",
     "element-ui": "^2.12.0",
     "normalize.css": "^8.0.1",
-    "vue": "^2.6.10",
+    "nuxt": "^2.0.0",
     "vue-github-button": "^1.1.2",
     "vue-google-adsense": "^1.7.0",
-    "vue-router": "^3.0.3",
-    "vue-script2": "^2.1.0",
-    "vuex": "^3.0.1"
+    "vue-script2": "^2.1.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.0",
-    "@vue/cli-service": "^4.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.0",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {
-      "no-console": 0
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "IE >= 11",
-    "Chrome >= 60",
-    "last 2 versions"
-  ]
+    "sass-loader": "^8.0.0"
+  }
 }
