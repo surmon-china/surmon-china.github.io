@@ -10,7 +10,7 @@
           <p>{{ userInfo.bio || '-' }}</p>
           <client-only>
             <github-button
-              :href="`https://github.com/users/${uid}/sponsorship`"
+              :href="`https://github.com/sponsors/${uid}`"
               :aria-label="`Sponsor @${uid} on GitHub`"
               data-icon="octicon-heart"
               data-size="large"
