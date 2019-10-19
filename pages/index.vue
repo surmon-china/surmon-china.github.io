@@ -138,7 +138,7 @@
   }
 
   .home-page {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     width: 100%;
@@ -208,6 +208,7 @@
         flex-grow: 1;
         padding: 2rem;
         overflow-y: auto;
+        overflow-x: hidden;
         background: $module-bg;
 
         hr {
@@ -260,6 +261,7 @@
   @media screen and (max-width: 1000px), screen and (max-height: 600px) {
     .home-page {
       position: relative;
+      height: auto;
 
       .container {
         width: 100%;

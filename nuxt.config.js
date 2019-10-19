@@ -1,5 +1,5 @@
 
-const title = `Surmon's Projects`;
+const title = `Surmon's projects`;
 const keywords = `Surmon,surmon-china,vue blog,vue components`;
 const description = `Surmon's github repository pages.`;
 
