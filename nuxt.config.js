@@ -40,6 +40,7 @@ export default {
   },
   plugins: [
     '~/plugins/element-ui',
+    '~/plugins/extend',
     { src: '~/plugins/adsense', ssr: false },
     { src: '~/plugins/github-button', ssr: false }
   ],

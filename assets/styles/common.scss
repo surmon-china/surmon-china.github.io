@@ -1,4 +1,6 @@
 
+@import url('//at.alicdn.com/t/font_1492229_rqwwg415mr.css');
+
 @font-face {
   font-family: 'DINRegular';
   src: url('/fonts/DIN-Regular.ttf');
@@ -8,6 +10,11 @@ body {
   font-family: 'DINRegular';
   background-color: $body-bg;
   color: $text-color;
+}
+
+.container {
+  width: 1080px;
+  margin: 0 auto;
 }
 
 a {
