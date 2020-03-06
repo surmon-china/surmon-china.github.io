@@ -1,27 +1,10 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>mode: {{ cmOption.mode }}</span>
-        <span>&nbsp;&nbsp;&nbsp;</span>
-        <span>theme: {{ cmOption.theme }}</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-codemirror/tree/master/examples/02-text-javascript.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <div class="codemirror">
-        <!-- codemirror -->
-        <codemirror v-model="code" :options="cmOption"></codemirror>
-      </div>
-    </md-card-media>
-  </md-card>
+  <codemirror v-model="code" :options="cmOption" />
 </template>
 
 <script>
+  import dedent from 'dedent'
+  import { codemirror } from 'vue-codemirror'
 
   // language
   import 'codemirror/mode/javascript/javascript.js'
@@ -69,30 +52,36 @@
   import'codemirror/addon/fold/xml-fold.js'
   
   export default {
+    name: 'codemirror-example-javascript',
+    title: 'Mode: text/javascript & Theme: monokai',
+    components: {
+      codemirror
+    },
     data() {
       return {
-        code :
-`import someResource from 'codemirror/some-resource'
-export default {
-  data () {
-    // 这是一个包含、代码提示、折叠、选中、sublime模式...的编辑器
-    // 按下Ctrl键可以体验代码提示
-    // 可以尝试sublime下的快捷键操作
-    return {
-      exampleCode: 'const a = 10',
-      cmOption: {
-        tabSize: 4,
-        styleActiveLine: true,
-        lineNumbers: true,
-        line: true,
-        mode: 'text/javascript',
-        lineWrapping: true,
-        theme: 'default'
-      }
-    }
-  },
-  components: examples
-}`,
+        code: dedent`
+          import someResource from 'codemirror/some-resource'
+          export default {
+            data () {
+              // 这是一个包含、代码提示、折叠、选中、sublime模式...的编辑器
+              // 按下Ctrl键可以体验代码提示
+              // 可以尝试sublime下的快捷键操作
+              return {
+                exampleCode: 'const a = 10',
+                cmOption: {
+                  tabSize: 4,
+                  styleActiveLine: true,
+                  lineNumbers: true,
+                  line: true,
+                  mode: 'text/javascript',
+                  lineWrapping: true,
+                  theme: 'default'
+                }
+              }
+            },
+            components: examples
+          }
+        `,
         cmOption: {
           tabSize: 4,
           styleActiveLine: false,
@@ -119,7 +108,7 @@ export default {
     },
     mounted() {
       setTimeout(() => {
-        this.styleSelectedText =  true,
+        this.styleSelectedText = true,
         this.cmOption.styleActiveLine = true
       }, 1800)
     }
@@ -132,6 +121,10 @@ export default {
     background-position: bottom;
     background-repeat: repeat-x;
   }
-  .cm-matchhighlight {background-color: lightgreen}
-  .CodeMirror-selection-highlight-scrollbar {background-color: green}
+  .cm-matchhighlight {
+    background-color: lightgreen;
+  }
+  .CodeMirror-selection-highlight-scrollbar {
+    background-color: green;
+  }
 </style>

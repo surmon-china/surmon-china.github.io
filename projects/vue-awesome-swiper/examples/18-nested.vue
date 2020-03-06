@@ -15,10 +15,10 @@
     </md-card-actions>
     <md-card-media>
       <!-- swiper -->
-      <swiper :options="swiperOptionh">
+      <swiper class="swiper" :options="swiperOptionh">
         <swiper-slide>Horizontal Slide 1</swiper-slide>
         <swiper-slide>
-          <swiper :options="swiperOptionv">
+          <swiper class="swiper" :options="swiperOptionv">
             <swiper-slide>Vertical Slide 1</swiper-slide>
             <swiper-slide>Vertical Slide 2</swiper-slide>
             <swiper-slide>Vertical Slide 3</swiper-slide>
@@ -38,7 +38,18 @@
 </template>
 
 <script>
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/dist/css/swiper.css'
+
   export default {
+    name: 'swiper-example-03',
+    components: {
+      swiper,
+      swiperSlide
+    },
+    exampleData: {
+      name: 'Pagination'
+    },
     data() {
       return {
         swiperOptionh: {
@@ -60,6 +71,23 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .swiper {
+    height: 100%;
+    width: 100%;
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: bold;
+      font-size: $font-size-huge * 2;
+      background-color: $white;
+    }
+  }
+</style>
 
 <style scoped>
   .swiper-container-v {

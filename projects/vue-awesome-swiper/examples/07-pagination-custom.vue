@@ -1,39 +1,30 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>Custom Pagination</span>
-        <span>（</span>
-        <span>自定义指示器</span>
-        <span>）</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-awesome-swiper/blob/master/examples/07-pagination-custom.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <!-- swiper -->
-      <swiper :options="swiperOption">
-        <swiper-slide>Slide 1</swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 4</swiper-slide>
-        <swiper-slide>Slide 5</swiper-slide>
-        <swiper-slide>Slide 6</swiper-slide>
-        <swiper-slide>Slide 7</swiper-slide>
-        <swiper-slide>Slide 8</swiper-slide>
-        <swiper-slide>Slide 9</swiper-slide>
-        <swiper-slide>Slide 10</swiper-slide>
-        <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
-      </swiper>
-    </md-card-media>
-  </md-card>
+  <swiper class="swiper" :options="swiperOption">
+    <swiper-slide>Slide 1</swiper-slide>
+    <swiper-slide>Slide 2</swiper-slide>
+    <swiper-slide>Slide 3</swiper-slide>
+    <swiper-slide>Slide 4</swiper-slide>
+    <swiper-slide>Slide 5</swiper-slide>
+    <swiper-slide>Slide 6</swiper-slide>
+    <swiper-slide>Slide 7</swiper-slide>
+    <swiper-slide>Slide 8</swiper-slide>
+    <swiper-slide>Slide 9</swiper-slide>
+    <swiper-slide>Slide 10</swiper-slide>
+    <div class="swiper-pagination swiper-pagination-bullets" slot="pagination"></div>
+  </swiper>
 </template>
 
 <script>
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/dist/css/swiper.css'
+
   export default {
+    name: 'swiper-example-pagination-custom',
+    title: 'Custom Pagination',
+    components: {
+      swiper,
+      swiperSlide
+    },
     data() {
       return {
         swiperOption: {
@@ -50,19 +41,44 @@
   }
 </script>
 
-<style>
- .swiper-pagination-bullet-custom {
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
-    font-size: 12px;
-    color: #000;
-    opacity: 1;
-    background: rgba(0,0,0,0.2);
+<style lang="scss" scoped>
+  .swiper {
+    height: 100%;
+    width: 100%;
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: bold;
+      font-size: $font-size-huge * 2;
+      background-color: $white;
+    }
+
+    /deep/ .swiper-pagination-bullet-custom {
+      $size: 20px;
+      width: $size !important;
+      height: $size !important;
+      line-height: $size !important;
+      text-align: center;
+      color: $text-color;
+      opacity: 0.7;
+      background: rgba($text-color, 0.2);
+      transition: all $transition-time-normal;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &.swiper-pagination-bullet-active {
+        opacity: 1;
+        color: $white;
+        background: #007aff;
+      }
+    }
   }
-  .swiper-pagination-bullet-custom.swiper-pagination-bullet-active {
-    color: #fff;
-    background: #007aff;
-  }
+</style>
+
+<style lang="scss">
 </style>

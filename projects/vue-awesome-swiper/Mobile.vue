@@ -1,6 +1,6 @@
 <template>
   <div class="mobile">
-    <swiper :options="swiperOption" class="my-swiper" ref="mySwiper">
+    <swiper class="swiper" :options="swiperOption" class="my-swiper" ref="mySwiper">
       <swiper-slide v-for="(banner, index) in banners" 
                     :class="{ 
                       'swiper-footer': Object.is(index, 3) 
@@ -14,7 +14,18 @@
 </template>
 
 <script>
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/dist/css/swiper.css'
+
   export default {
+    name: 'swiper-example-03',
+    components: {
+      swiper,
+      swiperSlide
+    },
+    exampleData: {
+      name: 'Pagination'
+    },
     data () {
       const img = {
         image: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1504281020&di=de7cca8acc97c2d9d710022b78051e09&imgtype=jpg&er=1&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F267f9e2f07082838b5168c32b299a9014c08f1f9.jpg'

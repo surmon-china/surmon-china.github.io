@@ -1,42 +1,31 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>mode: {{ cmOption.mode }}</span>
-        <span>&nbsp;&nbsp;&nbsp;</span>
-        <span>theme: {{ cmOption.theme }}</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-codemirror/tree/master/examples/01-text-x-vue.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <div class="vue">
-        <div class="codemirror">
-          <!-- codemirror -->
-          <codemirror v-model="code" 
-                      :options="cmOption"
-                      @cursorActivity="onCmCursorActivity"
-                      @ready="onCmReady"
-                      @focus="onCmFocus"
-                      @blur="onCmBlur">
-          </codemirror>
-        </div>
-        <pre class="pre">{{ code }}</pre>
-      </div>
-    </md-card-media>
-  </md-card>
+  <div class="example">
+    <div class="codemirror">
+      <codemirror
+        v-model="code" 
+        :options="cmOption"
+        @cursorActivity="onCmCursorActivity"
+        @ready="onCmReady"
+        @focus="onCmFocus"
+        @blur="onCmBlur"
+      />
+    </div>
+    <pre class="pre">{{ code }}</pre>
+  </div>
 </template>
 
 <script>
+  import dedent from 'dedent'
+  import { codemirror } from 'vue-codemirror'
 
-  // language
-  import 'codemirror/mode/vue/vue.js'
+  // base style
+  import 'codemirror/lib/codemirror.css'
 
   // theme css
   import 'codemirror/theme/base16-dark.css'
+
+  // language
+  import 'codemirror/mode/vue/vue.js'
 
   // active-line.js
   import 'codemirror/addon/selection/active-line.js'
@@ -72,50 +61,55 @@
   import 'codemirror/addon/fold/xml-fold.js'
 
   export default {
-    data() {
-      const code =
-`<template>
-  <h1>Hello World!</h1>
-  <codemirror v-model="code" :options="cmOption"></codemirror>
-</template>
-
-<script>
-  // import 'some-codemirror-resource'
-  export default {
+    name: 'codemirror-example-vue',
+    title: 'Mode: text/x-vue & Theme: base16-dark',
+    components: {
+      codemirror
+    },
     data() {
       return {
-        code: 'const A = 10',
-        cmOption: {
-          tabSize: 4,
-          styleActiveLine: true,
-          lineNumbers: true,
-          line: true,
-          foldGutter: true,
-          styleSelectedText: true,
-          mode: 'text/javascript',
-          keyMap: "sublime",
-          matchBrackets: true,
-          showCursorWhenSelecting: true,
-          theme: "monokai",
-          extraKeys: { "Ctrl": "autocomplete" },
-          hintOptions:{
-            completeSingle: false
-          }
-        }
-      }
-    }
-  }
-<\/script>
+        code: dedent`
+          <template>
+            <h1>Hello World!</h1>
+            <codemirror v-model="code" :options="cmOption" />
+          </template>
 
-<style lang="scss">
-  @import './sass/mixins';
-  @import './sass/variables';
-  main {
-    position: relative;
-  }
-</style>`
-      return {
-        code,
+          <script>
+            // import 'some-codemirror-resource'
+            export default {
+              data() {
+                return {
+                  code: 'const A = 10',
+                  cmOption: {
+                    tabSize: 4,
+                    styleActiveLine: true,
+                    lineNumbers: true,
+                    line: true,
+                    foldGutter: true,
+                    styleSelectedText: true,
+                    mode: 'text/javascript',
+                    keyMap: "sublime",
+                    matchBrackets: true,
+                    showCursorWhenSelecting: true,
+                    theme: "monokai",
+                    extraKeys: { "Ctrl": "autocomplete" },
+                    hintOptions:{
+                      completeSingle: false
+                    }
+                  }
+                }
+              }
+            }
+          ${'<\/script>'}
+
+          <style lang="scss">
+            @import './sass/mixins';
+            @import './sass/variables';
+            main {
+              position: relative;
+            }
+          </style>
+        `,
         cmOption: {
           tabSize: 4,
           foldGutter: true,
@@ -138,17 +132,41 @@
     },
     methods: {
       onCmCursorActivity(codemirror) {
-        console.log('onCmCursorActivity', codemirror)
+        console.debug('onCmCursorActivity', codemirror)
       },
       onCmReady(codemirror) {
-        console.log('onCmReady', codemirror)
+        console.debug('onCmReady', codemirror)
       },
       onCmFocus(codemirror) {
-        console.log('onCmFocus', codemirror)
+        console.debug('onCmFocus', codemirror)
       },
       onCmBlur(codemirror) {
-        console.log('onCmBlur', codemirror)
+        console.debug('onCmBlur', codemirror)
       }
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .example {
+    display: flex;
+    height: 100%;
+
+    .codemirror,
+    .pre {
+      width: 50%;
+      height: 100%;
+      margin: 0;
+      overflow: auto;
+    }
+
+    .pre {
+      display: block;
+      padding: 1rem;
+      font-size: $font-size-small;
+      line-height: 1.6;
+      word-break: break-all;
+      word-wrap: break-word;
+    }
+  }
+</style>

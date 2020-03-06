@@ -1,34 +1,19 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>CodeMirror Merge Example</span>
-        <span>&nbsp;&nbsp;&nbsp;</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-codemirror/tree/master/examples/14-merge-view.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <div class="codemirror">
-        <!-- codemirror-merge -->
-        <codemirror :merge="true"
-                    :options="cmOption" 
-                    @cursorActivity="onCmCursorActivity"
-                    @ready="onCmReady"
-                    @focus="onCmFocus"
-                    @blur="onCmBlur"
-                    @input="onCmInput"
-                    @scroll="onCmScroll">
-        </codemirror>
-      </div>
-    </md-card-media>
-  </md-card>
+  <codemirror
+    :merge="true"
+    :options="cmOption" 
+    @cursorActivity="onCmCursorActivity"
+    @ready="onCmReady"
+    @focus="onCmFocus"
+    @blur="onCmBlur"
+    @input="onCmInput"
+    @scroll="onCmScroll"
+  />
 </template>
 
 <script>
+  import dedent from 'dedent'
+  import { codemirror } from 'vue-codemirror'
 
   // language
   import 'codemirror/mode/css/css.js'
@@ -51,15 +36,19 @@
   window.DIFF_EQUAL = 0
 
   export default {
+    name: 'codemirror-example-merge-view',
+    title: 'Mode: text/html & merge view',
+    components: {
+      codemirror
+    },
     data() {
-      let html = document.documentElement.innerHTML
-                 .replace(/<style([\s\S]*?)<\/style>/ig, '')
-                 .replace(/></ig, '>\n<')
-      const orig1 = html.replace('surmon@foxmail.com', 'surmon.me@gmail.com')
-      const orig2 = html.replace('surmon@foxmail.com', 'surmon.me@gmail.com')
-                        .replace('content="320"', 'content="360"')
-                        .replace(/<title>([\s\S]*?)<\/title>/ig, '<title>test title</title>')
-      // console.log('html', html, 'orig1', 'orig2', orig2)
+      const html = document.documentElement.innerHTML
+        .replace(/<style([\s\S]*?)<\/style>/ig, '')
+        .replace(/></ig, '>\n<')
+      const orig2 = html
+        .replace('body', 'body2')
+        .replace('content="320"', 'content="360"')
+        .replace(/<title>([\s\S]*?)<\/title>/ig, '<title>test title</title>')
       return {
         cmOption: {
           value: html,
@@ -75,22 +64,22 @@
     },
     methods: {
       onCmCursorActivity(a, b, c) {
-        console.log('onCmCursorActivity', a, b, c)
+        console.debug('onCmCursorActivity', a, b, c)
       },
       onCmReady(a, b, c) {
-        console.log('onCmReady', a, b, c)
+        console.debug('onCmReady', a, b, c)
       },
       onCmFocus(a, b, c) {
-        console.log('onCmFocus', a, b, c)
+        console.debug('onCmFocus', a, b, c)
       },
       onCmBlur(a, b, c) {
-        console.log('onCmBlur', a, b, c)
+        console.debug('onCmBlur', a, b, c)
       },
       onCmInput(code) {
-        console.log('onCmInput', code)
+        console.debug('onCmInput', code)
       },
       onCmScroll() {
-        console.log('onCmScroll')
+        console.debug('onCmScroll')
       }
     }
   }

@@ -15,7 +15,7 @@
     </md-card-actions>
     <md-card-media  style="height: 500px">
       <!-- swiper1 -->
-      <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
+      <swiper class="swiper" :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
         <swiper-slide class="slide-1"></swiper-slide>
         <swiper-slide class="slide-2"></swiper-slide>
         <swiper-slide class="slide-3"></swiper-slide>
@@ -25,7 +25,7 @@
         <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
       </swiper>
       <!-- swiper2 Thumbs -->
-      <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
+      <swiper class="swiper" :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
         <swiper-slide class="slide-1"></swiper-slide>
         <swiper-slide class="slide-2"></swiper-slide>
         <swiper-slide class="slide-3"></swiper-slide>
@@ -38,7 +38,18 @@
 
 
 <script>
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/dist/css/swiper.css'
+
   export default {
+    name: 'swiper-example-03',
+    components: {
+      swiper,
+      swiperSlide
+    },
+    exampleData: {
+      name: 'Pagination'
+    },
     data() {
       return {
         swiperOptionTop: {
@@ -70,6 +81,23 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .swiper {
+    height: 100%;
+    width: 100%;
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: bold;
+      font-size: $font-size-huge * 2;
+      background-color: $white;
+    }
+  }
+</style>
 
 <style lang="scss" scoped>
   .swiper-container {

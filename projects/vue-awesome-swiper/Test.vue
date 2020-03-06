@@ -1,7 +1,7 @@
 <!-- The ref attr used to find the swiper instance -->
 <template>
   <div>
-    <swiper :options="swiperOption" 
+    <swiper class="swiper" :options="swiperOption" 
             @setTranslate="onSlideChange"
             @ready="swiperReady"
             ref="mySwiper"

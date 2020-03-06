@@ -1,13 +1,35 @@
-
+// colors
 $white: white;
 $black: #000000;
 $github-primary: #24292e;
 $github-secondary: #30363c;
-// $github-primary: #1a252f;
-// $github-secondary: #2c3e50;
 
-$body-bg: #e8e1da;
+$body-bg: #e6e6e6;
 $module-bg: #fafbfc;
+$module-bg-darken: #eeeeee;
 
 $text-color: #353535;
 $link-color: #000000;
+
+// sizes
+$container-width: 68rem;
+
+// gaps
+$golden-ratio: 0.618;
+$gap: 1rem; // ~12px
+$sm-gap: $gap * $golden-ratio; // ~8px
+$xs-gap: $sm-gap / 2; // ~4px
+$lg-gap: $sm-gap * 2; // ~14px
+
+// times
+$transition-time-fast: .15s;
+$transition-time-normal: .25s;
+$transition-time-slow: .38s;
+
+// fonts
+$font-size-base: 14px;
+$font-size-large: $font-size-base * 1.1; // ~15.4px
+$font-size-huge: $font-size-base * 1.35; // ~19px
+$font-size-small: $font-size-base * .888; // ~12.4px
+
+$iconfont-size: $font-size-base * 1.35;

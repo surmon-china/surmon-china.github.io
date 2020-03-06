@@ -15,7 +15,7 @@
     </md-card-actions>
     <md-card-media>
       <!-- swiper -->
-      <swiper :options="swiperOption" v-for="i in 2" :key="i" style="margin-bottom: 1rem;">
+      <swiper class="swiper" :options="swiperOption" v-for="i in 2" :key="i" style="margin-bottom: 1rem;">
         <swiper-slide v-for="i in 9" :key="i">Slide {{ i + 1 }}</swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
@@ -24,7 +24,18 @@
 </template>
 
 <script>
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/dist/css/swiper.css'
+
   export default {
+    name: 'swiper-example-03',
+    components: {
+      swiper,
+      swiperSlide
+    },
+    exampleData: {
+      name: 'Pagination'
+    },
     data() {
       return {
         swiperOption: {
@@ -38,3 +49,20 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .swiper {
+    height: 100%;
+    width: 100%;
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-weight: bold;
+      font-size: $font-size-huge * 2;
+      background-color: $white;
+    }
+  }
+</style>

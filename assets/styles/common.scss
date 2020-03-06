@@ -1,19 +1,37 @@
 
-@import url('//at.alicdn.com/t/font_1492229_rqwwg415mr.css');
+@import url('//at.alicdn.com/t/font_1492229_svevkauigms.css');
 
 @font-face {
   font-family: 'DINRegular';
   src: url('/fonts/DIN-Regular.ttf');
 }
 
+html {
+  font-size: $font-size-base;
+}
+
 body {
+  font-size: $font-size-base;
   font-family: 'DINRegular';
   background-color: $body-bg;
   color: $text-color;
 }
 
+* {
+  outline: none;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+.mammon {
+  background-color: $module-bg-darken;
+  width: 100%;
+  height: auto;
+  margin: 1rem 0;
+}
+
 .container {
-  width: 1080px;
+  width: $container-width;
   margin: 0 auto;
 }
 
@@ -21,18 +39,24 @@ a {
   color: $link-color;
 }
 
-.mammon {
-  background-color: #eee;
-  width: 100%;
-  height: auto;
-  margin: 1rem 0;
+::-webkit-scrollbar {
+  width: .5rem;
+  height: .5rem;
+  background: $module-bg;
 }
 
-.radio, .checkbox {
-  display: inline-block;
-  margin-top: 0px;
-  padding-top: 0px;
-  margin-bottom: 0px;
+::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0;
+  background-color: $github-secondary;
+  @include background-transition();
+
+  &:hover {
+    background-color: $github-primary;
+  }
 }
 
 .slide-up-enter-active, .slide-up-leave-active {
