@@ -37,9 +37,9 @@
       </aside>
       <main class="detail">
         <h3>Homepages & examples</h3>
-        <p>Homepages and demos for GitHub repositories.</p>
+        <p class="sub-title">Homepages and demos for GitHub repositories.</p>
         <p v-if="!inited">Loading...</p>
-        <ul class="repo-list example">
+        <ul class="homepage-repo-list">
           <li class="item" :key="repo.clone_url" v-for="repo in exampleRepositories">
             <i class="iconfont icon-link"></i>
             <a class="name" target="_blacnk" :href="repo.homepage">{{ repo.name }}</a>
@@ -48,9 +48,9 @@
         <hr>
         <adsense-responsive-ad-1 v-if="enableAd" />
         <h3>My Projects</h3>
-        <p>GitHub repositories that I've built.</p>
+        <p class="sub-title">GitHub repositories that I've built.</p>
         <p v-if="!inited">Loading...</p>
-        <ul class="repo-list detail">
+        <ul class="detail-repo-list">
           <li class="item" :key="repo.clone_url" v-for="repo in repositories">
             <i class="iconfont icon-repo"></i>
             <a class="name" target="_blacnk" :href="repo.html_url">{{ repo.full_name }}</a>
@@ -215,6 +215,10 @@
         background: $module-bg;
         border-left: none;
 
+        .sub-title {
+          color: $text-secondary;
+        }
+
         hr {
           height: 1px;
           border: 0;
@@ -222,57 +226,59 @@
           background-color: #8e8e8e;
         }
 
-        .repo-list {
+        .homepage-repo-list {
           list-style-type: square;
 
           .iconfont {
             margin-right: $xs-gap;
+            color: $text-secondary;
           }
 
-          &.example {
-            > .item {
-              margin-top: 2rem;
+          > .item {
+            margin-top: $gap * 2;
+            &:not(:first-child) {
+              margin-top: $lg-gap;
+            }
 
-              &:not(:first-child) {
-                margin-top: 1.2rem;
-              }
-
-              .name {
-                color: $link-color;
-              }
+            .name {
+              color: $link-color;
             }
           }
+        }
 
-          &.detail {
-            > .item {
-              padding-top: $lg-gap;
-              margin-bottom: $gap;
-              border-top: 1px dashed $module-bg-darken;
+        .detail-repo-list {
+          list-style-type: square;
+          margin-bottom: $gap * 2;
 
-              .desc,
-              .meta {
-                color: $text-color;
-              }
+          > .item {
+            margin-top: $gap * 2;
 
-              .desc {
+            .iconfont {
+              margin-right: $xs-gap / 2;
+            }
+
+            .desc,
+            .meta {
+              color: $text-secondary;
+            }
+
+            .meta {
+              font-size: $font-size-base;
+              .iconfont {
                 font-size: $font-size-base;
               }
 
-              .meta {
-                font-size: $font-size-small;
+              .item {
+                margin-right: 1rem;
 
-                .iconfont {
-                  font-size: $font-size-small;
-                }
+                &.language {
+                  display: inline-flex;
+                  justify-content: center;
+                  align-items: center;
+                  padding: 0 $xs-gap;
 
-                .item {
-                  margin-right: 1rem;
-
-                  &.language {
-                    display: inline-flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding: 0 $xs-gap;
+                  .iconfont {
+                    margin-right: $xs-gap;
                   }
                 }
               }
