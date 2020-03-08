@@ -69,5 +69,11 @@ export default {
   ],
   build: {
     extractCSS: true,
+    extend (config, { isClient, loaders: { vue } }) {
+      if (isClient) {
+        // https://vue-loader.vuejs.org/zh/options.html#exposefilename
+        vue.exposeFilename = true
+      }
+    }
   }
 }

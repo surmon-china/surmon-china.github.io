@@ -103,17 +103,19 @@
         </div>
       </div>
       <div class="container">
-        <homepage-basic-card class="homepage-mammon">
+        <!-- 体验太差了，所以暂时不开了 -->
+        <!-- <homepage-basic-card class="homepage-mammon">
           <client-only>
             <mammon v-if="!disabledAd" key="ad1" :provider="ad1Provider" />
           </client-only>
-        </homepage-basic-card>
+        </homepage-basic-card> -->
         <slot name="content">
           <Loading class="loading" />
         </slot>
         <homepage-basic-card class="homepage-mammon">
           <client-only>
-            <mammon v-if="!disabledAd" key="ad2" :provider="ad2Provider" />
+            <!-- 暂时使用 AD1 的广告逻辑 -->
+            <mammon v-if="!disabledAd" :provider="ad1Provider" />
           </client-only>
         </homepage-basic-card>
       </div>
@@ -123,7 +125,7 @@
         <span class="footer-content">
           <a :href="repoUrl" target="_blank">{{ repoName }}</a>
           <span> is maintained by </span>
-          <a :href="userUrl" target="_blank">{{ githubUID }}</a>
+          <a :href="userUrl" target="_blank">@{{ githubUID }}</a>
         </span>
       </div>
     </footer>
@@ -186,12 +188,12 @@
       const repoName = computed(() => props.name || repoDetail.value?.name || props.repositorieId)
       const repoDescription = computed(() => repoDetail.value?.description)
       const appRepositories = computed(() => root.$store.getters[StoreNames.AppRepositories])
-      // China user -> random Aliyun/ADSense (40%)
+      // China user -> random Aliyun / AdSense (60%)
       // Other user -> ADSense
       const isChinaGuest = computed(() => root.$store.state.isChinaGuest)
       const ad1Provider = !isChinaGuest
         ? MammonProvider.GoogleAdSense
-        : ((Math.ceil(Math.random() * 10) > 4)
+        : ((Math.ceil(Math.random() * 10) > 6)
             ? MammonProvider.Aliyun
             : MammonProvider.GoogleAdSense
           )
@@ -246,8 +248,6 @@
 
 <style lang="scss" scoped>
   .home-page {
-    border-top: 1px solid $github-secondary;
-
     .header {
       $height: 3rem;
       height: $height;
@@ -508,6 +508,10 @@
 
         a {
           color: $text-reverse;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }

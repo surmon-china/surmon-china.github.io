@@ -1,6 +1,6 @@
 <template>
   <homepage
-    :repositorie-id="repoId"
+    :repositorie-id="repositorieId"
     class="vue-touch-ripple"
   >
     <template slot="content">
@@ -28,7 +28,7 @@
   import { StoreNames } from '@/store'
 
   const data = {
-    repoId: GitHubRepositorieIDs.VueTouchRipple,
+    repositorieId: GitHubRepositorieIDs.VueTouchRipple,
     examples: [] as $TODO[],
   }
   const components = {
@@ -38,20 +38,22 @@
 
   if (isBrowser) {
     getComponentExampleMeta(require('@/projects/vue-touch-ripple/examples').default)
-      .forEach(({ component, ...others }) => {
-        data.examples.push(others)
+      .forEach(({ component, fileName, ...others }) => {
+        data.examples.push({
+          ...others,
+          fileName,
+          path: fileName && `projects/${data.repositorieId}/examples/${fileName}`
+        })
         Object.assign(components, {
           [component.name]: component
         })
       })
   }
 
-  console.log('component.data', data, components)
-
   export default createComponent({
-    name: data.repoId,
+    name: data.repositorieId,
     components,
-    head: getHomePageHeadMeta(data.repoId),
+    head: getHomePageHeadMeta(data.repositorieId),
     setup() {
       return data
     }

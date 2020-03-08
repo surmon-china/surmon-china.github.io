@@ -4,6 +4,7 @@
       <div slot="actions">
         <slot name="actions"></slot>
         <button
+          v-if="path"
           class="code-button"
           @click="handleViewCode"
         >
@@ -30,7 +31,7 @@
       },
       path: {
         type: String,
-        required: true
+        required: false
       }
     },
     components: {
@@ -46,7 +47,7 @@
           props.path
         ),
         handleViewCode() {
-          modalStore.open(props.title, props.path)
+          props.path && modalStore.open(props.title, props.path)
         }
       }
     }
