@@ -17,7 +17,10 @@ export const GITHUB_SPONSORS_URL = getSponsorsUrl(GITHUB_UID)
 
 export enum GitHubRepositorieIDs {
   Naivebayes = 'naivebayes',
+  VueAwesomeSwiper = 'vue-awesome-swiper',
   VueQuillEditor = 'vue-quill-editor',
+  VueVideoPlayer = 'vue-video-player',
+  VueCodemirror = 'vue-codemirror',
   VueTouchRipple = 'vue-touch-ripple',
   VueDragZone = 'vue-drag-zone',
   NgxQuillEditor = 'ngx-quill-editor',
