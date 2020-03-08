@@ -1,50 +1,35 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>Horizontal Base Example</span>
+  <drag-zone class="zone">
+    <drag-content class="content c1">
+      <div class="item i1">item 1</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c2">
+      <div class="item i2">item 2</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c3">
+      <div class="item i3">item 3</div>
+    </drag-content>
+    <drag-content :fixed="false" class="content c4">
+      <div class="item i4">
+        <span>item 4</span>
       </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-drag-zone/tree/master/examples/01-example.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <!-- drag-zone -->
-      <drag-zone class="zone">
-        <drag-content class="content c1">
-          <div class="item i1">item 1</div>
-        </drag-content>
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c2">
-          <div class="item i2">item 2</div>
-        </drag-content>
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c3">
-          <div class="item i3">item 3</div>
-        </drag-content>
-        <drag-content :fixed="false" class="content c4">
-          <div class="item i4">
-            <span>item 4</span>
-          </div>
-        </drag-content>
-     <!--    <drag-content class="content c5">
-          <div class="item i5">item 5</div>
-        </drag-content>
-        <drag-content class="content c6">
-          <div class="item i6">item 6</div>
-        </drag-content> -->
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c7">
-          <div class="item i7">item 7</div>
-        </drag-content>
-        <drag-content class="content c8">
-          <div class="item i8">item 8</div>
-        </drag-content>
-      </drag-zone>
-    </md-card-media>
-  </md-card>
+    </drag-content>
+  <!--    <drag-content class="content c5">
+      <div class="item i5">item 5</div>
+    </drag-content>
+    <drag-content class="content c6">
+      <div class="item i6">item 6</div>
+    </drag-content> -->
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c7">
+      <div class="item i7">item 7</div>
+    </drag-content>
+    <drag-content class="content c8">
+      <div class="item i8">item 8</div>
+    </drag-content>
+  </drag-zone>
 </template>
 
 <script>
