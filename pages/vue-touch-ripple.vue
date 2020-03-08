@@ -46,6 +46,8 @@
       })
   }
 
+  console.log('component.data', data, components)
+
   export default createComponent({
     name: data.repoId,
     components,

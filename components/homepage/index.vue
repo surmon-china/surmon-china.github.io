@@ -491,7 +491,6 @@
 
         .homepage-mammon {
           min-height: 9rem;
-          max-height: 16rem;
           overflow: hidden;
         }
       }
