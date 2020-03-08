@@ -51,11 +51,12 @@ export default {
     scss: '@/assets/styles/init.scss',
   },
   plugins: [
-    '@/plugins/composition-api',
     '@/plugins/highlight',
-    { src: '@/plugins/adsense', ssr: false },
-    { src: '@/plugins/quill-editor', ssr: false },
-    { src: '@/plugins/swiper', ssr: false },
+    '@/plugins/vue-composition-api',
+    { src: '@/plugins/vue-google-adsense', ssr: false },
+    { src: '@/plugins/vue-quill-editor', ssr: false },
+    { src: '@/plugins/vue-awesome-swiper', ssr: false },
+    { src: '@/plugins/vue-drag-zone', ssr: false },
   ],
   buildModules: [
     ['@nuxt/typescript-build', {

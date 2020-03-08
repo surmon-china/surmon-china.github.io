@@ -1,47 +1,30 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>Vertical MinHeight and MaxHeight</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-drag-zone/tree/master/examples/04-example.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <!-- drag-zone -->
-      <drag-zone class="zone" :options="{ direction: 'vertical' }">
-        <drag-content class="content c1">
-          <div class="item i1">min-height: 60px max-height: 20rem</div>
-        </drag-content>
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c2">
-          <div class="item i2">item 2</div>
-        </drag-content>
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c3">
-          <div class="item i3">min-height: 70px</div>
-        </drag-content>
-        <drag-content class="content c4">
-          <div class="item i4">item 4</div>
-        </drag-content>
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c5">
-          <div class="item i5">min-height: 5em</div>
-        </drag-content>
-      </drag-zone>
-    </md-card-media>
-  </md-card>
+  <drag-zone class="zone" :options="{ direction: 'vertical' }">
+    <drag-content class="content c1">
+      <div class="item i1">min-height: 60px max-height: 20rem</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c2">
+      <div class="item i2">item 2</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c3">
+      <div class="item i3">min-height: 70px</div>
+    </drag-content>
+    <drag-content class="content c4">
+      <div class="item i4">item 4</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c5">
+      <div class="item i5">min-height: 5em</div>
+    </drag-content>
+  </drag-zone>
 </template>
 
 <script>
   export default {
-    data() {
-      return {
-      }
-    }
+    name: 'vertical-size-example',
+    title: 'Vertical MinHeight and MaxHeight'
   }
 </script>
 
@@ -66,6 +49,7 @@
   }
   .zone .item {
     width: 100%;
+    user-select: none;
   }
   .zone .content {
     width: 100%;

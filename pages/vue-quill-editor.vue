@@ -1,7 +1,7 @@
 <template>
   <homepage
     :repositorie-id="repositorieId"
-    class="vue-quill-editor"
+    :class="repositorieId"
   >
     <template slot="actions">
       <homepage-link

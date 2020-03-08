@@ -1,12 +1,11 @@
 /**
- * @file Vue quill editor
+ * @file vue-quill-editor
  * @module plugins/vue-quill-editor
  * @author Surmon <https://github.com/surmon-china>
  */
 
 import Vue from 'vue'
 import VueQuillEditor from 'vue-quill-editor'
-// Deprecated
 // import VueQuillEditor from 'vue-quill-editor/dist/ssr'
 
 Vue.use(VueQuillEditor, {

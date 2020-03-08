@@ -19,6 +19,7 @@ export enum GitHubRepositorieIDs {
   Naivebayes = 'naivebayes',
   VueQuillEditor = 'vue-quill-editor',
   VueTouchRipple = 'vue-touch-ripple',
+  VueDragZone = 'vue-drag-zone',
   NgxQuillEditor = 'ngx-quill-editor',
 }
 

@@ -1,47 +1,30 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>Horizontal MinWidth and MaxWidth</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-drag-zone/tree/master/examples/03-example.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <!-- drag-zone -->
-      <drag-zone class="zone">
-        <drag-content class="content c1">
-          <div class="item i1">min 100px && max 30rem</div>
-        </drag-content>
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c2">
-          <div class="item i2">item 2</div>
-        </drag-content>
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c3">
-          <div class="item i3">item 3</div>
-        </drag-content>
-        <drag-content class="content c4">
-          <div class="item i4">min 50px</div>
-        </drag-content>
-        <drag-handle class="handle"></drag-handle>
-        <drag-content class="content c5">
-          <div class="item i5">min 10em</div>
-        </drag-content>
-      </drag-zone>
-    </md-card-media>
-  </md-card>
+  <drag-zone class="zone">
+    <drag-content class="content c1">
+      <div class="item i1">min 100px && max 30rem</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c2">
+      <div class="item i2">item 2</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c3">
+      <div class="item i3">item 3</div>
+    </drag-content>
+    <drag-content class="content c4">
+      <div class="item i4">min 50px</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c5">
+      <div class="item i5">min 10em</div>
+    </drag-content>
+  </drag-zone>
 </template>
 
 <script>
   export default {
-    data() {
-      return {
-      }
-    }
+    name: 'horizontal-size-example',
+    title: 'Horizontal MinWidth and MaxWidth'
   }
 </script>
 
@@ -66,6 +49,7 @@
   }
   .zone .item {
     width: 100%;
+    user-select: none;
   }
   .zone .content {
     width: calc((100% - 30px) / 4);

@@ -1,6 +1,6 @@
 /**
- * @file Vue composition-api
- * @module plugins/composition-api
+ * @file vue-composition-api
+ * @module plugins/vue-composition-api
  * @author Surmon <https://github.com/surmon-china>
  */
 

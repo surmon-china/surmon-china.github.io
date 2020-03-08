@@ -28,7 +28,7 @@
   import { StoreNames } from '@/store'
 
   const data = {
-    repositorieId: GitHubRepositorieIDs.VueTouchRipple,
+    repositorieId: GitHubRepositorieIDs.VueDragZone,
     examples: [] as $TODO[],
   }
   const components = {
@@ -37,7 +37,7 @@
   }
 
   if (isBrowser) {
-    getComponentExampleMeta(require('@/projects/vue-touch-ripple/examples').default)
+    getComponentExampleMeta(require('@/projects/vue-drag-zone/examples').default)
       .forEach(({ component, fileName, ...others }) => {
         data.examples.push({
           ...others,

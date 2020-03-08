@@ -1,70 +1,56 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>Vertical Nested</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-drag-zone/tree/master/examples/05-example.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <!-- drag-zone -->
-      <drag-zone class="vertical-zone" :options="{ direction: 'vertical' }">
+  <drag-zone class="vertical-zone" :options="{ direction: 'vertical' }">
+    <drag-content class="content c1">
+      <div class="item i1">item 1</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c2">
+      <div class="item i2">item 2</div>
+    </drag-content>
+    <drag-content class="content c3">
+      <div class="item i3">item 3</div>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c4">
+      <drag-zone class="horizontal-zone">
         <drag-content class="content c1">
-          <div class="item i1">item 1</div>
+          <div class="item i1">min 100px && max 30rem</div>
         </drag-content>
         <drag-handle class="handle"></drag-handle>
         <drag-content class="content c2">
           <div class="item i2">item 2</div>
         </drag-content>
+        <drag-handle class="handle"></drag-handle>
         <drag-content class="content c3">
           <div class="item i3">item 3</div>
         </drag-content>
-        <drag-handle class="handle"></drag-handle>
         <drag-content class="content c4">
-          <drag-zone class="horizontal-zone">
-            <drag-content class="content c1">
-              <div class="item i1">min 100px && max 30rem</div>
-            </drag-content>
-            <drag-handle class="handle"></drag-handle>
-            <drag-content class="content c2">
-              <div class="item i2">item 2</div>
-            </drag-content>
-            <drag-handle class="handle"></drag-handle>
-            <drag-content class="content c3">
-              <div class="item i3">item 3</div>
-            </drag-content>
-            <drag-content class="content c4">
-              <div class="item i4">min 50px</div>
-            </drag-content>
-            <drag-handle class="handle"></drag-handle>
-            <drag-content class="content c5">
-              <div class="item i5">item 5</div>
-            </drag-content>
-          </drag-zone>
+          <div class="item i4">min 50px</div>
         </drag-content>
         <drag-handle class="handle"></drag-handle>
         <drag-content class="content c5">
           <div class="item i5">item 5</div>
         </drag-content>
       </drag-zone>
-    </md-card-media>
-  </md-card>
+    </drag-content>
+    <drag-handle class="handle"></drag-handle>
+    <drag-content class="content c5">
+      <div class="item i5">item 5</div>
+    </drag-content>
+  </drag-zone>
 </template>
 
 <script>
   export default {
-    data() {
-      return {
-      }
-    }
+    name: 'vertical-nested-example',
+    title: 'Vertical Nested'
   }
 </script>
 
 <style scoped>
+  .item {
+    user-select: none;
+  }
   .vertical-zone {
     width: 100%;
     height: 500px;
