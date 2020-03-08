@@ -1,14 +1,17 @@
+/**
+ * @file Global store
+ * @author Surmon <https://github.com/surmon-china>
+ */
 
 import { ActionContext } from 'vuex'
-import { Context } from '@nuxt/types'
 import { isBrowser } from '@/environment'
-import CONFIG, { GitHubRepositorieIDs } from '@/config'
+import { GitHubRepositorieIDs } from '@/config'
 import * as http from '~/services/http'
 
 export const state = () => ({
   isChinaGuest: false,
   userInfo: null as $TODO,
-  repositories: [],
+  repositories: [] as $TODO[],
   inited: false
 })
 
@@ -28,6 +31,7 @@ export enum StoreNames {
   // getters
   OwnRepositories = 'ownRepositories',
   AppRepositories = 'appRepositories',
+  GetRepositorieDetail = 'getRepositorieDetail',
 }
 
 export const getters = {
@@ -38,9 +42,16 @@ export const getters = {
   },
   [StoreNames.AppRepositories](state: RootState) {
     const ids = Object.values(GitHubRepositorieIDs)
-    return state.repositories.filter(
-      (repositorie: $TODO) => ids.includes(repositorie.name)
-    )
+    return state.repositories
+    .filter((repositorie: $TODO) => ids.includes(repositorie.name))
+    .sort((a: $TODO, b: $TODO) => b.stargazers_count - a.stargazers_count)
+  },
+  [StoreNames.GetRepositorieDetail](state: RootState) {
+    return (repositorieName: string) => {
+      return state.repositories.find(
+        repositorie => repositorie.name === repositorieName
+      )
+    }
   }
 }
 
@@ -61,12 +72,12 @@ export const mutations = {
 
 export const actions = {
   [StoreNames.GetUserInfo](vuexContext: VuexContext) {
-    return http.getUserInfo(CONFIG.GITHUB_UID).then(userinfo => {
+    return http.getUserInfo().then(userinfo => {
       vuexContext.commit(StoreNames.UpdateUserInfo, userinfo)
     })
   },
   [StoreNames.GetRepositories](vuexContext: VuexContext) {
-    return http.getRepositories(CONFIG.GITHUB_UID).then(repositories => {
+    return http.getRepositories().then(repositories => {
       vuexContext.commit(StoreNames.UpdateRepositories, repositories)
     })
   },

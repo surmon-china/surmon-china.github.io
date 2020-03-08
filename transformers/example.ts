@@ -1,3 +1,9 @@
+/**
+ * @file Example page meta transformer
+ * @author Surmon <https://github.com/surmon-china>
+ */
+
+import CONFIG from '@/config'
 
 export interface IComponentExampleMeta {
   name: string
@@ -18,17 +24,22 @@ export function getComponentExampleMeta(components: $TODO): IComponentExampleMet
   })
 }
 
-export function getHomePageHeadMeta(repoName: string, description: string) {
+export function getHomePageHeadMeta(repoName: string, description?: string) {
   const keywords = [
+    `${CONFIG.GITHUB_UID} ${repoName}`,
     `${repoName} github homepage`,
     `${repoName} examples`,
     `How to use ${repoName}?`,
   ];
+
+  const titleSuffix = description ? ` | ${description} ` : ''
+  const title = `${repoName} homepage | ${CONFIG.GITHUB_UID}${titleSuffix}`
+
   return {
-    title: `${repoName} | ${description}`,
+    title,
     meta: [
       { hid: 'keywords', name: 'keywords', content: keywords.join(',') },
-      { hid: 'description', name: 'description', content: description }
+      { hid: 'description', name: 'description', content: description || title }
     ]
   }
 }

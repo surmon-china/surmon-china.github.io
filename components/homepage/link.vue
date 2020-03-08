@@ -9,7 +9,6 @@
 
 <script lang="ts">
   import { createComponent, computed } from '@vue/composition-api'
-
   export default createComponent({
     name: 'homepage-link',
     props: {
@@ -29,7 +28,7 @@
     margin: 0 1rem;
 
     .link {
-      $color: $body-bg;
+      $color: $text-reverse;
       color: $color;
       text-decoration: none;
       position: relative;

@@ -1,12 +1,11 @@
 <template>
   <div class="homepage-example-card">
-    <homepage-basic-card :title="title">
+    <homepage-basic-card :title="title" :titleLink="fileUrl">
       <div slot="actions">
         <slot name="actions"></slot>
         <button
-          size="mini"
-          icon="iconfont icon-code"
-          @click="handleClick"
+          class="code-button"
+          @click="handleViewCode"
         >
           <i class="iconfont icon-code" />
         </button>
@@ -16,30 +15,54 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+  import CONFIG from '@/config'
+  import { createComponent } from '@vue/composition-api'
+  import { getGitFileSourceUrl } from '@/transformers/url'
   import HomepageBasicCard from './card-basic.vue'
-  export default {
+  import { useModalStore } from './modal-store'
+  export default createComponent({
     name: 'homepage-example-card',
     props: {
-      title: String,
-      path: String
+      title: {
+        type: String,
+        required: true
+      },
+      path: {
+        type: String,
+        required: true
+      }
     },
     components: {
       HomepageBasicCard
     },
-    computed: {
-      file() {
-      }
-    },
-    methods: {
-      handleClick() {
-        console.log('t', props.path)
+    setup(props) {
+      const modalStore = useModalStore()
+
+      return {
+        fileUrl: props.path && getGitFileSourceUrl(
+          CONFIG.GITHUB_UID,
+          CONFIG.PROJECT_NAME,
+          props.path
+        ),
+        handleViewCode() {
+          modalStore.open(props.title, props.path)
+        }
       }
     }
-  }
+  })
 </script>
 
 <style lang="scss" scoped>
   .homepage-example-card {
+    .code-button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+
+      &:hover {
+        color: $link-color;
+      }
+    }
   }
 </style>

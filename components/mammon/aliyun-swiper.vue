@@ -1,5 +1,5 @@
 <template>
-  <div class="aliyun-mammon">
+  <div class="mammon aliyun">
     <client-only>
       <swiper class="swiper" :options="swiperOption">
         <swiper-slide class="slide" :key="index" v-for="(ad, index) in aliyunAds">
@@ -28,7 +28,7 @@
           loop: true,
           direction: 'vertical',
           autoplay: {
-            delay: 1800,
+            delay: 2600,
             disableOnInteraction: false
           },
           pagination: {
@@ -42,17 +42,17 @@
 </script>
 
 <style lang="scss">
-.aliyun-pagination {
-  .swiper-pagination-bullet {
-    &.swiper-pagination-bullet-active {
-      background-color: $body-bg;
+  .aliyun-pagination {
+    .swiper-pagination-bullet {
+      &.swiper-pagination-bullet-active {
+        background-color: $body-bg;
+      }
     }
   }
-}
 </style>
 
 <style lang="scss" scoped>
-  .aliyun-mammon {
+  .aliyun {
     height: 9rem;
 
     .swiper {
@@ -76,7 +76,7 @@
             height: 100%;
             cursor: pointer;
             background-size: cover;
-            opacity: .96;
+            opacity: .9;
             transition: opacity $transition-time-fast;
 
             &:hover {

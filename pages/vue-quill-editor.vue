@@ -1,8 +1,6 @@
 <template>
   <homepage
-    :name="repoId"
-    :repo-id="repoId"
-    :description="description"
+    :repositorie-id="repoId"
     class="vue-quill-editor"
   >
     <template slot="actions">
@@ -28,54 +26,54 @@
       />
     </template>
     <template slot="content">
-      <homepage-example-card
-        :data="example"
-        :key="example.name"
-        :title="example.name"
-        v-for="example in examples" 
-      >
-        <component class="quill-example" :is="example.name" />
-      </homepage-example-card>
+      <client-only>
+        <homepage-example-card
+          :key="example.name"
+          :path="example.path"
+          :title="example.title || example.name"
+          v-for="example in examples"
+        >
+          <component class="quill-example" :is="example.name" />
+        </homepage-example-card>
+      </client-only>
     </template>
   </homepage>
 </template>
 
 <script lang="ts">
-  import { isBrowser } from '@/environment'
-  import { createComponent } from '@vue/composition-api'
+  import { createComponent, computed } from '@vue/composition-api'
   import { getComponentExampleMeta, getHomePageHeadMeta } from '@/transformers/example'
   import Homepage from '@/components/homepage/index.vue'
   import HomepageLink from '@/components/homepage/link.vue'
   import HomepageExampleCard from '@/components/homepage/card-example.vue'
+  import { GitHubRepositorieIDs } from '@/config'
+  import { isBrowser } from '@/environment'
+  import { StoreNames } from '@/store'
 
-  const repoId = 'vue-quill-editor'
-  const description = 'Quill editor component for Vue'
-  const data: $TODO = {
-    repoId,
-    description,
-    examples: [],
+  const data = {
+    repoId: GitHubRepositorieIDs.VueQuillEditor,
+    examples: [] as $TODO[],
   }
   const components = {
     Homepage,
     HomepageLink,
-    HomepageExampleCard,
+    HomepageExampleCard
   }
 
   if (isBrowser) {
-    getComponentExampleMeta(
-      require('@/projects/vue-quill-editor/examples').default
-    ).forEach(({ component, ...others }) => {
-      data.examples.push(others)
-      Object.assign(components, {
-        [component.name]: component
+    getComponentExampleMeta(require('@/projects/vue-quill-editor/examples').default)
+      .forEach(({ component, ...others }) => {
+        data.examples.push(others)
+        Object.assign(components, {
+          [component.name]: component
+        })
       })
-    })
   }
 
   export default createComponent({
-    name: repoId,
+    name: data.repoId,
     components,
-    head: getHomePageHeadMeta(repoId, description),
+    head: getHomePageHeadMeta(data.repoId),
     setup() {
       return data
     }

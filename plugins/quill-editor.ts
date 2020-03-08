@@ -1,3 +1,8 @@
+/**
+ * @file Vue quill editor
+ * @module plugins/vue-quill-editor
+ * @author Surmon <https://github.com/surmon-china>
+ */
 
 import Vue from 'vue'
 import VueQuillEditor from 'vue-quill-editor'

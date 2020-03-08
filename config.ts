@@ -1,9 +1,19 @@
+/**
+ * @file App config
+ * @module app.config
+ * @author Surmon <https://github.com/surmon-china>
+ */
 
-import { getSponsorUrl, getUserPageUrl } from './transformers/url'
+import { getSponsorsUrl, getUserPageUrl, getFollowersUrl } from './transformers/url'
+const packageJSON = require('./package.json')
+
+export const PROJECT_URL = packageJSON.homepage
+export const PROJECT_NAME = packageJSON.name
 
 export const GITHUB_UID = 'surmon-china'
-export const GITHUB_HOMEPAGE_URL = getUserPageUrl(GITHUB_UID)
-export const GITHUB_SPONSOR_URL = getSponsorUrl(GITHUB_UID)
+export const GITHUB_USER_URL = getUserPageUrl(GITHUB_UID)
+export const GITHUB_FOLLOWERS_URL = getFollowersUrl(GITHUB_UID)
+export const GITHUB_SPONSORS_URL = getSponsorsUrl(GITHUB_UID)
 
 export enum GitHubRepositorieIDs {
   Naivebayes = 'naivebayes',
@@ -12,25 +22,27 @@ export enum GitHubRepositorieIDs {
   NgxQuillEditor = 'ngx-quill-editor',
 }
 
-export const ALIYUN_PARTER_URL_1 = 'https://www.aliyun.com/minisite/goods?userCode=pu7fghvl'
-export const ALIYUN_PARTER_URL_2 = 'https://www.aliyun.com/acts/hotsale?userCode=pu7fghvl'
+const ALIYUN_PARTER_URL_fixed = 'https://www.aliyun.com/minisite/goods?userCode=pu7fghvl'
+const ALIYUN_PARTER_URL_HOTSALE = 'https://www.aliyun.com/acts/hotsale?userCode=pu7fghvl'
+
 export const ALIYUN_ADS = [
   {
-    image: '/images/mammon/aliyun-banner-1.jpg',
-    url: ALIYUN_PARTER_URL_1
+    image: '/images/mammon/aliyun-banner-4.jpg',
+    url: ALIYUN_PARTER_URL_fixed
   },
   {
     image: '/images/mammon/aliyun-banner-3.jpg',
-    url: ALIYUN_PARTER_URL_2
+    url: ALIYUN_PARTER_URL_HOTSALE
   }
 ]
 
 export default Object.freeze({
-  GITHUB_UID,
-  GITHUB_HOMEPAGE_URL,
-  GITHUB_SPONSOR_URL,
+  PROJECT_URL,
+  PROJECT_NAME,
 
-  ALIYUN_PARTER_URL_1,
-  ALIYUN_PARTER_URL_2,
+  GITHUB_UID,
+  GITHUB_USER_URL,
+  GITHUB_FOLLOWERS_URL,
+  GITHUB_SPONSORS_URL,
   ALIYUN_ADS
 })

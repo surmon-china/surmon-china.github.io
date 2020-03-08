@@ -1,9 +1,16 @@
+/**
+ * @file Nuxt config
+ * @module nuxt.config
+ * @author Surmon <https://github.com/surmon-china>
+ */
+
+const packageJSON = require('./package.json')
 
 export const APP = {
-  url: 'https://github.surmon.me',
+  url: packageJSON.homepage,
   title: `Surmon's projects`,
   description: `Surmon's github repository pages.`,
-  keywords: ['Surmon', 'surmon-china', 'vue nuxtjs blog', 'vue components']
+  keywords: ['surmon-china', 'vue components example', 'vue swiper example', 'vue text editor']
 }
 
 export default {
@@ -34,7 +41,7 @@ export default {
     'normalize.css/normalize.css',
     '@/assets/styles/app.scss',
     // libs and components...
-    'highlight.js/styles/tomorrow.css',
+    'highlight.js/styles/github.css',
     'quill/dist/quill.snow.css',
     'quill/dist/quill.bubble.css',
     'quill/dist/quill.core.css',
@@ -45,8 +52,8 @@ export default {
   },
   plugins: [
     '@/plugins/composition-api',
+    '@/plugins/highlight',
     { src: '@/plugins/adsense', ssr: false },
-    { src: '@/plugins/github-button', ssr: false },
     { src: '@/plugins/quill-editor', ssr: false },
     { src: '@/plugins/swiper', ssr: false },
   ],
@@ -62,10 +69,5 @@ export default {
   ],
   build: {
     extractCSS: true,
-  },
-  // typescript: {
-  //   typeCheck: {
-  //     eslint: true
-  //   }
-  // }
+  }
 }

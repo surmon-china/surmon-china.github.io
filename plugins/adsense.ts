@@ -1,3 +1,8 @@
+/**
+ * @file GoogleADsense
+ * @module plugins/adsense
+ * @author Surmon <https://github.com/surmon-china>
+ */
 
 import Vue from 'vue'
 import Ads from 'vue-google-adsense'
@@ -12,4 +17,3 @@ Vue.use(Ads.InFeedAdsense)
 
 Vue.component(Adsense1.name, Adsense1)
 Vue.component(Adsense2.name, Adsense2)
-// TODO: mobile

@@ -1,6 +1,6 @@
 <template>
   <div class="example">
-    <touch-ripple class="love" color="#eee">
+    <touch-ripple class="love" color="#fff">
       <div class="heart">
         <span class="text">Surmon</span>
       </div>

@@ -1,5 +1,5 @@
 /**
- * @file Environment / ES module
+ * @file Environment
  * @module environment
  * @author Surmon <https://github.com/surmon-china>
  */

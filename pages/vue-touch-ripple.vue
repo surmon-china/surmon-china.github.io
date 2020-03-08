@@ -1,16 +1,14 @@
 <template>
   <homepage
-    :name="repoID"
-    :repo-id="repoID"
-    :description="description"
+    :repositorie-id="repoId"
     class="vue-touch-ripple"
   >
     <template slot="content">
       <client-only>
         <homepage-example-card
           :key="example.name"
-          :title="example.name"
           :path="example.path"
+          :title="example.title || example.name"
           v-for="example in examples"
         >
           <component :is="example.name" />
@@ -21,17 +19,16 @@
 </template>
 
 <script lang="ts">
-  import { isBrowser } from '@/environment'
-  import { createComponent } from '@vue/composition-api'
+  import { createComponent, computed } from '@vue/composition-api'
   import { getComponentExampleMeta, getHomePageHeadMeta } from '@/transformers/example'
   import Homepage from '@/components/homepage/index.vue'
   import HomepageExampleCard from '@/components/homepage/card-example.vue'
+  import { GitHubRepositorieIDs } from '@/config'
+  import { isBrowser } from '@/environment'
+  import { StoreNames } from '@/store'
 
-  const repoID = 'vue-touch-ripple'
-  const description = 'Touch ripple component for Vue'
   const data = {
-    repoID,
-    description,
+    repoId: GitHubRepositorieIDs.VueTouchRipple,
     examples: [] as $TODO[],
   }
   const components = {
@@ -40,20 +37,19 @@
   }
 
   if (isBrowser) {
-    getComponentExampleMeta(
-      require('@/projects/vue-touch-ripple/examples').default
-    ).forEach(({ component, ...others }) => {
-      data.examples.push(others)
-      Object.assign(components, {
-        [component.name]: component
+    getComponentExampleMeta(require('@/projects/vue-touch-ripple/examples').default)
+      .forEach(({ component, ...others }) => {
+        data.examples.push(others)
+        Object.assign(components, {
+          [component.name]: component
+        })
       })
-    })
   }
 
   export default createComponent({
-    name: repoID,
+    name: data.repoId,
     components,
-    head: getHomePageHeadMeta(repoID, description),
+    head: getHomePageHeadMeta(data.repoId),
     setup() {
       return data
     }

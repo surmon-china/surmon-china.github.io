@@ -1,5 +1,5 @@
 
-@import url('//at.alicdn.com/t/font_1492229_svevkauigms.css');
+@import url('//at.alicdn.com/t/font_1492229_igtklwxf7nl.css');
 
 @font-face {
   font-family: 'DINRegular';
@@ -24,10 +24,12 @@ body {
 }
 
 .mammon {
-  background-color: $module-bg-darken;
   width: 100%;
   height: auto;
-  margin: 1rem 0;
+
+  &.g-a {
+    min-height: 6rem;
+  }
 }
 
 .container {
@@ -51,7 +53,7 @@ a {
 
 ::-webkit-scrollbar-thumb {
   border-radius: 0;
-  background-color: $github-secondary;
+  background-color: rgba($github-primary, 0.9);
   @include background-transition();
 
   &:hover {
@@ -59,35 +61,11 @@ a {
   }
 }
 
-.slide-up-enter-active, .slide-up-leave-active {
-  transition: all .4s cubic-bezier(0, 1.2, 1, 0.5);
-  opacity: .7;
-  transform: translate3d(0, 4em, 0);
+.module-enter-active, .module-leave-active {
+  transition: opacity $transition-time-normal;
 }
-.slide-up-enter, .slide-up-leave-active {
-  opacity: .3;
-  transform: translate3d(0, 4em, 0);
-}
-
-.slide-left-enter-active, .slide-left-leave-active {
-  transition: all .2s cubic-bezier(0, 1.2, 1, 0.5);
-  opacity: .5;
-  transform: translate3d(2em, 0, 0);
-}
-
-.slide-left-enter, .slide-left-leave-active {
-  opacity: .3;
-  transform: translate3d(2em, 0, 0);
-}
-
-.slide-right-enter-active, .slide-right-leave-active {
-  transition: all .4s cubic-bezier(0, 1.2, 1, 0.5);
-  opacity: .5;
-  transform: translate3d(5em, 0, 0);
-}
-.slide-right-enter, .slide-right-leave-active {
-  opacity: .3;
-  transform: translate3d(5em, 0, 0);
+.module-enter, .module-leave-active {
+  opacity: 0
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -96,7 +74,6 @@ a {
 .fade-enter, .fade-leave-active {
   opacity: 0
 }
-
 .fade-move {
   transition: transform 1s;
 }

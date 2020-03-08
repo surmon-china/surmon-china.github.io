@@ -2,79 +2,97 @@
   <div class="index-page">
     <div class="container">
       <aside class="aside">
-        <div class="gravatar" v-if="userInfo">
-          <img class="image" :draggable="false" :src="userInfo.avatar_url">
-          <h2>{{ userInfo.name || '-' }}</h2>
-          <p>{{ userInfo.bio || '-' }}</p>
-          <client-only>
+        <transition name="module">
+          <div class="gravatar" v-if="userInfo">
+            <img class="image" :draggable="false" :src="userInfo.avatar_url">
+            <h2>{{ userInfo.name || '-' }}</h2>
+            <p>{{ userInfo.bio || '-' }}</p>
             <p class="sponsor">
-              <github-button
-                :href="githubSponsorUrl"
-                data-icon="octicon-heart"
-                data-size="large"
-              >Sponsor</github-button>
+              <github-button-base
+                :link="githubSponsorsUrl"
+                :count="userInfo.followers"
+                :countLink="githubFollowersUrl"
+                icon="icon-heart"
+                icon-color="#ea4aaa"
+              >
+                Sponsor
+              </github-button-base>
             </p>
-          </client-only>
-        </div>
-        <div class="profile" v-if="userInfo">
-          <p class="item" v-if="userInfo.html_url">
-            <i class="iconfont icon-github"></i>
-            <a class="text link" target="_blank" :href="userInfo.html_url">@{{ userInfo.login }}</a>
-          </p>
-          <p class="item" v-if="userInfo.email">
-            <i class="iconfont icon-mail"></i>
-            <a class="text link" target="_blank" :href="'mailto://' + userInfo.email">{{ userInfo.email }}</a>
-          </p>
-          <p class="item" v-if="userInfo.blog">
-            <i class="iconfont icon-link"></i>
-            <a class="text link" target="_blank" :href="userInfo.blog">{{ userInfo.blog }}</a>
-          </p>
-          <span class="item" v-if="userInfo.location">
-            <i class="iconfont icon-location"></i>
-            <span class="text">{{ userInfo.location }}</span>
-          </span>
-        </div>
+          </div>
+        </transition>
+        <transition name="module">
+          <div class="profile" v-if="userInfo">
+            <p class="item" v-if="userInfo.html_url">
+              <i class="iconfont icon-github"></i>
+              <a class="text link" target="_blank" :href="userInfo.html_url">@{{ userInfo.login }}</a>
+            </p>
+            <p class="item" v-if="userInfo.email">
+              <i class="iconfont icon-mail"></i>
+              <a class="text link" target="_blank" :href="'mailto://' + userInfo.email">{{ userInfo.email }}</a>
+            </p>
+            <p class="item" v-if="userInfo.blog">
+              <i class="iconfont icon-link"></i>
+              <a class="text link" target="_blank" :href="userInfo.blog">{{ userInfo.blog }}</a>
+            </p>
+            <span class="item" v-if="userInfo.location">
+              <i class="iconfont icon-location"></i>
+              <span class="text">{{ userInfo.location }}</span>
+            </span>
+          </div>
+        </transition>
       </aside>
       <main class="detail">
         <h3>Homepages & examples</h3>
         <p class="sub-title">Homepages and demos for GitHub repositories.</p>
+        <transition name="module" mode="out-in">
         <p v-if="!inited">Loading...</p>
-        <ul class="homepage-repo-list">
+        <ul v-else class="homepage-repo-list">
           <li class="item" :key="repo.clone_url" v-for="repo in exampleRepositories">
             <i class="iconfont icon-link"></i>
             <a class="name" target="_blacnk" :href="repo.homepage">{{ repo.name }}</a>
           </li>
         </ul>
+        </transition>
         <hr>
-        <adsense-responsive-ad-1 v-if="enableAd" />
+        <transition name="module">
+        <div class="index-mammon" v-if="enableAd">
+          <mammon :provider="adProvider" />
+        </div>
+        </transition>
         <h3>My Projects</h3>
         <p class="sub-title">GitHub repositories that I've built.</p>
-        <p v-if="!inited">Loading...</p>
-        <ul class="detail-repo-list">
-          <li class="item" :key="repo.clone_url" v-for="repo in repositories">
-            <i class="iconfont icon-repo"></i>
-            <a class="name" target="_blacnk" :href="repo.html_url">{{ repo.full_name }}</a>
-            <p class="desc">{{ repo.description }}</p>
-            <p class="meta">
-              <span class="item">
-                <i class="iconfont icon-star"></i>
-                <span>{{ repo.stargazers_count }}</span>
-              </span>
-              <span class="item">
-                <i class="iconfont icon-fork"></i>
-                <span>{{ repo.forks_count }}</span>
-              </span>
-              <span class="item">
-                <i class="iconfont icon-watch"></i>
-                <span>{{ repo.watchers_count }}</span>
-              </span>
-              <span class="item language" v-if="repo.language">
-                <i class="iconfont icon-code"></i>
-                <span>{{ repo.language }}</span>
-              </span>
-            </p>
-          </li>
-        </ul>
+        <transition name="module" mode="out-in">
+          <p v-if="!inited">Loading...</p>
+          <ul v-else class="detail-repo-list">
+            <li class="item" :key="repo.clone_url" v-for="repo in repositories">
+              <i class="iconfont icon-repo"></i>
+              <a class="name" target="_blacnk" :href="repo.html_url">{{ repo.full_name }}</a>
+              <p class="desc">{{ repo.description }}</p>
+              <p class="meta">
+                <span class="item">
+                  <i class="iconfont icon-star"></i>
+                  <span>{{ repo.stargazers_count }}</span>
+                </span>
+                <span class="item">
+                  <i class="iconfont icon-fork"></i>
+                  <span>{{ repo.forks_count }}</span>
+                </span>
+                <span class="item">
+                  <i class="iconfont icon-watch"></i>
+                  <span>{{ repo.watchers_count }}</span>
+                </span>
+                <span class="item license" v-if="repo.license">
+                  <i class="iconfont icon-law"></i>
+                  <span>{{ repo.license.name }}</span>
+                </span>
+                <span class="item language" v-if="repo.language">
+                  <i class="iconfont icon-code"></i>
+                  <span>{{ repo.language }}</span>
+                </span>
+              </p>
+            </li>
+          </ul>
+        </transition>
       </main>
     </div>
   </div>
@@ -85,9 +103,15 @@
   import { StoreNames, RootState } from '@/store'
   import { isBrowser } from '@/environment'
   import CONFIG from '@/config'
+  import GithubButtonBase from '@/components/github-button/base.vue'
+  import Mammon, { MammonProvider } from '@/components/mammon/index.vue'
 
   export default createComponent({
     name: 'index',
+    components: {
+      Mammon,
+      GithubButtonBase
+    },
     setup(_, { root }) {
       const rootGetters = root.$store.getters
       const rootState = root.$store.state as RootState
@@ -95,19 +119,19 @@
       const inited = computed(() => rootState.inited)
       const userInfo = computed(() => rootState.userInfo)
       const repositories = computed(() => rootGetters[StoreNames.OwnRepositories])
-      const exampleRepositories = computed(
-        () => repositories.value.filter((repo: $TODO) => !!repo.homepage)
-      )
+      const exampleRepositories = computed(() => {
+        return repositories.value.filter((repo: $TODO) => !!repo.homepage)
+      })
 
-      const datas = {
-        inited,
-        userInfo,
-        repositories,
-        exampleRepositories,
-        enableAd,
-        githubUID: CONFIG.GITHUB_UID,
-        githubSponsorUrl: CONFIG.GITHUB_SPONSOR_URL
-      }
+      // China user -> random Aliyun (30%) / ADSense (70%)
+      // Other user -> ADSense
+      const isChinaGuest = computed(() => rootState.isChinaGuest)
+      const adProvider = !isChinaGuest
+        ? MammonProvider.GoogleAdSense
+        : ((Math.ceil(Math.random() * 10) > 7)
+            ? MammonProvider.Aliyun
+            : MammonProvider.GoogleAdSense
+          )
 
       watch(
         () => inited,
@@ -118,7 +142,17 @@
         }
       )
 
-      return datas
+      return {
+        inited,
+        userInfo,
+        repositories,
+        exampleRepositories,
+        enableAd,
+        adProvider,
+        githubUID: CONFIG.GITHUB_UID,
+        githubFollowersUrl: CONFIG.GITHUB_FOLLOWERS_URL,
+        githubSponsorsUrl: CONFIG.GITHUB_SPONSORS_URL
+      }
     }
   })
 </script>
@@ -146,7 +180,7 @@
         width: 24%;
         height: 100%;
         background-color: $github-secondary;
-        color: $white;
+        color: $text-reverse;
         display: flex;
         flex-direction: column;
         flex-shrink: 0;
@@ -157,14 +191,13 @@
 
         .gravatar {
           padding: 2rem 1rem;
-          padding-bottom: 1.5rem;
           text-align: center;
           background-color: $github-primary;
 
           .image {
             $size: 110px;
             border-radius: 100%;
-            border: 3px solid $white;
+            border: 3px solid $text-reverse;
             width: $size;
             height: $size;
             transition: transform $transition-time-slow;
@@ -181,14 +214,14 @@
         }
 
         .profile {
-          padding: 1rem 1.5rem;
+          padding: $gap $lg-gap;
 
           .item {
             margin-top: 0;
-            margin-bottom: 1rem;
+            margin-bottom: $gap;
 
             .text {
-              color: $white;
+              color: $text-reverse;
 
               &.link {
                 text-decoration: unset;
@@ -201,10 +234,15 @@
 
             .iconfont {
               font-size: $iconfont-size;
-              margin-right: 0.5rem;
+              margin-right: $xs-gap;
             }
           }
         }
+      }
+
+      .index-mammon {
+        margin: $gap 0;
+        background-color: $module-bg-darken;
       }
 
       .detail {
@@ -223,7 +261,7 @@
           height: 1px;
           border: 0;
           margin-top: 2rem;
-          background-color: #8e8e8e;
+          background-color: $text-secondary;
         }
 
         .homepage-repo-list {
@@ -253,8 +291,8 @@
           > .item {
             margin-top: $gap * 2;
 
-            .iconfont {
-              margin-right: $xs-gap / 2;
+            .name {
+              font-weight: bold;
             }
 
             .desc,
@@ -263,22 +301,21 @@
             }
 
             .meta {
-              font-size: $font-size-base;
+              font-size: $font-size-small;
               .iconfont {
                 font-size: $font-size-base;
               }
 
               .item {
-                margin-right: 1rem;
+                margin-right: $gap;
 
                 &.language {
                   display: inline-flex;
                   justify-content: center;
                   align-items: center;
-                  padding: 0 $xs-gap;
 
                   .iconfont {
-                    margin-right: $xs-gap;
+                    margin-right: $xs-gap / 2;
                   }
                 }
               }

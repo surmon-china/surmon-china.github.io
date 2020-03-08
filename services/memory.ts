@@ -1,6 +1,6 @@
 /**
- * @file Memory storage / ES module
- * @module services/storage
+ * @file Memory storage
+ * @module services/memory
  * @author Surmon <https://github.com/surmon-china>
  */
 

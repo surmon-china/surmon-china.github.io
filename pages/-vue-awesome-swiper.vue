@@ -74,7 +74,7 @@
   .vue-awesome-swiper {
     .example-card {
       /deep/ .header {
-        border-bottom: 1px solid $module-bg-darken;
+        border-bottom: 1px solid $module-bg;
       }
     }
 
