@@ -64,16 +64,6 @@ a {
 .module-enter-active, .module-leave-active {
   transition: opacity $transition-time-normal;
 }
-.module-enter, .module-leave-active {
+.module-enter, .module-leave-to {
   opacity: 0
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .8s
-}
-.fade-enter, .fade-leave-active {
-  opacity: 0
-}
-.fade-move {
-  transition: transform 1s;
 }

@@ -123,12 +123,13 @@
         return repositories.value.filter((repo: $TODO) => !!repo.homepage)
       })
 
-      // China user -> random Aliyun (30%) / ADSense (70%)
+      // China user -> random Aliyun (40%) / ADSense (60%)
       // Other user -> ADSense
+      const isMobileDevice = computed(() => rootState.isMobileDevice)
       const isChinaGuest = computed(() => rootState.isChinaGuest)
-      const adProvider = !isChinaGuest
+      const adProvider = (!isChinaGuest.value || isMobileDevice.value)
         ? MammonProvider.GoogleAdSense
-        : ((Math.ceil(Math.random() * 10) > 7)
+        : ((Math.ceil(Math.random() * 10) > 6)
             ? MammonProvider.Aliyun
             : MammonProvider.GoogleAdSense
           )

@@ -1,7 +1,6 @@
 <template>
   <span class="github-button">
     <a
-      :class="{ 'with-count': hasCount }"
       :href="link"
       class="button"
       target="_blank"
@@ -10,17 +9,17 @@
       <span class="text" v-if="text">{{ text }}</span>
       <slot></slot>
     </a>
-    <transition name="module">
-      <a
-        v-if="hasCount"
-        :href="countLink || link"
-        target="_blank"
-        class="count"
-      >
-        <i v-if="countIcon" class="iconfont" :class="countIcon"></i>
-        <span>{{ countContent }}</span>
-      </a>
-    </transition>
+    <a
+      v-if="hasCount"
+      :href="countLink || link"
+      target="_blank"
+      class="count"
+    >
+      <i v-if="countIcon" class="iconfont" :class="countIcon"></i>
+      <transition name="module" mode="out-in">
+        <span :key="countContent">{{ countContent }}</span>
+      </transition>
+    </a>
   </span>
 </template>
 
@@ -28,7 +27,6 @@
   import Vue from 'vue'
   import { createComponent, computed } from '@vue/composition-api'
   import { countToK } from '@/transformers/unit'
-
   export default createComponent({
     name: 'github-button-base',
     props: {

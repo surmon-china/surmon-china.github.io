@@ -63,41 +63,43 @@
         <transition name="module" mode="out-in">
           <h4 class="subtitle" :key="repoDescription">{{ repoDescription || '...' }}</h4>
         </transition>
-        <transition name="module">
-          <div class="github-buttons" v-if="repoDetail">
-            <github-button-base
-              :link="repoUrl"
-              :count="repoDetail.stargazers_count"
-              :countLink="`${repoUrl}/stargazers`"
-              icon="icon-github"
-              class="item"
-              text="Star"
-            />
-            <github-button-base
-              :link="`${repoUrl}/issues`"
-              :count="repoDetail.open_issues_count"
-              icon="icon-issue"
-              class="item"
-              text="Issue"
-            />
-            <github-button-base
-              :link="`${repoUrl}/fork`"
-              :count="repoDetail.forks"
-              icon="icon-fork"
-              class="item"
-              text="Fork"
-            />
-            <github-button-base
-              :link="`${repoUrl}/archive/master.zip`"
-              icon="icon-download"
-              class="item"
-              text="Download"
-              count-icon="icon-law"
-              :count-text="repoDetail.license && repoDetail.license.name"
-              :count-link="`${repoUrl}/blob/master/LICENSE`"
-            />
-          </div>
-        </transition>
+        <div class="github-buttons">
+          <github-button-base
+            :link="repoUrl"
+            :count="repoDetail && repoDetail.stargazers_count || 0"
+            :countLink="`${repoUrl}/stargazers`"
+            icon="icon-github"
+            class="item"
+            text="Star"
+          />
+          <github-button-base
+            :link="`${repoUrl}/issues`"
+            :count="repoDetail && repoDetail.open_issues_count || 0"
+            icon="icon-issue"
+            class="item"
+            text="Issue"
+          />
+          <github-button-base
+            :link="`${repoUrl}/fork`"
+            :count="repoDetail && repoDetail.forks || 0"
+            icon="icon-fork"
+            class="item"
+            text="Fork"
+          />
+          <github-button-base
+            :link="`${repoUrl}/archive/master.zip`"
+            icon="icon-download"
+            class="item"
+            text="Download"
+            count-icon="icon-law"
+            :count-link="`${repoUrl}/blob/master/LICENSE`"
+            :count-text="
+              repoDetail && repoDetail.license
+                ? repoDetail.license.name
+                : 'LICENSE'
+            "
+          />
+        </div>
         <div class="actions">
           <slot name="actions"></slot>
         </div>
@@ -175,34 +177,36 @@
     },
     setup(props, { root }) {
       provideModalStore()
-
+      const rootState = root.$store.state as RootState
       const repoDetail = computed(() => {
         return root.$store.getters[StoreNames.GetRepositorieDetail](props.repositorieId)
       })
 
       const githubUID = CONFIG.GITHUB_UID
       const userUrl = CONFIG.GITHUB_USER_URL
-      const blogUrl = computed(() => root.$store.state.userInfo?.blog)
+      const blogUrl = computed(() => rootState.userInfo?.blog)
       const currentRepositorie = computed(() => root.$route.name)
       const repoUrl = computed(() => getRepositorieUrl(githubUID, props.repositorieId))
       const repoName = computed(() => props.name || repoDetail.value?.name || props.repositorieId)
       const repoDescription = computed(() => repoDetail.value?.description)
       const appRepositories = computed(() => root.$store.getters[StoreNames.AppRepositories])
-      // China user -> random Aliyun / AdSense (60%)
+      const isMobileDevice = computed(() => rootState.isMobileDevice)
+      // China user -> random Aliyun / AdSense (50%)
       // Other user -> ADSense
-      const isChinaGuest = computed(() => root.$store.state.isChinaGuest)
-      const ad1Provider = !isChinaGuest
+      const isChinaGuest = computed(() => rootState.isChinaGuest)
+      const ad1Provider = (!isChinaGuest.value || isMobileDevice.value)
         ? MammonProvider.GoogleAdSense
-        : ((Math.ceil(Math.random() * 10) > 6)
+        : ((Math.ceil(Math.random() * 10) > 5)
             ? MammonProvider.Aliyun
             : MammonProvider.GoogleAdSense
           )
       // If isChinaGuest && exixt Aliyun -> ADSense
-      const ad2Provider = (isChinaGuest && ad1Provider === MammonProvider.Aliyun)
+      const ad2Provider = (isChinaGuest.value && ad1Provider === MammonProvider.Aliyun)
         ? MammonProvider.GoogleAdSense
         : MammonProvider.Aliyun
 
       return {
+        isMobileDevice,
         githubUID,
         userUrl,
         blogUrl,
@@ -221,16 +225,26 @@
 
 <style lang="scss">
   @media screen and (max-width: $container-width) {
+    #toolbox {
+      display: none !important;
+    }
     .container {
       width: 100%;
     }
     .home-page {
-      #toolbox {
-        display: none !important;
-      }
-
       .header {
         padding: 0 $gap;
+
+        .main {
+          .author {
+            &::after {
+              @include hidden();
+            }
+            &:not(:first-child) {
+              display: none !important;
+            }
+          }
+        }
       }
 
       .github-buttons,

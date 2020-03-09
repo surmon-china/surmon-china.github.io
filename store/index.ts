@@ -10,6 +10,7 @@ import * as http from '~/services/http'
 
 export const state = () => ({
   isChinaGuest: false,
+  isMobileDevice: false,
   userInfo: null as $TODO,
   repositories: [] as $TODO[],
   inited: false
@@ -21,6 +22,7 @@ export type VuexContext = ActionContext<RootState, RootState>
 export enum StoreNames {
   // mutations
   UpdateGuestState = 'updateGuestState',
+  UpdateMobileState = 'updateMobileState',
   UpdateUserInfo = 'updateUserInfo',
   UpdateRepositories = 'updateRepositories',
   UpdateInitedState = 'updateInitedState',
@@ -62,6 +64,9 @@ export const mutations = {
   [StoreNames.UpdateGuestState](state: RootState, value: boolean) {
     state.isChinaGuest = value
   },
+  [StoreNames.UpdateMobileState](state: RootState, value: boolean) {
+    state.isMobileDevice = value
+  },
   [StoreNames.UpdateUserInfo](state: RootState, value: $TODO) {
     state.userInfo = value
   },
@@ -86,6 +91,19 @@ export const actions = {
     vuexContext.commit(
       StoreNames.UpdateGuestState,
       isBrowser && navigator.language.includes('zh-CN')
+    )
+    // 设备类型
+    vuexContext.commit(
+      StoreNames.UpdateMobileState,
+      isBrowser && (
+        /Android/i.test(navigator.userAgent) ||
+        /webOS/i.test(navigator.userAgent) ||
+        /iPhone/i.test(navigator.userAgent) ||
+        /iPad/i.test(navigator.userAgent) ||
+        /iPod/i.test(navigator.userAgent) ||
+        /BlackBerry/i.test(navigator.userAgent) ||
+        /Windows Phone/i.test(navigator.userAgent)
+      )
     )
     // 基本数据
     return Promise.all([
