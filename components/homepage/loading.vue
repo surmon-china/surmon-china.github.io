@@ -19,6 +19,7 @@
     justify-content: center;
     align-items: center;
     color: $text-secondary;
+    user-select: none;
 
     .iconfont {
       color: $text-secondary;
