@@ -1,63 +1,46 @@
 <template>
-  <homepage-example-card :data="{ title: 'Base example' }">
-    <template slot="actions">
-      <button @click="runClassifier">
+  <homepage-example-card v-bind="$attrs">
+    <div class="actions" slot="actions">
+      <button class="button" @click="runClassifier">
+        <i class="iconfont icon-play"></i>
         <span>运行代码</span>
       </button>
-      <!-- <menu>
-        <button class="icon-button" menu-trigger>
-          <icon>more_vert</icon>
-        </button>
-        <menu-content>
-          <menu-item @click="saveLearnHistory">
-            <icon>file_download</icon>
-            <span>缓存学习记录</span>
-          </menu-item>
-          <menu-item @click="loadLearnHistory">
-            <icon>file_upload</icon>
-            <span>载入上次学习记录</span>
-          </menu-item>
-          <menu-item @click="clearLearnHistory">
-            <icon>format_clear</icon>
-            <span>清空学习记录</span>
-          </menu-item>
-        </menu-content>
-      </menu> -->
-    </template>
-    <div class="example">
-      <div class="codemirror">
-        <codemirror v-model="code" :options="editorOption"></codemirror>
-      </div>
-      <div class="pre">
-        <p><strong>console:</strong></p>
-        <hr>
-        <pre>{{ classifierLog }}</pre>
-      </div>
+      <button class="button" @click="saveLearnHistory">
+        <i class="iconfont icon-download"></i>
+        <span>缓存学习记录</span>
+      </button>
+      <button class="button" @click="loadLearnHistory">
+        <i class="iconfont icon-upload"></i>
+        <span>载入上次学习记录</span>
+      </button>
+      <button class="button" @click="clearLearnHistory">
+        <i class="iconfont icon-close"></i>
+        <span>清空学习记录</span>
+      </button>
+    </div>
+    <codemirror
+      v-model="code"
+      class="codemirror"
+      :options="editorOption"
+    />
+    <div class="output">
+      <p class="title">Console:</p>
+      <pre class="result">{{ classifierLog }}</pre>
     </div>
   </homepage-example-card>
 </template>
 
-<style>
-  pre {
-    border-radius: 1px!important;
-  }
-</style>
-
 <script>
-  import HomepageExampleCard from '@/components/homepage/cards/example.vue'
-
   import dedent from 'dedent'
   import NaiveBayes from 'naivebayes'
-  import { codemirror } from 'vue-codemirror'
+  import HomepageExampleCard from '@/components/homepage/card-example.vue'
   import 'codemirror/mode/javascript/javascript.js'
-  import 'codemirror/lib/codemirror.css'
-  import 'codemirror/theme/base16-dark.css'
+  const localStorageKey = '01-classifierJson'
 
   export default {
     name: 'naivebayes-example-base',
-    title: 'Base',
+    title: 'Base 基础用例',
     components: {
-      codemirror,
       HomepageExampleCard
     },
     data () {
@@ -76,7 +59,6 @@
           console.log(classifier)
 
           // 英文学习
-
           // positive
           classifier.learn('What is your name?', 'positive')
           classifier.learn('amazing, awesome movie!! Yeah!! Oh boy.', 'positive')
@@ -168,7 +150,7 @@
 
           // 输出学习进度
           const classifierJson = classifier.toJson()
-          console.log('学习进度：\\n', classifierJson)
+          console.log('学习进度：', classifierJson)
         `
       }
     },
@@ -200,11 +182,11 @@
       },
       saveLearnHistory() {
         const classifierJson = this.classifier.toJson()
-        localStorage.setItem('01-classifierJson', classifierJson)
-        this.console.log(`学习记录已缓存至LocalStrong\n${classifierJson}`)
+        localStorage.setItem(localStorageKey, classifierJson)
+        this.console.log(`学习记录已缓存至 LocalStorage\n${classifierJson}`)
       },
       loadLearnHistory() {
-        const classifierJson = localStorage.getItem('02-classifierJson')
+        const classifierJson = localStorage.getItem(localStorageKey)
         if (classifierJson) {
           try {
             let newClassifier = NaiveBayes.fromJson(classifierJson)
@@ -215,16 +197,22 @@
             this.console.log(`学习记录加载失败，可能是因为缓存了无效的记录（缓存的是一个空的、未学习过的分类器）：\n${err}`)
           }
         } else {
-          this.console.log('LocalStrong没有缓存学习记录，加载失败')
+          this.console.log('LocalStorage 没有缓存学习记录，加载失败')
         }
       },
       clearLearnHistory() {
-        localStorage.removeItem('01-classifierJson')
-        this.console.log('LocalStrong学习记录清理成功')
+        localStorage.removeItem(localStorageKey)
+        this.console.log('LocalStorage 学习记录清理成功')
       }
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  @import './base.scss';
+  .codemirror {
+    /deep/ .CodeMirror {
+      height: 460px;
+    }
+  }
 </style>

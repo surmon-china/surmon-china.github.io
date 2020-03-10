@@ -1,61 +1,45 @@
 <template>
-  <homepage
-    :repositorie-id="repositorieId"
-    :class="repositorieId"
-  >
-    <template slot="content">
-      <client-only>
-        <homepage-example-card
-          :key="example.name"
-          :path="example.path"
-          :title="example.title || example.name"
-          v-for="example in examples"
-        >
-          <component :is="example.name" />
-        </homepage-example-card>
-      </client-only>
-    </template>
+  <homepage :repositorie-id="repositorieId" :class="repositorieId">
+    <homepage-examples :examples="examples" slot="content" />
   </homepage>
 </template>
 
 <script lang="ts">
-  import { createComponent, computed } from '@vue/composition-api'
-  import { getComponentExampleMeta, getHomePageHeadMeta } from '@/transformers/example'
-  import Homepage from '@/components/homepage/index.vue'
-  import HomepageExampleCard from '@/components/homepage/card-example.vue'
+  import { createComponent } from '@vue/composition-api'
+  import { getComponentExampleMeta, getHomePageHeadMeta } from '@/transformers/page-meta'
   import { GitHubRepositorieIDs } from '@/config'
   import { isBrowser } from '@/environment'
-  import { StoreNames } from '@/store'
+  import HomepageExamples, { IExample } from '@/components/homepage/examples.vue'
+  import Homepage from '@/components/homepage/index.vue'
 
-  const data = {
-    repositorieId: GitHubRepositorieIDs.VueDragZone,
-    examples: [] as $TODO[],
-  }
-  const components = {
-    Homepage,
-    HomepageExampleCard
-  }
+  const repositorieId = GitHubRepositorieIDs.VueDragZone
+  const examples = [] as IExample[]
 
   if (isBrowser) {
-    getComponentExampleMeta(require('@/projects/vue-drag-zone/examples').default)
+    getComponentExampleMeta(require(`@/projects/vue-drag-zone/examples`).default)
       .forEach(({ component, fileName, ...others }) => {
-        data.examples.push({
+        examples.push({
           ...others,
-          fileName,
-          path: fileName && `projects/${data.repositorieId}/examples/${fileName}`
+          path: fileName && `projects/${repositorieId}/examples/${fileName}`
         })
-        Object.assign(components, {
+        Object.assign(HomepageExamples.components, {
           [component.name]: component
         })
       })
   }
 
   export default createComponent({
-    name: data.repositorieId,
-    components,
-    head: getHomePageHeadMeta(data.repositorieId),
+    name: `page-${repositorieId}`,
+    components: {
+      Homepage,
+      HomepageExamples
+    },
+    head: getHomePageHeadMeta(repositorieId),
     setup() {
-      return data
+      return {
+        repositorieId,
+        examples
+      }
     }
   })
 </script>

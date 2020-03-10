@@ -41,10 +41,16 @@ export default {
     'normalize.css/normalize.css',
     '@/assets/styles/app.scss',
     // libs and components...
+    // highlight
     'highlight.js/styles/github.css',
+    // quill
     'quill/dist/quill.snow.css',
     'quill/dist/quill.bubble.css',
     'quill/dist/quill.core.css',
+    // codemirror
+    'codemirror/lib/codemirror.css',
+    'codemirror/theme/base16-dark.css',
+    // swiper
     'swiper/dist/css/swiper.css'
   ],
   styleResources: {
@@ -56,6 +62,7 @@ export default {
     { src: '@/plugins/vue-google-adsense', ssr: false },
     { src: '@/plugins/vue-quill-editor', ssr: false },
     { src: '@/plugins/vue-awesome-swiper', ssr: false },
+    { src: '@/plugins/vue-codemirror', ssr: false },
     { src: '@/plugins/vue-drag-zone', ssr: false },
   ],
   buildModules: [

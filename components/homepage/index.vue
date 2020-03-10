@@ -105,19 +105,17 @@
         </div>
       </div>
       <div class="container">
-        <!-- 体验太差了，所以暂时不开了 -->
-        <!-- <homepage-basic-card class="homepage-mammon">
+        <homepage-basic-card class="homepage-mammon" v-if="headerAdProvider">
           <client-only>
-            <mammon v-if="!disabledAd" key="ad1" :provider="ad1Provider" />
+            <mammon :provider="headerAdProvider" />
           </client-only>
-        </homepage-basic-card> -->
+        </homepage-basic-card>
         <slot name="content">
           <Loading class="loading" />
         </slot>
-        <homepage-basic-card class="homepage-mammon">
+        <homepage-basic-card class="homepage-mammon" v-if="footerAdProvider">
           <client-only>
-            <!-- 暂时使用 AD1 的广告逻辑 -->
-            <mammon v-if="!disabledAd" :provider="ad1Provider" />
+            <mammon :provider="footerAdProvider" />
           </client-only>
         </homepage-basic-card>
       </div>
@@ -143,7 +141,7 @@
   import { IVueComponentData } from '@/types/interfaces'
   import { getRepositorieUrl } from '@/transformers/url'
   import GithubButtonBase from '@/components/github-button/base.vue'
-  import Mammon, { MammonProvider } from '@/components/mammon/index.vue'
+  import Mammon from '@/components/mammon/index.vue'
   import HomepageBasicCard from './card-basic.vue'
   import HomepageToolbox from './toolbox.vue'
   import HomepageModal from './modal.vue'
@@ -170,18 +168,22 @@
         type: String,
         required: true
       },
-      disabledAd: {
-        type: Boolean,
+      headerAdProvider: {
+        type: String,
+        required: false
+      },
+      footerAdProvider: {
+        type: String,
         required: false
       }
     },
     setup(props, { root }) {
       provideModalStore()
+
       const rootState = root.$store.state as RootState
       const repoDetail = computed(() => {
         return root.$store.getters[StoreNames.GetRepositorieDetail](props.repositorieId)
       })
-
       const githubUID = CONFIG.GITHUB_UID
       const userUrl = CONFIG.GITHUB_USER_URL
       const blogUrl = computed(() => rootState.userInfo?.blog)
@@ -190,23 +192,8 @@
       const repoName = computed(() => props.name || repoDetail.value?.name || props.repositorieId)
       const repoDescription = computed(() => repoDetail.value?.description)
       const appRepositories = computed(() => root.$store.getters[StoreNames.AppRepositories])
-      const isMobileDevice = computed(() => rootState.isMobileDevice)
-      // China user -> random Aliyun / AdSense (50%)
-      // Other user -> ADSense
-      const isChinaGuest = computed(() => rootState.isChinaGuest)
-      const ad1Provider = (!isChinaGuest.value || isMobileDevice.value)
-        ? MammonProvider.GoogleAdSense
-        : ((Math.ceil(Math.random() * 10) > 5)
-            ? MammonProvider.Aliyun
-            : MammonProvider.GoogleAdSense
-          )
-      // If isChinaGuest && exixt Aliyun -> ADSense
-      const ad2Provider = (isChinaGuest.value && ad1Provider === MammonProvider.Aliyun)
-        ? MammonProvider.GoogleAdSense
-        : MammonProvider.Aliyun
 
       return {
-        isMobileDevice,
         githubUID,
         userUrl,
         blogUrl,
@@ -215,9 +202,7 @@
         repoName,
         repoDescription,
         repoDetail,
-        appRepositories,
-        ad1Provider,
-        ad2Provider
+        appRepositories
       }
     }
   })
@@ -498,7 +483,7 @@
         }
 
         .loading {
-          height: 14rem;
+          height: 18rem;
           margin-top: $gap * 2;
           background-color: $module-bg;
         }

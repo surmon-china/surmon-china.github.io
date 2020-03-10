@@ -128,10 +128,10 @@
       const isMobileDevice = computed(() => rootState.isMobileDevice)
       const isChinaGuest = computed(() => rootState.isChinaGuest)
       const adProvider = (!isChinaGuest.value || isMobileDevice.value)
-        ? MammonProvider.GoogleAdSense
+        ? MammonProvider.GoogleAdSense1
         : ((Math.ceil(Math.random() * 10) > 6)
             ? MammonProvider.Aliyun
-            : MammonProvider.GoogleAdSense
+            : MammonProvider.GoogleAdSense1
           )
 
       watch(

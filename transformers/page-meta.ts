@@ -37,7 +37,7 @@ export function getHomePageHeadMeta(repoName: string, description?: string) {
   ];
 
   const titleSuffix = description ? ` | ${description} ` : ''
-  const title = `${repoName} | ${CONFIG.GITHUB_UID}${titleSuffix}`
+  const title = `${repoName} | Homepage${titleSuffix}`
 
   return {
     title,

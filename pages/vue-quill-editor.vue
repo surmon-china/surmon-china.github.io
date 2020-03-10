@@ -1,8 +1,5 @@
 <template>
-  <homepage
-    :repositorie-id="repositorieId"
-    :class="repositorieId"
-  >
+  <homepage :repositorie-id="repositorieId" :class="repositorieId">
     <template slot="actions">
       <homepage-link
         icon="doc"
@@ -26,68 +23,49 @@
       />
     </template>
     <template slot="content">
-      <client-only>
-        <homepage-example-card
-          :key="example.name"
-          :path="example.path"
-          :title="example.title || example.name"
-          v-for="example in examples"
-        >
-          <component class="quill-example" :is="example.name" />
-        </homepage-example-card>
-      </client-only>
+      <homepage-examples :examples="examples" />
     </template>
   </homepage>
 </template>
 
 <script lang="ts">
-  import { createComponent, computed } from '@vue/composition-api'
-  import { getComponentExampleMeta, getHomePageHeadMeta } from '@/transformers/example'
-  import Homepage from '@/components/homepage/index.vue'
-  import HomepageLink from '@/components/homepage/link.vue'
-  import HomepageExampleCard from '@/components/homepage/card-example.vue'
+  import { createComponent } from '@vue/composition-api'
+  import { getComponentExampleMeta, getHomePageHeadMeta } from '@/transformers/page-meta'
   import { GitHubRepositorieIDs } from '@/config'
   import { isBrowser } from '@/environment'
-  import { StoreNames } from '@/store'
+  import HomepageExamples, { IExample } from '@/components/homepage/examples.vue'
+  import HomepageLink from '@/components/homepage/link.vue'
+  import Homepage from '@/components/homepage/index.vue'
 
-  const data = {
-    repositorieId: GitHubRepositorieIDs.VueQuillEditor,
-    examples: [] as $TODO[],
-  }
-  const components = {
-    Homepage,
-    HomepageLink,
-    HomepageExampleCard
-  }
+  const repositorieId = GitHubRepositorieIDs.VueQuillEditor
+  const examples = [] as IExample[]
 
   if (isBrowser) {
-    getComponentExampleMeta(require('@/projects/vue-quill-editor/examples').default)
+    getComponentExampleMeta(require(`@/projects/vue-quill-editor/examples`).default)
       .forEach(({ component, fileName, ...others }) => {
-        data.examples.push({
+        examples.push({
           ...others,
-          fileName,
-          path: fileName && `projects/${data.repositorieId}/examples/${fileName}`
+          path: fileName && `projects/${repositorieId}/examples/${fileName}`
         })
-        Object.assign(components, {
+        Object.assign(HomepageExamples.components, {
           [component.name]: component
         })
       })
   }
 
   export default createComponent({
-    name: data.repositorieId,
-    components,
-    head: getHomePageHeadMeta(data.repositorieId),
+    name: `page-${repositorieId}`,
+    components: {
+      Homepage,
+      HomepageLink,
+      HomepageExamples
+    },
+    head: getHomePageHeadMeta(repositorieId),
     setup() {
-      return data
+      return {
+        repositorieId,
+        examples
+      }
     }
   })
 </script>
-
-<style lang="scss" scoped>
-  .vue-quill-editor {
-    .quill-example {
-      background-color: $module-bg;
-    }
-  }
-</style>

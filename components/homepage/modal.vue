@@ -14,6 +14,7 @@
         <div class="content">
           <transition name="module" mode="out-in">
             <Loading class="loading" v-if="isLoading" />
+            <p v-else-if="!code">No data</p>
             <pre v-else class="code">
               <code :data-lang="fileExt" v-html="code"></code>
             </pre>

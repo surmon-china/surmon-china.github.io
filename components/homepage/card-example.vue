@@ -1,7 +1,7 @@
 <template>
   <div class="homepage-example-card">
     <homepage-basic-card :title="title" :titleLink="fileUrl">
-      <div slot="actions">
+      <div class="actions" slot="actions">
         <slot name="actions"></slot>
         <button
           v-if="path"
@@ -20,8 +20,9 @@
   import CONFIG from '@/config'
   import { createComponent } from '@vue/composition-api'
   import { getGitFileSourceUrl } from '@/transformers/url'
-  import HomepageBasicCard from './card-basic.vue'
   import { useModalStore } from './modal-store'
+  import HomepageBasicCard from './card-basic.vue'
+
   export default createComponent({
     name: 'homepage-example-card',
     props: {
@@ -39,15 +40,16 @@
     },
     setup(props) {
       const modalStore = useModalStore()
-
       return {
         fileUrl: props.path && getGitFileSourceUrl(
           CONFIG.GITHUB_UID,
           CONFIG.PROJECT_NAME,
           props.path
-        ),
+        ) || '',
         handleViewCode() {
-          props.path && modalStore.open(props.title, props.path)
+          if (props.title && props.path) {
+            modalStore.open(props.title, props.path)
+          }
         }
       }
     }
@@ -56,13 +58,22 @@
 
 <style lang="scss" scoped>
   .homepage-example-card {
-    .code-button {
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
+    .actions {
+      display: flex;
+      height: 100%;
+      align-items: center;
 
-      &:hover {
-        color: $link-color;
+      .code-button {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        &:hover {
+          color: $link-color;
+        }
+
+        .iconfont {
+          font-size: $font-size-huge;
+        }
       }
     }
   }

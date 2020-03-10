@@ -1,6 +1,25 @@
 <template>
   <homepage :repositorie-id="repositorieId" :class="repositorieId">
-    <homepage-examples :examples="examples" slot="content" />
+    <template slot="actions">
+      <homepage-link
+        icon="doc"
+        text="CodeMirror User manual"
+        href="https://codemirror.net/doc/manual.html#config"
+      />
+      <homepage-link
+        icon="doc"
+        text="CodeMirror themes"
+        href="https://codemirror.net/demo/theme.html"
+      />
+      <homepage-link
+        icon="doc"
+        text="CodeMirror Language modes"
+        href="https://codemirror.net/mode/"
+      />
+    </template>
+    <template slot="content">
+      <homepage-examples example-class="codemirror-example" :examples="examples" />
+    </template>
   </homepage>
 </template>
 
@@ -10,13 +29,14 @@
   import { GitHubRepositorieIDs } from '@/config'
   import { isBrowser } from '@/environment'
   import HomepageExamples, { IExample } from '@/components/homepage/examples.vue'
+  import HomepageLink from '@/components/homepage/link.vue'
   import Homepage from '@/components/homepage/index.vue'
 
-  const repositorieId = GitHubRepositorieIDs.VueTouchRipple
+  const repositorieId = GitHubRepositorieIDs.VueCodemirror
   const examples = [] as IExample[]
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-touch-ripple/examples`).default)
+    getComponentExampleMeta(require(`@/projects/vue-codemirror/examples`).default)
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,
@@ -32,6 +52,7 @@
     name: `page-${repositorieId}`,
     components: {
       Homepage,
+      HomepageLink,
       HomepageExamples
     },
     head: getHomePageHeadMeta(repositorieId),
@@ -43,3 +64,14 @@
     }
   })
 </script>
+
+<style lang="scss">
+  .codemirror-example {
+    height: 350px !important;
+
+    .CodeMirror,
+    .CodeMirror-merge {
+      height: 350px !important;
+    }
+  }
+</style>

@@ -20,9 +20,12 @@
     align-items: center;
     color: $text-secondary;
     user-select: none;
+    font-size: $font-size-huge;
+    opacity: .6;
 
     .iconfont {
       color: $text-secondary;
+      font-size: $font-size-huge;
       margin-right: $xs-gap;
     }
   }

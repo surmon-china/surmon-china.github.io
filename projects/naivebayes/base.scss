@@ -1,0 +1,44 @@
+
+.actions {
+  .button {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    padding: 0;
+    background: none;
+    font-size: $font-size-small;
+    margin-right: $sm-gap;
+    color: $text-secondary;
+    cursor: pointer;
+    @include color-transition();
+
+    &[disabled] {
+      opacity: .7;
+      cursor: no-drop;
+    }
+    &:not([disabled]) {
+      &:hover {
+        color: $link-color;
+      }
+    }
+
+    .iconfont {
+      margin-right: $xs-gap;
+    }
+  }
+}
+
+/deep/ .CodeMirror {
+  line-height: 21px;
+}
+
+.output {
+  padding: 0 $gap;
+
+  .result {
+    border-radius: $radius;
+    border: 1px solid $text-secondary;
+    padding: $gap;
+    overflow: auto;
+  }
+}
