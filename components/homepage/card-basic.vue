@@ -13,7 +13,7 @@
       <span v-else>{{ title }}</span>
       <slot name="actions"></slot>
     </div>
-    <div class="content">
+    <div class="content" :class="contentClass">
       <slot></slot>
     </div>
   </div>
@@ -25,7 +25,12 @@
     name: 'homepage-basic-card',
     props: {
       title: String,
-      titleLink: String
+      titleLink: String,
+      contentClass: {
+        type: String,
+        required: false,
+        default: ''
+      }
     }
   })
 </script>

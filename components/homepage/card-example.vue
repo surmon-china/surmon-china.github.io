@@ -1,6 +1,10 @@
 <template>
   <div class="homepage-example-card">
-    <homepage-basic-card :title="title" :titleLink="fileUrl">
+    <homepage-basic-card
+      :title="title"
+      :title-link="fileUrl"
+      :content-class="contentClass"
+    >
       <div class="actions" slot="actions">
         <slot name="actions"></slot>
         <button
@@ -31,6 +35,10 @@
         required: true
       },
       path: {
+        type: String,
+        required: false
+      },
+      contentClass: {
         type: String,
         required: false
       }

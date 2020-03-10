@@ -12,6 +12,7 @@
             <homepage-example-card
               :path="example.path"
               :title="example.title || example.name"
+              :content-class="contentClass"
             >
               <component
                 class="example-component"
@@ -63,6 +64,10 @@
         type: String,
         required: false,
         default: ''
+      },
+      contentClass: {
+        type: String,
+        required: false
       }
     },
     components: {

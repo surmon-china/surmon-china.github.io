@@ -3,7 +3,8 @@
     <quill-editor
       class="editor"
       ref="myTextEditor"
-      v-model="content"
+      :value="content"
+      @change="onEditorChange"
       :options="editorOption"
       @blur="onEditorBlur($event)"
       @focus="onEditorFocus($event)"
@@ -21,6 +22,7 @@
 <script>
   import dedent from 'dedent'
   import hljs from 'highlight.js'
+  import debounce from 'lodash/debounce'
   import { quillEditor } from 'vue-quill-editor'
 
   // highlight.js style
@@ -69,6 +71,9 @@
       }
     },
     methods: {
+      onEditorChange: debounce(function(value) {
+        this.content = value.html
+      }, 466),
       onEditorBlur(editor) {
         console.log('editor blur!', editor)
       },

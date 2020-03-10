@@ -23,7 +23,11 @@
       />
     </template>
     <template slot="content">
-      <homepage-examples :examples="examples" />
+      <homepage-examples
+        example-class="quill-example"
+        content-class="quill-example-content"
+        :examples="examples"
+      />
     </template>
   </homepage>
 </template>
@@ -69,3 +73,9 @@
     }
   })
 </script>
+
+<style lang="scss">
+  .quill-example-content {
+    overflow: visible !important;
+  }
+</style>
