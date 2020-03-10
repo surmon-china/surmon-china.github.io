@@ -183,7 +183,7 @@
   .codemirror-1 {
     height: auto!important;
     overflow-y: hidden!important;
-    border-bottom: 1px solid $body-bg;
+    border-bottom: 1px solid $github-secondary;
 
     /deep/ .CodeMirror {
       height: auto!important;
