@@ -21,6 +21,11 @@
         text="Quill Delta format"
         href="https://quilljs.com/docs/delta/"
       />
+      <homepage-link
+        icon="doc"
+        text="Nuxt.js example"
+        href="https://github.com/surmon-china/surmon-china.github.io/tree/source/projects/vue-quill-editor/nuxt"
+      />
     </template>
     <template slot="content">
       <homepage-examples
