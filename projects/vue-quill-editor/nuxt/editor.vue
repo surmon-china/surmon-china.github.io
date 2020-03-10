@@ -1,0 +1,64 @@
+<template>
+  <section class="container">
+    <client-only>
+      <quill-editor
+        v-model="content"
+        ref="myQuillEditor"
+        :options="editorOption"
+        @blur="onEditorBlur($event)"
+        @focus="onEditorFocus($event)"
+        @ready="onEditorReady($event)"
+      />
+    </client-only>
+  </section>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        content: '<p>I am Example</p>',
+        editorOption: {
+          // Some quill options...
+          modules: {
+            toolbar: [
+              ['bold', 'italic', 'underline', 'strike'],
+              ['blockquote', 'code-block']
+            ]
+          }
+        }
+      }
+    },
+    mounted() {
+      console.log('App init, this quill insrance object is:', this.myQuillEditor)
+      setTimeout(() => {
+        this.content = 'I am changed'
+      }, 3000)
+    },
+    methods: {
+      onEditorBlur(editor) {
+        console.log('editor blur!', editor)
+      },
+      onEditorFocus(editor) {
+        console.log('editor focus!', editor)
+      },
+      onEditorReady(editor) {
+        console.log('editor ready!', editor)
+      }
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+  .container {
+    width: 60%;
+    margin: 0 auto;
+    padding: 50px 0;
+
+    .quill-editor {
+      min-height: 200px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+  }
+</style>
