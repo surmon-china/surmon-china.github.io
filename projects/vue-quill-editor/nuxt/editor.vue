@@ -15,6 +15,7 @@
 
 <script>
   export default {
+    name: 'quill-example-nuxt',
     data () {
       return {
         content: '<p>I am Example</p>',
@@ -30,7 +31,7 @@
       }
     },
     mounted() {
-      console.log('App init, this quill instance object is:', this.editor.quill)
+      console.log('App init, the Quill instance object is:', this.editor.quill)
       setTimeout(() => {
         this.content = 'I am changed'
       }, 3000)
