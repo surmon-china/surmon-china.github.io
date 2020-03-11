@@ -92,7 +92,7 @@
       }
     },
     mounted() {
-      console.log('this is my editor', this.editor)
+      console.log('this is Quill instance:', this.editor)
     }
   }
 </script>

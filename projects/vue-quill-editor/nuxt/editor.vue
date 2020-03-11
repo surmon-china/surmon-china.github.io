@@ -2,8 +2,8 @@
   <section class="container">
     <client-only>
       <quill-editor
+        ref="editor"
         v-model="content"
-        ref="myQuillEditor"
         :options="editorOption"
         @blur="onEditorBlur($event)"
         @focus="onEditorFocus($event)"
@@ -19,7 +19,7 @@
       return {
         content: '<p>I am Example</p>',
         editorOption: {
-          // Some quill options...
+          // Some Quill options...
           modules: {
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],
@@ -30,7 +30,7 @@
       }
     },
     mounted() {
-      console.log('App init, this quill insrance object is:', this.myQuillEditor)
+      console.log('App init, this quill instance object is:', this.editor.quill)
       setTimeout(() => {
         this.content = 'I am changed'
       }, 3000)
