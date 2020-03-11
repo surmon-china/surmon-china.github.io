@@ -5,15 +5,14 @@
       v-model="content"
       :options="editorOption"
     />
-    <div class="output">
-      <code class="hljs xml" v-html="contentCode"></code>
+    <div class="output ql-snow">
+      <div class="ql-editor" v-html="this.content"></div>
     </div>
   </div>
 </template>
 
 <script>
   import dedent from 'dedent'
-  import hljs from 'highlight.js'
   import { Quill } from 'vue-quill-editor'
   import { container, ImageExtend, QuillWatch } from 'quill-image-extend-module'
   import quillEmoji from 'quill-emoji'
@@ -58,11 +57,6 @@
             }
           }
         }
-      }
-    },
-    computed: {
-      contentCode() {
-        return hljs.highlightAuto(this.content).value
       }
     }
   }
