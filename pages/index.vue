@@ -50,6 +50,7 @@
           <li class="item" :key="repo.clone_url" v-for="repo in exampleRepositories">
             <i class="iconfont icon-link"></i>
             <a class="name" target="_blacnk" :href="repo.homepage">{{ repo.name }}</a>
+            <span class="archived" v-if="repo.archived">Archived</span>
           </li>
         </ul>
         </transition>
@@ -65,8 +66,11 @@
           <p v-if="!inited">Loading...</p>
           <ul v-else class="detail-repo-list">
             <li class="item" :key="repo.clone_url" v-for="repo in repositories">
-              <i class="iconfont icon-repo"></i>
-              <a class="name" target="_blacnk" :href="repo.html_url">{{ repo.full_name }}</a>
+              <p>
+                <i class="iconfont icon-repo"></i>
+                <a class="name" target="_blacnk" :href="repo.html_url">{{ repo.full_name }}</a>
+                <span class="archived" v-if="repo.archived">Archived</span>
+              </p>
               <p class="desc">{{ repo.description }}</p>
               <p class="meta">
                 <span class="item">
@@ -120,7 +124,9 @@
       const userInfo = computed(() => rootState.userInfo)
       const repositories = computed(() => rootGetters[StoreNames.OwnRepositories])
       const exampleRepositories = computed(() => {
-        return repositories.value.filter((repo: $TODO) => !!repo.homepage)
+        return repositories.value.filter(
+          (repo: $TODO) => !!repo.homepage && repo.homepage !== CONFIG.PROJECT_URL
+        )
       })
 
       // China user -> random Aliyun (40%) / ADSense (60%)
@@ -265,12 +271,23 @@
           background-color: $text-secondary;
         }
 
+        .homepage-repo-list,
+        .detail-repo-list {
+          .archived {
+            margin-left: 2px;
+            padding: 1px ($xs-gap / 2);
+            border: 1px solid rgba($text-secondary, $golden-ratio);
+            border-radius: $radius * 2;
+            color: $text-secondary;
+            font-size: $font-size-small;
+          }
+        }
+
         .homepage-repo-list {
           list-style-type: square;
 
           .iconfont {
             margin-right: $xs-gap;
-            color: $text-secondary;
           }
 
           > .item {
