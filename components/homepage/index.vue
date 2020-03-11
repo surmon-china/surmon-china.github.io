@@ -232,12 +232,16 @@
         }
       }
 
-      .github-buttons,
-      .actions {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        .item {
+      .main {
+        .github-buttons,
+        .actions {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .github-buttons .item,
+        .actions > * {
           margin: $sm-gap;
         }
       }

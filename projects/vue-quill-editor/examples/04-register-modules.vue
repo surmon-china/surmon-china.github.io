@@ -1,78 +1,69 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>04 Example (register modules)</span>
-      </div>
-      <md-button target="_blank" 
-                 class="md-icon-button"
-                 href="https://github.com/surmon-china/vue-quill-editor/tree/master/examples/04-example.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <div class="quill-editor-example">
-        <!-- quill-editor -->
-        <quill-editor v-model="content"
-                      :options="editorOption"
-                      @blur="onEditorBlur($event)"
-                      @focus="onEditorFocus($event)"
-                      @ready="onEditorReady($event)">
-        </quill-editor>
-        <div class="quill-code">
-          <div class="title">Code</div>
-          <code class="hljs xml" v-html="contentCode"></code>
-        </div>
-      </div>
-    </md-card-media>
-  </md-card>
+  <div class="example">
+    <quill-editor
+      class="editor"
+      v-model="content"
+      :options="editorOption"
+      @blur="onEditorBlur($event)"
+      @focus="onEditorFocus($event)"
+      @ready="onEditorReady($event)"
+    />
+    <div class="output">
+      <code class="hljs xml" v-html="contentCode"></code>
+    </div>
+  </div>
 </template>
 
 <script>
+  import dedent from 'dedent'
   import hljs from 'highlight.js'
-  import VueQuillEditor, { Quill } from 'vue-quill-editor'
-  import { ImageDrop } from 'quill-image-drop-module'
-  import ImageResize from 'quill-image-resize-module'
-  Quill.register('modules/imageDrop', ImageDrop)
-  Quill.register('modules/imageResize', ImageResize)
-  
+  import { Quill } from 'vue-quill-editor'
+  import quillEmoji from 'quill-emoji'
+  import 'quill-emoji/dist/quill-emoji.css'
+  import { container, ImageExtend, QuillWatch } from 'quill-image-extend-module'
+
+  Quill.register('modules/ImageExtend', ImageExtend)
+
   export default {
     name: 'quill-example-register-modules',
     title: 'Register modules',
     data() {
       return {
         name: 'register-modules-example',
-        content: `<p><img src="/vue-quill-editor/static/images/surmon-6.jpg" width="500"></p>
-                  <br>
-                  <p><strong><em>Or drag/paste an image here.</em></strong></p>`,
+        content: dedent`
+          <p><span class="ql-emojiblot" data-name="grinning">﻿<span contenteditable="false"><span class="ap ap-grinning">😀</span></span>﻿</span></p><p><br></p><p><em>Register Quill emoji module</em></p><p><br></p><p><em>Register QuillBetterTable module</em></p>
+        `,
         editorOption: {
+          theme: 'snow',
           modules: {
-            toolbar: [
-              [{ 'size': ['small', false, 'large'] }],
-              ['bold', 'italic'],
-              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-              ['link', 'image']
-            ],
-            history: {
-              delay: 1000,
-              maxStack: 50,
-              userOnly: false
+            "emoji-toolbar": true,
+            "emoji-shortname": true,
+            toolbar: {
+              container: [
+                ['image'],
+                ['emoji']
+              ],
+              handlers: {
+                'image': function () {
+                  QuillWatch.emit(this.quill.id)
+                }
+              }
             },
-            imageDrop: true,
-            imageResize: {
-              displayStyles: {
-                backgroundColor: 'black',
-                border: 'none',
-                color: 'white'
+            ImageExtend: {
+              loading: true,
+              name: 'img',
+              action: 'https://github.surmon.me/images/',
+              error: (error) => {
+                console.log('error', error)
+                return Promise.resolve()
               },
-              modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
-            }
+              response: (res) => {
+                return 'https://github.surmon.me/images/background.jpg'
+              }
+            },
           }
         }
       }
-    },
-    mounted() {
-      this.content = `<p><strong><em>Click on the Image Below to resize!</em></strong></p><br>` + this.content
     },
     computed: {
       contentCode() {
@@ -93,44 +84,32 @@
   }
 </script>
 
-<style>
-  .quill-editor:not(.bubble) .ql-container,
-  .quill-editor:not(.bubble) .ql-container .ql-editor {
-    height: 30rem;
-    padding-bottom: 1rem;
-  }
-</style>
-
 <style lang="scss" scoped>
-  .quill-editor,
-  .quill-code {
-    width: 50%;
-    float: left;
-  }
+  .example {
+    display: flex;
+    height: 20rem;
+    overflow: hidden;
 
-  .quill-code {
-    height: auto;
-    border: none;
-
-    > .title {
-      border: 1px solid #ccc;
-      border-left: none;
-      height: 3em;
-      line-height: 3em;
-      text-indent: 1rem;
-      font-weight: bold;
+    .editor,
+    .output {
+      width: 50%;
+      height: 100%;
     }
 
-    > code {
-      width: 100%;
-      margin: 0;
-      padding: 1rem;
-      border: 1px solid #ccc;
-      border-top: none;
-      border-left: none;
-      border-radius: 0;
-      height: 30rem;
-      overflow-y: auto;
+    .output {
+      border: none;
+
+      > code {
+        width: 100%;
+        margin: 0;
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-left: none;
+        border-radius: 0;
+        height: 100%;
+        overflow-y: auto;
+      }
     }
   }
 </style>

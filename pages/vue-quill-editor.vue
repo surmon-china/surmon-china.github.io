@@ -81,6 +81,6 @@
 
 <style lang="scss">
   .quill-example-content {
-    overflow: visible !important;
+    overflow: initial !important;
   }
 </style>
