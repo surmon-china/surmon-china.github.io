@@ -22,8 +22,7 @@ export enum GitHubRepositorieIDs {
   VueVideoPlayer = 'vue-video-player',
   VueCodemirror = 'vue-codemirror',
   VueTouchRipple = 'vue-touch-ripple',
-  VueDragZone = 'vue-drag-zone',
-  NgxQuillEditor = 'ngx-quill-editor',
+  VueDragZone = 'vue-drag-zone'
 }
 
 const ALIYUN_PARTER_URL_fixed = 'https://www.aliyun.com/minisite/goods?userCode=pu7fghvl'
