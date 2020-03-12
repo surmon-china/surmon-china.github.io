@@ -1,10 +1,12 @@
-module.exports = {
+
+export default {
   // some nuxt config...
   plugins: [
-    { src: '@/plugins/swiper.js', ssr: false },
+    { src: '@/plugins/nuxt-swiper-plugin.js', ssr: false },
   ],
   // some nuxt config...
   css: [
+    // swiper style
     'swiper/dist/css/swiper.css'
   ],
   // some nuxt config...

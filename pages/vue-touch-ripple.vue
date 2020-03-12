@@ -13,10 +13,10 @@
   import Homepage from '@/components/homepage/index.vue'
 
   const repositorieId = GitHubRepositorieIDs.VueTouchRipple
-  const examples = [] as IExample[]
+  const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-touch-ripple/examples`).default)
+    getComponentExampleMeta(require(`@/projects/vue-touch-ripple/examples`))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,

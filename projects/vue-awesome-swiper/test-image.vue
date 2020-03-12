@@ -9,15 +9,11 @@
   import 'swiper/dist/css/swiper.css'
 
   export default {
-    name: 'swiper-example-03',
+    name: 'swiper-example-lazy-image',
     components: {
       swiper,
       swiperSlide
     },
-    exampleData: {
-      name: 'Pagination'
-    },
-    name: 'lazyImage',
     props: {
       src: String
     },

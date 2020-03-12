@@ -20,7 +20,7 @@
 
   export default {
     name: 'swiper-example-pagination-dynamic',
-    title: 'Pagination / Dynamic Bullets',
+    title: 'Pagination / Dynamic bullets',
     components: {
       swiper,
       swiperSlide
@@ -39,18 +39,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .swiper {
-    height: 100%;
-    width: 100%;
-
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-weight: bold;
-      font-size: $font-size-huge * 2;
-      background-color: $white;
-    }
-  }
+  @import './base.scss';
 </style>
+

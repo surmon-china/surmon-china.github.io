@@ -47,10 +47,10 @@
   import Homepage from '@/components/homepage/index.vue'
 
   const repositorieId = GitHubRepositorieIDs.VueQuillEditor
-  const examples = [] as IExample[]
+  const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-quill-editor/examples`).default)
+    getComponentExampleMeta(require(`@/projects/vue-quill-editor/examples`))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,

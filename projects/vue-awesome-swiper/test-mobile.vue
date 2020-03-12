@@ -1,10 +1,11 @@
 <template>
   <div class="mobile">
     <swiper class="swiper" :options="swiperOption" class="my-swiper" ref="mySwiper">
-      <swiper-slide v-for="(banner, index) in banners" 
-                    :class="{ 
-                      'swiper-footer': Object.is(index, 3) 
-                    }">
+      <swiper-slide
+        v-for="(banner, index) in banners" 
+        :class="{ 
+          'swiper-footer': Object.is(index, 3) 
+        }">
         <!-- <span>{{ index }}</span> -->
         <img :src="banner.image" :class="{ 'swiper-no-swiping': Object.is(index, 3) }">
       </swiper-slide>
@@ -18,13 +19,10 @@
   import 'swiper/dist/css/swiper.css'
 
   export default {
-    name: 'swiper-example-03',
+    name: 'swiper-test',
     components: {
       swiper,
       swiperSlide
-    },
-    exampleData: {
-      name: 'Pagination'
     },
     data () {
       const img = {

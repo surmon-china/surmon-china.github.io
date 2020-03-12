@@ -1,39 +1,24 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>Thumbs Gallery With Two-way Control</span>
-        <span>（</span>
-        <span>缩略图控制</span>
-        <span>）</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-awesome-swiper/blob/master/examples/30-thumbs-gallery.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media  style="height: 500px">
-      <!-- swiper1 -->
-      <swiper class="swiper" :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide class="slide-1"></swiper-slide>
-        <swiper-slide class="slide-2"></swiper-slide>
-        <swiper-slide class="slide-3"></swiper-slide>
-        <swiper-slide class="slide-4"></swiper-slide>
-        <swiper-slide class="slide-5"></swiper-slide>
-        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
-      </swiper>
-      <!-- swiper2 Thumbs -->
-      <swiper class="swiper" :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-        <swiper-slide class="slide-1"></swiper-slide>
-        <swiper-slide class="slide-2"></swiper-slide>
-        <swiper-slide class="slide-3"></swiper-slide>
-        <swiper-slide class="slide-4"></swiper-slide>
-        <swiper-slide class="slide-5"></swiper-slide>
-      </swiper>
-    </md-card-media>
-  </md-card>
+  <div class="thumb-example">
+    <!-- swiper1 -->
+    <swiper class="swiper gallery-top" :options="swiperOptionTop" ref="swiperTop">
+      <swiper-slide class="slide-1"></swiper-slide>
+      <swiper-slide class="slide-2"></swiper-slide>
+      <swiper-slide class="slide-3"></swiper-slide>
+      <swiper-slide class="slide-4"></swiper-slide>
+      <swiper-slide class="slide-5"></swiper-slide>
+      <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+      <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+    </swiper>
+    <!-- swiper2 Thumbs -->
+    <swiper class="swiper gallery-thumbs" :options="swiperOptionThumbs" ref="swiperThumbs">
+      <swiper-slide class="slide-1"></swiper-slide>
+      <swiper-slide class="slide-2"></swiper-slide>
+      <swiper-slide class="slide-3"></swiper-slide>
+      <swiper-slide class="slide-4"></swiper-slide>
+      <swiper-slide class="slide-5"></swiper-slide>
+    </swiper>
+  </div>
 </template>
 
 <script>
@@ -41,17 +26,17 @@
   import 'swiper/dist/css/swiper.css'
 
   export default {
-    name: 'swiper-example-03',
+    name: 'swiper-example-thumbs-gallery',
+    title: 'Thumbs gallery with Two-way control',
     components: {
       swiper,
       swiperSlide
     },
-    exampleData: {
-      name: 'Pagination'
-    },
     data() {
       return {
         swiperOptionTop: {
+          loop: true,
+          loopedSlides: 5, //looped slides should be the same
           spaceBetween: 10,
           navigation: {
             nextEl: '.swiper-button-next',
@@ -59,6 +44,8 @@
           }
         },
         swiperOptionThumbs: {
+          loop: true,
+          loopedSlides: 5, //looped slides should be the same
           spaceBetween: 10,
           centeredSlides: true,
           slidesPerView: 'auto',
@@ -79,65 +66,49 @@
 </script>
 
 <style lang="scss" scoped>
+  .thumb-example {
+    height: 480px;
+    background-color: $black;
+  }
+
   .swiper {
-    height: 100%;
-    width: 100%;
-
     .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-weight: bold;
-      font-size: $font-size-huge * 2;
-      background-color: $white;
-    }
-  }
-</style>
+      background-size: cover;
+      background-position: center;
 
-<style lang="scss" scoped>
-  .swiper-container {
-    background-color: #000;
-  }
-  .swiper-slide {
-    background-size: cover;
-    background-position: center;
-
-    &.slide-1 {
-      background-image:url('/static/images/surmon-1.jpg');
+      &.slide-1 {
+        background-image:url('/images/example/1.jpg');
+      }
+      &.slide-2 {
+        background-image:url('/images/example/2.jpg');
+      }
+      &.slide-3 {
+        background-image:url('/images/example/4.jpg');
+      }
+      &.slide-4 {
+        background-image:url('/images/example/5.jpg');
+      }
+      &.slide-5 {
+        background-image:url('/images/example/6.jpg');
+      }
     }
 
-    &.slide-2 {
-      background-image:url('/static/images/surmon-6.jpg');
+    &.gallery-top {
+      height: 80%;
+      width: 100%;
     }
-
-    &.slide-3 {
-      background-image:url('/static/images/surmon-8.jpg');
+    &.gallery-thumbs {
+      height: 20%;
+      box-sizing: border-box;
+      padding: $gap 0;
     }
-
-    &.slide-4 {
-      background-image:url('/static/images/surmon-9.jpg');
+    &.gallery-thumbs .swiper-slide {
+      width: 25%;
+      height: 100%;
+      opacity: 0.4;
     }
-
-    &.slide-5 {
-      background-image:url('/static/images/surmon-10.jpg');
+    &.gallery-thumbs .swiper-slide-active {
+      opacity: 1;
     }
-  }
-  .gallery-top {
-    height: 80%!important;
-    width: 100%;
-  }
-  .gallery-thumbs {
-    height: 20%!important;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-  .gallery-thumbs .swiper-slide {
-    width: 25%;
-    height: 100%;
-    opacity: 0.4;
-  }
-  .gallery-thumbs .swiper-slide-active {
-    opacity: 1;
   }
 </style>

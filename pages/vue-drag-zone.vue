@@ -13,10 +13,10 @@
   import Homepage from '@/components/homepage/index.vue'
 
   const repositorieId = GitHubRepositorieIDs.VueDragZone
-  const examples = [] as IExample[]
+  const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-drag-zone/examples`).default)
+    getComponentExampleMeta(require(`@/projects/vue-drag-zone/examples`))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,

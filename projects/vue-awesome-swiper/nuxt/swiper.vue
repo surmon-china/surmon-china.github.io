@@ -1,4 +1,23 @@
 <template>
+  <!-- TODO: 4.0 -->
+  <div clsss="example">
+    <!-- component: only render html on browser env -->
+    <client-only>
+      <swiper class="swiper">
+        <swiper-slide>Slide 1</swiper-slide>
+        <swiper-slide>Slide 2</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide>Slide 4</swiper-slide>
+        <swiper-slide>Slide 5</swiper-slide>
+        <swiper-slide>Slide 6</swiper-slide>
+        <swiper-slide>Slide 7</swiper-slide>
+        <swiper-slide>Slide 8</swiper-slide>
+        <swiper-slide>Slide 9</swiper-slide>
+        <swiper-slide>Slide 10</swiper-slide>
+      </swiper>
+    </client-only>
+  </div>
+  <!-- directive: render origin html with SSR -->
   <!-- You can find this swiper instance object in current component by the "mySwiper"  -->
   <div v-swiper:mySwiper="swiperOption">
     <div class="swiper-wrapper">

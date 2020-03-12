@@ -1,34 +1,18 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>Dynamic Slides</span>
-        <span>（</span>
-        <span>动态加载 Slides</span>
-        <span>）</span>
-      </div>
-      <div>
-        <md-button @click.native="prependSlide">Prepend Slide</md-button>
-        <md-button @click.native="appendSlide">Append Slide</md-button>
-        <md-button @click.native="popSlide">Pop Slide</md-button>
-        <md-button @click.native="shiftSlide">Shift Slide</md-button>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-awesome-swiper/blob/master/examples/29-dynamic-slides.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <!-- swiper -->
-      <swiper class="swiper" :options="swiperOption">
-        <swiper-slide v-for="slide in swiperSlides" :key="slide">Slide {{ slide }}</swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
-    </md-card-media>
-  </md-card>
+  <div class="example">
+    <div class="toolbar">
+      <button @click="prependSlide">Prepend slide</button>
+      <button @click="appendSlide">Append slide</button>
+      <button @click="popSlide">Pop slide</button>
+      <button @click="shiftSlide">Shift slide</button>
+    </div>
+    <swiper class="swiper" :options="swiperOption">
+      <swiper-slide v-for="slide in swiperSlides" :key="slide">Slide {{ slide }}</swiper-slide>
+      <div class="swiper-pagination" slot="pagination"></div>
+      <div class="swiper-button-prev" slot="button-prev"></div>
+      <div class="swiper-button-next" slot="button-next"></div>
+    </swiper>
+  </div>
 </template>
 
 <script>
@@ -36,13 +20,11 @@
   import 'swiper/dist/css/swiper.css'
 
   export default {
-    name: 'swiper-example-03',
+    name: 'swiper-example-dynamic-slides',
+    title: 'Dynamic slides',
     components: {
       swiper,
       swiperSlide
-    },
-    exampleData: {
-      name: 'Pagination'
     },
     data() {
       return {
@@ -80,29 +62,35 @@
 </script>
 
 <style lang="scss" scoped>
-  .swiper {
-    height: 100%;
-    width: 100%;
+  @import './base.scss';
 
-    .swiper-slide {
+  .example {
+    height: auto;
+
+    .toolbar {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-weight: bold;
-      font-size: $font-size-huge * 2;
-      background-color: $white;
-    }
-  }
-</style>
+      justify-content: space-around;
+      width: 100%;
+      height: 2rem;
+      border-bottom: 1px solid $body-bg;
+      margin-bottom: $gap;
 
-<style scoped>
-  .append-buttons {
-    text-align: center;
-    margin-top: 20px;
-  }
-  .append-buttons a {
-    display: inline-block;
-    margin: 0 10px;
+      button {
+        flex: 1;
+        padding: 0;
+        margin: 0;
+        border: none;
+        border-right: 1px solid $body-bg;
+        background-color: $module-bg;
+        cursor: pointer;
+        &:last-child {
+          border: none;
+        }
+
+        &:hover {
+          background-color: $module-bg-darken;
+        }
+      }
+    }
   }
 </style>

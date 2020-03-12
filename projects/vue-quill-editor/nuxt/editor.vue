@@ -21,6 +21,7 @@
         content: '<p>I am Example</p>',
         editorOption: {
           // Some Quill options...
+          theme: 'snow',
           modules: {
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],
@@ -33,7 +34,7 @@
     mounted() {
       console.log('App init, the Quill instance object is:', this.editor.quill)
       setTimeout(() => {
-        this.content = 'I am changed'
+        this.content = 'I was changed!'
       }, 3000)
     },
     methods: {

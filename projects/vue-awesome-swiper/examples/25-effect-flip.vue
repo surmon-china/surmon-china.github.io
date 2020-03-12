@@ -1,32 +1,14 @@
 <template>
-  <md-card>
-    <md-card-actions>
-      <div class="md-subhead">
-        <span>3D Flip Effect</span>
-        <span>（</span>
-        <span>3D翻转切换</span>
-        <span>）</span>
-      </div>
-      <md-button class="md-icon-button"
-                 target="_blank"
-                 href="https://github.com/surmon-china/vue-awesome-swiper/blob/master/examples/25-effect-flip.vue">
-        <md-icon>code</md-icon>
-      </md-button>
-    </md-card-actions>
-    <md-card-media>
-      <!-- swiper -->
-      <swiper class="swiper" :options="swiperOption">
-        <swiper-slide class="slide-1"></swiper-slide>
-        <swiper-slide class="slide-2"></swiper-slide>
-        <swiper-slide class="slide-3"></swiper-slide>
-        <swiper-slide class="slide-4"></swiper-slide>
-        <swiper-slide class="slide-5"></swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
-      </swiper>
-    </md-card-media>
-  </md-card>
+  <swiper class="swiper" :options="swiperOption">
+    <swiper-slide class="slide-1"></swiper-slide>
+    <swiper-slide class="slide-2"></swiper-slide>
+    <swiper-slide class="slide-3"></swiper-slide>
+    <swiper-slide class="slide-4"></swiper-slide>
+    <swiper-slide class="slide-5"></swiper-slide>
+    <div class="swiper-pagination" slot="pagination"></div>
+    <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div>
+  </swiper>
 </template>
 
 <script>
@@ -34,13 +16,11 @@
   import 'swiper/dist/css/swiper.css'
 
   export default {
-    name: 'swiper-example-03',
+    name: 'swiper-example-3d-flip',
+    title: '3D Flip effect',
     components: {
       swiper,
       swiperSlide
-    },
-    exampleData: {
-      name: 'Pagination'
     },
     data() {
       return {
@@ -61,50 +41,33 @@
 </script>
 
 <style lang="scss" scoped>
+  @import './base.scss';
+
   .swiper {
-    height: 100%;
-    width: 100%;
+    width: 300px;
+    padding: 50px;
+    background-color: $module-bg;
 
     .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-weight: bold;
-      font-size: $font-size-huge * 2;
-      background-color: $white;
-    }
-  }
-</style>
+      background-position: 50%;
+      background-size: cover;
+      width: 100%;
 
-<style lang="scss" scoped>
-  .swiper-container {
-    width: 300px!important;
-    padding: 50px!important;
-  }
-  .swiper-slide {
-    background-position: 50%!important;
-    background-size: cover!important;
-    width: 100%!important;
-
-    &.slide-1 {
-      background-image:url('/static/images/surmon-1.jpg');
-    }
-
-    &.slide-2 {
-      background-image:url('/static/images/surmon-6.jpg');
-    }
-
-    &.slide-3 {
-      background-image:url('/static/images/surmon-8.jpg');
-    }
-
-    &.slide-4 {
-      background-image:url('/static/images/surmon-9.jpg');
-    }
-
-    &.slide-5 {
-      background-image:url('/static/images/surmon-10.jpg');
+      &.slide-1 {
+        background-image:url('/images/example/5.jpg');
+      }
+      &.slide-2 {
+        background-image:url('/images/example/6.jpg');
+      }
+      &.slide-3 {
+        background-image:url('/images/example/7.jpg');
+      }
+      &.slide-4 {
+        background-image:url('/images/example/8.jpg');
+      }
+      &.slide-5 {
+        background-image:url('/images/example/9.jpg');
+      }
     }
   }
 </style>

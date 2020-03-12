@@ -1,11 +1,4 @@
-import example01 from './01-theme-snow.vue'
-import example02 from './02-theme-bubble.vue'
-import example03 from './03-custom-toolbar.vue'
-import example04 from './04-register-modules.vue'
-
-export default {
-  example01,
-  example02,
-  example03,
-  example04
-}
+export { default as example01 } from './01-theme-snow.vue'
+export { default as example02 } from './02-theme-bubble.vue'
+export { default as example03 } from './03-custom-toolbar.vue'
+export { default as example04 } from './04-register-modules.vue'

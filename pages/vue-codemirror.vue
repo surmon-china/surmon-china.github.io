@@ -33,10 +33,10 @@
   import Homepage from '@/components/homepage/index.vue'
 
   const repositorieId = GitHubRepositorieIDs.VueCodemirror
-  const examples = [] as IExample[]
+  const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-codemirror/examples`).default)
+    getComponentExampleMeta(require(`@/projects/vue-codemirror/examples`))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,

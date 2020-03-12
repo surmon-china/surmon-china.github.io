@@ -28,18 +28,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .swiper {
-    height: 100%;
-    width: 100%;
-
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-weight: bold;
-      font-size: $font-size-huge * 2;
-      background-color: $white;
-    }
-  }
+  @import './base.scss';
 </style>

@@ -20,7 +20,7 @@
 
   export default {
     name: 'swiper-example-pagination-custom',
-    title: 'Custom Pagination',
+    title: 'Custom pagination',
     components: {
       swiper,
       swiperSlide
@@ -42,20 +42,9 @@
 </script>
 
 <style lang="scss" scoped>
+  @import './base.scss';
+
   .swiper {
-    height: 100%;
-    width: 100%;
-
-    .swiper-slide {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-weight: bold;
-      font-size: $font-size-huge * 2;
-      background-color: $white;
-    }
-
     /deep/ .swiper-pagination-bullet-custom {
       $size: 20px;
       width: $size !important;
@@ -78,7 +67,4 @@
       }
     }
   }
-</style>
-
-<style lang="scss">
 </style>

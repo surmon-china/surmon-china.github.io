@@ -6,6 +6,7 @@
       :options="editorOption"
     />
     <div class="output ql-snow">
+      <div class="title">Output</div>
       <div class="ql-editor" v-html="this.content"></div>
     </div>
   </div>
@@ -73,12 +74,21 @@
       height: 100%;
     }
 
+    $toolbar-height: 42px;
+
     .editor {
-      padding-bottom: 40px;
+      padding-bottom: $toolbar-height;
     }
 
     .output {
       border: none;
+
+      .title {
+        height: $toolbar-height;
+        line-height: $toolbar-height;
+        padding-left: $gap;
+        border-bottom: 1px solid #ccc;
+      }
 
       > code {
         width: 100%;

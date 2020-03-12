@@ -28,14 +28,14 @@
   import Homepage from '@/components/homepage/index.vue'
 
   const repositorieId = GitHubRepositorieIDs.Naivebayes
-  const examples = [] as IExample[]
+  const examples: IExample[] = []
   const components = {
     Homepage,
     HomepageExampleCard
   }
 
   if (isBrowser) {
-    getComponentExampleMeta(require('@/projects/naivebayes').default)
+    getComponentExampleMeta(require('@/projects/naivebayes'))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,
