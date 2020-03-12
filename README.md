@@ -1,6 +1,6 @@
 # github.surmon.me
 
-> My gitHub repository homepages.
+> My GitHub repository homepages.
 
 ## Build Setup
 
