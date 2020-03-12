@@ -7,6 +7,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# development components
+development
+
 # local env files
 .env.local
 .env.*.local
