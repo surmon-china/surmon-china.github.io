@@ -22,15 +22,15 @@
 </template>
 
 <script>
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import 'swiper/dist/css/swiper.css'
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/css/swiper.css'
 
   export default {
     name: 'swiper-example-thumbs-gallery',
     title: 'Thumbs gallery with Two-way control',
     components: {
-      swiper,
-      swiperSlide
+      Swiper,
+      SwiperSlide
     },
     data() {
       return {
@@ -58,8 +58,8 @@
       this.$nextTick(() => {
         const swiperTop = this.$refs.swiperTop.swiper
         const swiperThumbs = this.$refs.swiperThumbs.swiper
-        swiperTop.controller.control = swiperThumbs
-        swiperThumbs.controller.control = swiperTop
+        // swiperTop.controller.control = swiperThumbs
+        // swiperThumbs.controller.control = swiperTop
       })
     }
   }

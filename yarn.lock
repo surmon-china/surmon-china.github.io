@@ -1277,6 +1277,11 @@
   resolved "https://registry.npm.taobao.org/@types/source-list-map/download/@types/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
   integrity sha1-AHiDYGP/rxdBI0m7o2QIfgrALsk=
 
+"@types/swiper@^5.2.1":
+  version "5.2.1"
+  resolved "https://registry.npm.taobao.org/@types/swiper/download/@types/swiper-5.2.1.tgz#889ab9c9041007c27ffa3220097303b6b1670608"
+  integrity sha1-iJq5yQQQB8J/+jIgCXMDtrFnBgg=
+
 "@types/tapable@*":
   version "1.0.4"
   resolved "https://registry.npm.taobao.org/@types/tapable/download/@types/tapable-1.0.4.tgz#b4ffc7dc97b498c969b360a41eee247f82616370"
@@ -8410,10 +8415,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swiper@^4.0.7:
-  version "4.5.1"
-  resolved "https://registry.npm.taobao.org/swiper/download/swiper-4.5.1.tgz#ed43998e780ceb478610079c8d23fd425eca636f"
-  integrity sha1-7UOZjngM60eGEAecjSP9Ql7KY28=
+swiper@^5.3.6:
+  version "5.3.6"
+  resolved "https://registry.npm.taobao.org/swiper/download/swiper-5.3.6.tgz#102b7f8145d734ec4c30e04602160382356b5948"
+  integrity sha1-ECt/gUXXNOxMMOBGAhYDgjVrWUg=
   dependencies:
     dom7 "^2.1.3"
     ssr-window "^1.0.1"
@@ -8995,13 +9000,8 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz?cache=0&sync_timestamp=1572870776965&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvm-browserify%2Fdownload%2Fvm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
-vue-awesome-swiper@^3.1.3:
-  version "3.1.3"
-  resolved "https://registry.npm.taobao.org/vue-awesome-swiper/download/vue-awesome-swiper-3.1.3.tgz#05500b501ffb3fec9bf7eb9985bcf4ae8360ed9e"
-  integrity sha1-BVALUB/7P+yb9+uZhbz0roNg7Z4=
-  dependencies:
-    object-assign "^4.1.1"
-    swiper "^4.0.7"
+vue-awesome-swiper@/Users/surmon/Projects/JavaScript/NPM/vue-awesome-swiper:
+  version "4.0.0-rc1"
 
 vue-client-only@^2.0.0:
   version "2.0.0"

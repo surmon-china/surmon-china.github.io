@@ -51,7 +51,7 @@ export default {
     'codemirror/lib/codemirror.css',
     'codemirror/theme/base16-dark.css',
     // swiper
-    'swiper/dist/css/swiper.css'
+    'swiper/css/swiper.css'
   ],
   styleResources: {
     scss: '@/assets/styles/init.scss',

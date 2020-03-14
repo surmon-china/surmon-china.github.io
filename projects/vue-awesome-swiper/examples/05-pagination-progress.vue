@@ -17,15 +17,15 @@
 </template>
 
 <script>
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import 'swiper/dist/css/swiper.css'
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/css/swiper.css'
 
   export default {
     name: 'swiper-example-pagination-progress',
     title: 'Progress pagination',
     components: {
-      swiper,
-      swiperSlide
+      Swiper,
+      SwiperSlide
     },
     data() {
       return {

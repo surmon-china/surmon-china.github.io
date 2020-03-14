@@ -15,15 +15,15 @@
 </template>
 
 <script>
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import 'swiper/dist/css/swiper.css'
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/css/swiper.css'
 
   export default {
     name: 'swiper-example-slides-per-column',
     title: 'Multi row slides layout',
     components: {
-      swiper,
-      swiperSlide
+      Swiper,
+      SwiperSlide
     },
     data() {
       return {
@@ -45,7 +45,7 @@
   @import './base.scss';
 
   .swiper {
-    height: auto!important;
+    height: 430px;
     margin-left: auto;
     margin-right: auto;
 

@@ -15,15 +15,15 @@
 
 <script>
   // TODO: https://www.swiper.com.cn/api/parameters/449.html
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import 'swiper/dist/css/swiper.css'
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/css/swiper.css'
 
   export default {
     name: 'swiper-exampl-css-mode',
     title: 'CSS mode',
     components: {
-      swiper,
-      swiperSlide
+      Swiper,
+      SwiperSlide
     }
   }
 </script>

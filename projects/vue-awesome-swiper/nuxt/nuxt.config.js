@@ -7,7 +7,7 @@ export default {
   // some nuxt config...
   css: [
     // swiper style
-    'swiper/dist/css/swiper.css'
+    'swiper/css/swiper.css'
   ],
   // some nuxt config...
 }

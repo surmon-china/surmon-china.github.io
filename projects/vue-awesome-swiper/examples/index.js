@@ -1,4 +1,5 @@
-// export { default as example00 } from './00-typescript-composition-api.vue'
+import { default as example00, title } from './00-typescript-composition-api.vue'
+export const typescriptExample = Object.assign(example00, { title })
 export { default as example01 } from './01-default.vue'
 export { default as example02 } from './02-navigation.vue'
 export { default as example03 } from './03-pagination.vue'

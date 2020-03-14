@@ -12,15 +12,15 @@
 </template>
 
 <script>
-  import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import 'swiper/dist/css/swiper.css'
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import 'swiper/css/swiper.css'
 
   export default {
     name: 'swiper-example-3d-flip',
     title: '3D Flip effect',
     components: {
-      swiper,
-      swiperSlide
+      Swiper,
+      SwiperSlide
     },
     data() {
       return {
