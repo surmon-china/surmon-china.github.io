@@ -68,9 +68,16 @@
       text-align: center;
       font-weight: bold;
       font-size: $font-size-huge * 2;
-      background-color: bisque;
+      background-color: #2C8DFB;
       background-position: center;
       background-size: cover;
+      color: $white;
+    }
+
+    .swiper-pagination {
+      /deep/ .swiper-pagination-bullet.swiper-pagination-bullet-active {
+        background-color: $white;
+      }
     }
   }
 </style>

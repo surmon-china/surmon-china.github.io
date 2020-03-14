@@ -32,7 +32,7 @@
       }
     },
     mounted() {
-      console.log('App init, the Quill instance object is:', this.editor.quill)
+      console.log('App inited, the Quill instance object is:', this.$refs.editor.quill)
       setTimeout(() => {
         this.content = 'I was changed!'
       }, 3000)

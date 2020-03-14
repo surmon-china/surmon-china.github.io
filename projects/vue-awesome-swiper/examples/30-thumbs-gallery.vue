@@ -36,7 +36,7 @@
       return {
         swiperOptionTop: {
           loop: true,
-          loopedSlides: 5, //looped slides should be the same
+          loopedSlides: 5, // looped slides should be the same
           spaceBetween: 10,
           navigation: {
             nextEl: '.swiper-button-next',
@@ -45,7 +45,7 @@
         },
         swiperOptionThumbs: {
           loop: true,
-          loopedSlides: 5, //looped slides should be the same
+          loopedSlides: 5, // looped slides should be the same
           spaceBetween: 10,
           centeredSlides: true,
           slidesPerView: 'auto',

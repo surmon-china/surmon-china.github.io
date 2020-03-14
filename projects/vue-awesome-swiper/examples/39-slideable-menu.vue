@@ -34,12 +34,9 @@
           initialSlide: 1,
           resistanceRatio: 0,
           slidesPerView: 'auto',
-          slideToClickedSlide: true,
           on: {
             slideChange: () => {
-              window.setTimeout(() => {
-                this.menuOpened = this.swiper.activeIndex === 0
-              })
+              this.menuOpened = this.swiper.activeIndex === 0
             }
           }
         }
