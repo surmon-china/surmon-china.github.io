@@ -2,8 +2,13 @@
 @import url('//at.alicdn.com/t/font_1492229_0twamxrq65yg.css');
 
 @font-face {
-  font-family: 'DINRegular';
+  font-family: 'DIN-Regular';
   src: url('/fonts/DIN-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'SFMono-Regular';
+  src: url('/fonts/SFMonoRegular.otf') format('opentype');
 }
 
 html {
@@ -12,9 +17,13 @@ html {
 
 body {
   font-size: $font-size-base;
-  font-family: 'DINRegular';
+  font-family: 'DIN-Regular';
   background-color: $body-bg;
   color: $text-color;
+}
+
+pre, code {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
 }
 
 * {

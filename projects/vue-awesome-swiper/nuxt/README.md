@@ -1,6 +1,6 @@
 ### SSR
 
-In the ssr environment, you can control any component to be loaded and rendered only on the client. Under Nuxt.js, you can use the following methods:
+In the SSR environment, you can control any component to be loaded and rendered only on the client. Under Nuxt.js, you can use the following methods:
 
 ```ts
 plugins: [
@@ -11,11 +11,11 @@ plugins: [
 ```vue
 <template>
   <client-only>
-    <swiper>
-      <swiper-slide>
-        Just load and render on browser
-      </swiper-slide>
-    </swiper>
+  <swiper>
+    <swiper-slide>
+      Only load and render on browser
+    </swiper-slide>
+  </swiper>
   </client-only>
 </template>
 ```

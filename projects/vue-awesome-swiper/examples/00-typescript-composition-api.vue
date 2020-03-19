@@ -21,7 +21,7 @@
           <span class="click">{{ isSlideClicked(1) ? 'clicked!' : 'click me' }}</span>
         </swiper-slide>
         <swiper-slide>
-          <span>just render on client.</span>
+          <span>only render on client.</span>
           <span class="click">{{ isSlideClicked(2) ? 'clicked!' : 'click me' }}</span>
         </swiper-slide>
         <swiper-slide>
@@ -54,7 +54,7 @@
     >
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <span>Directive render with ssr (HTML).</span>
+          <span>Directive render with SSR (HTML).</span>
         </div>
         <div class="swiper-slide">
           <span>Because directive doesn't instantiate Swiper on server (render HTML).</span>

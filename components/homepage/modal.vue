@@ -16,7 +16,7 @@
             <Loading class="loading" v-if="isLoading" />
             <p v-else-if="!code">No data</p>
             <pre v-else class="code">
-              <code :data-lang="fileExt" v-html="code"></code>
+              <code :data-lang="fileExt" v-html="code" contenteditable></code>
             </pre>
           </transition>
         </div>
@@ -115,6 +115,9 @@
 
         .code {
           margin: 0;
+          line-height: 20px;
+          font-size: 13px;
+          cursor: text;
         }
       }
     }
