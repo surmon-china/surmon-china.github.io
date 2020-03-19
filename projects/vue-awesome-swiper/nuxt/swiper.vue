@@ -1,55 +1,49 @@
 <template>
-  <!-- TODO: 4.0 -->
-  <div clsss="example">
-    <!-- component: only render html on browser env -->
+  <div class="example">
+    <!-- component: only render Swiper on browser env -->
     <client-only>
-      <swiper class="swiper">
+      <swiper
+        ref="carousel"
+        class="swiper"
+        :options="swiperOptions"
+        @ready="onSwiperRedied"
+        @clickSlide="onSwiperClickSlide"
+        @slideChangeTransitionStart="onSwiperSlideChangeTransitionStart"
+      >
         <swiper-slide>Slide 1</swiper-slide>
         <swiper-slide>Slide 2</swiper-slide>
         <swiper-slide>Slide 3</swiper-slide>
         <swiper-slide>Slide 4</swiper-slide>
         <swiper-slide>Slide 5</swiper-slide>
         <swiper-slide>Slide 6</swiper-slide>
-        <swiper-slide>Slide 7</swiper-slide>
-        <swiper-slide>Slide 8</swiper-slide>
-        <swiper-slide>Slide 9</swiper-slide>
-        <swiper-slide>Slide 10</swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
     </client-only>
-  </div>
-  <!-- directive: render origin html with SSR -->
-  <!-- You can find this swiper instance object in current component by the "mySwiper"  -->
-  <div v-swiper:mySwiper="swiperOption">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for="banner in banners" :key="banner">
-        <img :src="banner">
+    <!-- directive: render origin html on server & render Swiper on browser -->
+    <!-- You can get the swiper instance object in current component context by the name: "mySwiper"  -->
+    <div
+      class="swiper"
+      v-swiper:myDirectiveSwiper="swiperOptions"
+      @ready="onSwiperRedied"
+      @click-slide="onSwiperClickSlide"
+      @slide-change-transition-start="onSwiperSlideChangeTransitionStart"
+    >
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="index in 6" :key="index">
+          <span>Slide {{ index }}</span>
+        </div>
       </div>
+      <div class="swiper-pagination swiper-pagination-bullets"></div>
     </div>
-    <div class="swiper-pagination swiper-pagination-bullets"></div>
   </div>
 </template>
 
 <script>
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-  import 'swiper/css/swiper.css'
-
   export default {
-    name: 'swiper-example-03',
-    components: {
-      Swiper,
-      SwiperSlide
-    },
-    exampleData: {
-      name: 'Pagination'
-    },
+    name: 'swiper-nuxt',
     data () {
       return {
-        banners: [
-          '/1.jpg',
-          '/2.jpg',
-          '/3.jpg'
-        ],
-        swiperOption: {
+        swiperOptions: {
           loop: true,
           slidesPerView: 'auto',
           centeredSlides: true,
@@ -57,52 +51,46 @@
           pagination: {
             el: '.swiper-pagination',
             dynamicBullets: true
-          },
-          on: {
-            slideChange() {
-              console.log('onSlideChangeEnd', this);
-            },
-            tap() {
-              console.log('onTap', this);
-            }
           }
         }
       }
     },
-    mounted() {
-      console.log('app init', this)
-      setTimeout(() => {
-        this.banners.push('/5.jpg')
-        console.log('banners update')
-      }, 3000)
-      console.log(
-        'This is current swiper instance object', this.mySwiper, 
-        'I will slideTo banners 3')
-       this.mySwiper.slideTo(3)
+    methods: {
+      onSwiperRedied(swiper) {
+        console.log('Swiper redied!', swiper)
+      },
+      onSwiperSlideChangeTransitionStart() {
+        console.log('SwiperSlideChangeTransitionStart!')
+      },
+      onSwiperClickSlide(index, reallyIndex) {
+        console.log('Swiper click slide!', reallyIndex)
+      }
     }
   }
 </script>
 
-
 <style lang="scss" scoped>
-  .my-swiper {
-    height: 300px;
-    width: 100%;
+  .example {
+    height: auto;
 
-    .swiper-slide {
-      text-align: center;
-      font-size: 38px;
-      font-weight: 700;
-      background-color: #eee;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    .swiper {
+      height: 300px;
+      width: 100%;
 
-    .swiper-pagination {
+      .swiper-slide {
+        text-align: center;
+        font-size: 38px;
+        font-weight: 700;
+        background-color: #eee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-      > .swiper-pagination-bullet {
-        background-color: red;
+      .swiper-pagination {
+        > .swiper-pagination-bullet {
+          background-color: red;
+        }
       }
     }
   }

@@ -1,11 +1,12 @@
-<!-- The ref attr used to find the swiper instance -->
 <template>
   <div>
-    <swiper class="swiper" :options="swiperOption" 
-            @setTranslate="onSlideChange"
-            @ready="swiperReady"
-            ref="mySwiper"
-            class="my-swiper">
+    <swiper
+      ref="mySwiper"
+      class="swiper my-swiper"
+      :options="swiperOption" 
+      @setTranslate="onSlideChange"
+      @ready="swiperReady"
+    >
       <!-- slides -->
       <swiper-slide v-for="slide in slides" :key="slide">I'm Slide {{ slide }}</swiper-slide>
       <!-- Optional controls -->
@@ -18,11 +19,7 @@
 </template>
 
 <script>
-import lazyImage from './Image'
-import { swiper, swiperSlide } from '@components/vue-awesome-swiper/dist/vue-awesome-swiper.js'
-// const { swiper, swiperSlide } = require('@components/vue-awesome-swiper/dist/vue-awesome-swiper.js').default
-console.log('VueAwesomeSwiper', swiper, swiperSlide)
-  // swiper options example:
+  import lazyImage from './Image'
   export default {
     name: 'carrousel',
     components: {

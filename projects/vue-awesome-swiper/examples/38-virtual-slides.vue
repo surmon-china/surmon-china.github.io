@@ -48,7 +48,7 @@
     },
     methods: {
       toSlide(index) {
-        this.$refs.mySwiper.swiper.slideTo(index, 0)
+        this.$refs.mySwiper.$swiper.slideTo(index, 0)
       }
     }
   }

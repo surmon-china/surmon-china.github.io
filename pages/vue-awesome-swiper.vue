@@ -3,12 +3,12 @@
     <template slot="actions">
       <homepage-link
         icon="doc"
-        text="Swiper 5/4 API Document (zh)"
+        text="Swiper 5/4 API Document (ZH)"
         href="https://www.swiper.com.cn/api/index.html"
       />
       <homepage-link
         icon="doc"
-        text="Swiper API Document (en)"
+        text="Swiper API Document (EN)"
         href="https://swiperjs.com/api/"
       />
       <homepage-link
@@ -18,8 +18,8 @@
       />
       <homepage-link
         icon="doc"
-        text="How to use in Nuxt.js?"
-        href="https://github.com/surmon-china/vue-awesome-swiper/tree/master/examples/nuxt-ssr-example"
+        text="How to use with SSR?"
+        href="https://github.com/surmon-china/surmon-china.github.io/tree/source/projects/vue-awesome-swiper/nuxt"
       />
     </template>
     <template slot="content">

@@ -4,6 +4,7 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
+const path = require('path')
 const packageJSON = require('./package.json')
 
 export const APP = {
@@ -78,6 +79,8 @@ export default {
   build: {
     extractCSS: true,
     extend (config, { isClient, loaders: { vue } }) {
+      // MARK: Just run in test
+      // config.resolve.alias['vue-awesome-swiper'] = path.join(__dirname, 'development', 'vue-awesome-swiper', 'src')
       if (isClient) {
         // https://vue-loader.vuejs.org/zh/options.html#exposefilename
         vue.exposeFilename = true

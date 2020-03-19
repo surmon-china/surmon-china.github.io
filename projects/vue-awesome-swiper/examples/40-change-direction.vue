@@ -34,19 +34,14 @@
           },
           on: {
             resize: () => {
-              this.$refs.swiper.swiper.changeDirection(
-                this.getDirection()
+              this.$refs.swiper.$swiper.changeDirection(
+                window.innerWidth <= 960
+                  ? 'vertical'
+                  : 'horizontal'
               )
             }
           }
         }
-      }
-    },
-    methods: {
-      getDirection() {
-        return window.innerWidth <= 960
-          ? 'vertical'
-          : 'horizontal'
       }
     }
   }

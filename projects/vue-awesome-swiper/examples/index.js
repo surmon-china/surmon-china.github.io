@@ -1,5 +1,5 @@
-import { default as example00, title } from './00-typescript-composition-api.vue'
-export const typescriptExample = Object.assign(example00, { title })
+// export { default as nuxtExample } from './../nuxt/swiper.vue'
+export { default as example00 } from './00-typescript-composition-api.vue'
 export { default as example01 } from './01-default.vue'
 export { default as example02 } from './02-navigation.vue'
 export { default as example03 } from './03-pagination.vue'
@@ -40,4 +40,3 @@ export { default as example37 } from './37-zoom.vue'
 export { default as example38 } from './38-virtual-slides.vue'
 export { default as example39 } from './39-slideable-menu.vue'
 export { default as example40 } from './40-change-direction.vue'
-// export { default as example41 } from './41-css-mode.vue'
