@@ -82,8 +82,8 @@
                   <span>{{ repo.forks_count }}</span>
                 </span>
                 <span class="item">
-                  <i class="iconfont icon-watch"></i>
-                  <span>{{ repo.watchers_count }}</span>
+                  <i class="iconfont icon-issue"></i>
+                  <span>{{ repo.open_issues_count }}</span>
                 </span>
                 <span class="item license" v-if="repo.license">
                   <i class="iconfont icon-law"></i>
