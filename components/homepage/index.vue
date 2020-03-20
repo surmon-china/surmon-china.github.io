@@ -234,8 +234,13 @@
 
       .main {
         .banner {
+          min-height: 20rem !important;
+
           .title {
             font-size: 2.2rem !important;
+          }
+          .subtitle {
+            margin-bottom: 2rem !important;
           }
         }
 
