@@ -235,7 +235,7 @@
       .main {
         .banner {
           .title {
-            font-size: 2.6rem !important;
+            font-size: 2.2rem !important;
           }
         }
 
