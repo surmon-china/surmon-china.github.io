@@ -28,6 +28,7 @@ export enum GitHubRepositorieIDs {
 const ALIYUN_PARTER_URL_fixed = 'https://www.aliyun.com/minisite/goods?userCode=pu7fghvl'
 const ALIYUN_PARTER_URL_HOTSALE = 'https://www.aliyun.com/acts/hotsale?userCode=pu7fghvl'
 
+export const GOOGLE_ADSENSE_CLIENT = 'ca-pub-4710915636313788'
 export const ALIYUN_ADS = [
   {
     image: '/images/mammon/aliyun-banner-4.jpg',
@@ -47,5 +48,7 @@ export default Object.freeze({
   GITHUB_USER_URL,
   GITHUB_FOLLOWERS_URL,
   GITHUB_SPONSORS_URL,
+
+  GOOGLE_ADSENSE_CLIENT,
   ALIYUN_ADS
 })

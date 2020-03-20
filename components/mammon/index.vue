@@ -1,7 +1,8 @@
 <template>
-  <aliyun-swiper-ad key="aliyun" v-if="isEnabledAliyun" />
-  <adsense-responsive-ad-1 key="gad1" v-else-if="isEnabledGA1" />
-  <adsense-responsive-ad-2 key="gad2" v-else-if="isEnabledGA2" />
+  <aliyun-swiper-ad key="aliyun" v-if="isEnabledAd(MammonProvider.Aliyun)" />
+  <adsense-responsive-ad-1 key="gad1" v-else-if="isEnabledAd(MammonProvider.GoogleAdSense1)" />
+  <adsense-responsive-ad-2 key="gad2" v-else-if="isEnabledAd(MammonProvider.GoogleAdSense2)" />
+  <adsense-responsive-ad-3 key="gad2" v-else-if="isEnabledAd(MammonProvider.GoogleAdSense3)" />
 </template>
 
 <script lang="ts">
@@ -12,7 +13,8 @@
   export enum MammonProvider {
     Aliyun = 'Aliyun',
     GoogleAdSense1 = 'GoogleAdSense1',
-    GoogleAdSense2 = 'GoogleAdSense2'
+    GoogleAdSense2 = 'GoogleAdSense2',
+    GoogleAdSense3 = 'GoogleAdSense3'
   }
 
   export const cnMammonProviders = [
@@ -20,7 +22,8 @@
   ]
   export const gaMammonProviders = [
     MammonProvider.GoogleAdSense1,
-    MammonProvider.GoogleAdSense2
+    MammonProvider.GoogleAdSense2,
+    MammonProvider.GoogleAdSense3
   ]
 
   export default createComponent({
@@ -36,9 +39,10 @@
     },
     setup(props) {
       return {
-        isEnabledAliyun: computed(() => props.provider === MammonProvider.Aliyun),
-        isEnabledGA1: computed(() => props.provider === MammonProvider.GoogleAdSense1),
-        isEnabledGA2: computed(() => props.provider === MammonProvider.GoogleAdSense2),
+        MammonProvider,
+        isEnabledAd(provider: MammonProvider) {
+          return props.provider === provider
+        }
       }
     }
   })

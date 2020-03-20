@@ -4,7 +4,7 @@
       :root-class="`mammon g-a ${rootClass}`"
       :data-ad-client="GOOGLE_ADSENSE_CLIENT"
       :data-full-width-responsive="true"
-      data-ad-slot="8733527061"
+      data-ad-slot="4010319351"
     >
     </Adsense>
   </client-only>
@@ -15,7 +15,7 @@
   import { createComponent } from '@vue/composition-api'
   import { GOOGLE_ADSENSE_CLIENT } from '@/config'
   export default createComponent({
-    name: 'AdsenseResponsiveAd1',
+    name: 'AdsenseResponsiveAd3',
     props: {
       rootClass: String
     },
