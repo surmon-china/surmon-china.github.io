@@ -233,6 +233,12 @@
       }
 
       .main {
+        .banner {
+          .title {
+            font-size: 2.6rem !important;
+          }
+        }
+
         .github-buttons,
         .actions {
           display: flex;
@@ -420,7 +426,7 @@
       padding: 0;
       overflow: hidden;
 
-      > .banner {
+      .banner {
         min-height: 24rem;
         display: flex;
         justify-content: center;
@@ -432,12 +438,12 @@
         background-color: $github-secondary;
         border-top: 1px solid $black;
 
-        > .title {
+        .title {
           font-size: 3rem;
           font-weight: bold;
         }
 
-        > .subtitle {
+        .subtitle {
           margin-top: 0;
           margin-bottom: 5rem;
           font-size: $font-size-huge;

@@ -8995,10 +8995,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz?cache=0&sync_timestamp=1572870776965&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvm-browserify%2Fdownload%2Fvm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
-vue-awesome-swiper@^4.0.0-rc.1:
-  version "4.0.0-rc.1"
-  resolved "https://registry.npmjs.org/vue-awesome-swiper/-/vue-awesome-swiper-4.0.0-rc.1.tgz#6fb8ac90aed644855ac921ef1029d00634132a97"
-  integrity sha512-u50uPpJgPeL8JwTPuCph93HF7nplFacUsJ7DsN1YgVP4cvFeuIdF+v9f1PZNpUda+0iydR4wIL6C6vugkBYcnQ==
+vue-awesome-swiper@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/vue-awesome-swiper/-/vue-awesome-swiper-4.0.2.tgz#fc50e98143bf09f63542eb67151b220278fb7288"
+  integrity sha512-8fv0vdZJiM8BvCjCFiU4lTb1gR/S8FwO9dPhgPFN3LdIp8A80ZAhh1Uln9eZsEf9EZd4uJNMq5zmdTDPoTqytw==
 
 vue-client-only@^2.0.0:
   version "2.0.0"
