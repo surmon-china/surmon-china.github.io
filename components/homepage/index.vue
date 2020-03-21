@@ -256,6 +256,12 @@
           margin: $sm-gap;
         }
       }
+
+      .footer {
+        .footer-content {
+          font-size: $font-size-small;
+        }
+      }
     }
   }
 </style>
