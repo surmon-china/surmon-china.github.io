@@ -11,11 +11,11 @@ plugins: [
 ```vue
 <template>
   <client-only>
-  <swiper>
-    <swiper-slide>
-      Only load and render on browser
-    </swiper-slide>
-  </swiper>
+    <swiper>
+      <swiper-slide>
+        Only load and render on browser
+      </swiper-slide>
+    </swiper>
   </client-only>
 </template>
 ```
