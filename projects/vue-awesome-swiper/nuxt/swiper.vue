@@ -26,7 +26,7 @@
       v-swiper:myDirectiveSwiper="swiperOptions"
       @ready="onSwiperRedied"
       @click-slide="onSwiperClickSlide"
-      @slide-change-transition-start="onSwiperSlideChangeTransitionStart"
+      @slideChangeTransitionStart="onSwiperSlideChangeTransitionStart"
     >
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for="index in 6" :key="index">
