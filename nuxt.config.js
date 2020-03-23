@@ -27,7 +27,7 @@ export default {
       { charset: 'utf-8' },
       { 'http-equiv': 'cleartype', content: 'on' },
       { 'http-equiv': 'x-dns-prefetch-control', content: 'on' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, user-scalable=no' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no' },
       { hid: 'keywords', name: 'keywords', content: APP.keywords.join(',') },
       { hid: 'description', name: 'description', content: APP.description },
     ],
