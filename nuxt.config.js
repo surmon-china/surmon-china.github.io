@@ -60,11 +60,11 @@ export default {
   plugins: [
     '@/plugins/highlight',
     '@/plugins/vue-composition-api',
-    { src: '@/plugins/vue-google-adsense', ssr: false },
-    { src: '@/plugins/vue-quill-editor', ssr: false },
-    { src: '@/plugins/vue-awesome-swiper', ssr: false },
-    { src: '@/plugins/vue-codemirror', ssr: false },
-    { src: '@/plugins/vue-drag-zone', ssr: false },
+    { src: '@/plugins/vue-google-adsense', mode: 'client' },
+    { src: '@/plugins/vue-quill-editor', mode: 'client' },
+    { src: '@/plugins/vue-awesome-swiper', mode: 'client' },
+    { src: '@/plugins/vue-codemirror', mode: 'client' },
+    { src: '@/plugins/vue-drag-zone', mode: 'client' },
   ],
   buildModules: [
     ['@nuxt/typescript-build', {
