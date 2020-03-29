@@ -19,6 +19,10 @@ export function getRepositorieUrl(username: string, repositorieName: string) {
   return `https://github.com/${username}/${repositorieName}`
 }
 
+export function getOrganizationUrl(organizationName: string) {
+  return `https://github.com/${organizationName}`
+}
+
 export function getGitFileSourceUrl(username: string, repositorieName: string, path: string) {
   return `https://github.com/${username}/${repositorieName}/tree/source/${path}`
 }

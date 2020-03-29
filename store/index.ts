@@ -13,6 +13,7 @@ export const state = () => ({
   isMobileDevice: false,
   userInfo: null as $TODO,
   repositories: [] as $TODO[],
+  organizations: [] as $TODO[],
   inited: false
 })
 
@@ -25,11 +26,13 @@ export enum StoreNames {
   UpdateMobileState = 'updateMobileState',
   UpdateUserInfo = 'updateUserInfo',
   UpdateRepositories = 'updateRepositories',
+  UpdateOrganizations = 'updateOrganizations',
   UpdateInitedState = 'updateInitedState',
   // actions
   Init = 'init',
   GetUserInfo = 'getUserInfo',
   GetRepositories = 'getRepositories',
+  GetOrganizations = 'getOrganizations',
   // getters
   OwnRepositories = 'ownRepositories',
   AppRepositories = 'appRepositories',
@@ -72,6 +75,9 @@ export const mutations = {
   },
   [StoreNames.UpdateRepositories](state: RootState, value: $TODO) {
     state.repositories = value
+  },
+  [StoreNames.UpdateOrganizations](state: RootState, value: $TODO) {
+    state.organizations = value
   }
 }
 
@@ -84,6 +90,11 @@ export const actions = {
   [StoreNames.GetRepositories](vuexContext: VuexContext) {
     return http.getRepositories().then(repositories => {
       vuexContext.commit(StoreNames.UpdateRepositories, repositories)
+    })
+  },
+  [StoreNames.GetOrganizations](vuexContext: VuexContext) {
+    return http.getOriginations().then(organizations => {
+      vuexContext.commit(StoreNames.UpdateOrganizations, organizations)
     })
   },
   [StoreNames.Init](vuexContext: VuexContext) {
@@ -105,7 +116,6 @@ export const actions = {
         /Windows Phone/i.test(navigator.userAgent)
       )
     )
-    // 基本数据
     return Promise.all([
       vuexContext.dispatch(StoreNames.GetUserInfo),
       vuexContext.dispatch(StoreNames.GetRepositories)

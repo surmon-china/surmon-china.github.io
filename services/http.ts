@@ -54,9 +54,15 @@ export function getRepositorieDetail(repoName: string): Promise<$TODO[]> {
 }
 
 export function getOriginations(): Promise<$TODO[]> {
-  return axios
-    .get(`https://api.github.com/users/${CONFIG.GITHUB_UID}/orgs`)
-    .then(response => response.data)
+  return cache.promise({
+    key: 'originations',
+    ttl: 60 * 3 * 1000,
+    promise() {
+      return axios
+        .get(`https://api.github.com/users/${CONFIG.GITHUB_UID}/orgs`)
+        .then(response => response.data)
+    }
+  })
 }
 
 export function getFileContent(filePath: string): Promise<$TODO> {

@@ -438,7 +438,7 @@
       overflow: hidden;
 
       .banner {
-        min-height: 24rem;
+        min-height: 25rem;
         display: flex;
         justify-content: center;
         align-items: center;

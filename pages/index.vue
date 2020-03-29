@@ -45,14 +45,14 @@
         <h3>Homepages & examples</h3>
         <p class="sub-title">Homepages and demos for GitHub repositories.</p>
         <transition name="module" mode="out-in">
-        <p v-if="!inited">Loading...</p>
-        <ul v-else class="homepage-repo-list">
-          <li class="item" :key="repo.clone_url" v-for="repo in exampleRepositories">
-            <i class="iconfont icon-link"></i>
-            <a class="name" target="_blacnk" :href="repo.homepage">{{ repo.name }}</a>
-            <span class="archived" v-if="repo.archived">Archived</span>
-          </li>
-        </ul>
+          <p v-if="!inited">Loading...</p>
+          <ul v-else class="homepage-repo-list">
+            <li class="item" :key="repo.clone_url" v-for="repo in exampleRepositories">
+              <i class="iconfont icon-link"></i>
+              <a class="name" target="_blacnk" :href="repo.homepage">{{ repo.name }}</a>
+              <span class="archived" v-if="repo.archived">Archived</span>
+            </li>
+          </ul>
         </transition>
         <hr>
         <transition name="module">
@@ -60,6 +60,23 @@
           <mammon :provider="adProvider" />
         </div>
         </transition>
+        <h3>Organizations</h3>
+        <p class="sub-title">GitHub organizations that I've built.</p>
+        <transition name="module" mode="out-in">
+          <p v-if="!inited">Loading...</p>
+          <ul v-else class="homepage-org-list">
+            <li class="item" :key="org.login" v-if="org.description" v-for="org in organizations">
+              <div class="wrapper">
+                <img class="logo" :src="org.avatar_url" :alt="org.login">
+                <div class="content">
+                  <a class="name" target="_blacnk" :href="getOrganizationUrl(org.login)">{{ org.login }}</a>
+                  <p class="desc">{{ org.description }}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </transition>
+        <hr>
         <h3>My Projects</h3>
         <p class="sub-title">GitHub repositories that I've built.</p>
         <transition name="module" mode="out-in">
@@ -103,8 +120,9 @@
 </template>
 
 <script lang="ts">
-  import { createComponent, ref, computed, watch } from '@vue/composition-api'
+  import { createComponent, ref, computed, watch, onMounted } from '@vue/composition-api'
   import { StoreNames, RootState } from '@/store'
+  import { getOrganizationUrl } from '@/transformers/url'
   import { isBrowser } from '@/environment'
   import CONFIG from '@/config'
   import GithubButtonBase from '@/components/github-button/base.vue'
@@ -123,19 +141,20 @@
       const inited = computed(() => rootState.inited)
       const userInfo = computed(() => rootState.userInfo)
       const repositories = computed(() => rootGetters[StoreNames.OwnRepositories])
+      const organizations = computed(() => rootState.organizations)
       const exampleRepositories = computed(() => {
         return repositories.value.filter(
           (repo: $TODO) => !!repo.homepage && repo.homepage !== CONFIG.PROJECT_URL
         )
       })
 
-      // China user -> random Aliyun (40%) / ADSense (60%)
+      // China user -> random Aliyun (70%) / ADSense (30%)
       // Other user -> ADSense
       const isMobileDevice = computed(() => rootState.isMobileDevice)
       const isChinaGuest = computed(() => rootState.isChinaGuest)
       const adProvider = (!isChinaGuest.value || isMobileDevice.value)
         ? MammonProvider.GoogleAdSense1
-        : ((Math.ceil(Math.random() * 10) > 6)
+        : ((Math.ceil(Math.random() * 10) > 7)
             ? MammonProvider.Aliyun
             : MammonProvider.GoogleAdSense1
           )
@@ -149,13 +168,19 @@
         }
       )
 
+      onMounted(() => {
+        root.$store.dispatch(StoreNames.GetOrganizations)
+      })
+
       return {
         inited,
         userInfo,
         repositories,
+        organizations,
         exampleRepositories,
         enableAd,
         adProvider,
+        getOrganizationUrl,
         githubUID: CONFIG.GITHUB_UID,
         githubFollowersUrl: CONFIG.GITHUB_FOLLOWERS_URL,
         githubSponsorsUrl: CONFIG.GITHUB_SPONSORS_URL
@@ -298,6 +323,38 @@
 
             .name {
               color: $link-color;
+            }
+          }
+        }
+
+        .homepage-org-list {
+          list-style-type: square;
+          margin-top: $gap * 2;
+          margin-bottom: 0;
+
+          .item {
+            margin-top: $lg-gap;
+
+            .wrapper {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+
+              .logo {
+                width: 32px;
+                height: 32px;
+                background-color: $module-bg;
+                border-radius: 50%;
+                margin-right: $gap;
+              }
+
+              .content {
+                .desc {
+                  font-size: $font-size-small;
+                  color: $text-secondary;
+                  margin-bottom: 0;
+                }
+              }
             }
           }
         }
