@@ -118,7 +118,7 @@ export function getNPMPackages(): Promise<$TODO> {
     ttl: MIN_3,
     promise() {
       return axios
-        .get(`http://registry.npmjs.com/-/v1/search?text=maintainer:${CONFIG.NPM_UID}`)
+        .get(`https://registry.npmjs.com/-/v1/search?text=maintainer:${CONFIG.NPM_UID}`)
         .then(response => response.data.objects)
     }
   })
