@@ -572,7 +572,6 @@
     }
   }
 
-
   @media screen and (max-width: $container-width), screen and (max-height: 600px) {
     .index-page {
       position: relative;
@@ -590,6 +589,43 @@
 
         .detail {
           overflow: hidden;
+
+          .homepage-repo-list,
+          .homepage-org-list,
+          .detail-repo-list {
+            padding-left: 2rem;
+          }
+
+          .homepage-statistics {
+            height: auto;
+            flex-direction: column;
+
+            .item {
+              margin: $gap 0;
+            }
+          }
+
+          .homepage-repo-list {
+            .wrapper {
+              flex-direction: column;
+
+              .meta {
+                margin-top: $gap;
+              }
+            }
+          }
+
+          .detail-repo-list {
+            .item {
+              .title {
+                flex-direction: column;
+
+                .badge {
+                  margin-top: $gap;
+                }
+              }
+            }
+          }
         }
       }
     }
