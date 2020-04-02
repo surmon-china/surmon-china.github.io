@@ -10,6 +10,7 @@ const packageJSON = require('./package.json')
 export const PROJECT_URL = packageJSON.homepage
 export const PROJECT_NAME = packageJSON.name
 
+export const NPM_UID = 'surmon'
 export const GITHUB_UID = 'surmon-china'
 export const GITHUB_USER_URL = getUserPageUrl(GITHUB_UID)
 export const GITHUB_FOLLOWERS_URL = getFollowersUrl(GITHUB_UID)
@@ -44,6 +45,7 @@ export default Object.freeze({
   PROJECT_URL,
   PROJECT_NAME,
 
+  NPM_UID,
   GITHUB_UID,
   GITHUB_USER_URL,
   GITHUB_FOLLOWERS_URL,

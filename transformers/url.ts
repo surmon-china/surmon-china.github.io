@@ -26,3 +26,7 @@ export function getOrganizationUrl(organizationName: string) {
 export function getGitFileSourceUrl(username: string, repositorieName: string, path: string) {
   return `https://github.com/${username}/${repositorieName}/tree/source/${path}`
 }
+
+export function getNPMUrl(repositorieName: string) {
+  return `https://www.npmjs.com/package/${repositorieName}`
+}

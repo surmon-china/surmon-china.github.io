@@ -17,6 +17,10 @@
               <span class="name">Blog</span>
             </a>
           </transition>
+          <a class="author" target="_blank" :href="sponsorUrl">
+            <i class="iconfont icon-heart"></i>
+            <span class="name">Sponsor</span>
+          </a>
         </div>
         <div class="repositories">
           <span class="current">
@@ -86,19 +90,42 @@
             class="item"
             text="Fork"
           />
-          <github-button-base
-            :link="`${repoUrl}/archive/master.zip`"
-            icon="icon-download"
+          <transition name="module" mode="out-in">
+            <github-button-base
+              v-if="isNPMPackage"
+              :link="`${repoUrl}/archive/master.zip`"
+              icon="icon-download"
+              class="item"
+              text="Download"
+              count-icon="icon-npm"
+              :count-link="npmUrl"
+              :count-text="packageDownloads"
+            />
+            <github-button-base
+              v-else
+              :link="`${repoUrl}/archive/master.zip`"
+              icon="icon-download"
+              class="item"
+              text="Download"
+              count-icon="icon-law"
+              :count-link="`${repoUrl}/blob/master/LICENSE`"
+              :count-text="
+                repoDetail && repoDetail.license
+                  ? repoDetail.license.name
+                  : 'LICENSE'
+              "
+            />
+          </transition>
+          <!-- <github-button-base
+            :link="`${repoUrl}/blob/master/LICENSE`"
+            icon="icon-law"
             class="item"
-            text="Download"
-            count-icon="icon-law"
-            :count-link="`${repoUrl}/blob/master/LICENSE`"
-            :count-text="
+            :text="
               repoDetail && repoDetail.license
                 ? repoDetail.license.name
                 : 'LICENSE'
             "
-          />
+          /> -->
         </div>
         <div class="actions">
           <slot name="actions"></slot>
@@ -139,7 +166,8 @@
   import { Route } from 'vue-router'
   import { StoreNames, RootState } from '@/store'
   import { IVueComponentData } from '@/types/interfaces'
-  import { getRepositorieUrl } from '@/transformers/url'
+  import { getRepositorieUrl, getNPMUrl } from '@/transformers/url'
+  import { numberSplit } from '@/transformers/unit'
   import GithubButtonBase from '@/components/github-button/base.vue'
   import Mammon from '@/components/mammon/index.vue'
   import HomepageBasicCard from './card-basic.vue'
@@ -188,12 +216,23 @@
       const userUrl = CONFIG.GITHUB_USER_URL
       const blogUrl = computed(() => rootState.userInfo?.blog)
       const currentRepositorie = computed(() => root.$route.name)
+      const npmUrl = computed(() => getNPMUrl(props.repositorieId))
       const repoUrl = computed(() => getRepositorieUrl(githubUID, props.repositorieId))
       const repoName = computed(() => props.name || repoDetail.value?.name || props.repositorieId)
       const repoDescription = computed(() => repoDetail.value?.description)
       const appRepositories = computed(() => root.$store.getters[StoreNames.AppRepositories])
+      const packageDownloads = computed(() => {
+        const downloads = (rootState.npmPackagesDownloadsMap as any)[repoName.value as any]
+        return downloads ? numberSplit(downloads) : '0'
+      })
+      const isNPMPackage = computed((): boolean => {
+        return root.$store.getters[StoreNames.NPMRepositories]
+          .map(({ name }: $TODO) => name)
+          .includes(repoName.value)
+      })
 
       return {
+        isNPMPackage,
         githubUID,
         userUrl,
         blogUrl,
@@ -202,7 +241,10 @@
         repoName,
         repoDescription,
         repoDetail,
-        appRepositories
+        packageDownloads,
+        appRepositories,
+        npmUrl,
+        sponsorUrl: CONFIG.GITHUB_SPONSORS_URL
       }
     }
   })

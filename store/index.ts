@@ -3,9 +3,10 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import { ActionContext } from 'vuex'
+import Vue from 'vue'
+import { ActionContext, GetterTree } from 'vuex'
 import { isBrowser } from '@/environment'
-import { GitHubRepositorieIDs } from '@/config'
+import { GitHubRepositorieIDs, GITHUB_UID } from '@/config'
 import * as http from '~/services/http'
 
 export const state = () => ({
@@ -14,12 +15,15 @@ export const state = () => ({
   userInfo: null as $TODO,
   repositories: [] as $TODO[],
   organizations: [] as $TODO[],
+  npmPackages: [] as $TODO[],
+  // TODO: 3.0
+  // npmPackagesDownloadsMap: new Map<string, number>(),
+  npmPackagesDownloadsMap: {} as { [key: string]: number },
   inited: false
 })
 
 export type RootState = ReturnType<typeof state>
 export type VuexContext = ActionContext<RootState, RootState>
-
 export enum StoreNames {
   // mutations
   UpdateGuestState = 'updateGuestState',
@@ -27,31 +31,48 @@ export enum StoreNames {
   UpdateUserInfo = 'updateUserInfo',
   UpdateRepositories = 'updateRepositories',
   UpdateOrganizations = 'updateOrganizations',
+  UpdateNPMPackages = 'updateNPMPackages',
   UpdateInitedState = 'updateInitedState',
+  SetPackageDownloads = 'setPackageDownloads',
   // actions
   Init = 'init',
   GetUserInfo = 'getUserInfo',
   GetRepositories = 'getRepositories',
   GetOrganizations = 'getOrganizations',
+  GetNPMPackages = 'getNPMPackages',
+  GetPackageDownloads = 'getPackageDownloads',
   // getters
   OwnRepositories = 'ownRepositories',
   AppRepositories = 'appRepositories',
-  GetRepositorieDetail = 'getRepositorieDetail',
+  NPMRepositories = 'npmRepositories',
+  GetRepositorieDetail = 'getRepositorieDetail'
 }
 
-export const getters = {
-  [StoreNames.OwnRepositories](state: RootState) {
+export const getters: GetterTree<RootState, RootState> = {
+  [StoreNames.OwnRepositories](state) {
     return state.repositories
       .filter((repositorie: $TODO) => !repositorie.fork)
       .sort((a: $TODO, b: $TODO) => b.stargazers_count - a.stargazers_count)
   },
-  [StoreNames.AppRepositories](state: RootState) {
+  [StoreNames.AppRepositories](state) {
     const ids = Object.values(GitHubRepositorieIDs)
     return state.repositories
     .filter((repositorie: $TODO) => ids.includes(repositorie.name))
     .sort((a: $TODO, b: $TODO) => b.stargazers_count - a.stargazers_count)
   },
-  [StoreNames.GetRepositorieDetail](state: RootState) {
+  [StoreNames.NPMRepositories](state, getters) {
+    return getters[StoreNames.OwnRepositories].filter(
+      (repositorie: $TODO) => !!state.npmPackages.find(item => {
+        return (
+          // Personal repositorie
+          repositorie.name === item?.package?.name ||
+          // Github packages
+          `@${GITHUB_UID}` === item?.package?.scope
+        )
+      })
+    )
+  },
+  [StoreNames.GetRepositorieDetail](state) {
     return (repositorieName: string) => {
       return state.repositories.find(
         repositorie => repositorie.name === repositorieName
@@ -78,6 +99,12 @@ export const mutations = {
   },
   [StoreNames.UpdateOrganizations](state: RootState, value: $TODO) {
     state.organizations = value
+  },
+  [StoreNames.UpdateNPMPackages](state: RootState, value: $TODO) {
+    state.npmPackages = value
+  },
+  [StoreNames.SetPackageDownloads](state: RootState, value: $TODO) {
+    Vue.set(state.npmPackagesDownloadsMap, value.package, value.downloads)
   }
 }
 
@@ -95,6 +122,16 @@ export const actions = {
   [StoreNames.GetOrganizations](vuexContext: VuexContext) {
     return http.getOriginations().then(organizations => {
       vuexContext.commit(StoreNames.UpdateOrganizations, organizations)
+    })
+  },
+  [StoreNames.GetNPMPackages](vuexContext: VuexContext) {
+    return http.getNPMPackages().then(packages => {
+      vuexContext.commit(StoreNames.UpdateNPMPackages, packages)
+    })
+  },
+  [StoreNames.GetPackageDownloads](vuexContext: VuexContext, repoName: string) {
+    return http.getNPMPackagesDownloads(repoName).then(value => {
+      vuexContext.commit(StoreNames.SetPackageDownloads, value)
     })
   },
   [StoreNames.Init](vuexContext: VuexContext) {
@@ -118,8 +155,17 @@ export const actions = {
     )
     return Promise.all([
       vuexContext.dispatch(StoreNames.GetUserInfo),
-      vuexContext.dispatch(StoreNames.GetRepositories)
-    ]).finally(() => {
+      vuexContext.dispatch(StoreNames.GetRepositories),
+      vuexContext.dispatch(StoreNames.GetNPMPackages)
+    ])
+    .then(() => Promise.all(
+      vuexContext.getters[StoreNames.NPMRepositories].map(
+        ({ name }: $TODO) => vuexContext.dispatch(
+          StoreNames.GetPackageDownloads, name
+        )
+      )
+    ))
+    .finally(() => {
       vuexContext.commit(StoreNames.UpdateInitedState, true)
     })
   }

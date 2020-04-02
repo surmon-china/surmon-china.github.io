@@ -1,7 +1,7 @@
 <template>
   <div class="example">
     <touch-ripple class="image-box">
-      <img class="image" src="/images/vue-logo.png">
+      <img class="image" src="/images/common/vue-logo.png">
     </touch-ripple>
     <touch-ripple
       class="image-box" 
@@ -9,7 +9,7 @@
       :speed="0.2" 
       :opacity="0.2"
     >
-      <img class="image" src="/images/vue-logo.png" />
+      <img class="image" src="/images/common/vue-logo.png" />
     </touch-ripple>
     <touch-ripple
       class="image-box" 
@@ -18,7 +18,7 @@
       :opacity="0.2"
       transition="cubic-bezier(1, -0.24, 0, 1.92)"
     >
-      <img class="image" src="/images/vue-logo.png" />
+      <img class="image" src="/images/common/vue-logo.png" />
     </touch-ripple>
   </div>
 </template>

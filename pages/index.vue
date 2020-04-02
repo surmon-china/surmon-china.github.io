@@ -42,51 +42,97 @@
         </transition>
       </aside>
       <main class="detail">
-        <h3>Homepages & examples</h3>
-        <p class="sub-title">Homepages and demos for GitHub repositories.</p>
+        <h3>Open Source Software</h3>
+        <p class="sub-title">I am passionate about open source software and giving back to others. My projects are trusted by thousands of developers all over the world.</p>
+        <div class="homepage-statistics">
+          <div class="item">
+            <animated-number
+              class="count"
+              :number="inited ? repositorieStarTotal : 0"
+            />
+            <p class="name">
+              <i class="iconfont icon-star"></i>
+              <span>Total GitHub stars</span>
+            </p>
+          </div>
+          <div class="item">
+            <a :href="githubSponsorsUrl" target="_blank" class="sponsor">
+              <i class="iconfont icon-heart"></i>
+            </a>
+          </div>
+          <div class="item">
+            <animated-number
+              class="count"
+              :number="inited ? packageDownloadTotal : 0"
+            />
+            <span class="name">
+              <i class="iconfont icon-npm"></i>
+              <span>Total NPM downloads</span>
+            </span>
+          </div>
+        </div>
+        <hr>
+        <h3>Homepages | examples</h3>
+        <p class="sub-title">Homepages and examples for GitHub repositories.</p>
         <transition name="module" mode="out-in">
           <p v-if="!inited">Loading...</p>
           <ul v-else class="homepage-repo-list">
             <li class="item" :key="repo.clone_url" v-for="repo in exampleRepositories">
-              <i class="iconfont icon-link"></i>
-              <a class="name" target="_blacnk" :href="repo.homepage">{{ repo.name }}</a>
-              <span class="archived" v-if="repo.archived">Archived</span>
-            </li>
-          </ul>
-        </transition>
-        <hr>
-        <transition name="module">
-        <div class="index-mammon" v-if="enableAd">
-          <mammon :provider="adProvider" />
-        </div>
-        </transition>
-        <h3>Organizations</h3>
-        <p class="sub-title">GitHub organizations that I've built.</p>
-        <transition name="module" mode="out-in">
-          <p v-if="!inited">Loading...</p>
-          <ul v-else class="homepage-org-list">
-            <li class="item" :key="org.login" v-if="org.description" v-for="org in organizations">
               <div class="wrapper">
-                <img class="logo" :src="org.avatar_url" :alt="org.login">
-                <div class="content">
-                  <a class="name" target="_blacnk" :href="getOrganizationUrl(org.login)">{{ org.login }}</a>
-                  <p class="desc">{{ org.description }}</p>
-                </div>
+                <span>
+                  <i class="iconfont icon-link"></i>
+                  <a class="name" target="_blacnk" :href="repo.homepage">{{ repo.name }}</a>
+                  <span class="archived" v-if="repo.archived">Archived</span>
+                </span>
+                <span class="meta">
+                  <template v-if="!repo.archived">
+                    <transition name="module" mode="out-in">
+                      <badge-npm-downloads
+                        v-if="isNPMPackage(repo.name)"
+                        :name="repo.name"
+                        class="badge"
+                      />
+                      <badge-last-commit
+                        v-else
+                        :name="repo.name"
+                        class="badge"
+                      />
+                    </transition>
+                  </template>
+                  <span class="star">
+                    <i class="iconfont icon-star"></i>
+                    <span class="count">{{ repo.stargazers_count }}</span>
+                  </span>
+                </span>
               </div>
             </li>
           </ul>
         </transition>
         <hr>
-        <h3>My Projects</h3>
+        <transition name="module">
+          <div class="index-mammon" v-if="enableAd">
+            <mammon :provider="adProvider" />
+          </div>
+        </transition>
+        <h3>Projects</h3>
         <p class="sub-title">GitHub repositories that I've built.</p>
         <transition name="module" mode="out-in">
           <p v-if="!inited">Loading...</p>
           <ul v-else class="detail-repo-list">
             <li class="item" :key="repo.clone_url" v-for="repo in repositories">
-              <p>
-                <i class="iconfont icon-repo"></i>
-                <a class="name" target="_blacnk" :href="repo.html_url">{{ repo.full_name }}</a>
-                <span class="archived" v-if="repo.archived">Archived</span>
+              <p class="title">
+                <span>
+                  <i class="iconfont icon-repo"></i>
+                  <a class="name" target="_blacnk" :href="repo.html_url">{{ repo.full_name }}</a>
+                  <span class="archived" v-if="repo.archived">Archived</span>
+                </span>
+                <template v-if="!repo.archived">
+                  <span class="npm" v-if="isNPMPackage(repo.name)">
+                    <badge-npm-downloads interval="dy" :name="repo.name" />
+                    <badge-npm-version :name="repo.name" />
+                  </span>
+                  <badge-last-commit v-else :name="repo.name" />
+                </template>
               </p>
               <p class="desc">{{ repo.description }}</p>
               <p class="meta">
@@ -114,25 +160,52 @@
             </li>
           </ul>
         </transition>
+        <hr>
+        <h3>Organizations</h3>
+        <p class="sub-title">GitHub organizations that I've built.</p>
+        <transition name="module" mode="out-in">
+          <p v-if="isFetchingOrganizations">Loading...</p>
+          <ul v-else class="homepage-org-list">
+            <template v-for="org in organizations">
+              <li class="item" v-if="org.description" :key="org.login">
+                <div class="wrapper">
+                  <img class="logo" :src="org.avatar_url" :alt="org.login">
+                  <div class="content">
+                    <a class="name" target="_blacnk" :href="getOrganizationUrl(org.login)">{{ org.login }}</a>
+                    <p class="desc">{{ org.description }}</p>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </transition>
       </main>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { createComponent, ref, computed, watch, onMounted } from '@vue/composition-api'
+  import { createComponent, ref, reactive, computed, watch, onMounted } from '@vue/composition-api'
   import { StoreNames, RootState } from '@/store'
   import { getOrganizationUrl } from '@/transformers/url'
   import { isBrowser } from '@/environment'
   import CONFIG from '@/config'
   import GithubButtonBase from '@/components/github-button/base.vue'
+  import BadgeNpmDownloads from '@/components/badge/download.vue'
+  import BadgeLastCommit from '@/components/badge/last-commit.vue'
+  import BadgeNpmVersion from '@/components/badge/version.vue'
+  import AnimatedNumber from '@/components/animated-number'
   import Mammon, { MammonProvider } from '@/components/mammon/index.vue'
 
   export default createComponent({
     name: 'index',
     components: {
       Mammon,
-      GithubButtonBase
+      GithubButtonBase,
+      BadgeNpmDownloads,
+      BadgeLastCommit,
+      BadgeNpmVersion,
+      AnimatedNumber
     },
     setup(_, { root }) {
       const rootGetters = root.$store.getters
@@ -140,13 +213,32 @@
       const enableAd = ref(false)
       const inited = computed(() => rootState.inited)
       const userInfo = computed(() => rootState.userInfo)
-      const repositories = computed(() => rootGetters[StoreNames.OwnRepositories])
       const organizations = computed(() => rootState.organizations)
+      const repositories = computed(() => rootGetters[StoreNames.OwnRepositories])
+      const isFetchingOrganizations = ref(false)
       const exampleRepositories = computed(() => {
         return repositories.value.filter(
           (repo: $TODO) => !!repo.homepage && repo.homepage !== CONFIG.PROJECT_URL
         )
       })
+
+      const repositorieStarTotal = computed(() => {
+        return repositories.value.reduce(
+          (total: number, repo: $TODO) => repo.stargazers_count + total, 0
+        )
+      })
+      const packageDownloadTotal = computed(() => {
+        return Object
+          .values<number>(rootState.npmPackagesDownloadsMap)
+          .reduce((plus, item) => plus + item, 0)
+      })
+
+      // NPM Package
+      const isNPMPackage = (name: string): boolean => {
+        return rootGetters[StoreNames.NPMRepositories]
+          .map(({ name }: $TODO) => name)
+          .includes(name)
+      }
 
       // China user -> random Aliyun (70%) / ADSense (30%)
       // Other user -> ADSense
@@ -169,7 +261,12 @@
       )
 
       onMounted(() => {
-        root.$store.dispatch(StoreNames.GetOrganizations)
+        isFetchingOrganizations.value = true
+        root.$store
+          .dispatch(StoreNames.GetOrganizations)
+          .finally(() => {
+            isFetchingOrganizations.value = false
+          })
       })
 
       return {
@@ -178,6 +275,10 @@
         repositories,
         organizations,
         exampleRepositories,
+        repositorieStarTotal,
+        packageDownloadTotal,
+        isNPMPackage,
+        isFetchingOrganizations,
         enableAd,
         adProvider,
         getOrganizationUrl,
@@ -286,14 +387,15 @@
         border-left: none;
 
         .sub-title {
+          line-height: 1.66em;
           color: $text-secondary;
         }
 
         hr {
           height: 1px;
           border: 0;
-          margin-top: 2rem;
-          background-color: $text-secondary;
+          margin-top: $lg-gap;
+          background-color: $body-bg;
         }
 
         .homepage-repo-list,
@@ -305,6 +407,45 @@
             border-radius: $radius * 2;
             color: $text-secondary;
             font-size: $font-size-small;
+          }
+        }
+
+        .homepage-statistics {
+          height: 6rem;
+          display: flex;
+          justify-content: space-evenly;
+
+          .item {
+            flex: 1;
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .sponsor {
+              text-decoration: none;
+              opacity: .8;
+              @include visibility-transition();
+
+              &:hover {
+                opacity: 1;
+              }
+
+              .iconfont {
+                font-size: $font-size-huge * 2.6;
+                color: $github-sponsor-primary;
+              }
+            }
+
+            .count {
+              font-weight: bolder;
+              font-size: $font-size-huge * 2;
+            }
+
+            .name {
+              margin-top: $gap;
+              margin-bottom: 0;
+            }
           }
         }
 
@@ -321,16 +462,33 @@
               margin-top: $lg-gap;
             }
 
-            .name {
-              color: $link-color;
+            .wrapper {
+              display: flex;
+              justify-content: space-between;
+
+              .name {
+                color: $link-color;
+              }
+
+              .meta {
+                display: inline-flex;
+                align-items: center;
+
+                .star {
+                  width: 5em;
+                }
+
+                .badge {
+                  margin-right: $gap;
+                }
+              }
             }
           }
         }
 
         .homepage-org-list {
           list-style-type: square;
-          margin-top: $gap * 2;
-          margin-bottom: 0;
+          margin: ($gap * 2) 0;
 
           .item {
             margin-top: $lg-gap;
@@ -366,8 +524,21 @@
           > .item {
             margin-top: $gap * 2;
 
-            .name {
-              font-weight: bold;
+            .title {
+              display: flex;
+              justify-content: space-between;
+
+              .name {
+                font-weight: bold;
+              }
+
+              .npm {
+                display: inline-flex;
+
+                .badge {
+                  margin-left: $xs-gap;
+                }
+              }
             }
 
             .desc,

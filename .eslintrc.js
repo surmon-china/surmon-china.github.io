@@ -3,6 +3,6 @@ module.exports = {
     '@nuxtjs/eslint-config-typescript'
   ],
   rules: {
-    'vue/no-use-v-if-with-v-for': 0
+    'vue/no-use-v-if-with-v-for': 'off'
   }
 }
