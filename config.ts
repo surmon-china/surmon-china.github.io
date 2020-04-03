@@ -26,14 +26,14 @@ export enum GitHubRepositorieIDs {
   VueDragZone = 'vue-drag-zone'
 }
 
-const ALIYUN_PARTER_URL_fixed = 'https://www.aliyun.com/minisite/goods?userCode=pu7fghvl'
+const ALIYUN_PARTER_URL_FIXED = 'https://www.aliyun.com/minisite/goods?userCode=pu7fghvl'
 const ALIYUN_PARTER_URL_HOTSALE = 'https://www.aliyun.com/acts/hotsale?userCode=pu7fghvl'
 
 export const GOOGLE_ADSENSE_CLIENT = 'ca-pub-4710915636313788'
 export const ALIYUN_ADS = [
   {
     image: '/images/mammon/aliyun-banner-4.jpg',
-    url: ALIYUN_PARTER_URL_fixed
+    url: ALIYUN_PARTER_URL_FIXED
   },
   {
     image: '/images/mammon/aliyun-banner-3.jpg',

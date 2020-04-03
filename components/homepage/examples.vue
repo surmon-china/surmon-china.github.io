@@ -36,10 +36,9 @@
 </template>
 
 <script lang="ts">
-  import CONFIG from '@/config'
   import { createComponent, computed, reactive, onBeforeMount } from '@vue/composition-api'
   import Mammon, { MammonProvider, cnMammonProviders, gaMammonProviders } from '@/components/mammon/index.vue'
-  import { StoreNames, RootState } from '@/store'
+  import { RootState } from '@/store'
   import HomepageExampleCard from './card-example.vue'
   import HomepageBasicCard from './card-basic.vue'
   import Loading from './loading.vue'

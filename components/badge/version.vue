@@ -13,10 +13,9 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  import { createComponent, computed } from '@vue/composition-api'
+  import { createComponent } from '@vue/composition-api'
   import { getNPMUrl } from '@/transformers/url'
-  import { BadgeStyle, DownloadInterval } from './constants'
+  import { BadgeStyle } from './constants'
 
   export default createComponent({
     name: 'badge-npm-version',

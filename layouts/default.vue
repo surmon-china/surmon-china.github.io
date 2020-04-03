@@ -8,7 +8,6 @@
   import { createComponent, onBeforeMount } from '@vue/composition-api'
   import { isBrowser } from '@/environment'
   import { StoreNames } from '@/store'
-  import CONFIG from '@/config'
 
   export default createComponent({
     name: 'app',

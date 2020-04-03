@@ -9,8 +9,7 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-  import { createComponent, computed } from '@vue/composition-api'
+  import { createComponent } from '@vue/composition-api'
   import { getRepositorieUrl } from '@/transformers/url'
   import { BadgeStyle } from './constants'
   import { GITHUB_UID } from '@/config'

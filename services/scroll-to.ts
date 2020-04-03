@@ -95,11 +95,17 @@ export const scrollTo = (target: string | number | Element, duration = 500, opti
     }
   }
 
-  if (!diff) return
+  if (!diff) {
+    return
+  }
 
   window.requestAnimationFrame(function step(timestamp) {
-    if (abort) return done()
-    if (!start) start = timestamp
+    if (abort) {
+      return done()
+    }
+    if (!start) {
+      start = timestamp
+    }
 
     const time = timestamp - start
     let progress = Math.min(time / duration, 1)
