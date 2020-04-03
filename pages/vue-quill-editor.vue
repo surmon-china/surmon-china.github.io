@@ -50,7 +50,7 @@
   const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-quill-editor/examples`))
+    getComponentExampleMeta(require('@/projects/vue-quill-editor/examples'))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,

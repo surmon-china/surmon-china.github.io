@@ -185,7 +185,7 @@
 </template>
 
 <script lang="ts">
-  import { createComponent, ref, reactive, computed, watch, onMounted } from '@vue/composition-api'
+  import { createComponent, ref, computed, watch, onMounted } from '@vue/composition-api'
   import { StoreNames, RootState } from '@/store'
   import { getOrganizationUrl } from '@/transformers/url'
   import { isBrowser } from '@/environment'
@@ -606,11 +606,17 @@
           }
 
           .homepage-repo-list {
-            .wrapper {
-              flex-direction: column;
+            .item {
+              margin-top: $lg-gap;
 
-              .meta {
-                margin-top: $gap;
+              .wrapper {
+                flex-direction: column;
+
+                .meta {
+                  margin-top: $gap;
+                  flex-direction: row-reverse;
+                  justify-content: flex-end;
+                }
               }
             }
           }
@@ -622,6 +628,12 @@
 
                 .badge {
                   margin-top: $gap;
+                }
+              }
+
+              .meta {
+                .language {
+                  display: none !important;
                 }
               }
             }

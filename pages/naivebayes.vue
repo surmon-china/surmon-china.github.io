@@ -7,21 +7,20 @@
     <client-only slot="content">
       <component
         :is="example.name"
+        v-for="example in examples"
         :key="example.name"
         :path="example.path"
         :title="example.title || example.name"
-        v-for="example in examples"
       />
     </client-only>
   </homepage>
 </template>
 
 <script lang="ts">
-  import { createComponent, computed } from '@vue/composition-api'
+  import { createComponent } from '@vue/composition-api'
   import { getComponentExampleMeta, getHomePageHeadMeta } from '@/transformers/page-meta'
   import { GitHubRepositorieIDs } from '@/config'
   import { isBrowser } from '@/environment'
-  import { StoreNames } from '@/store'
   import { MammonProvider } from '@/components/mammon/index.vue'
   import { IExample } from '@/components/homepage/examples.vue'
   import HomepageExampleCard from '@/components/homepage/card-example.vue'

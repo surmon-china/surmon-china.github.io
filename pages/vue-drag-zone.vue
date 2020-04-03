@@ -16,7 +16,7 @@
   const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-drag-zone/examples`))
+    getComponentExampleMeta(require('@/projects/vue-drag-zone/examples'))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,

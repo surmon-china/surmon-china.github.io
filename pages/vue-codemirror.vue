@@ -36,7 +36,7 @@
   const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-codemirror/examples`))
+    getComponentExampleMeta(require('@/projects/vue-codemirror/examples'))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,

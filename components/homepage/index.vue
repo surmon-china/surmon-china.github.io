@@ -13,7 +13,7 @@
           </a>
           <transition name="module">
             <a class="author" target="_blank" :href="blogUrl" v-if="blogUrl">
-              <i class="iconfont icon-code"></i>
+              <i class="iconfont icon-link"></i>
               <span class="name">Blog</span>
             </a>
           </transition>
@@ -333,7 +333,7 @@
             text-decoration: none;
             color: $text-reverse;
             opacity: .5;
-            transition: opacity $transition-time-fast;
+            transition: opacity $transition-time-fast / 3;
             &:hover {
               opacity: .9;
               &::after {

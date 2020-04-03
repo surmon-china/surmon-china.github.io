@@ -16,7 +16,7 @@
   const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-touch-ripple/examples`))
+    getComponentExampleMeta(require('@/projects/vue-touch-ripple/examples'))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,

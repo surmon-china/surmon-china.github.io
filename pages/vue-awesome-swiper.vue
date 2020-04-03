@@ -41,7 +41,7 @@
   const examples: IExample[] = []
 
   if (isBrowser) {
-    getComponentExampleMeta(require(`@/projects/vue-awesome-swiper/examples`))
+    getComponentExampleMeta(require('@/projects/vue-awesome-swiper/examples'))
       .forEach(({ component, fileName, ...others }) => {
         examples.push({
           ...others,
