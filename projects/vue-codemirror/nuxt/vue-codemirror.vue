@@ -11,7 +11,7 @@
         @focus="onCmFocus"
         @blur="onCmBlur"
       />
-    <client-only>
+    </client-only>
     <pre class="pre">{{ code }}</pre>
   </div>
 </template>
