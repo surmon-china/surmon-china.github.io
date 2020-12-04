@@ -28,7 +28,7 @@
     "axios": "^0.19.0",
     "bezier-easing": "^2.1.0",
     "dedent": "^0.7.0",
-    "highlight.js": "^9.16.2",
+    "highlight.js": "^10.4.1",
     "lodash": "^4.17.15",
     "naivebayes": "^0.5.0",
     "normalize.css": "^8.0.1",
