@@ -25,7 +25,7 @@
     "@nuxtjs/sitemap": "^2.0.1",
     "@nuxtjs/style-resources": "^1.0.0",
     "@vue/composition-api": "^0.3.4",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bezier-easing": "^2.1.0",
     "dedent": "^0.7.0",
     "highlight.js": "^9.16.2",
