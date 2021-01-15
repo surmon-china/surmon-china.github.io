@@ -6,8 +6,15 @@ export default {
   ],
   // some nuxt config...
   css: [
-    // swiper style
+
+    // (>= Swiper 6.x)
+    'swiper/swiper-bundle.css'
+
+    // OR
+    
+    // (<= Swiper 5.x)
     'swiper/css/swiper.css'
+    
   ],
   // some nuxt config...
 }
