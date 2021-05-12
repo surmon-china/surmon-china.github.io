@@ -36,7 +36,7 @@
     "quill-emoji": "^0.1.7",
     "quill-image-extend-module": "^1.1.2",
     "segmentit": "^2.0.2",
-    "swiper": "^5.3.6",
+    "swiper": "^6.5.1",
     "vue-awesome-swiper": "^4.1.0",
     "vue-codemirror": "^4.0.6",
     "vue-drag-zone": "^2.0.0-rc1",
