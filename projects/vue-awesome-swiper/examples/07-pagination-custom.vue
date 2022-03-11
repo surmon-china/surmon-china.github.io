@@ -32,7 +32,9 @@
             el: '.swiper-pagination',
             clickable: true,
             renderBullet(index, className) {
-              return `<span class="${className} swiper-pagination-bullet-custom">${index + 1}</span>`
+              return `<span class="${className} swiper-pagination-bullet-custom">${
+                index + 1
+              }</span>`
             }
           }
         }
@@ -45,7 +47,7 @@
   @import './base.scss';
 
   .swiper {
-    /deep/ .swiper-pagination-bullet-custom {
+    ::v-deep(.swiper-pagination-bullet-custom) {
       $size: 20px;
       width: $size !important;
       height: $size !important;

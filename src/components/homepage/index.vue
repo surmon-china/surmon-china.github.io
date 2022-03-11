@@ -1,0 +1,274 @@
+<template>
+  <div class="home-page">
+    <homepage-header :repository="repository" />
+    <main class="main">
+      <div class="banner">
+        <h1 class="title">
+          <span>{{ repository }}</span>
+        </h1>
+        <transition name="module" mode="out-in">
+          <h4 class="subtitle" :key="repoDescription">
+            {{ repoDescription || '...' }}
+          </h4>
+        </transition>
+        <div class="buttons">
+          <github-button
+            :link="repoUrl"
+            :count="repoDetail?.stargazers_count || 0"
+            :countLink="`${repoUrl}/stargazers`"
+            icon="icon-github"
+            class="item"
+            text="Star"
+          />
+          <github-button
+            :link="`${repoUrl}/issues`"
+            :count="repoDetail?.open_issues_count || 0"
+            icon="icon-issue"
+            class="item"
+            text="Issue"
+          />
+          <github-button
+            :link="`${repoUrl}/fork`"
+            :count="repoDetail?.forks || 0"
+            icon="icon-fork"
+            class="item"
+            text="Fork"
+          />
+          <github-button
+            class="item"
+            icon="icon-download"
+            text="Download"
+            :link="`${repoUrl}/archive/master.zip`"
+            :count-icon="isNPMPackage ? `icon-npm` : void 0"
+            :count-link="isNPMPackage ? npmUrl : void 0"
+            :count-text="isNPMPackage ? packageDownloads : void 0"
+          />
+        </div>
+        <div class="actions">
+          <slot name="actions"></slot>
+        </div>
+      </div>
+      <div class="container">
+        <homepage-card class="homepage-mammon" v-if="headerAdProvider">
+          <mammon :provider="headerAdProvider" />
+        </homepage-card>
+        <transition name="module" mode="out-in">
+          <slot name="content" v-if="initialized"></slot>
+          <Loading class="loading" v-else />
+        </transition>
+        <homepage-card class="homepage-mammon" v-if="footerAdProvider">
+          <mammon :provider="footerAdProvider" />
+        </homepage-card>
+      </div>
+    </main>
+    <homepage-footer :repository="repository" />
+    <homepage-toolbox :repository="repository" />
+  </div>
+</template>
+
+<script lang="ts">
+  import { defineComponent, computed, PropType } from 'vue'
+  import { useGlobalStore } from '@/store'
+  import { numberSplit } from '@/transforms/unit'
+  import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
+  import Mammon, { MammonProvider } from '@/components/mammon/index'
+  import HomepageHeader from './header.vue'
+  import HomepageFooter from './footer.vue'
+  import HomepageCard from './card.vue'
+  import HomepageToolbox from './toolbox.vue'
+  import GithubButton from './button.vue'
+  import Loading from './loading.vue'
+
+  export default defineComponent({
+    name: 'homepage',
+    components: {
+      Mammon,
+      Loading,
+      HomepageHeader,
+      HomepageFooter,
+      HomepageCard,
+      HomepageToolbox,
+      GithubButton
+    },
+    props: {
+      repository: {
+        type: String,
+        required: true
+      },
+      headerAdProvider: {
+        type: String as PropType<MammonProvider>,
+        required: false
+      },
+      footerAdProvider: {
+        type: String as PropType<MammonProvider>,
+        required: false
+      }
+    },
+    setup(props) {
+      const store = useGlobalStore()
+      const initialized = computed(() => store.initialized)
+      const npmUrl = getNPMHomepageURL(props.repository)
+      const repoUrl = getGitHubRepositoryURL(props.repository)
+      const repoDescription = computed(() => repoDetail.value?.description)
+      const repoDetail = computed(() => store.getGitHubRepositoryDetail(props.repository))
+      const appRepositories = computed(() => store.githubRepositories)
+      const packageDownloads = computed(() => {
+        const downloads = store.npmPackagesDownloadsMap.get(props.repository)
+        return downloads ? numberSplit(downloads) : '0'
+      })
+      const isNPMPackage = computed((): boolean => {
+        return store.githubNPMRepositories
+          .map(({ name }: any) => name)
+          .includes(props.repository)
+      })
+
+      return {
+        initialized,
+        isNPMPackage,
+        repoUrl,
+        repoDescription,
+        repoDetail,
+        packageDownloads,
+        appRepositories,
+        npmUrl
+      }
+    }
+  })
+</script>
+
+<style lang="scss" scoped>
+  @use 'sass:math';
+  @import '@/styles/init.scss';
+
+  .home-page {
+    .main {
+      padding: 0;
+      overflow: hidden;
+
+      .banner {
+        min-height: 25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        background-color: $banner-bg;
+
+        .title {
+          font-size: 3rem;
+          font-weight: bold;
+        }
+
+        .subtitle {
+          margin-top: 0;
+          margin-bottom: 5rem;
+          font-size: $font-size-huge;
+          font-weight: normal;
+        }
+
+        .buttons {
+          .item:not(:first-child) {
+            margin-left: $gap;
+          }
+
+          .github-license {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 $sm-gap;
+            background-color: $banner-bg;
+            color: $text-color;
+
+            .iconfont {
+              font-weight: normal;
+              margin-right: 2px;
+            }
+          }
+        }
+
+        > .actions {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+          display: flex;
+
+          .repositories {
+            margin-left: $gap;
+          }
+        }
+      }
+
+      > .container {
+        margin: 2rem auto;
+
+        .card {
+          background-color: $banner-bg;
+          width: 100%;
+          height: auto;
+          min-height: 40px;
+          margin: 20px 0;
+        }
+
+        .loading {
+          height: 18rem;
+          margin-top: $gap * 2;
+          background-color: $banner-bg;
+        }
+
+        .homepage-mammon {
+          min-height: 9rem;
+          overflow: hidden;
+        }
+      }
+    }
+  }
+</style>
+
+<style lang="scss">
+  @import '@/styles/init.scss';
+
+  @media screen and (max-width: $container-width) {
+    #toolbox {
+      display: none !important;
+    }
+    .container {
+      width: 90%;
+    }
+    .home-page {
+      .header {
+        padding: 0 $gap;
+      }
+
+      .main {
+        .banner {
+          min-height: 20rem !important;
+          .title {
+            font-size: 2.3em !important;
+          }
+          .subtitle {
+            font-size: 1.3em !important;
+            margin-bottom: 2rem !important;
+          }
+        }
+
+        .buttons,
+        .actions {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .homepage-button,
+        .homepage-link {
+          margin-bottom: $gap;
+        }
+      }
+
+      .footer {
+        .footer-content {
+          font-size: $font-size-small;
+        }
+      }
+    }
+  }
+</style>

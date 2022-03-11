@@ -1,57 +1,49 @@
 {
-  "name": "surmon-china.github.io",
-  "version": "1.1.0",
-  "description": "Surmon's github repository pages.",
-  "private": false,
+  "name": "github.surmon.me",
+  "description": "Surmon's GitHub repositorys homepage.",
+  "version": "2.0.0",
   "homepage": "https://github.surmon.me",
-  "scripts": {
-    "dev": "nuxt",
-    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
-    "post-update": "yarn upgrade --latest"
-  },
   "author": {
     "name": "Surmon",
-    "email": "surmon@foxmail.com",
     "url": "https://github.com/surmon-china"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/surmon-china/surmon-china.github.io"
   },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "generate": "todo",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@nuxtjs/sitemap": "^2.0.1",
-    "@nuxtjs/style-resources": "^1.0.0",
-    "@vue/composition-api": "^0.3.4",
-    "axios": "^0.19.0",
-    "bezier-easing": "^2.1.0",
+    "@codemirror/basic-setup": "^0.19.1",
+    "@codemirror/lang-javascript": "^0.19.7",
+    "@highlightjs/vue-plugin": "^2.1.0",
+    "@vueuse/head": "^0.7.5",
+    "axios": "^0.26.0",
     "dedent": "^0.7.0",
-    "highlight.js": "^9.16.2",
-    "lodash": "^4.17.15",
+    "highlight.js": "^11.4.0",
+    "lodash": "^4.17.21",
     "naivebayes": "^0.5.0",
-    "normalize.css": "^8.0.1",
-    "nuxt": "^2.10.2",
-    "quill-emoji": "^0.1.7",
-    "quill-image-extend-module": "^1.1.2",
-    "segmentit": "^2.0.2",
-    "swiper": "^5.3.6",
-    "vue-awesome-swiper": "^4.1.0",
-    "vue-codemirror": "^4.0.6",
-    "vue-drag-zone": "^2.0.0-rc1",
-    "vue-google-adsense": "^1.8.0",
-    "vue-quill-editor": "^3.0.6",
-    "vue-script2": "^2.1.0",
-    "vue-touch-ripple": "^3.0.0",
-    "vue-video-player": "^5.0.2"
+    "pinia": "^2.0.11",
+    "segmentit": "^2.0.3",
+    "swiper": "^8.0.7",
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^0.6.0",
-    "@nuxtjs/eslint-config-typescript": "^1.0.2",
-    "@types/swiper": "^5.2.1",
-    "eslint": "^6.8.0",
-    "node-sass": "^4.13.0",
-    "sass-loader": "^8.0.0"
+    "@types/dedent": "^0.7.0",
+    "@types/node": "^17.0.21",
+    "@vitejs/plugin-vue": "^2.2.4",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.5.0",
+    "prettier": "^2.5.1",
+    "sass": "^1.49.9",
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6"
   }
 }

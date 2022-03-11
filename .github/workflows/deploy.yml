@@ -3,28 +3,28 @@ name: Deploy to master branch
 on:
   push:
     branches:
-    - source
+      - source
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+      - uses: actions/checkout@master
 
-    - name: setup node
-      uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
 
-    - name: install
-      run: yarn
+      - name: install
+        run: yarn
 
-    - name: generate
-      run: yarn generate
+      - name: generate
+        run: yarn generate
 
-    - name: deploy
-      uses: peaceiris/actions-gh-pages@v2.5.0
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./dist
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: release
+          publish_dir: ./dist

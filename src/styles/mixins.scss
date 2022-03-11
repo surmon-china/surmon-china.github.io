@@ -1,0 +1,45 @@
+@import 'variables.scss';
+
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin visible() {
+  opacity: 1;
+  visibility: visible;
+}
+
+@mixin hidden() {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@mixin backdrop-blur($blur-radius: 5px) {
+  backdrop-filter: blur($blur-radius);
+}
+
+@mixin box-shadow($alpha: 0.6, $blur-radius: 8px) {
+  box-shadow: rgba($black, $alpha) 0px 0px $blur-radius;
+}
+
+@mixin drop-shadow($alpha: 0.6, $blur-radius: 1px) {
+  filter: drop-shadow(0px 0px $blur-radius rgba($black, $alpha));
+}
+
+@mixin transform-transition($time: $transition-time) {
+  transition: transform $time;
+}
+
+@mixin visibility-transition($time: $transition-time) {
+  transition: opacity $time, visibility $time;
+}
+
+@mixin color-transition($time: $transition-time) {
+  transition: color $time;
+}
+
+@mixin background-transition($time: $transition-time) {
+  transition: background-color $time;
+}
