@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 
 export enum RouteName {
-  ReadMe = 'readme',
+  Readme = 'readme',
   Naivebayes = 'naivebayes',
   VueAwesomeSwiper = 'vue-awesome-swiper',
   VueQuillEditor = 'vue-quill-editor',
@@ -18,8 +18,8 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/index.vue')
   },
   {
-    path: `/` + RouteName.ReadMe,
-    name: RouteName.ReadMe,
+    path: `/` + RouteName.Readme,
+    name: RouteName.Readme,
     component: () => import('@/pages/readme.vue')
   },
   {

@@ -214,12 +214,11 @@
     @include swiper-wrapper($height: 32em);
 
     .slide {
+      height: auto;
+      padding: 30px;
+      box-sizing: border-box;
       font-size: 18px !important;
       text-align: left !important;
-      height: auto;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      padding: 30px;
       background: $banner-bg;
 
       p {

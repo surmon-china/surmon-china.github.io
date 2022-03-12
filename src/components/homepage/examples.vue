@@ -1,6 +1,6 @@
 <template>
   <div class="examples">
-    <homepage-modal
+    <modal
       :visible="isVisibleExampleModal"
       :title="`${activeExample?.title} (${activeExample?.path})`"
       :title-url="activeExample?.url || ''"
@@ -15,7 +15,7 @@
           :language="activeExample?.language"
         />
       </template>
-    </homepage-modal>
+    </modal>
     <div class="example-item" :key="example.name" v-for="(example, index) in examples">
       <homepage-card :title="example.title || example.name" :content-class="contentClass">
         <template #actions>
@@ -46,15 +46,15 @@
   } from '@/components/mammon/index'
   import { useGlobalStore } from '@/store'
   import { ExampleComponent } from '@/transforms/example'
+  import Modal from '@/components/common/modal.vue'
   import HomepageCard from './card.vue'
-  import HomepageModal from './modal.vue'
 
   export default defineComponent({
     name: 'example-list',
     components: {
       Mammon,
       HomepageCard,
-      HomepageModal
+      Modal
     },
     props: {
       examples: {

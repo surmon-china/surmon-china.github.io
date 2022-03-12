@@ -24,7 +24,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   export default defineComponent({
-    name: 'homepage-modal',
+    name: 'modal',
     props: {
       visible: {
         type: Boolean,
@@ -60,8 +60,8 @@
     background-color: rgb(47 47 47 / 40%);
 
     .wrapper {
-      min-width: 60vw;
-      max-width: 70vw;
+      width: 60em;
+      max-width: 68vw;
       border-radius: $sm-radius;
       overflow: hidden;
 

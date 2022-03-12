@@ -6,7 +6,7 @@
   import Homepage from '@/components/homepage/index.vue'
   import HomepageLink from '@/components/homepage/link.vue'
   import exampleComponents from '@examples/vue-awesome-swiper'
-  const id = RouteName.ReadMe
+  const id = RouteName.Readme
   const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({

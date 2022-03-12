@@ -2,52 +2,57 @@
   <div class="home-page">
     <homepage-header :repository="repository" />
     <main class="main">
-      <div class="banner">
-        <h1 class="title">
-          <span>{{ repository }}</span>
-        </h1>
-        <transition name="module" mode="out-in">
-          <h4 class="subtitle" :key="repoDescription">
-            {{ repoDescription || '...' }}
-          </h4>
-        </transition>
-        <div class="buttons">
-          <github-button
-            :link="repoUrl"
-            :count="repoDetail?.stargazers_count || 0"
-            :countLink="`${repoUrl}/stargazers`"
-            icon="icon-github"
-            class="item"
-            text="Star"
-          />
-          <github-button
-            :link="`${repoUrl}/issues`"
-            :count="repoDetail?.open_issues_count || 0"
-            icon="icon-issue"
-            class="item"
-            text="Issue"
-          />
-          <github-button
-            :link="`${repoUrl}/fork`"
-            :count="repoDetail?.forks || 0"
-            icon="icon-fork"
-            class="item"
-            text="Fork"
-          />
-          <github-button
-            class="item"
-            icon="icon-download"
-            text="Download"
-            :link="`${repoUrl}/archive/master.zip`"
-            :count-icon="isNPMPackage ? `icon-npm` : void 0"
-            :count-link="isNPMPackage ? npmUrl : void 0"
-            :count-text="isNPMPackage ? packageDownloads : void 0"
-          />
+      <transition name="module" mode="out-in">
+        <div v-if="!initialized" class="banner" key="skeleton">
+          <div class="title-skeleton"><skeleton /></div>
+          <div class="subtitle-skeleton"><skeleton /></div>
+          <div class="buttons-skeleton">
+            <div class="item-skeleton" :key="item" v-for="item in 4">
+              <skeleton />
+            </div>
+          </div>
         </div>
-        <div class="actions">
-          <slot name="actions"></slot>
+        <div v-else class="banner" key="banner">
+          <h1 class="title">{{ repository }}</h1>
+          <h4 class="subtitle">{{ repoDescription || '...' }}</h4>
+          <div class="buttons">
+            <github-button
+              :link="repoUrl"
+              :count="repoDetail?.stargazers_count || 0"
+              :countLink="`${repoUrl}/stargazers`"
+              icon="icon-github"
+              class="item"
+              text="Star"
+            />
+            <github-button
+              :link="`${repoUrl}/issues`"
+              :count="repoDetail?.open_issues_count || 0"
+              icon="icon-issue"
+              class="item"
+              text="Issue"
+            />
+            <github-button
+              :link="`${repoUrl}/fork`"
+              :count="repoDetail?.forks || 0"
+              icon="icon-fork"
+              class="item"
+              text="Fork"
+            />
+            <github-button
+              class="item"
+              icon="icon-download"
+              text="Download"
+              :link="`${repoUrl}/archive/master.zip`"
+              :count-icon="isNPMPackage ? `icon-npm` : void 0"
+              :count-link="isNPMPackage ? npmUrl : void 0"
+              :count-text="isNPMPackage ? packageDownloads : void 0"
+            />
+          </div>
+          <div class="actions">
+            <slot name="actions"></slot>
+          </div>
         </div>
-      </div>
+      </transition>
       <div class="container">
         <homepage-card class="homepage-mammon" v-if="headerAdProvider">
           <mammon :provider="headerAdProvider" />
@@ -61,8 +66,10 @@
         </homepage-card>
       </div>
     </main>
-    <homepage-footer :repository="repository" />
-    <homepage-toolbox :repository="repository" />
+    <template v-if="initialized">
+      <homepage-footer :repository="repository" />
+      <homepage-toolbox :repository="repository" />
+    </template>
   </div>
 </template>
 
@@ -72,6 +79,7 @@
   import { numberSplit } from '@/transforms/unit'
   import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
   import Mammon, { MammonProvider } from '@/components/mammon/index'
+  import Skeleton from '@/components/common/skeleton.vue'
   import HomepageHeader from './header.vue'
   import HomepageFooter from './footer.vue'
   import HomepageCard from './card.vue'
@@ -84,6 +92,7 @@
     components: {
       Mammon,
       Loading,
+      Skeleton,
       HomepageHeader,
       HomepageFooter,
       HomepageCard,
@@ -155,6 +164,29 @@
         overflow: hidden;
         background-color: $banner-bg;
 
+        .title-skeleton {
+          width: 400px;
+          max-width: 40%;
+          height: 38px;
+          margin-bottom: $lg-gap;
+        }
+        .subtitle-skeleton {
+          width: 300px;
+          max-width: 36%;
+          height: 30px;
+          margin-bottom: 4rem;
+        }
+        .buttons-skeleton {
+          display: flex;
+          height: 34px;
+          width: 580px;
+          max-width: 70%;
+          .item-skeleton {
+            flex: 1;
+            margin: 0 $gap;
+          }
+        }
+
         .title {
           font-size: 3rem;
           font-weight: bold;
@@ -210,9 +242,8 @@
         }
 
         .loading {
-          height: 18rem;
-          margin-top: $gap * 2;
-          background-color: $banner-bg;
+          /* header + banner + margin */
+          height: calc(100vh - 3rem - 25rem - 4rem);
         }
 
         .homepage-mammon {
