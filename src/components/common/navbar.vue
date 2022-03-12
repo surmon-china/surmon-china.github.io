@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="navbar">
     <div class="container">
       <div class="left">
         <a class="item" target="_blank" :href="CONFIG.GITHUB_USER_URL">
@@ -37,7 +37,14 @@
                       {{ item.name }}
                     </a>
                     <i class="iconfont icon-link-external"></i>
-                    <span v-if="item.archived" class="archived">archived</span>
+                    <span
+                      v-if="item.archived"
+                      class="archived"
+                      title="This repository has been archived. It is now read-only."
+                    >
+                      <span class="icon">⚠️</span>
+                      <span class="text">archived</span>
+                    </span>
                   </div>
                   <div class="description" :title="item.description">
                     {{ item.description || '-' }}
@@ -148,9 +155,8 @@
   @use 'sass:math';
   @import '@/styles/init.scss';
 
-  .header {
-    $height: 3rem;
-    height: $height;
+  .navbar {
+    height: $navbar-height;
     background-color: $header-bg;
     border-bottom: 1px solid $border-color;
     box-sizing: content-box;
@@ -160,7 +166,7 @@
     z-index: 99999;
 
     > .container {
-      height: $height;
+      height: $navbar-height;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -220,7 +226,7 @@
           display: block;
           position: fixed;
           z-index: 9;
-          top: $height;
+          top: $navbar-height;
           right: 0;
           width: 100vw;
           padding: $gap 0;
@@ -291,11 +297,15 @@
                 .archived {
                   margin-left: $xs-gap;
                   padding: 0 2px;
-                  border: 1px solid;
-                  border-radius: $sm-radius;
-                  font-size: $font-size-small - 1;
-                  color: $github-attention;
                   opacity: 0.6;
+                  color: $github-attention;
+                  .icon {
+                    font-size: $font-size-small - 2;
+                    margin-right: $xs-gap;
+                  }
+                  .text {
+                    font-size: $font-size-small;
+                  }
                 }
               }
 

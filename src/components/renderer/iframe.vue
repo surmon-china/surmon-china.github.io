@@ -1,19 +1,19 @@
 <template>
   <div>
-    <homepage-header class="legacy-header" :repository="id" />
+    <navbar class="legacy-header" :repository="id" />
     <iframe class="legacy-iframe" :src="src || legacyUrl" />
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { useMeta } from '@/composables/meta'
-  import HomepageHeader from '@/components/homepage/header.vue'
   import { V2_LEGACY_URL } from '@/config'
+  import { useMeta } from '@/composables/meta'
+  import Navbar from '@/components/common/navbar.vue'
 
   export default defineComponent({
     name: 'legacy-iframe',
-    components: { HomepageHeader },
+    components: { Navbar },
     props: {
       src: String,
       id: {

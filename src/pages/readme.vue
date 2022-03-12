@@ -1,13 +1,9 @@
 <script lang="ts" setup>
   import { useMeta } from '@/composables/meta'
   import { RouteName } from '@/routes'
-  import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
-  import Homepage from '@/components/homepage/index.vue'
-  import HomepageLink from '@/components/homepage/link.vue'
-  import exampleComponents from '@examples/vue-awesome-swiper'
+  import Navbar from '@/components/common/navbar.vue'
   const id = RouteName.Readme
-  const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({
     title: getMetaTitle(id),
@@ -18,7 +14,10 @@
 
 <template>
   <div class="page">
-    <span class="text">README.md</span>
+    <navbar :repository="id" />
+    <div class="content">
+      <span class="todo">README.md</span>
+    </div>
   </div>
 </template>
 
@@ -26,15 +25,19 @@
   @import '@/styles/init.scss';
 
   .page {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-color: $banner-bg;
 
-    .text {
-      font-size: $font-size-huge * 2;
+    .content {
+      width: 100%;
+      height: calc(100vh - $navbar-height);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .todo {
+        font-size: $font-size-huge;
+        color: $text-disabled;
+      }
     }
   }
 </style>

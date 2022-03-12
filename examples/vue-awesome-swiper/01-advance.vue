@@ -83,20 +83,21 @@
           <i class="iconfont icon-arrow-down"></i>
         </button>
       </template>
-      <template #container-end
-        ><button
+      <template #container-end>
+        <button
           class="nav-button-next"
           :disabled="vSwiperIndex === 5 - 1"
           @click="nextVSwiperSlide"
         >
-          <i class="iconfont icon-arrow-up"></i></button
-      ></template>
+          <i class="iconfont icon-arrow-up"></i>
+        </button>
+      </template>
     </swiper>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, reactive, computed, onMounted } from 'vue'
+  import { defineComponent, ref, reactive } from 'vue'
   import SwiperClass, { Pagination, Navigation, Grid, Mousewheel } from 'swiper'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
@@ -235,7 +236,7 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      border-radius: $lg-radius;
+      border-radius: 100%;
       opacity: 0.5;
       color: rgba(white, 0.6);
       background-color: var(--swiper-theme-color);

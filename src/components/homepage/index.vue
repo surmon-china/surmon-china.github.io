@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <homepage-header :repository="repository" />
+    <navbar :repository="repository" />
     <main class="main">
       <transition name="module" mode="out-in">
         <div v-if="!initialized" class="banner" key="skeleton">
@@ -13,6 +13,9 @@
           </div>
         </div>
         <div v-else class="banner" key="banner">
+          <p class="archived" v-if="repoDetail?.archived">
+            ⚠️ This repository has been archived. It is now read-only.
+          </p>
           <h1 class="title">{{ repository }}</h1>
           <h4 class="subtitle">{{ repoDescription || '...' }}</h4>
           <div class="buttons">
@@ -80,7 +83,7 @@
   import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
   import Mammon, { MammonProvider } from '@/components/mammon/index'
   import Skeleton from '@/components/common/skeleton.vue'
-  import HomepageHeader from './header.vue'
+  import Navbar from '@/components/common/navbar.vue'
   import HomepageFooter from './footer.vue'
   import HomepageCard from './card.vue'
   import HomepageToolbox from './toolbox.vue'
@@ -93,7 +96,7 @@
       Mammon,
       Loading,
       Skeleton,
-      HomepageHeader,
+      Navbar,
       HomepageFooter,
       HomepageCard,
       HomepageToolbox,
@@ -187,6 +190,15 @@
           }
         }
 
+        .archived {
+          color: $github-attention;
+          margin-top: 1rem;
+          margin-bottom: 0;
+          & + .title {
+            margin-top: 0;
+          }
+        }
+
         .title {
           font-size: 3rem;
           font-weight: bold;
@@ -243,7 +255,7 @@
 
         .loading {
           /* header + banner + margin */
-          height: calc(100vh - 3rem - 25rem - 4rem);
+          height: calc(100vh - $navbar-height - 25rem - 4rem);
         }
 
         .homepage-mammon {
