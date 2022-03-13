@@ -299,12 +299,12 @@
                   padding: 0 2px;
                   opacity: 0.6;
                   color: $github-attention;
+                  font-size: $font-size-small - 1;
                   .icon {
-                    font-size: $font-size-small - 2;
                     margin-right: $xs-gap;
                   }
                   .text {
-                    font-size: $font-size-small;
+                    text-transform: uppercase;
                   }
                 }
               }

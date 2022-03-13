@@ -1,6 +1,7 @@
 import path from 'path'
 import { defineConfig, Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { CDN_PREFIX } from './src/config'
 
 // https://github.com/vitejs/vite/issues/5071
 // https://github.com/vitejs/vite/pull/5535/files
@@ -27,8 +28,9 @@ const fixSwiperCSSOnSSR = (): Plugin => ({
 })
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [vue(), resolveMetaUrl(), fixSwiperCSSOnSSR()],
+  base: mode === 'production' ? CDN_PREFIX : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -41,4 +43,4 @@ export default defineConfig({
   build: {
     cssCodeSplit: false
   }
-})
+}))
