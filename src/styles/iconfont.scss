@@ -1,9 +1,8 @@
 @font-face {
   font-family: 'iconfont'; /* Project id 1492229 */
-  src: url('//at.alicdn.com/t/font_1492229_knkqe71tp8i.woff2?t=1646939581674')
-      format('woff2'),
-    url('//at.alicdn.com/t/font_1492229_knkqe71tp8i.woff?t=1646939581674') format('woff'),
-    url('//at.alicdn.com/t/font_1492229_knkqe71tp8i.ttf?t=1646939581674') format('truetype');
+  src: url('/iconfont/iconfont.woff2?t=1647197333343') format('woff2'),
+    url('/iconfont/iconfont.woff?t=1647197333343') format('woff'),
+    url('/iconfont/iconfont.ttf?t=1647197333343') format('truetype');
 }
 
 .iconfont {
@@ -12,10 +11,6 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-website:before {
-  content: '\e628';
 }
 
 .icon-discussions:before {
