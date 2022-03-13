@@ -93,9 +93,9 @@
 
       onBeforeMount(() => {
         const count = props.examples.length
-        // const gaOnly = !visitor.isZhLangGuest || visitor.isMobileDevice
         // MARK: GA only
         const gaOnly = true
+        // const gaOnly = !visitor.isZhLangGuest || visitor.isMobileDevice
         // 如果总数小于临界值，则仅在中间显示一个
         if (count <= AD_BOUNDARY) {
           const targetIndex = Math.ceil(count / 2)
