@@ -20,7 +20,7 @@ export const GOOGLE_ADSENSE_CLIENT = 'ca-pub-4710915636313788'
 export const IMAGE_AD = { image: '', url: '' }
 export const SWIPER_ADS = [{ image: '', url: '' }]
 
-export const V2_LEGACY_URL = 'https://v2.github.surmon.me/'
+export const V1_LEGACY_URL = 'https://v1.github.surmon.me/'
 
 export const APP_META = {
   title: `Surmon's open-source projects`,

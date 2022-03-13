@@ -22,16 +22,7 @@ export const useGlobalStore = defineStore('global', {
   state: () => ({
     initialized: false,
     githubData: null as null | GitHubAggregateData,
-    npmData: null as null | NPMAggregateData,
-    isZhLangGuest: navigator.language.includes('zh-CN'),
-    isMobileDevice:
-      /Android/i.test(navigator.userAgent) ||
-      /webOS/i.test(navigator.userAgent) ||
-      /iPhone/i.test(navigator.userAgent) ||
-      /iPad/i.test(navigator.userAgent) ||
-      /iPod/i.test(navigator.userAgent) ||
-      /BlackBerry/i.test(navigator.userAgent) ||
-      /Windows Phone/i.test(navigator.userAgent)
+    npmData: null as null | NPMAggregateData
   }),
   getters: {
     githubUserinfo: (state) => state.githubData?.userinfo,

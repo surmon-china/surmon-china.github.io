@@ -1,43 +1,49 @@
-import { createApp, computed } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
+import { CreateAppFunction } from 'vue'
+import { createRouter, RouterHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-import adsense from './composables/adsense'
 import { createMeta } from './composables/meta'
-import { createTheme, getLocalTheme, Theme } from './composables/theme'
-import highlight, { getHighlightThemeStyle } from './plugins/highlight'
+import { createVisitor } from './composables/visitor'
+import { createTheme, Theme } from './composables/theme'
 import { routes } from './routes'
 import App from './app.vue'
-import { GOOGLE_ADSENSE_CLIENT } from './config'
 
-import './styles/app.scss'
+export interface AppCreatorOptions {
+  appCreator: CreateAppFunction<Element>
+  routerHistory: RouterHistory
+  initTheme: Theme
+  language: string
+  userAgent: string
+}
 
-const app = createApp(App)
-const meta = createMeta()
-const theme = createTheme(getLocalTheme())
-const pinia = createPinia()
-const router = createRouter({
-  routes,
-  strict: true,
-  history: createWebHistory(),
-  linkActiveClass: 'link-active',
-  scrollBehavior: () => ({ top: 0, behavior: 'smooth' })
-})
+export const createUniversalApp = (options: AppCreatorOptions) => {
+  const app = options.appCreator(App)
+  const pinia = createPinia()
+  const meta = createMeta()
+  const theme = createTheme(options.initTheme)
+  const visitor = createVisitor({
+    language: options.language,
+    userAgent: options.userAgent
+  })
+  const router = createRouter({
+    routes,
+    strict: true,
+    history: options.routerHistory,
+    linkActiveClass: 'link-active',
+    scrollBehavior: () => ({ top: 0, behavior: 'smooth' })
+  })
 
-meta.addHeadObjs(
-  computed(() => ({
-    style: [
-      {
-        key: 'markdown',
-        children: getHighlightThemeStyle(theme.theme.value === Theme.Dark)
-      }
-    ]
-  }))
-)
+  app.use(router)
+  app.use(pinia)
+  app.use(meta)
+  app.use(theme)
+  app.use(visitor)
 
-app.use(meta)
-app.use(theme)
-app.use(pinia)
-app.use(router)
-app.use(highlight)
-app.use(adsense, { ID: GOOGLE_ADSENSE_CLIENT, enabledAutoAD: false })
-app.mount('#app')
+  return {
+    app,
+    router,
+    pinia,
+    meta,
+    theme,
+    visitor
+  }
+}

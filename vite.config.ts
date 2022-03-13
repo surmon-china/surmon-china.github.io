@@ -18,9 +18,17 @@ const resolveMetaUrl = (): Plugin => ({
   }
 })
 
+// https://github.com/antfu/vite-ssg/issues/156#issuecomment-1047341987
+const fixSwiperCSSOnSSR = (): Plugin => ({
+  name: 'fix-swiper-ssr',
+  transform(code, id, options = {}) {
+    if (options.ssr) return code.replace(/import .swiper\/(s?css|less).*$/gm, '')
+  }
+})
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), resolveMetaUrl()],
+  plugins: [vue(), resolveMetaUrl(), fixSwiperCSSOnSSR()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -29,5 +37,8 @@ export default defineConfig({
   },
   server: {
     open: true
+  },
+  build: {
+    cssCodeSplit: false
   }
 })

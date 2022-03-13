@@ -4,11 +4,12 @@
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import Navbar from '@/components/common/navbar.vue'
   const id = RouteName.Readme
+  const name = 'README.md'
 
   useMeta({
-    title: getMetaTitle(id),
-    keywords: [getMetaKeywords(id), `How to use Swiper on vue3?`].join(','),
-    description: getMetaDescription(id)
+    title: getMetaTitle(name),
+    keywords: getMetaKeywords(name).join(','),
+    description: getMetaDescription(name)
   })
 </script>
 

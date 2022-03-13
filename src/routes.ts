@@ -14,8 +14,8 @@ export enum RouteName {
 export const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'index',
-    component: () => import('@/pages/index.vue')
+    name: 'home',
+    component: () => import('@/pages/home.vue')
   },
   {
     path: `/` + RouteName.Readme,
@@ -55,6 +55,6 @@ export const routes: RouteRecordRaw[] = [
   {
     name: 'error',
     path: '/:error(.*)',
-    component: () => import('@/pages/index.vue')
+    component: () => import('@/pages/home.vue')
   }
 ]

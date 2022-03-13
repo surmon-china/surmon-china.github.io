@@ -44,7 +44,7 @@
     customMammonProviders,
     unionMammonProviders
   } from '@/components/mammon/index'
-  import { useGlobalStore } from '@/store'
+  import { useVisitor } from '@/composables/visitor'
   import { ExampleComponent } from '@/transforms/example'
   import Modal from '@/components/common/modal.vue'
   import HomepageCard from './card.vue'
@@ -71,7 +71,7 @@
       }
     },
     setup(props) {
-      const store = useGlobalStore()
+      const visitor = useVisitor()
       const activeExampleIndex = ref<number | null>(null)
       const isVisibleExampleModal = computed(() =>
         Number.isInteger(activeExampleIndex.value)
@@ -93,7 +93,7 @@
 
       onBeforeMount(() => {
         const count = props.examples.length
-        // const gaOnly = !store.isZhLangGuest || store.isMobileDevice
+        // const gaOnly = !visitor.isZhLangGuest || visitor.isMobileDevice
         // MARK: GA only
         const gaOnly = true
         // 如果总数小于临界值，则仅在中间显示一个
