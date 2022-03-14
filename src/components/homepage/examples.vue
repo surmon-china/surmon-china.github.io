@@ -50,7 +50,7 @@
   import HomepageCard from './card.vue'
 
   export default defineComponent({
-    name: 'example-list',
+    name: 'homepage-examples',
     components: {
       Mammon,
       HomepageCard,
