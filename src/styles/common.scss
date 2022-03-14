@@ -1,3 +1,4 @@
+@use 'sass:meta';
 @import './init.scss';
 @import './theme.scss';
 
@@ -9,9 +10,11 @@
 :root {
   &[theme='light'] {
     @include defaultTheme();
+    @include meta.load-css('highlight.js/styles/github');
   }
   &[theme='dark'] {
     @include darkTheme();
+    @include meta.load-css('highlight.js/styles/github-dark-dimmed');
   }
 }
 

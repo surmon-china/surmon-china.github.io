@@ -1,12 +1,12 @@
-import { createApp, computed } from 'vue'
+import { createApp } from 'vue'
 import { createWebHistory } from 'vue-router'
-import highlight, { getHighlightThemeStyle } from './plugins/highlight'
+import highlight from './plugins/highlight'
 import adsense from './composables/adsense'
-import { getLocalTheme, Theme } from './composables/theme'
+import { getLocalTheme } from './composables/theme'
 import { GOOGLE_ADSENSE_CLIENT } from './config'
 import { createUniversalApp } from './main'
 
-const { app, router, meta, theme, visitor } = createUniversalApp({
+const { app, router, visitor } = createUniversalApp({
   // MARK: use `createApp`, not `createSSRApp`, to avoid hydrate
   appCreator: createApp,
   routerHistory: createWebHistory(),
@@ -14,18 +14,6 @@ const { app, router, meta, theme, visitor } = createUniversalApp({
   language: navigator.language,
   userAgent: navigator.userAgent
 })
-
-// highlight theme style
-meta.addHeadObjs(
-  computed(() => ({
-    style: [
-      {
-        key: 'highlight',
-        children: getHighlightThemeStyle(theme.theme.value === Theme.Dark)
-      }
-    ]
-  }))
-)
 
 app.use(highlight)
 app.use(adsense, { ID: GOOGLE_ADSENSE_CLIENT, enabledAutoAD: false })
