@@ -4,29 +4,33 @@
  */
 
 export function getUserPageUrl(username: string) {
-  return `https://github.com/${username}`
+  return `https://github.com/${username}`;
 }
 
 export function getFollowersUrl(username: string) {
-  return `${getUserPageUrl(username)}?tab=followers`
+  return `${getUserPageUrl(username)}?tab=followers`;
 }
 
 export function getSponsorsUrl(username: string) {
-  return `https://github.com/sponsors/${username}`
+  return `https://github.com/sponsors/${username}`;
 }
 
 export function getRepositorieUrl(username: string, repositorieName: string) {
-  return `https://github.com/${username}/${repositorieName}`
+  return `https://github.com/${username}/${repositorieName}`;
 }
 
 export function getOrganizationUrl(organizationName: string) {
-  return `https://github.com/${organizationName}`
+  return `https://github.com/${organizationName}`;
 }
 
-export function getGitFileSourceUrl(username: string, repositorieName: string, path: string) {
-  return `https://github.com/${username}/${repositorieName}/tree/source/${path}`
+export function getGitFileSourceUrl(
+  username: string,
+  repositorieName: string,
+  path: string
+) {
+  return `https://github.com/${username}/${repositorieName}/blob/vue2/${path}`;
 }
 
 export function getNPMUrl(repositorieName: string) {
-  return `https://www.npmjs.com/package/${repositorieName}`
+  return `https://www.npmjs.com/package/${repositorieName}`;
 }
