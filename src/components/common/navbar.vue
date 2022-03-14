@@ -7,7 +7,7 @@
           <span class="text">{{ CONFIG.GITHUB_UID }}</span>
         </ulink>
         <span class="dot">•</span>
-        <ulink class="item" :href="CONFIG.GITHUB_SPONSORS_URL">
+        <ulink class="item sponsor" :href="CONFIG.GITHUB_SPONSORS_URL">
           <span class="text">Sponsor</span>
         </ulink>
       </div>
@@ -384,6 +384,24 @@
           .list {
             grid-template-columns: repeat(2, 1fr) !important;
             padding-right: 0 !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $mobile-width) {
+    .navbar {
+      .left {
+        .dot,
+        .sponsor {
+          display: none !important;
+        }
+      }
+      .right {
+        .projects {
+          .list {
+            grid-template-columns: repeat(1, 1fr) !important;
           }
         }
       }

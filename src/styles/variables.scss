@@ -4,6 +4,8 @@
 $navbar-height: 3rem;
 $banner-height: 25rem;
 $footbar-height: 4rem;
+$container-width: 960px;
+$mobile-width: 420px;
 
 // colors
 $white: #ffffff;
@@ -27,7 +29,6 @@ $text-disabled: var(--text-disabled);
 $text-divider: var(--text-divider);
 
 // sizes
-$container-width: 960px;
 $xs-radius: 1px;
 $sm-radius: 2px;
 $lg-radius: 4px;
