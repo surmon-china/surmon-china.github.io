@@ -41,4 +41,10 @@
       }
     }
   }
+
+  @media screen and (max-width: $container-width) {
+    .homepage-link {
+      margin-bottom: $gap;
+    }
+  }
 </style>
