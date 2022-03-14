@@ -2,9 +2,9 @@
   <div id="toolbox">
     <div class="container">
       <div class="tools">
-        <a class="item github" title="to GitHub homepage" target="_blank" :href="repoURL">
+        <ulink class="item github" title="to GitHub homepage" :href="repoURL">
           <i class="iconfont icon-github"></i>
-        </a>
+        </ulink>
         <button class="item to-top" @click="handleToPageTop">
           <i class="iconfont icon-arrow-up"></i>
         </button>

@@ -12,6 +12,7 @@ export const PROJECT_URL = packageJSON.homepage
 export const NPM_UID = 'surmon'
 export const GITHUB_UID = 'surmon-china'
 export const GITHUB_PROJECT_NAME = 'surmon-china.github.io'
+export const GITHUB_PAGES_ROOT_DOMAIN = 'surmon.me'
 export const GITHUB_USER_URL = `https://github.com/${GITHUB_UID}`
 export const GITHUB_FOLLOWERS_URL = `https://github.com/${GITHUB_UID}?tab=followers`
 export const GITHUB_SPONSORS_URL = `https://github.com/sponsors/${GITHUB_UID}`

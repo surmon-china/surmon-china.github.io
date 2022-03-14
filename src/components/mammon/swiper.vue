@@ -23,9 +23,9 @@
     }"
   >
     <swiper-slide class="slide" :key="index" v-for="(ad, index) in SWIPER_ADS">
-      <a :href="ad.url" class="link" target="_blank">
+      <ulink class="link" :href="ad.url">
         <div :style="{ backgroundImage: `url(${ad.image})` }" class="image"></div>
-      </a>
+      </ulink>
     </swiper-slide>
   </swiper>
 </template>

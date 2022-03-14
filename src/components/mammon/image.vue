@@ -4,9 +4,9 @@
 
 <template>
   <div class="image-mammon">
-    <a :href="IMAGE_AD.url" class="link" target="_blank">
+    <ulink class="link" :href="IMAGE_AD.url">
       <div :style="{ backgroundImage: `url(${IMAGE_AD.image})` }" class="image"></div>
-    </a>
+    </ulink>
   </div>
 </template>
 

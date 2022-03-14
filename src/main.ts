@@ -4,6 +4,7 @@ import { createPinia } from 'pinia'
 import { createMeta } from './composables/meta'
 import { createVisitor } from './composables/visitor'
 import { createTheme, Theme } from './composables/theme'
+import UlinkComponent from './components/common/ulink'
 import { routes } from './routes'
 import App from './app.vue'
 
@@ -37,6 +38,7 @@ export const createUniversalApp = (options: AppCreatorOptions) => {
   app.use(meta)
   app.use(theme)
   app.use(visitor)
+  app.component(UlinkComponent.name, UlinkComponent)
 
   return {
     app,

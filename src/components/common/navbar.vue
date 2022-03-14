@@ -2,14 +2,14 @@
   <header class="navbar">
     <div class="container">
       <div class="left">
-        <a class="item" target="_blank" :href="CONFIG.GITHUB_USER_URL">
+        <ulink class="item" :href="CONFIG.GITHUB_USER_URL">
           <i class="iconfont icon-github"></i>
           <span class="text">{{ CONFIG.GITHUB_UID }}</span>
-        </a>
+        </ulink>
         <span class="dot">•</span>
-        <a class="item" target="_blank" :href="CONFIG.GITHUB_SPONSORS_URL">
+        <ulink class="item" :href="CONFIG.GITHUB_SPONSORS_URL">
           <span class="text">Sponsor</span>
-        </a>
+        </ulink>
       </div>
       <div class="right">
         <button class="item theme" @click="toggleTheme">
@@ -28,14 +28,13 @@
                   v-for="item in ownRepositories"
                 >
                   <div class="title">
-                    <a
+                    <ulink
+                      class="link"
                       :href="getGitHubRepositoryURL(item.name)"
                       :title="item.name"
-                      target="_blank"
-                      class="link"
                     >
                       {{ item.name }}
-                    </a>
+                    </ulink>
                     <i class="iconfont icon-link-external"></i>
                     <span
                       v-if="item.archived"
@@ -51,37 +50,30 @@
                   </div>
                   <div class="meta">
                     <div class="left">
-                      <a
+                      <ulink
+                        class="item"
                         :href="getGitHubRepositoryURL(item.name)"
                         :title="`GitHub stars: ${item.stargazers_count}`"
-                        target="_blank"
-                        class="item"
                       >
                         <i class="iconfont icon-star"></i>
                         <span>{{ countToK(item.stargazers_count) }}</span>
-                      </a>
-                      <a
+                      </ulink>
+                      <ulink
                         v-if="isNPMPackage(item.name)"
+                        class="item npm"
                         :href="getNPMHomepageURL(item.name)"
                         :title="`NPM downloads: ${item.stargazers_count}`"
-                        target="_blank"
-                        class="item npm"
                       >
                         <i class="iconfont icon-npm"></i>
                         <span>{{ getNPMDownloads(item.name) }}</span>
-                      </a>
+                      </ulink>
                       <span v-if="item.language" class="item">{{ item.language }}</span>
                     </div>
                     <div class="right">
-                      <a
-                        class="homepage"
-                        v-if="item.homepage"
-                        :href="item.homepage"
-                        target="_blank"
-                      >
+                      <ulink class="homepage" v-if="item.homepage" :href="item.homepage">
                         <span class="text">HP</span>
                         <i class="iconfont icon-link-external"></i>
-                      </a>
+                      </ulink>
                     </div>
                   </div>
                 </li>

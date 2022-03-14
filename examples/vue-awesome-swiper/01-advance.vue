@@ -57,17 +57,13 @@
       @slide-change="updateVSwiperIndex"
     >
       <swiper-slide class="slide">
-        <a class="link" href="https://swiperjs.com/" target="_blank">swiperjs.com</a>
+        <ulink class="link" href="https://swiperjs.com/">swiperjs.com</ulink>
         <i class="iconfont icon-link-external"></i>
       </swiper-slide>
       <swiper-slide class="slide">
-        <a
-          class="link"
-          href="https://github.com/nolimits4web/swiper/discussions"
-          target="_blank"
-        >
+        <ulink class="link" href="https://github.com/nolimits4web/swiper/discussions">
           discussions
-        </a>
+        </ulink>
         <i class="iconfont icon-link-external"></i>
       </swiper-slide>
       <swiper-slide class="slide">Slide 3</swiper-slide>

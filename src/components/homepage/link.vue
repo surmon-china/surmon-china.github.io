@@ -1,9 +1,9 @@
 <template>
   <div class="homepage-link">
-    <a class="link" target="_blank" :href="href">
+    <ulink class="link" :href="href">
       <i class="iconfont" :class="`icon-${icon}`" />
       <span>{{ text }}</span>
-    </a>
+    </ulink>
   </div>
 </template>
 

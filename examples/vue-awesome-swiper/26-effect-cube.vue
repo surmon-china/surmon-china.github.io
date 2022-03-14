@@ -13,17 +13,8 @@
         shadowScale: 0.94
       }"
     >
-      <swiper-slide class="slide">
-        <img src="/images/example/3.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/5.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/6.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/7.jpg" />
+      <swiper-slide class="slide" v-for="index in 5" :key="index">
+        <img :src="`/images/example/${index}.jpg`" />
       </swiper-slide>
     </swiper>
   </div>

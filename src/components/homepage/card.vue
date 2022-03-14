@@ -1,10 +1,10 @@
 <template>
   <div class="homepage-card">
     <div class="header" v-if="title">
-      <a v-if="titleLink" :href="titleLink" target="_blank" class="link">
+      <ulink v-if="titleLink" :href="titleLink" class="link">
         <span>{{ title }}</span>
         <i class="iconfont icon-link-external"></i>
-      </a>
+      </ulink>
       <span v-else>{{ title }}</span>
       <slot name="actions"></slot>
     </div>

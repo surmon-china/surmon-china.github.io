@@ -4,10 +4,10 @@
       <div class="modal" v-if="visible">
         <div class="wrapper">
           <p class="title">
-            <a :href="titleUrl" class="link" target="_blank">
+            <ulink class="link" :href="titleUrl">
               <span>{{ title }}</span>
               <i class="iconfont icon-link-external"></i>
-            </a>
+            </ulink>
             <button class="close" @click="$emit('close')">
               <i class="iconfont icon-close"></i>
             </button>

@@ -16,29 +16,8 @@
         slideShadows: true
       }"
     >
-      <swiper-slide class="slide">
-        <img src="/images/example/1.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/2.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/3.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/4.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/5.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/6.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/7.jpg" />
-      </swiper-slide>
-      <swiper-slide class="slide">
-        <img src="/images/example/8.jpg" />
+      <swiper-slide class="slide" v-for="index in 8" :key="index">
+        <img :src="`/images/example/${index}.jpg`" />
       </swiper-slide>
     </swiper>
   </div>

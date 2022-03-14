@@ -2,9 +2,9 @@
   <footer class="footer">
     <div class="container">
       <span class="footer-content">
-        <a :href="getGitHubRepositoryURL(repository)" target="_blank">{{ repository }}</a>
+        <ulink :href="getGitHubRepositoryURL(repository)">{{ repository }}</ulink>
         <span> is maintained by </span>
-        <a :href="CONFIG.GITHUB_USER_URL" target="_blank">@{{ CONFIG.GITHUB_UID }}</a>
+        <ulink :href="CONFIG.GITHUB_USER_URL">@{{ CONFIG.GITHUB_UID }}</ulink>
       </span>
     </div>
   </footer>

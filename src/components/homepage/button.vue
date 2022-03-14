@@ -1,16 +1,16 @@
 <template>
   <span class="homepage-button">
-    <a :href="link" class="item button" target="_blank">
+    <ulink :href="link" class="item button">
       <i class="iconfont" :class="icon"></i>
       <span class="text" v-if="text">{{ text }}</span>
       <slot></slot>
-    </a>
-    <a v-if="hasCount" class="item count" :href="countLink || link" target="_blank">
+    </ulink>
+    <ulink v-if="hasCount" class="item count" :href="countLink || link">
       <i v-if="countIcon" class="iconfont" :class="countIcon"></i>
       <transition name="module" mode="out-in">
         <span :key="countContent || 'null'">{{ countContent }}</span>
       </transition>
-    </a>
+    </ulink>
   </span>
 </template>
 
