@@ -18,6 +18,16 @@ import python from 'highlight.js/lib/languages/python'
 import javascript from 'highlight.js/lib/languages/javascript'
 import typescript from 'highlight.js/lib/languages/typescript'
 
+// dynamic style for highlight.js
+// https://github.com/vitejs/vite/issues/3246
+// https://github.com/vitejs/vite/commit/e1de8a888ea9adb9dc415cf74aec43dfa83aa526
+import _lightStyle from 'highlight.js/styles/github.css?inline'
+import _darkStyle from 'highlight.js/styles/github-dark-dimmed.css?inline'
+
+export const getHighlightThemeStyle = (darkTheme: boolean) => {
+  return darkTheme ? `${_darkStyle}` : `${_lightStyle}`
+}
+
 const languages: Record<string, LanguageFn> = {
   go,
   css,
@@ -37,15 +47,5 @@ const languages: Record<string, LanguageFn> = {
 }
 
 Object.keys(languages).forEach((name) => hljs.registerLanguage(name, languages[name]))
-
-// dynamic style for highlight.js
-// https://github.com/vitejs/vite/issues/3246
-// https://github.com/vitejs/vite/commit/e1de8a888ea9adb9dc415cf74aec43dfa83aa526
-import _lightStyle from 'highlight.js/styles/github.css?inline'
-import _darkStyle from 'highlight.js/styles/github-dark-dimmed.css'
-
-export const getHighlightThemeStyle = (darkTheme: boolean) => {
-  return darkTheme ? _darkStyle : _lightStyle
-}
 
 export default hljsVuePlugin

@@ -1,6 +1,6 @@
 {
   "name": "github.surmon.me",
-  "description": "Surmon's GitHub repositorys homepage.",
+  "description": "Surmon's GitHub repositories homepage.",
   "version": "2.0.0",
   "homepage": "https://github.surmon.me",
   "author": {
@@ -22,22 +22,22 @@
     "@codemirror/lang-javascript": "^0.19.7",
     "@highlightjs/vue-plugin": "^2.1.0",
     "@vueuse/head": "^0.7.5",
-    "axios": "^0.26.0",
+    "axios": "^0.26.1",
     "dedent": "^0.7.0",
-    "highlight.js": "^11.4.0",
+    "highlight.js": "^11.5.0",
     "lodash": "^4.17.21",
     "naivebayes": "^0.5.0",
     "pinia": "^2.0.11",
     "segmentit": "^2.0.3",
     "swiper": "^8.0.7",
     "vue": "^3.2.31",
-    "vue-router": "^4.0.13"
+    "vue-router": "^4.0.14"
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
     "@types/node": "^17.0.21",
     "@vitejs/plugin-vue": "^2.2.4",
-    "eslint": "^8.10.0",
+    "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.5.0",

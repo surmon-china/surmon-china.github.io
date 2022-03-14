@@ -44,6 +44,10 @@ const pageRoutes = fs.readdirSync(toAbsolute('src/pages')).map((file) => {
         .replace(`<head>`, () => `<head>\n${metas.headTags}`)
         .replace(`<body>`, () => `<body ${metas.bodyAttrs}>`)
         .replace(`<!--app-html-->`, () => appHTML)
+
+      // ✅ https://github.surmon.me/xxx
+      // ❌ https://github.surmon.me/xxx/
+      // 🔗 https://ahrefs.com/blog/trailing-slash/
       const filePath = `dist${url === '/' ? '/index' : url}.html`
       fs.writeFileSync(toAbsolute(filePath), html)
       console.log('pre-rendered:', filePath)

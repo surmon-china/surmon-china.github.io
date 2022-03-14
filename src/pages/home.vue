@@ -6,7 +6,7 @@
   const meta = reactive({ ...APP_META })
   useMeta(() => meta)
   onBeforeMount(() => {
-    meta.title = `Redirect to GitHub ...`
+    meta.title = `Redirect to Surmon's GitHub ...`
     location.href = GITHUB_USER_URL
   })
 </script>

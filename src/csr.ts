@@ -20,7 +20,7 @@ meta.addHeadObjs(
   computed(() => ({
     style: [
       {
-        key: 'markdown',
+        key: 'highlight',
         children: getHighlightThemeStyle(theme.theme.value === Theme.Dark)
       }
     ]
