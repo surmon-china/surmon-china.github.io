@@ -2,7 +2,7 @@
   <div class="examples">
     <modal
       :visible="isVisibleExampleModal"
-      :title="`${activeExample?.title} (${activeExample?.path})`"
+      :title="`${activeExample?.title} (Edit on GitHub)`"
       :title-url="activeExample?.url || ''"
       @close="closeExampleModal"
     >

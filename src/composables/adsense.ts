@@ -47,7 +47,7 @@ export interface AdSenseConfig {
   enabledAutoAD?: boolean
 }
 
-const ADS_SCRIPT = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+const ADS_SCRIPT = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
 
 const getComponent = (clientID: string) =>
   defineComponent({
@@ -87,14 +87,15 @@ const getComponent = (clientID: string) =>
         return h(
           'div',
           {
-            class: ['mammon-box', rootClass],
+            class: ['mammon-box', rootClass || ''],
             placeholder: 'AD'
           },
           [
             h('script', {
               type: 'text/javascript',
               async: 'true',
-              src: ADS_SCRIPT
+              crossorigin: 'anonymous',
+              src: `${ADS_SCRIPT}?client=${clientID}`
             }),
             h('ins', {
               class: ['adsbygoogle', insClass],

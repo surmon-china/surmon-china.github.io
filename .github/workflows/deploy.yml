@@ -1,4 +1,4 @@
-name: Deploy to master branch
+name: Deploy
 
 on:
   push:
