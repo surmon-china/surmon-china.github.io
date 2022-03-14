@@ -25,6 +25,7 @@
     "axios": "^0.26.1",
     "dedent": "^0.7.0",
     "highlight.js": "^11.5.0",
+    "js-base64": "^3.7.2",
     "lodash": "^4.17.21",
     "naivebayes": "^0.5.0",
     "pinia": "^2.0.11",

@@ -11,7 +11,7 @@ const service = axios.create()
 service.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    console.error('Fetch failed:', error)
+    console.warn('Fetch failed:', error)
     return Promise.reject(error)
   }
 )
