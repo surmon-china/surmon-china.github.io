@@ -1,15 +1,15 @@
 <script lang="ts" setup>
   import { useMeta } from '@/composables/meta'
-  import { RouteName } from '@/routes'
+  import { RouteRepoID } from '@/routes'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import Navbar from '@/components/common/navbar.vue'
-  const id = RouteName.Readme
-  const name = 'README.md'
+  import Footbar from '@/components/common/footbar.vue'
+  const id = RouteRepoID.Readme
 
   useMeta({
-    title: getMetaTitle(name),
-    keywords: getMetaKeywords(name).join(','),
-    description: getMetaDescription(name)
+    title: getMetaTitle(id),
+    keywords: getMetaKeywords(id).join(','),
+    description: getMetaDescription(id)
   })
 </script>
 
@@ -17,8 +17,9 @@
   <div class="page">
     <navbar :repository="id" />
     <div class="content">
-      <span class="todo">README.md</span>
+      <span class="todo">README.md homepage is coming soon</span>
     </div>
+    <footbar :repository="id" />
   </div>
 </template>
 
@@ -26,11 +27,9 @@
   @import '@/styles/init.scss';
 
   .page {
-    background-color: $banner-bg;
-
     .content {
       width: 100%;
-      height: calc(100vh - $navbar-height);
+      height: calc(100vh - $navbar-height - $footbar-height);
       display: flex;
       flex-direction: column;
       justify-content: center;

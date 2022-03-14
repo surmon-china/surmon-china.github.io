@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-  import { RouteName } from '@/routes'
+  import { RouteRepoID } from '@/routes'
   import { useMeta } from '@/composables/meta'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import IframeRenderer from '@/components/renderer/iframe.vue'
-  const id = RouteName.VueTouchRipple
+  const id = RouteRepoID.VueTouchRipple
 
   useMeta({
     title: getMetaTitle(id),

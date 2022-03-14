@@ -1,78 +1,75 @@
 <template>
-  <div class="home-page">
+  <div class="homepage">
     <navbar :repository="repository" />
     <main class="main">
-      <transition name="module" mode="out-in">
-        <div v-if="!initialized" class="banner" key="skeleton">
-          <div class="title-skeleton"><skeleton /></div>
-          <div class="subtitle-skeleton"><skeleton /></div>
-          <div class="buttons-skeleton">
-            <div class="item-skeleton" :key="item" v-for="item in 4">
-              <skeleton />
+      <div class="banner">
+        <transition name="module" mode="out-in">
+          <div v-if="!initialized" class="banner-content" key="skeleton">
+            <div class="title-skeleton"><skeleton /></div>
+            <div class="subtitle-skeleton"><skeleton /></div>
+            <div class="buttons-skeleton">
+              <div class="item-skeleton" :key="item" v-for="item in 4">
+                <skeleton />
+              </div>
             </div>
           </div>
-        </div>
-        <div v-else class="banner" key="banner">
-          <p class="archived" v-if="repoDetail?.archived">
-            ⚠️ This repository has been archived. It is now read-only.
-          </p>
-          <h1 class="title">{{ repository }}</h1>
-          <h4 class="subtitle">{{ repoDescription || '...' }}</h4>
-          <div class="buttons">
-            <github-button
-              :link="repoUrl"
-              :count="repoDetail?.stargazers_count || 0"
-              :countLink="`${repoUrl}/stargazers`"
-              icon="icon-github"
-              class="item"
-              text="Star"
-            />
-            <github-button
-              :link="`${repoUrl}/issues`"
-              :count="repoDetail?.open_issues_count || 0"
-              icon="icon-issue"
-              class="item"
-              text="Issue"
-            />
-            <github-button
-              :link="`${repoUrl}/fork`"
-              :count="repoDetail?.forks || 0"
-              icon="icon-fork"
-              class="item"
-              text="Fork"
-            />
-            <github-button
-              class="item"
-              icon="icon-download"
-              text="Download"
-              :link="`${repoUrl}/archive/master.zip`"
-              :count-icon="isNPMPackage ? `icon-npm` : void 0"
-              :count-link="isNPMPackage ? npmUrl : void 0"
-              :count-text="isNPMPackage ? packageDownloads : void 0"
-            />
+          <div v-else class="banner-content" key="content">
+            <p class="archived" v-if="repoDetail?.archived">
+              ⚠️ This repository has been archived. It is now read-only.
+            </p>
+            <h1 class="title">{{ repository }}</h1>
+            <h4 class="subtitle">{{ repoDescription || '...' }}</h4>
+            <div class="buttons">
+              <github-button
+                :link="repoUrl"
+                :count="repoDetail?.stargazers_count || 0"
+                :countLink="`${repoUrl}/stargazers`"
+                icon="icon-github"
+                class="item"
+                text="Star"
+              />
+              <github-button
+                :link="`${repoUrl}/issues`"
+                :count="repoDetail?.open_issues_count || 0"
+                icon="icon-issue"
+                class="item"
+                text="Issue"
+              />
+              <github-button
+                :link="`${repoUrl}/fork`"
+                :count="repoDetail?.forks || 0"
+                icon="icon-fork"
+                class="item"
+                text="Fork"
+              />
+              <github-button
+                class="item"
+                icon="icon-download"
+                text="Download"
+                :link="`${repoUrl}/archive/master.zip`"
+                :count-icon="isNPMPackage ? `icon-npm` : void 0"
+                :count-link="isNPMPackage ? npmUrl : void 0"
+                :count-text="isNPMPackage ? packageDownloads : void 0"
+              />
+            </div>
+            <div class="actions">
+              <slot name="actions"></slot>
+            </div>
           </div>
-          <div class="actions">
-            <slot name="actions"></slot>
-          </div>
-        </div>
-      </transition>
+        </transition>
+      </div>
       <div class="container">
         <homepage-card class="homepage-mammon" v-if="headerAdProvider">
           <mammon :provider="headerAdProvider" />
         </homepage-card>
-        <transition name="module" mode="out-in">
-          <slot name="content" v-if="initialized"></slot>
-          <Loading class="loading" v-else />
-        </transition>
+        <slot name="content"></slot>
         <homepage-card class="homepage-mammon" v-if="footerAdProvider">
           <mammon :provider="footerAdProvider" />
         </homepage-card>
       </div>
     </main>
-    <template v-if="initialized">
-      <homepage-footer :repository="repository" />
-      <homepage-toolbox :repository="repository" />
-    </template>
+    <homepage-toolbox :repository="repository" />
+    <footbar :repository="repository" />
   </div>
 </template>
 
@@ -84,20 +81,18 @@
   import Mammon, { MammonProvider } from '@/components/mammon/index'
   import Skeleton from '@/components/common/skeleton.vue'
   import Navbar from '@/components/common/navbar.vue'
-  import HomepageFooter from './footer.vue'
-  import HomepageCard from './card.vue'
+  import Footbar from '@/components/common/footbar.vue'
   import HomepageToolbox from './toolbox.vue'
+  import HomepageCard from './card.vue'
   import GithubButton from './button.vue'
-  import Loading from './loading.vue'
 
   export default defineComponent({
     name: 'homepage',
     components: {
       Mammon,
-      Loading,
       Skeleton,
       Navbar,
-      HomepageFooter,
+      Footbar,
       HomepageCard,
       HomepageToolbox,
       GithubButton
@@ -152,20 +147,23 @@
   @use 'sass:math';
   @import '@/styles/init.scss';
 
-  .home-page {
+  .homepage {
     .main {
       padding: 0;
       overflow: hidden;
 
       .banner {
-        min-height: 25rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
         position: relative;
         overflow: hidden;
         background-color: $banner-bg;
+
+        .banner-content {
+          min-height: $banner-height;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
 
         .title-skeleton {
           width: 400px;
@@ -231,14 +229,10 @@
           }
         }
 
-        > .actions {
+        .actions {
           margin-top: 2rem;
           margin-bottom: 2rem;
           display: flex;
-
-          .repositories {
-            margin-left: $gap;
-          }
         }
       }
 
@@ -253,11 +247,6 @@
           margin: 20px 0;
         }
 
-        .loading {
-          /* header + banner + margin */
-          height: calc(100vh - $navbar-height - 25rem - 4rem);
-        }
-
         .homepage-mammon {
           min-height: 9rem;
           overflow: hidden;
@@ -265,24 +254,14 @@
       }
     }
   }
-</style>
-
-<style lang="scss">
-  @import '@/styles/init.scss';
 
   @media screen and (max-width: $container-width) {
-    #toolbox {
-      display: none !important;
-    }
-    .container {
-      width: 90%;
-    }
-    .home-page {
-      .header {
-        padding: 0 $gap;
-      }
-
+    .homepage {
       .main {
+        .container {
+          width: 90%;
+        }
+
         .banner {
           min-height: 20rem !important;
           .title {
@@ -304,12 +283,6 @@
         .homepage-button,
         .homepage-link {
           margin-bottom: $gap;
-        }
-      }
-
-      .footer {
-        .footer-content {
-          font-size: $font-size-small;
         }
       }
     }

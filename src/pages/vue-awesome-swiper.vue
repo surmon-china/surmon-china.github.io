@@ -1,13 +1,13 @@
 <script lang="ts" setup>
   import { useMeta } from '@/composables/meta'
-  import { RouteName } from '@/routes'
+  import { RouteRepoID } from '@/routes'
   import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import Homepage from '@/components/homepage/index.vue'
   import HomepageLink from '@/components/homepage/link.vue'
   import HomepageExamples from '@/components/homepage/examples.vue'
   import exampleComponents from '@examples/vue-awesome-swiper'
-  const id = RouteName.VueAwesomeSwiper
+  const id = RouteRepoID.VueAwesomeSwiper
   const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({

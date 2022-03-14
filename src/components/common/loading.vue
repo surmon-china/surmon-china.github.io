@@ -44,7 +44,7 @@
         height: 18px;
         margin: 0 $xs-gap;
         border-radius: $sm-radius;
-        background: $banner-bg;
+        background: $body-bg;
         animation: animation 2s linear infinite;
       }
       div:nth-child(1) {

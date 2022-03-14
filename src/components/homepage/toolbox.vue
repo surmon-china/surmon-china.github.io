@@ -41,6 +41,12 @@
 <style lang="scss" scoped>
   @import '@/styles/init.scss';
 
+  @media screen and (max-width: $container-width) {
+    #toolbox {
+      display: none !important;
+    }
+  }
+
   #toolbox {
     position: fixed;
     z-index: 9;

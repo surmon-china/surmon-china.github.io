@@ -20,64 +20,67 @@
           <i class="iconfont icon-arrow-down"></i>
           <div class="projects">
             <div class="container">
-              <ul class="list">
-                <li
-                  class="item"
-                  :key="item.name"
-                  :class="{ activated: item.name === repository }"
-                  v-for="item in ownRepositories"
-                >
-                  <div class="title">
-                    <ulink
-                      class="link"
-                      :href="getGitHubRepositoryURL(item.name)"
-                      :title="item.name"
-                    >
-                      {{ item.name }}
-                    </ulink>
-                    <i class="iconfont icon-link-external"></i>
-                    <span
-                      v-if="item.archived"
-                      class="archived"
-                      title="This repository has been archived. It is now read-only."
-                    >
-                      <span class="icon">⚠️</span>
-                      <span class="text">archived</span>
-                    </span>
-                  </div>
-                  <div class="description" :title="item.description">
-                    {{ item.description || '-' }}
-                  </div>
-                  <div class="meta">
-                    <div class="left">
+              <transition name="module" mode="out-in">
+                <loading v-if="!initialized" class="loading" />
+                <ul v-else class="list">
+                  <li
+                    class="item"
+                    :key="item.name"
+                    :class="{ activated: item.name === repository }"
+                    v-for="item in ownRepositories"
+                  >
+                    <div class="title">
                       <ulink
-                        class="item"
+                        class="link"
                         :href="getGitHubRepositoryURL(item.name)"
-                        :title="`GitHub stars: ${item.stargazers_count}`"
+                        :title="item.name"
                       >
-                        <i class="iconfont icon-star"></i>
-                        <span>{{ countToK(item.stargazers_count) }}</span>
+                        {{ item.name }}
                       </ulink>
-                      <ulink
-                        v-if="isNPMPackage(item.name)"
-                        class="item npm"
-                        :href="getNPMHomepageURL(item.name)"
-                        :title="`NPM downloads: ${item.stargazers_count}`"
+                      <i class="iconfont icon-link-external"></i>
+                      <span
+                        v-if="item.archived"
+                        class="archived"
+                        title="This repository has been archived. It is now read-only."
                       >
-                        <i class="iconfont icon-npm"></i>
-                        <span>{{ getNPMDownloads(item.name) }}</span>
-                      </ulink>
-                      <span v-if="item.language" class="item">{{ item.language }}</span>
+                        <span class="icon">⚠️</span>
+                        <span class="text">archived</span>
+                      </span>
                     </div>
-                    <div class="right">
-                      <ulink class="homepage" v-if="item.homepage" :href="item.homepage">
-                        <span class="text">HP</span>
-                        <i class="iconfont icon-link-external"></i>
-                      </ulink>
+                    <div class="description" :title="item.description">
+                      {{ item.description || '-' }}
                     </div>
-                  </div>
-                </li>
-              </ul>
+                    <div class="meta">
+                      <div class="left">
+                        <ulink
+                          class="item"
+                          :href="getGitHubRepositoryURL(item.name)"
+                          :title="`GitHub stars: ${item.stargazers_count}`"
+                        >
+                          <i class="iconfont icon-star"></i>
+                          <span>{{ countToK(item.stargazers_count) }}</span>
+                        </ulink>
+                        <ulink
+                          v-if="isNPMPackage(item.name)"
+                          class="item npm"
+                          :href="getNPMHomepageURL(item.name)"
+                          :title="`NPM downloads: ${item.stargazers_count}`"
+                        >
+                          <i class="iconfont icon-npm"></i>
+                          <span>{{ getNPMDownloads(item.name) }}</span>
+                        </ulink>
+                        <span v-if="item.language" class="item">{{ item.language }}</span>
+                      </div>
+                      <div class="right">
+                        <ulink class="homepage" v-if="item.homepage" :href="item.homepage">
+                          <span class="text">HP</span>
+                          <i class="iconfont icon-link-external"></i>
+                        </ulink>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </transition>
             </div>
           </div>
         </div>
@@ -93,9 +96,11 @@
   import { numberSplit, countToK } from '@/transforms/unit'
   import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
   import * as CONFIG from '@/config'
+  import Loading from './loading.vue'
 
   export default defineComponent({
-    name: 'homepage-header',
+    name: 'navbar',
+    components: { Loading },
     props: {
       repository: {
         type: String,
@@ -105,6 +110,7 @@
     setup() {
       const theme = useTheme()
       const store = useGlobalStore()
+      const initialized = computed(() => store.initialized)
       const ownRepositories = computed(() => store.githubOwnRepositories)
       const isNPMPackage = (repository: string): boolean => {
         return Boolean(store.getRepositoryNPMPackage(repository))
@@ -133,6 +139,7 @@
         themeIcon,
         toggleTheme,
         ownRepositories,
+        initialized,
         isNPMPackage,
         getNPMDownloads,
         getNPMHomepageURL,
@@ -228,10 +235,15 @@
           @include hidden();
           @include visibility-transition();
 
+          $min-height: $banner-height - $gap * 2;
           .container {
-            min-height: 25rem;
+            min-height: $min-height;
             max-height: 60vh;
             overflow-y: auto;
+          }
+          .loading {
+            width: 100%;
+            min-height: $min-height;
           }
 
           .list {
@@ -354,6 +366,24 @@
                 }
               }
             }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $container-width) {
+    .navbar {
+      .container {
+        width: 100%;
+        padding: 0 $gap;
+      }
+
+      .right {
+        .projects {
+          .list {
+            grid-template-columns: repeat(2, 1fr) !important;
+            padding-right: 0 !important;
           }
         }
       }

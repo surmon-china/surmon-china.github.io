@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footbar">
     <div class="container">
       <span class="footer-content">
         <ulink :href="getGitHubRepositoryURL(repository)">{{ repository }}</ulink>
@@ -16,7 +16,7 @@
   import * as CONFIG from '@/config'
 
   export default defineComponent({
-    name: 'homepage-footer',
+    name: 'footbar',
     props: {
       repository: {
         type: String,
@@ -35,9 +35,9 @@
 <style lang="scss" scoped>
   @import '@/styles/init.scss';
 
-  .footer {
-    height: 4rem;
-    line-height: 4rem;
+  .footbar {
+    height: $footbar-height;
+    line-height: $footbar-height;
     background-color: $banner-bg;
     color: $text-secondary;
     text-align: center;
@@ -49,6 +49,17 @@
       &:hover {
         color: $link-color;
         text-decoration: underline;
+      }
+    }
+  }
+
+  @media screen and (max-width: $container-width) {
+    .footbar {
+      .container {
+        width: 100%;
+      }
+      .footer-content {
+        font-size: $font-size-small;
       }
     }
   }
