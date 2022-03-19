@@ -2,13 +2,12 @@
   <header class="navbar">
     <div class="container">
       <div class="left">
-        <ulink class="item" :href="CONFIG.GITHUB_USER_URL">
+        <ulink class="item github" :href="CONFIG.GITHUB_USER_URL">
           <i class="iconfont icon-github"></i>
           <span class="text">{{ CONFIG.GITHUB_UID }}</span>
         </ulink>
-        <span class="dot">•</span>
         <ulink class="item sponsor" :href="CONFIG.GITHUB_SPONSORS_URL">
-          <span class="text">Sponsor</span>
+          <i class="iconfont icon-heart" />
         </ulink>
       </div>
       <div class="right">
@@ -44,7 +43,7 @@
                         title="This repository has been archived. It is now read-only."
                       >
                         <span class="icon">⚠️</span>
-                        <span class="text">archived</span>
+                        <!-- <span class="text">archived</span> -->
                       </span>
                     </div>
                     <div class="description" :title="item.description">
@@ -96,7 +95,7 @@
   import { numberSplit, countToK } from '@/transforms/unit'
   import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
   import * as CONFIG from '@/config'
-  import Loading from './loading.vue'
+  import Loading from '../common/loading.vue'
 
   export default defineComponent({
     name: 'navbar',
@@ -174,11 +173,6 @@
       > .right {
         height: 100%;
 
-        .dot {
-          margin: 0 $sm-gap;
-          color: $text-disabled;
-        }
-
         > .item {
           height: 100%;
           display: inline-flex;
@@ -193,19 +187,29 @@
             }
           }
 
-          > .iconfont {
-            margin-right: $xs-gap;
-          }
           > .text {
             text-transform: uppercase;
           }
-        }
-      }
 
-      .theme {
-        cursor: pointer;
-        background: none;
-        border: 0;
+          &.github {
+            .iconfont {
+              margin-right: $xs-gap;
+            }
+          }
+
+          &.sponsor {
+            margin-left: $sm-gap;
+            .iconfont:hover {
+              color: $github-sponsor-primary;
+            }
+          }
+
+          &.theme {
+            cursor: pointer;
+            background: none;
+            border: 0;
+          }
+        }
       }
 
       .project {
@@ -392,12 +396,6 @@
 
   @media screen and (max-width: $mobile-width) {
     .navbar {
-      .left {
-        .dot,
-        .sponsor {
-          display: none !important;
-        }
-      }
       .right {
         .projects {
           .list {

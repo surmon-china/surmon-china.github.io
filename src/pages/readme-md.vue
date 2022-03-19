@@ -2,8 +2,8 @@
   import { useMeta } from '@/composables/meta'
   import { RouteRepoID } from '@/routes'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
-  import Navbar from '@/components/common/navbar.vue'
-  import Footbar from '@/components/common/footbar.vue'
+  import Navbar from '@/components/layout/navbar.vue'
+  import Footbar from '@/components/layout/footbar.vue'
   const id = RouteRepoID.Readme
 
   useMeta({

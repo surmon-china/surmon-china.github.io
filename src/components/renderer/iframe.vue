@@ -9,7 +9,7 @@
   import { defineComponent } from 'vue'
   import { V1_LEGACY_URL } from '@/config'
   import { useMeta } from '@/composables/meta'
-  import Navbar from '@/components/common/navbar.vue'
+  import Navbar from '@/components/layout/navbar.vue'
 
   export default defineComponent({
     name: 'legacy-iframe',
