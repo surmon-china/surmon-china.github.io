@@ -2,11 +2,22 @@ const fs = require('fs')
 const path = require('path')
 const vite = require('vite')
 
+const INDEX_ROUTE = '/'
 const toAbsolute = (_path) => path.resolve(__dirname, _path)
 const pageRoutes = fs.readdirSync(toAbsolute('src/pages')).map((file) => {
   const name = file.replace(/\.vue$/, '').toLowerCase()
-  return name === 'home' ? `/` : `/${name}`
+  return name === 'home' ? INDEX_ROUTE : `/${name}`
 })
+
+const renderRedirectionHTML = (url) => `
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="refresh" content="0; url='https://github.surmon.me${url}'" />
+    </head>
+  </html>
+`
 
 ;(async () => {
   try {
@@ -48,9 +59,14 @@ const pageRoutes = fs.readdirSync(toAbsolute('src/pages')).map((file) => {
       // ✅ https://github.surmon.me/xxx
       // ❌ https://github.surmon.me/xxx/
       // 🔗 https://ahrefs.com/blog/trailing-slash/
-      const filePath = `dist${url === '/' ? '/index' : url}.html`
-      fs.writeFileSync(toAbsolute(filePath), html)
-      console.log('pre-rendered:', filePath)
+      const fileName = `dist${url === INDEX_ROUTE ? '/index' : url}`
+      fs.writeFileSync(toAbsolute(`${fileName}.html`), html)
+      if (url !== INDEX_ROUTE) {
+        // redirect `x/` to 'x'
+        fs.mkdirSync(toAbsolute(`${fileName}/`), { recursive: true })
+        fs.writeFileSync(toAbsolute(`${fileName}/index.html`), renderRedirectionHTML(url))
+      }
+      console.log('pre-rendered:', url)
     }
 
     fs.rmSync(toAbsolute('dist/ssr'), { recursive: true, force: true })
