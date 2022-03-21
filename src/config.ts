@@ -22,6 +22,7 @@ export const SWIPER_ADS = [{ image: '', url: '' }]
 // https://www.jsdelivr.com/github
 export const CDN_PREFIX = `https://cdn.jsdelivr.net/gh/${GITHUB_UID}/${GITHUB_PROJECT_NAME}@release/`
 export const V1_LEGACY_URL = 'https://v1.github.surmon.me/'
+export const getLegacyURL = (route: string) => `${V1_LEGACY_URL}${route}`
 
 export const GOOGLE_ADSENSE_CLIENT = 'ca-pub-4710915636313788'
 

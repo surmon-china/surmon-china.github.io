@@ -2,7 +2,9 @@
   <div class="homepage-link">
     <ulink class="link" :href="href">
       <i class="iconfont" :class="`icon-${icon}`" />
-      <span>{{ text }}</span>
+      <slot>
+        <span>{{ text }}</span>
+      </slot>
     </ulink>
   </div>
 </template>

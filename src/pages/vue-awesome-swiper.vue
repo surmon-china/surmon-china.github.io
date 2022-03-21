@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-  import { useMeta } from '@/composables/meta'
+  import { getLegacyURL } from '@/config'
   import { RouteRepoID } from '@/routes'
+  import { useMeta } from '@/composables/meta'
   import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import Homepage from '@/components/homepage/index.vue'
@@ -21,20 +22,16 @@
   <div class="page">
     <homepage :repository="id">
       <template #actions>
+        <homepage-link icon="doc" text="Vue(2) examples" :href="getLegacyURL(id)" />
         <homepage-link
           icon="doc"
-          text="Swiper API Document"
+          text="Swiper API Documentation"
           href="https://swiperjs.com/swiper-api"
         />
         <homepage-link
           icon="doc"
-          text="Swiper Vue component"
+          text="Swiper Vue(3) component"
           href="https://swiperjs.com/vue"
-        />
-        <homepage-link
-          icon="doc"
-          text="Original Swiper Demos"
-          href="https://swiperjs.com/demos"
         />
         <homepage-link
           icon="discussions"

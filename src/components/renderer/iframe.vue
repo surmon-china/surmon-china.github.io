@@ -7,7 +7,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { V1_LEGACY_URL } from '@/config'
+  import { getLegacyURL } from '@/config'
   import { useMeta } from '@/composables/meta'
   import Navbar from '@/components/layout/navbar.vue'
 
@@ -28,7 +28,7 @@
         }
       })
       return {
-        legacyUrl: `${V1_LEGACY_URL}${props.id}`
+        legacyUrl: getLegacyURL(props.id)
       }
     }
   })
