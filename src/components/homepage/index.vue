@@ -15,7 +15,8 @@
           </div>
           <div v-else class="banner-content" key="content">
             <p class="archived" v-if="repoDetail?.archived">
-              ⚠️ This repository has been archived. It is now read-only.
+              <i class="iconfont icon-warning-line"></i>
+              This repository has been archived. It is now read-only.
             </p>
             <h1 class="title">{{ repository }}</h1>
             <h4 class="subtitle">{{ repoDescription || '...' }}</h4>

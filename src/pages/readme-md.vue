@@ -1,10 +1,10 @@
 <script lang="ts" setup>
   import { useMeta } from '@/composables/meta'
-  import { RouteRepoID } from '@/routes'
+  import { Repository } from '@/config'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import Navbar from '@/components/layout/navbar.vue'
   import Footbar from '@/components/layout/footbar.vue'
-  const id = RouteRepoID.Readme
+  const id = Repository.Readme
 
   useMeta({
     title: getMetaTitle(id),

@@ -2,6 +2,10 @@
   <div id="toolbox">
     <div class="container">
       <div class="tools">
+        <ulink class="item sponsor" :href="CONFIG.GITHUB_SPONSORS_URL">
+          <i class="iconfont icon-heart" />
+          <i class="iconfont icon-heart-fill" />
+        </ulink>
         <ulink class="item github" title="to GitHub homepage" :href="repoURL">
           <i class="iconfont icon-github"></i>
         </ulink>
@@ -16,6 +20,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { getGitHubRepositoryURL } from '@/transforms/url'
+  import * as CONFIG from '@/config'
   export default defineComponent({
     name: 'homepage-toolbox',
     props: {
@@ -31,6 +36,7 @@
       }
 
       return {
+        CONFIG,
         repoURL,
         handleToPageTop
       }
@@ -79,11 +85,9 @@
             background-color: $header-bg;
             color: $link-color;
           }
-
           &:not(last-child) {
             border-bottom: 1px solid $body-bg;
           }
-
           &:first-child {
             border-top-left-radius: $sm-radius;
             border-top-right-radius: $sm-radius;
@@ -91,6 +95,21 @@
           &:last-child {
             border-bottom-left-radius: $sm-radius;
             border-bottom-right-radius: $sm-radius;
+          }
+
+          &.sponsor {
+            color: $github-sponsor-primary;
+            .icon-heart-fill {
+              display: none;
+            }
+            &:hover {
+              .icon-heart {
+                display: none;
+              }
+              .icon-heart-fill {
+                display: block;
+              }
+            }
           }
         }
       }

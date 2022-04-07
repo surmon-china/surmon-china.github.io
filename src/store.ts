@@ -73,12 +73,14 @@ export const useGlobalStore = defineStore('global', {
     },
     getRepositoryNPMPackage() {
       return (repositoryName: any): null | any => {
-        const targetRepository = this.getGitHubRepositoryDetail(repositoryName)
-        if (targetRepository) {
+        const repository = this.getGitHubRepositoryDetail(repositoryName)
+        if (repository) {
           return this.npmPackages.find((pkg) => {
             return (
+              // repo name === package name
               pkg.package.name === repositoryName ||
-              pkg.package.links.repository === targetRepository.html_url
+              // repo url === package repository url
+              pkg.package.links.repository === repository.html_url
             )
           })
         }

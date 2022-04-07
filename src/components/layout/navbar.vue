@@ -6,9 +6,6 @@
           <i class="iconfont icon-github"></i>
           <span class="text">{{ CONFIG.GITHUB_UID }}</span>
         </ulink>
-        <ulink class="item sponsor" :href="CONFIG.GITHUB_SPONSORS_URL">
-          <i class="iconfont icon-heart" />
-        </ulink>
       </div>
       <div class="right">
         <button class="item theme" @click="toggleTheme">
@@ -42,8 +39,7 @@
                         class="archived"
                         title="This repository has been archived. It is now read-only."
                       >
-                        <span class="icon">⚠️</span>
-                        <!-- <span class="text">archived</span> -->
+                        <i class="iconfont icon-warning-line"></i>
                       </span>
                     </div>
                     <div class="description" :title="item.description">
@@ -68,7 +64,15 @@
                           <i class="iconfont icon-npm"></i>
                           <span>{{ getNPMDownloads(item.name) }}</span>
                         </ulink>
-                        <span v-if="item.language" class="item">{{ item.language }}</span>
+                        <span v-if="item.language" class="item language">
+                          <i
+                            class="color"
+                            :style="{
+                              backgroundColor: getGitHubLanguageColor(item.language)
+                            }"
+                          ></i>
+                          <span>{{ item.language }}</span>
+                        </span>
                       </div>
                       <div class="right">
                         <ulink class="homepage" v-if="item.homepage" :href="item.homepage">
@@ -89,6 +93,7 @@
 </template>
 
 <script lang="ts">
+  import GH_LANG_COLORS from 'gh-lang-colors'
   import { defineComponent, computed } from 'vue'
   import { useGlobalStore } from '@/store'
   import { useTheme, Theme } from '@/composables/theme'
@@ -133,6 +138,10 @@
         return themeIconMap[themeValue.value]
       })
 
+      const getGitHubLanguageColor = (language: string): string => {
+        return (GH_LANG_COLORS as any)[language]
+      }
+
       return {
         CONFIG,
         themeIcon,
@@ -143,6 +152,7 @@
         getNPMDownloads,
         getNPMHomepageURL,
         getGitHubRepositoryURL,
+        getGitHubLanguageColor,
         countToK
       }
     }
@@ -194,13 +204,6 @@
           &.github {
             .iconfont {
               margin-right: $xs-gap;
-            }
-          }
-
-          &.sponsor {
-            margin-left: $sm-gap;
-            .iconfont:hover {
-              color: $github-sponsor-primary;
             }
           }
 
@@ -308,12 +311,6 @@
                   opacity: 0.6;
                   color: $github-attention;
                   font-size: $font-size-small - 1;
-                  .icon {
-                    margin-right: $xs-gap;
-                  }
-                  .text {
-                    text-transform: uppercase;
-                  }
                 }
               }
 
@@ -353,6 +350,16 @@
                   &.npm {
                     .iconfont {
                       color: $npm-primary;
+                    }
+                  }
+
+                  &.language {
+                    .color {
+                      display: inline-block;
+                      width: 8px;
+                      height: 8px;
+                      border-radius: 50%;
+                      margin-right: $xs-gap;
                     }
                   }
                 }

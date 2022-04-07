@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { getLegacyURL } from '@/config'
-  import { RouteRepoID } from '@/routes'
+  import { Repository } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
@@ -8,7 +8,7 @@
   import HomepageLink from '@/components/homepage/link.vue'
   import HomepageExamples from '@/components/homepage/examples.vue'
   import exampleComponents from '@examples/vue-awesome-swiper'
-  const id = RouteRepoID.VueAwesomeSwiper
+  const id = Repository.VueAwesomeSwiper
   const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({

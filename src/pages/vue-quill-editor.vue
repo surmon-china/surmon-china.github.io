@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-  import { RouteRepoID } from '@/routes'
+  import { Repository } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import IframeRenderer from '@/components/renderer/iframe.vue'
-  const id = RouteRepoID.VueQuillEditor
+  const id = Repository.VueQuillEditor
 
   useMeta({
     title: getMetaTitle(id),

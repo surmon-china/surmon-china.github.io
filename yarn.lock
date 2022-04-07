@@ -997,6 +997,11 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
+gh-lang-colors@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/gh-lang-colors/-/gh-lang-colors-0.0.19.tgz#3e5a6d698dea50805392f0817fb9085f96513734"
+  integrity sha512-ZC92ewwaItct9JVBrIQ1Z/mfoBMSZMrOmFnkGCxraV3Dl2dvH9aE+sLcuaoc6N24RkCw0EonmOh9XsCqWwwW/g==
+
 glob-parent@^6.0.1:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-6.0.2.tgz#6d237d99083950c79290f24c7642a3de9a28f9e3"

@@ -116,7 +116,7 @@
           })
         }
 
-        console.log('AutoMammonProviders', adProviders.slice())
+        // console.log('AutoMammonProviders', adProviders.slice())
       })
 
       return {

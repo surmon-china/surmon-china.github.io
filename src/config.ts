@@ -4,8 +4,18 @@
  * @author Surmon <https://github.com/surmon-china>
  */
 
-import { RouteRepoID } from './routes'
 import packageJSON from '../package.json'
+
+export enum Repository {
+  Readme = 'README.md',
+  Naivebayes = 'naivebayes',
+  VueAwesomeSwiper = 'vue-awesome-swiper',
+  VueQuillEditor = 'vue-quill-editor',
+  VueVideoPlayer = 'vue-video-player',
+  VueCodemirror = 'vue-codemirror',
+  VueTouchRipple = 'vue-touch-ripple',
+  VueDragZone = 'vue-drag-zone'
+}
 
 export const PROJECT_URL = packageJSON.homepage
 
@@ -29,5 +39,5 @@ export const GOOGLE_ADSENSE_CLIENT = 'ca-pub-4710915636313788'
 export const APP_META = {
   title: `Surmon's open-source projects`,
   description: `Surmon's GitHub repository pages.`,
-  keywords: [GITHUB_UID, ...Object.values(RouteRepoID)].join(',')
+  keywords: [GITHUB_UID, ...Object.values(Repository)].join(',')
 }

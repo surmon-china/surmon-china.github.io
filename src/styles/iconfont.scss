@@ -1,8 +1,9 @@
 @font-face {
   font-family: 'iconfont'; /* Project id 1492229 */
-  src: url('@/assets/iconfont/iconfont.woff2?t=1647197333343') format('woff2'),
-    url('@/assets/iconfont/iconfont.woff?t=1647197333343') format('woff'),
-    url('@/assets/iconfont/iconfont.ttf?t=1647197333343') format('truetype');
+  src: url('//at.alicdn.com/t/font_1492229_birrwxv58mo.woff2?t=1649341019344')
+      format('woff2'),
+    url('//at.alicdn.com/t/font_1492229_birrwxv58mo.woff?t=1649341019344') format('woff'),
+    url('//at.alicdn.com/t/font_1492229_birrwxv58mo.ttf?t=1649341019344') format('truetype');
 }
 
 .iconfont {
@@ -13,12 +14,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-discussions:before {
-  content: '\e666';
+.icon-heart-fill:before {
+  content: '\e602';
 }
 
 .icon-heart:before {
-  content: '\e849';
+  content: '\e605';
+}
+
+.icon-download:before {
+  content: '\e7d9';
+}
+
+.icon-warning-line:before {
+  content: '\e74c';
+}
+
+.icon-discussions:before {
+  content: '\e666';
 }
 
 .icon-sun:before {
@@ -73,20 +86,12 @@
   content: '\e673';
 }
 
-.icon-download:before {
-  content: '\e606';
-}
-
 .icon-issue:before {
   content: '\e6c6';
 }
 
 .icon-watch:before {
   content: '\e607';
-}
-
-.icon-mail:before {
-  content: '\e605';
 }
 
 .icon-link-external:before {
@@ -115,10 +120,6 @@
 
 .icon-doc:before {
   content: '\e611';
-}
-
-.icon-location:before {
-  content: '\e610';
 }
 
 .icon-fork:before {
