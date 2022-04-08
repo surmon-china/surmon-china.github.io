@@ -289,11 +289,12 @@
                 margin-bottom: $sm-gap;
 
                 .link {
+                  max-width: 30%;
                   margin-right: 2px;
-                  font-size: $font-size-base + 2;
                   color: $text-color;
                   text-decoration: none;
-                  max-width: 30%;
+                  font-size: $font-size-base + 2;
+                  font-weight: 600;
                   @include text-overflow();
                   &:hover {
                     color: $link-color;
