@@ -188,17 +188,14 @@
           display: inline-flex;
           align-items: center;
           text-decoration: none;
-
-          > .iconfont,
-          > .text {
-            color: $text-secondary;
-            &:hover {
-              color: $text-color;
-            }
+          color: $text-secondary;
+          &:hover {
+            color: $text-color;
           }
 
           > .text {
             text-transform: uppercase;
+            font-weight: bold;
           }
 
           &.github {
@@ -206,7 +203,6 @@
               margin-right: $xs-gap;
             }
           }
-
           &.theme {
             cursor: pointer;
             background: none;
@@ -370,6 +366,10 @@
                   color: $text-color;
                   &:hover {
                     color: $link-color;
+                  }
+
+                  .text {
+                    font-weight: bold;
                   }
 
                   .iconfont {
