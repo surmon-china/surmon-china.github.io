@@ -49,7 +49,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
   @import './style.scss';
 
   .swiper {

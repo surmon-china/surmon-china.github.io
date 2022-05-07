@@ -1,9 +1,10 @@
 <script lang="ts" setup>
-  import { Repository } from '@/config'
+  import { Repository, getLegacyURL } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import IframeRenderer from '@/components/renderer/iframe.vue'
   const id = Repository.VueQuillEditor
+  const src = getLegacyURL(id)
 
   useMeta({
     title: getMetaTitle(id),
@@ -13,5 +14,5 @@
 </script>
 
 <template>
-  <iframe-renderer class="iframe" :id="id" />
+  <iframe-renderer :repository="id" :src="src" legacy />
 </template>

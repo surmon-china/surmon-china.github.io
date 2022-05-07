@@ -155,7 +155,8 @@
 
 <style lang="scss" scoped>
   @use 'sass:math';
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
   @import './style.scss';
 
   .advance-example {

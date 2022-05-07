@@ -22,7 +22,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   .homepage-link {
     margin: 0 1em;

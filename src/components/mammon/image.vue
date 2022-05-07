@@ -11,7 +11,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   .image-mammon {
     width: 100%;

@@ -12,7 +12,7 @@
 </script>
 
 <template>
-  <div class="page">
+  <div class="index-page">
     <div class="logo">
       <i class="iconfont icon-github"></i>
     </div>
@@ -20,9 +20,10 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
-  .page {
+  .index-page {
     width: 100%;
     height: 100vh;
     display: flex;

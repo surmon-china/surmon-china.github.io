@@ -161,7 +161,8 @@
 
 <style lang="scss" scoped>
   @use 'sass:math';
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   .navbar {
     height: $navbar-height;
@@ -169,8 +170,6 @@
     border-bottom: 1px solid $border-color;
     box-sizing: content-box;
     user-select: none;
-    position: sticky;
-    top: 0;
     z-index: 99999;
 
     > .container {
@@ -204,6 +203,7 @@
             }
           }
           &.theme {
+            margin-right: $xs-gap;
             cursor: pointer;
             background: none;
             border: 0;

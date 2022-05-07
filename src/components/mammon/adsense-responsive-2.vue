@@ -21,7 +21,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
   .g-a-mammon {
     width: 100%;
     min-height: 6rem;

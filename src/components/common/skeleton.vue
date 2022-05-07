@@ -33,7 +33,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   $skeleton-background: $header-bg;
   $skeleton-spinner: $body-bg;

@@ -1,5 +1,6 @@
 @use 'sass:meta';
-@import './init.scss';
+@import './variables.scss';
+@import './mixins.scss';
 @import './theme.scss';
 
 @font-face {

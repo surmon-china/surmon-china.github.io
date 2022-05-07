@@ -1,77 +1,72 @@
 <template>
-  <div class="homepage">
-    <navbar :repository="repository" />
-    <main class="main">
-      <div class="banner">
-        <transition name="module" mode="out-in">
-          <div v-if="!initialized" class="banner-content" key="skeleton">
-            <div class="title-skeleton"><skeleton /></div>
-            <div class="subtitle-skeleton"><skeleton /></div>
-            <div class="buttons-skeleton">
-              <div class="item-skeleton" :key="item" v-for="item in 4">
-                <skeleton />
-              </div>
+  <main class="homepage">
+    <div class="banner">
+      <transition name="module" mode="out-in">
+        <div v-if="!initialized" class="banner-content" key="skeleton">
+          <div class="title-skeleton"><skeleton /></div>
+          <div class="subtitle-skeleton"><skeleton /></div>
+          <div class="buttons-skeleton">
+            <div class="item-skeleton" :key="item" v-for="item in 4">
+              <skeleton />
             </div>
           </div>
-          <div v-else class="banner-content" key="content">
-            <p class="archived" v-if="repoDetail?.archived">
-              <i class="iconfont icon-warning-line"></i>
-              This repository has been archived. It is now read-only.
-            </p>
-            <h1 class="title">{{ repository }}</h1>
-            <h4 class="subtitle">{{ repoDescription || '...' }}</h4>
-            <div class="buttons">
-              <github-button
-                :link="repoUrl"
-                :count="repoDetail?.stargazers_count || 0"
-                :countLink="`${repoUrl}/stargazers`"
-                icon="icon-github"
-                class="item"
-                text="Star"
-              />
-              <github-button
-                :link="`${repoUrl}/issues`"
-                :count="repoDetail?.open_issues_count || 0"
-                icon="icon-issue"
-                class="item"
-                text="Issue"
-              />
-              <github-button
-                :link="`${repoUrl}/fork`"
-                :count="repoDetail?.forks || 0"
-                icon="icon-fork"
-                class="item"
-                text="Fork"
-              />
-              <github-button
-                class="item"
-                icon="icon-download"
-                text="Download"
-                :link="`${repoUrl}/archive/master.zip`"
-                :count-icon="isNPMPackage ? `icon-npm` : void 0"
-                :count-link="isNPMPackage ? npmUrl : void 0"
-                :count-text="isNPMPackage ? packageDownloads : void 0"
-              />
-            </div>
-            <div class="actions">
-              <slot name="actions"></slot>
-            </div>
+        </div>
+        <div v-else class="banner-content" key="content">
+          <p class="archived" v-if="repoDetail?.archived">
+            <i class="iconfont icon-warning-line"></i>
+            This repository has been archived. It is now read-only.
+          </p>
+          <h1 class="title">{{ repository }}</h1>
+          <h4 class="subtitle">{{ repoDescription || '...' }}</h4>
+          <div class="buttons">
+            <github-button
+              :link="repoUrl"
+              :count="repoDetail?.stargazers_count || 0"
+              :countLink="`${repoUrl}/stargazers`"
+              icon="icon-github"
+              class="item"
+              text="Star"
+            />
+            <github-button
+              :link="`${repoUrl}/issues`"
+              :count="repoDetail?.open_issues_count || 0"
+              icon="icon-issue"
+              class="item"
+              text="Issue"
+            />
+            <github-button
+              :link="`${repoUrl}/fork`"
+              :count="repoDetail?.forks || 0"
+              icon="icon-fork"
+              class="item"
+              text="Fork"
+            />
+            <github-button
+              class="item"
+              icon="icon-download"
+              text="Download"
+              :link="`${repoUrl}/archive/master.zip`"
+              :count-icon="isNPMPackage ? `icon-npm` : void 0"
+              :count-link="isNPMPackage ? npmUrl : void 0"
+              :count-text="isNPMPackage ? packageDownloads : void 0"
+            />
           </div>
-        </transition>
-      </div>
-      <div class="container">
-        <homepage-card class="homepage-mammon" v-if="headerAdProvider">
-          <mammon :provider="headerAdProvider" />
-        </homepage-card>
-        <slot name="content"></slot>
-        <homepage-card class="homepage-mammon" v-if="footerAdProvider">
-          <mammon :provider="footerAdProvider" />
-        </homepage-card>
-      </div>
-    </main>
-    <homepage-toolbox :repository="repository" />
-    <footbar :repository="repository" />
-  </div>
+          <div class="actions">
+            <slot name="actions"></slot>
+          </div>
+        </div>
+      </transition>
+    </div>
+    <div class="container">
+      <homepage-card class="homepage-mammon" v-if="headerAdProvider">
+        <mammon :provider="headerAdProvider" />
+      </homepage-card>
+      <slot name="content"></slot>
+      <homepage-card class="homepage-mammon" v-if="footerAdProvider">
+        <mammon :provider="footerAdProvider" />
+      </homepage-card>
+    </div>
+  </main>
 </template>
 
 <script lang="ts">
@@ -81,9 +76,6 @@
   import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
   import Mammon, { MammonProvider } from '@/components/mammon/index'
   import Skeleton from '@/components/common/skeleton.vue'
-  import Navbar from '@/components/layout/navbar.vue'
-  import Footbar from '@/components/layout/footbar.vue'
-  import HomepageToolbox from './toolbox.vue'
   import HomepageCard from './card.vue'
   import GithubButton from './button.vue'
 
@@ -92,10 +84,7 @@
     components: {
       Mammon,
       Skeleton,
-      Navbar,
-      Footbar,
       HomepageCard,
-      HomepageToolbox,
       GithubButton
     },
     props: {
@@ -146,145 +135,142 @@
 
 <style lang="scss" scoped>
   @use 'sass:math';
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   .homepage {
-    .main {
-      padding: 0;
+    padding: 0;
+    overflow: hidden;
+
+    .banner {
+      position: relative;
       overflow: hidden;
+      background-color: $banner-bg;
 
-      .banner {
-        position: relative;
-        overflow: hidden;
-        background-color: $banner-bg;
+      .banner-content {
+        min-height: $banner-height;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-        .banner-content {
-          min-height: $banner-height;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .title-skeleton {
-          width: 400px;
-          max-width: 40%;
-          height: 38px;
-          margin-bottom: $lg-gap;
-        }
-        .subtitle-skeleton {
-          width: 300px;
-          max-width: 36%;
-          height: 30px;
-          margin-bottom: 4rem;
-        }
-        .buttons-skeleton {
-          display: flex;
-          height: 34px;
-          width: 580px;
-          max-width: 70%;
-          .item-skeleton {
-            flex: 1;
-            margin: 0 $gap;
-          }
-        }
-
-        .archived {
-          color: $github-attention;
-          margin-top: 1rem;
-          margin-bottom: 0;
-          & + .title {
-            margin-top: 0;
-          }
-        }
-
-        .title {
-          font-size: 3rem;
-          font-weight: bold;
-        }
-
-        .subtitle {
-          margin-top: 0;
-          margin-bottom: 5rem;
-          font-size: $font-size-huge;
-          font-weight: normal;
-        }
-
-        .buttons {
-          .item:not(:first-child) {
-            margin-left: $gap;
-          }
-
-          .github-license {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 $sm-gap;
-            background-color: $banner-bg;
-            color: $text-color;
-
-            .iconfont {
-              font-weight: normal;
-              margin-right: 2px;
-            }
-          }
-        }
-
-        .actions {
-          margin-top: 2rem;
-          margin-bottom: 2rem;
-          display: flex;
+      .title-skeleton {
+        width: 400px;
+        max-width: 40%;
+        height: 38px;
+        margin-bottom: $lg-gap;
+      }
+      .subtitle-skeleton {
+        width: 300px;
+        max-width: 36%;
+        height: 30px;
+        margin-bottom: 4rem;
+      }
+      .buttons-skeleton {
+        display: flex;
+        height: 34px;
+        width: 580px;
+        max-width: 70%;
+        .item-skeleton {
+          flex: 1;
+          margin: 0 $gap;
         }
       }
 
-      > .container {
-        margin: 2rem auto;
+      .archived {
+        color: $github-attention;
+        margin-top: 1rem;
+        margin-bottom: 0;
+        & + .title {
+          margin-top: 0;
+        }
+      }
 
-        .card {
+      .title {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+
+      .subtitle {
+        margin-top: 0;
+        margin-bottom: 5rem;
+        font-size: $font-size-huge;
+        font-weight: normal;
+      }
+
+      .buttons {
+        .item:not(:first-child) {
+          margin-left: $gap;
+        }
+
+        .github-license {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0 $sm-gap;
           background-color: $banner-bg;
-          width: 100%;
-          height: auto;
-          min-height: 40px;
-          margin: 20px 0;
-        }
+          color: $text-color;
 
-        .homepage-mammon {
-          min-height: 9rem;
-          overflow: hidden;
+          .iconfont {
+            font-weight: normal;
+            margin-right: 2px;
+          }
         }
+      }
+
+      .actions {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        display: flex;
+      }
+    }
+
+    > .container {
+      margin: 2rem auto;
+
+      .card {
+        background-color: $banner-bg;
+        width: 100%;
+        height: auto;
+        min-height: 40px;
+        margin: 20px 0;
+      }
+
+      .homepage-mammon {
+        min-height: 9rem;
+        overflow: hidden;
       }
     }
   }
 
   @media screen and (max-width: $container-width) {
     .homepage {
-      .main {
-        .container {
-          width: 90%;
-        }
+      .container {
+        width: 90%;
+      }
 
-        .banner {
-          min-height: 20rem !important;
-          .title {
-            font-size: 2.3em !important;
-          }
-          .subtitle {
-            font-size: 1.3em !important;
-            margin-bottom: 2rem !important;
-          }
+      .banner {
+        min-height: 20rem !important;
+        .title {
+          font-size: 2.3em !important;
         }
+        .subtitle {
+          font-size: 1.3em !important;
+          margin-bottom: 2rem !important;
+        }
+      }
 
-        .buttons,
-        .actions {
-          display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
+      .buttons,
+      .actions {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
 
-        .homepage-button,
-        .homepage-link {
-          margin-bottom: $gap;
-        }
+      .homepage-button,
+      .homepage-link {
+        margin-bottom: $gap;
       }
     }
   }

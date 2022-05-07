@@ -4,6 +4,7 @@
   import { useMeta } from '@/composables/meta'
   import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
+  import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
   import HomepageLink from '@/components/homepage/link.vue'
   import HomepageExamples from '@/components/homepage/examples.vue'
@@ -19,7 +20,7 @@
 </script>
 
 <template>
-  <div class="page">
+  <vue-renderer :repository="id">
     <homepage :repository="id">
       <template #actions>
         <homepage-link icon="doc" text="Vue(2) examples" :href="getLegacyURL(id)" />
@@ -49,11 +50,12 @@
         </homepage-examples>
       </template>
     </homepage>
-  </div>
+  </vue-renderer>
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   .swiper-example {
     width: 100%;

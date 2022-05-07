@@ -2,8 +2,7 @@
   import { useMeta } from '@/composables/meta'
   import { Repository } from '@/config'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
-  import Navbar from '@/components/layout/navbar.vue'
-  import Footbar from '@/components/layout/footbar.vue'
+  import VueRenderer from '@/components/renderer/vue.vue'
   const id = Repository.Readme
 
   useMeta({
@@ -14,30 +13,25 @@
 </script>
 
 <template>
-  <div class="page">
-    <navbar :repository="id" />
-    <div class="content">
-      <span class="todo">README.md homepage is coming soon</span>
-    </div>
-    <footbar :repository="id" />
-  </div>
+  <vue-renderer class="page" :repository="id" :toolbox="false">
+    <div class="page-content">README.md homepage is coming soon</div>
+  </vue-renderer>
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   .page {
-    .content {
+    .page-content {
       width: 100%;
       height: calc(100vh - $navbar-height - $footbar-height);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      .todo {
-        font-size: $font-size-huge;
-        color: $text-disabled;
-      }
+      font-size: $font-size-huge;
+      color: $text-disabled;
     }
   }
 </style>

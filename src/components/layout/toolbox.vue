@@ -22,30 +22,27 @@
   import { getGitHubRepositoryURL } from '@/transforms/url'
   import * as CONFIG from '@/config'
   export default defineComponent({
-    name: 'homepage-toolbox',
+    name: 'toolbox',
     props: {
       repository: {
         type: String,
         required: true
       }
     },
-    setup(props) {
-      const repoURL = getGitHubRepositoryURL(props.repository)
-      const handleToPageTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-      }
-
+    emits: ['toTop'],
+    setup(props, content) {
       return {
         CONFIG,
-        repoURL,
-        handleToPageTop
+        repoURL: getGitHubRepositoryURL(props.repository),
+        handleToPageTop: () => content.emit('toTop')
       }
     }
   })
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   @media screen and (max-width: $container-width) {
     #toolbox {

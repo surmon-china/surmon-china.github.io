@@ -6,6 +6,8 @@ import { getLocalTheme } from './composables/theme'
 import { GOOGLE_ADSENSE_CLIENT } from './config'
 import { createUniversalApp } from './main'
 
+import '@/styles/app.scss'
+
 const { app, router, visitor } = createUniversalApp({
   // MARK: use `createApp`, not `createSSRApp`, to avoid hydrate
   appCreator: createApp,

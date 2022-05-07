@@ -31,7 +31,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/init.scss';
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
 
   .swiper-mammon {
     height: 9rem;
