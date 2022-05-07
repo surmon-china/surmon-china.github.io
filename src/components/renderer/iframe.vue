@@ -1,6 +1,6 @@
 <template>
   <div class="iframe-renderer" :class="{ legacy }">
-    <navbar class="header" :repository="repository" />
+    <navbar class="header" :repository="repository" :full="fullnav" />
     <iframe
       class="iframe"
       :src="src"
@@ -33,6 +33,10 @@
         required: true
       },
       legacy: {
+        type: Boolean,
+        default: false
+      },
+      fullnav: {
         type: Boolean,
         default: false
       }

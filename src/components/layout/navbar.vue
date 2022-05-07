@@ -1,10 +1,14 @@
 <template>
   <header class="navbar">
-    <div class="container">
+    <div class="container" :class="{ full }">
       <div class="left">
         <ulink class="item github" :href="CONFIG.GITHUB_USER_URL">
           <i class="iconfont icon-github"></i>
           <span class="text">{{ CONFIG.GITHUB_UID }}</span>
+        </ulink>
+        <span class="dot">/</span>
+        <ulink class="item repository" :href="getGitHubRepositoryURL(repository)">
+          <span class="text">{{ repository }}</span>
         </ulink>
       </div>
       <div class="right">
@@ -15,7 +19,7 @@
           <span class="text">Projects</span>
           <i class="iconfont icon-arrow-down"></i>
           <div class="projects">
-            <div class="container">
+            <div class="container" :class="{ full }">
               <transition name="module" mode="out-in">
                 <loading v-if="!initialized" class="loading" />
                 <ul v-else class="list">
@@ -109,6 +113,10 @@
       repository: {
         type: String,
         required: true
+      },
+      full: {
+        type: Boolean,
+        default: false
       }
     },
     setup() {
@@ -173,6 +181,8 @@
     z-index: 99999;
 
     > .container {
+      /* for navbar border */
+      padding-bottom: 1px;
       height: $navbar-height;
       display: flex;
       align-items: center;
@@ -180,7 +190,14 @@
 
       > .left,
       > .right {
+        display: flex;
+        align-items: center;
         height: 100%;
+
+        .dot {
+          margin: 0 $xs-gap;
+          color: $text-disabled;
+        }
 
         > .item {
           height: 100%;
@@ -201,6 +218,9 @@
             .iconfont {
               margin-right: $xs-gap;
             }
+          }
+          &.repository {
+            font-size: 95%;
           }
           &.theme {
             margin-right: $xs-gap;
@@ -267,7 +287,7 @@
               overflow: hidden;
               user-select: none;
               &.activated {
-                border-width: 2px;
+                border-style: double;
               }
               &.activated,
               &:hover {
@@ -384,11 +404,42 @@
     }
   }
 
+  @mixin full-container() {
+    width: 100%;
+    padding: 0 $gap;
+  }
+
+  .navbar {
+    .container.full {
+      @include full-container();
+      .right {
+        .projects {
+          .list {
+            padding-right: 0 !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .navbar {
+      .container.full {
+        .right {
+          .projects {
+            .list {
+              grid-template-columns: repeat(4, 1fr) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
   @media screen and (max-width: $container-width) {
     .navbar {
       .container {
-        width: 100%;
-        padding: 0 $gap;
+        @include full-container();
       }
 
       .right {
@@ -404,6 +455,12 @@
 
   @media screen and (max-width: $mobile-width) {
     .navbar {
+      .left {
+        .dot,
+        .item.repository {
+          display: none;
+        }
+      }
       .right {
         .projects {
           .list {
