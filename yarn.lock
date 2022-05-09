@@ -1574,6 +1574,11 @@ vue-router@^4.0.14:
   dependencies:
     "@vue/devtools-api" "^6.0.0"
 
+vue-touch-ripple@^4.0.0-rc.3:
+  version "4.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/vue-touch-ripple/-/vue-touch-ripple-4.0.0-rc.3.tgz#2e089d4630fe979d11620cc12f972ed0ed0fe8f0"
+  integrity sha512-eRbCCAtpYTDqbm2vCbMleZia/iYklW7ml7y+Arxfdo+kNByGJNIJJbL0Nne5YNXq/MLiIRUjMVCI4j8mVgQVFg==
+
 vue@^3.2.31:
   version "3.2.31"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.31.tgz#e0c49924335e9f188352816788a4cca10f817ce6"

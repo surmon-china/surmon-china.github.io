@@ -182,14 +182,12 @@
         color: $github-attention;
         margin-top: 1rem;
         margin-bottom: 0;
-        & + .title {
-          margin-top: 0;
-        }
       }
 
       .title {
         font-size: 3rem;
         font-weight: bold;
+        margin-top: 0;
       }
 
       .subtitle {
@@ -221,7 +219,7 @@
 
       .actions {
         margin-top: 2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 0;
         display: flex;
       }
     }

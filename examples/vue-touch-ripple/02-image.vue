@@ -1,39 +1,42 @@
 <template>
   <div class="example">
     <touch-ripple class="image-box">
-      <img class="image" src="/images/common/vue-logo.png">
+      <img class="image" draggable="false" src="/images/example/1.jpg" />
     </touch-ripple>
     <touch-ripple
-      class="image-box" 
-      color="#3fa27c"
-      :speed="0.2" 
+      class="image-box"
+      color="yellow"
       :opacity="0.2"
+      :duration="600"
+      transition="ease-in"
     >
-      <img class="image" src="/images/common/vue-logo.png" />
+      <img class="image" draggable="false" src="/images/example/2.jpg" />
     </touch-ripple>
     <touch-ripple
-      class="image-box" 
+      class="image-box"
       color="#36485e"
-      :speed="0.5"
       :opacity="0.2"
+      :duration="600"
       transition="cubic-bezier(1, -0.24, 0, 1.92)"
     >
-      <img class="image" src="/images/common/vue-logo.png" />
+      <img class="image" draggable="false" src="/images/example/3.jpg" />
     </touch-ripple>
   </div>
 </template>
 
-<script>
-  import { touchRipple } from 'vue-touch-ripple'
-  import 'vue-touch-ripple/dist/vue-touch-ripple.css'
+<script lang="ts">
+  import { defineComponent } from 'vue'
+  import { TouchRipple } from 'vue-touch-ripple'
+  import 'vue-touch-ripple/css'
 
-  export default {
+  export default defineComponent({
     name: 'touch-ripper-example-image-element',
     title: 'Image element',
+    url: import.meta.url,
     components: {
-      touchRipple
+      TouchRipple
     }
-  }
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -45,13 +48,15 @@
 
     .image-box {
       width: 30%;
-      padding: 2rem;
+      height: 10em;
       border-radius: 4px;
-      background-color: $white;
       overflow: hidden;
 
       .image {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
+        user-select: none;
       }
     }
   }

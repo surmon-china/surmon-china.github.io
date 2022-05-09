@@ -1,10 +1,16 @@
 <script lang="ts" setup>
-  import { Repository, getLegacyURL } from '@/config'
+  import { getLegacyURL } from '@/config'
+  import { Repository } from '@/config'
   import { useMeta } from '@/composables/meta'
+  import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
-  import IframeRenderer from '@/components/renderer/iframe.vue'
+  import VueRenderer from '@/components/renderer/vue.vue'
+  import Homepage from '@/components/homepage/index.vue'
+  import HomepageLink from '@/components/homepage/link.vue'
+  import HomepageExamples from '@/components/homepage/examples.vue'
+  import exampleComponents from '@examples/vue-touch-ripple'
   const id = Repository.VueTouchRipple
-  const src = getLegacyURL(id)
+  const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({
     title: getMetaTitle(id),
@@ -14,5 +20,35 @@
 </script>
 
 <template>
-  <iframe-renderer :repository="id" :src="src" legacy />
+  <vue-renderer :repository="id">
+    <homepage :repository="id">
+      <template #actions>
+        <homepage-link icon="doc" text="Vue(2) examples" :href="getLegacyURL(id)" />
+        <homepage-link
+          icon="doc"
+          text="Component Props"
+          href="https://github.com/surmon-china/vue-touch-ripple#component-props"
+        />
+        <homepage-link
+          icon="doc"
+          text="Component Events"
+          href="https://github.com/surmon-china/vue-touch-ripple#component-events"
+        />
+        <homepage-link
+          icon="discord"
+          text="Discord discussions"
+          href="https://discord.gg/QF8zwF3vPv"
+        />
+      </template>
+      <template #content>
+        <homepage-examples :examples="examples" :disabled-auto-ad="true">
+          <template #component="payload">
+            <div class="vtr-example">
+              <component :is="payload.component" />
+            </div>
+          </template>
+        </homepage-examples>
+      </template>
+    </homepage>
+  </vue-renderer>
 </template>

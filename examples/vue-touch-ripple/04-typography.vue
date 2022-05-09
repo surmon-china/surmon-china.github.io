@@ -2,8 +2,7 @@
   <div class="example">
     <touch-ripple
       class="typography-box"
-      color="#999"
-      :speed="2"
+      color="#C0C4CC"
       :opacity="0.3"
       transition="ease-in-out"
     >
@@ -11,8 +10,8 @@
     </touch-ripple>
     <touch-ripple
       class="typography-box"
-      color="#999"
-      :speed="2"
+      color="#909399"
+      :duration="200"
       :opacity="0.3"
       transition="ease-in-out"
     >
@@ -21,8 +20,9 @@
     <p class="typography-box">
       <span>Because</span>
       <touch-ripple
-        color="#999"
-        :speed="2"
+        class="inline-typography"
+        color="red"
+        :duration="200"
         :opacity="0.3"
         transition="ease-in-out"
       >
@@ -33,17 +33,19 @@
   </div>
 </template>
 
-<script>
-  import { touchRipple } from 'vue-touch-ripple'
-  import 'vue-touch-ripple/dist/vue-touch-ripple.css'
+<script lang="ts">
+  import { defineComponent } from 'vue'
+  import { TouchRipple } from 'vue-touch-ripple'
+  import 'vue-touch-ripple/css'
 
-  export default {
+  export default defineComponent({
     name: 'touch-ripper-example-typography-element',
     title: 'Typography element',
+    url: import.meta.url,
     components: {
-      touchRipple
+      TouchRipple
     }
-  }
+  })
 </script>
 
 <style lang="scss" scoped>
@@ -56,6 +58,11 @@
       width: 100%;
       text-align: center;
       user-select: none;
+
+      .inline-typography {
+        display: inline-block;
+        margin: 0 0.3em;
+      }
 
       .red {
         color: red;
