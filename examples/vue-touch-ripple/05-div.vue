@@ -42,7 +42,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { TouchRipple } from 'vue-touch-ripple'
-  import 'vue-touch-ripple/css'
+  import 'vue-touch-ripple/style.css'
 
   export default defineComponent({
     name: 'touch-ripper-example-cubic-bezier',
