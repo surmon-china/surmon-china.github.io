@@ -34,7 +34,7 @@
     "swiper": "^8.0.7",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14",
-    "vue-touch-ripple": "^4.0.0-rc.4"
+    "vue-touch-ripple": "^4.0.0"
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
