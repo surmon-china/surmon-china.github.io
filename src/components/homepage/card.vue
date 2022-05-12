@@ -60,6 +60,7 @@
 
         .iconfont {
           font-size: $font-size-small;
+          margin-left: $xs-gap;
         }
       }
     }

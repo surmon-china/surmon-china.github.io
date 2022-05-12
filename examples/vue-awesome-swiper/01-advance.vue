@@ -204,16 +204,17 @@
       }
 
       .click {
-        padding: 0.5em 1em;
-        border: none;
         margin-top: 1.4rem;
+        padding: 0.5em 1em;
+        border: 1px dashed $text-divider;
+        border-radius: $sm-radius;
         color: $text-color;
         background-color: $header-bg;
-        border-radius: $sm-radius;
+        opacity: 0.8;
         cursor: pointer;
         &:hover {
           color: $link-color;
-          background-color: $body-bg;
+          opacity: 1;
         }
       }
     }
