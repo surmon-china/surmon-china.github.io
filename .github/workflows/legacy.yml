@@ -1,0 +1,30 @@
+name: Legacy
+
+on:
+  push:
+    branches:
+      - vue2
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: install
+        run: yarn
+
+      - name: generate
+        run: yarn generate
+
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: vue2-release
+          publish_dir: ./dist
