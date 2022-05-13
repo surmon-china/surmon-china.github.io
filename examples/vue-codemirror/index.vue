@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, shallowRef, computed, onBeforeMount } from 'vue'
+  import { defineComponent, reactive, shallowRef, onBeforeMount } from 'vue'
   import { Theme, useTheme } from '@/composables/theme'
   import Loading from '@/components/common/loading.vue'
   import Toolbar from './toolbar.vue'
@@ -43,9 +43,26 @@
       })
 
       onBeforeMount(async () => {
-        languages.value = await import('./languages').then((r) => r.default)
-        themes.value = await import('./themes').then((r) => r.default)
-        codes.value = await import('./codes').then((r) => r.default)
+        let _languages = {}
+        let _legacyModes = {}
+        await Promise.all([
+          import('./chunk-codes').then((result) => {
+            codes.value = result.default
+          }),
+          import('./chunk-themes').then((result) => {
+            themes.value = result.default
+          }),
+          import('./chunk-languages').then((result) => {
+            _languages = result.default
+          }),
+          import('./chunk-legacy-modes').then((result) => {
+            _legacyModes = result.default
+          })
+        ])
+        languages.value = {
+          ..._languages,
+          ..._legacyModes
+        }
         initiated.value = true
       })
 

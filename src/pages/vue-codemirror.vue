@@ -47,7 +47,7 @@
       </template>
       <template #content>
         <homepage-card :title="example.title || example.name" :title-link="example.url">
-          <template #actions>♥︎</template>
+          <template #actions>❤︎</template>
           <component :is="example.component" />
         </homepage-card>
       </template>
