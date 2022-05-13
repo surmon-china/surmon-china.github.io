@@ -3,7 +3,7 @@ name: Legacy
 on:
   push:
     branches:
-      - vue2
+    - vue2
 
 jobs:
   build-deploy:
