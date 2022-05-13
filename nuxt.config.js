@@ -41,7 +41,6 @@ export default {
   css: [
     'normalize.css/normalize.css',
     '@/assets/styles/app.scss',
-    // libs and components...
     // highlight
     'highlight.js/styles/github.css',
     // quill
