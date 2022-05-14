@@ -44,10 +44,10 @@ const renderRedirectionHTML = (url) => `
 
     // MARK: after CSR bundled & before pre-render routes
     const template = fs.readFileSync(toAbsolute('dist/index.html'), 'utf-8')
+    const { render } = require('./dist/ssr/ssr.js')
 
     // pre-render each route...
     for (const url of pageRoutes) {
-      const { render } = require('./dist/ssr/ssr.js')
       const { appHTML, metas } = await render(url)
       const html = template
         .replace(/<title>[\s\S]*<\/title>/, '')

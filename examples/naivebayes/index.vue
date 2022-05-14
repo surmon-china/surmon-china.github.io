@@ -13,7 +13,7 @@
         <button class="button" @click="runClassifier" :disabled="loading">
           <i class="iconfont icon-play"></i>
           <span>Run code</span>
-          <span v-if="loading">&nbsp;(Loading...)</span>
+          <span v-if="loading">&nbsp;(loading tokenizer...)</span>
         </button>
         <button class="button" @click="clearLog">
           <i class="iconfont icon-close"></i>
