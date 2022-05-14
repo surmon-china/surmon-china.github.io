@@ -105,7 +105,10 @@
           ...window.console,
           log: consoleLog
         }
-        eval(codes.enabled)
+        // HACK: Prevent being Tree-Shaking
+        if (classifier || console) {
+          eval(codes.enabled)
+        }
       }
 
       const clearCode = () => {
@@ -176,12 +179,17 @@
       align-items: center;
       background: none;
       color: $text-secondary;
-      cursor: pointer;
       .iconfont {
         margin-right: $xs-gap;
       }
-      &:hover {
-        color: $link-color;
+      &[disabled] {
+        cursor: no-drop;
+      }
+      &:not([disabled]) {
+        cursor: pointer;
+        &:hover {
+          color: $link-color;
+        }
       }
     }
   }
