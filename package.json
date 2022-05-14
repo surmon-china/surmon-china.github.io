@@ -46,7 +46,7 @@
     "segmentit": "^2.0.3",
     "swiper": "^8.0.7",
     "vue": "^3.2.31",
-    "vue-codemirror": "^5.0.0-beta.1",
+    "vue-codemirror": "^5.0.1",
     "vue-router": "^4.0.14",
     "vue-touch-ripple": "^4.0.2"
   },

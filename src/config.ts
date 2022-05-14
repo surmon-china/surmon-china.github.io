@@ -8,7 +8,7 @@ import packageJSON from '../package.json'
 
 export enum Repository {
   Readme = 'README.md',
-  Naivebayes = 'naivebayes',
+  NaiveBayes = 'naivebayes',
   VueAwesomeSwiper = 'vue-awesome-swiper',
   VueQuillEditor = 'vue-quill-editor',
   VueVideoPlayer = 'vue-video-player',

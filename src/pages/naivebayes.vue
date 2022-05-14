@@ -1,10 +1,20 @@
 <script lang="ts" setup>
-  import { Repository, getLegacyURL } from '@/config'
+  import { Repository } from '@/config'
   import { useMeta } from '@/composables/meta'
+  import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
-  import IframeRenderer from '@/components/renderer/iframe.vue'
-  const id = Repository.Naivebayes
-  const src = getLegacyURL(id)
+  import VueRenderer from '@/components/renderer/vue.vue'
+  import Homepage from '@/components/homepage/index.vue'
+  import HomepageLink from '@/components/homepage/link.vue'
+  import HomepageExamples from '@/components/homepage/examples.vue'
+  import exampleComponent from '@examples/naivebayes/index.vue'
+  import exampleComponentString from '@examples/naivebayes/index.vue?raw'
+  const id = Repository.NaiveBayes
+  const example = getExampleComponent({
+    component: exampleComponent,
+    raw: exampleComponentString,
+    language: 'vue'
+  })
 
   useMeta({
     title: getMetaTitle(id),
@@ -14,5 +24,17 @@
 </script>
 
 <template>
-  <iframe-renderer :repository="id" :src="src" legacy />
+  <vue-renderer :repository="id">
+    <homepage :repository="id">
+      <template #content>
+        <homepage-examples :examples="[example]" :disabled-auto-ad="true">
+          <template #component="payload">
+            <div class="naivebayes-example">
+              <component :is="payload.component" />
+            </div>
+          </template>
+        </homepage-examples>
+      </template>
+    </homepage>
+  </vue-renderer>
 </template>

@@ -58,7 +58,7 @@
     "@codemirror/state" "^0.20.0"
     "@codemirror/view" "^0.20.0"
 
-"@codemirror/commands@0.20.0", "@codemirror/commands@^0.20.0":
+"@codemirror/commands@^0.20.0":
   version "0.20.0"
   resolved "https://registry.yarnpkg.com/@codemirror/commands/-/commands-0.20.0.tgz#51405d442e6b8687b63e8fa27effc28179917c88"
   integrity sha512-v9L5NNVA+A9R6zaFvaTbxs30kc69F6BkOoiEbeFw4m4I0exmDEKBILN6mK+GksJtvTzGBxvhAPlVFTdQW8GB7Q==
@@ -198,7 +198,7 @@
     "@lezer/common" "^0.16.0"
     "@lezer/xml" "^0.16.0"
 
-"@codemirror/language@0.20.0", "@codemirror/language@^0.20.0":
+"@codemirror/language@^0.20.0":
   version "0.20.0"
   resolved "https://registry.yarnpkg.com/@codemirror/language/-/language-0.20.0.tgz#959967901e780c1612934cf5d6df3d7b7e5bf9f0"
   integrity sha512-lPsF5Y2ZFd5lZ9+7HXTxu57Po3dms3+7q2iAffzrbis2wyJo0lzi/j2312EKStEzwd0pGGpvrUk2dEd333N2jw==
@@ -1649,14 +1649,14 @@ vite@^2.8.6:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vue-codemirror@^5.0.0-beta.1:
-  version "5.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/vue-codemirror/-/vue-codemirror-5.0.0-beta.1.tgz#3849288e00f184a9ac8b2e91adac42544bd566bc"
-  integrity sha512-weoUT52VD6z0aKE9EhxxmUbTMfPaS79LsyOTeUSe6RNonStSOZhPjwn10fstzWl1vyzNIZfCg6+qQIgCtXr0ng==
+vue-codemirror@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/vue-codemirror/-/vue-codemirror-5.0.1.tgz#7637839be5f3329374ebd5ffdc9f5dfa46e63ea0"
+  integrity sha512-bSr601Okb4ezQOcGdxR3urlcWpIV4s8hbIJeMuwXlRc1qFDkHlnkcsvAzP0bPK3+TpWBq7ovi3FAjE4tMTbf7A==
   dependencies:
     "@codemirror/basic-setup" "^0.20.0"
-    "@codemirror/commands" "0.20.0"
-    "@codemirror/language" "0.20.0"
+    "@codemirror/commands" "^0.20.0"
+    "@codemirror/language" "^0.20.0"
     "@codemirror/state" "^0.20.0"
     "@codemirror/view" "^0.20.0"
     csstype "^2.6.8"

@@ -13,7 +13,7 @@ export const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/readme-md.vue')
   },
   {
-    name: Repository.Naivebayes,
+    name: Repository.NaiveBayes,
     path: `/naivebayes`,
     component: () => import('@/pages/naivebayes.vue')
   },
