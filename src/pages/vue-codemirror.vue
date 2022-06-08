@@ -32,7 +32,7 @@
         <homepage-link
           icon="doc"
           text="CodeMirror(6) Guide"
-          href="https://codemirror.net/6/docs/guide/"
+          href="https://codemirror.net/docs/guide/"
         />
         <homepage-link
           icon="discussions"
