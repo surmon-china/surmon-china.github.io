@@ -35,7 +35,7 @@
       const config = reactive({
         disabled: false,
         indentWithTab: true,
-        tabSize: 4,
+        tabSize: 2,
         autofocus: true,
         height: 'auto',
         language: 'javascript',

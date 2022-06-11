@@ -120,7 +120,7 @@
         // length
         state.length = viewUpdate.state.doc.length
         state.lines = viewUpdate.state.doc.lines
-        log('viewUpdate', viewUpdate)
+        // log('viewUpdate', viewUpdate)
       }
 
       onMounted(() => {
