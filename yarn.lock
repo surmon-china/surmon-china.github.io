@@ -655,7 +655,7 @@ chalk@^4.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-codemirror@6.x:
+codemirror@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-6.0.0.tgz#48aac6370d188f0761807ad9c3b62da7e7f72446"
   integrity sha512-c4XR9QtDn+NhKLM2FBsnRn9SFdRH7G6594DYC/fyKKIsTOcdLF0WNWRd+f6kNyd5j1vgYPucbIeq2XkywYCwhA==
@@ -1651,16 +1651,15 @@ vite@^2.8.6:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vue-codemirror@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/vue-codemirror/-/vue-codemirror-5.1.0.tgz#208ffb25254937d50ea6caa248b38cd8e52fe040"
-  integrity sha512-U8t71S8Dk+9W3Yxfwv30E3vGYjfiKOqluoKkV1bW3Mh9y/T1cQAdGLzz7pN+Z8llivX+/8CJ5sg17xLPSOsvvQ==
+vue-codemirror@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/vue-codemirror/-/vue-codemirror-6.0.0.tgz#11c104603b99876839334ab26e9b1c29869cdbbb"
+  integrity sha512-1zYlS1l6Buxq0/PCw4gn2YQfWbINE0arEjtS/bZV1HcNMsgzotWbKmvRh9F+Ie0POX1F47gQricR731j4B/Ftw==
   dependencies:
     "@codemirror/commands" "6.x"
     "@codemirror/language" "6.x"
     "@codemirror/state" "6.x"
     "@codemirror/view" "6.x"
-    codemirror "6.x"
     csstype "^2.6.8"
 
 vue-demi@*:

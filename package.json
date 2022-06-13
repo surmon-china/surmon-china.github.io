@@ -36,6 +36,7 @@
     "@highlightjs/vue-plugin": "^2.1.0",
     "@vueuse/head": "^0.7.5",
     "axios": "^0.26.1",
+    "codemirror": "^6.0.0",
     "dedent": "^0.7.0",
     "gh-lang-colors": "^0.0.19",
     "highlight.js": "^11.5.0",
@@ -46,7 +47,7 @@
     "segmentit": "^2.0.3",
     "swiper": "^8.0.7",
     "vue": "^3.2.31",
-    "vue-codemirror": "^5.1.0",
+    "vue-codemirror": "^6.0.0",
     "vue-router": "^4.0.14",
     "vue-touch-ripple": "^4.0.2"
   },
