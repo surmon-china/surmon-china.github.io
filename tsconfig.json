@@ -8,6 +8,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "strict": true,
     "allowJs": false,
+    "jsx": "preserve",
     "skipLibCheck": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
