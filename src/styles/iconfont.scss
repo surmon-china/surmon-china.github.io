@@ -1,9 +1,8 @@
 @font-face {
-  font-family: 'iconfont'; /* Project id 1492229 */
-  src: url('//at.alicdn.com/t/font_1492229_bk684yqy8ok.woff2?t=1652251899859')
-      format('woff2'),
-    url('//at.alicdn.com/t/font_1492229_bk684yqy8ok.woff?t=1652251899859') format('woff'),
-    url('//at.alicdn.com/t/font_1492229_bk684yqy8ok.ttf?t=1652251899859') format('truetype');
+  font-family: 'iconfont';
+  src: url('/iconfont/iconfont.woff2?t=1657392028226') format('woff2'),
+    url('/iconfont/iconfont.woff?t=1657392028226') format('woff'),
+    url('/iconfont/iconfont.ttf?t=1657392028226') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-website:before {
+  content: '\e6f5';
 }
 
 .icon-eye:before {
@@ -92,10 +95,6 @@
 
 .icon-experiment:before {
   content: '\e655';
-}
-
-.icon-dropdown:before {
-  content: '\e673';
 }
 
 .icon-issue:before {

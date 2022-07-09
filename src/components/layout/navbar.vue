@@ -79,9 +79,14 @@
                         </span>
                       </div>
                       <div class="right">
-                        <ulink class="homepage" v-if="item.homepage" :href="item.homepage">
+                        <ulink
+                          v-if="item.homepage"
+                          :href="item.homepage"
+                          :title="`${item.name}'s homepage`"
+                          class="homepage"
+                        >
+                          <i class="iconfont icon-website"></i>
                           <span class="text">HP</span>
-                          <i class="iconfont icon-link-external"></i>
                         </ulink>
                       </div>
                     </div>
@@ -390,9 +395,6 @@
 
                   .text {
                     font-weight: bold;
-                  }
-
-                  .iconfont {
                     margin-left: $xs-gap;
                   }
                 }
