@@ -2,16 +2,17 @@
   <div class="example">
     <toolbar
       :config="config"
+      :disabled="loading"
       :themes="Object.keys(themes)"
       :languages="Object.keys(languages)"
-      @language="handleSwitchLanguage"
+      @language="ensureLanguageCode"
     />
     <div class="divider"></div>
     <div class="loading-box" v-if="loading">
       <loading />
     </div>
     <editor
-      v-else
+      v-else-if="currentLangCode"
       :config="config"
       :theme="currentTheme"
       :language="currentLangCode.language"
@@ -21,10 +22,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, computed, shallowRef, shallowReactive } from 'vue'
+  import { defineComponent, reactive, computed, shallowRef, onBeforeMount } from 'vue'
   import { Theme, useTheme } from '@/composables/theme'
   import Loading from '@/components/common/loading.vue'
-  import javascriptLang from './lang-code/javascript'
   import languages from './languages'
   import themes from './themes'
   import Toolbar from './toolbar.vue'
@@ -51,13 +51,13 @@
       })
 
       const loading = shallowRef(false)
-      const langCodeMap = shallowReactive(new Map([['javascript', javascriptLang]]))
+      const langCodeMap = reactive(new Map<string, { code: string; language: () => any }>())
       const currentLangCode = computed(() => langCodeMap.get(config.language)!)
       const currentTheme = computed(() => {
         return config.theme !== 'default' ? themes[config.theme] : void 0
       })
 
-      const handleSwitchLanguage = async (targetLanguage: string) => {
+      const ensureLanguageCode = async (targetLanguage: string) => {
         loading.value = true
         const delayPromise = () => new Promise((resolve) => window.setTimeout(resolve, 260))
         if (langCodeMap.has(targetLanguage)) {
@@ -70,6 +70,11 @@
         loading.value = false
       }
 
+      onBeforeMount(() => {
+        // init default language & code
+        ensureLanguageCode(config.language)
+      })
+
       return {
         loading,
         config,
@@ -77,7 +82,7 @@
         languages,
         currentTheme,
         currentLangCode,
-        handleSwitchLanguage
+        ensureLanguageCode
       }
     }
   })

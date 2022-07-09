@@ -5,6 +5,7 @@
       <select
         name="language"
         id="language"
+        :disabled="disabled"
         :value="config.language"
         @change="handleSelectLanguage"
       >
@@ -15,7 +16,7 @@
     </div>
     <div class="item">
       <label for="theme">theme:</label>
-      <select name="theme" id="theme" v-model="config.theme">
+      <select name="theme" id="theme" :disabled="disabled" v-model="config.theme">
         <option :value="option" :key="option" v-for="option in ['default', ...themes]">
           {{ option }}
         </option>
@@ -23,19 +24,34 @@
     </div>
     <div class="item">
       <label for="disabled">disabled:</label>
-      <input type="checkbox" id="disabled" v-model="config.disabled" />
+      <input type="checkbox" id="disabled" :disabled="disabled" v-model="config.disabled" />
     </div>
     <div class="item">
       <label for="autofocus">autofocus:</label>
-      <input type="checkbox" id="autofocus" v-model="config.autofocus" />
+      <input
+        type="checkbox"
+        id="autofocus"
+        :disabled="disabled"
+        v-model="config.autofocus"
+      />
     </div>
     <div class="item">
       <label for="indentWithTab">indentWithTab:</label>
-      <input type="checkbox" id="indentWithTab" v-model="config.indentWithTab" />
+      <input
+        type="checkbox"
+        id="indentWithTab"
+        :disabled="disabled"
+        v-model="config.indentWithTab"
+      />
     </div>
     <div class="item">
       <label for="tabSize">tabSize:</label>
-      <select name="tabSize" id="tabSize" v-model.number="config.tabSize">
+      <select
+        name="tabSize"
+        id="tabSize"
+        :disabled="disabled"
+        v-model.number="config.tabSize"
+      >
         <option :value="option" :key="option" v-for="option in [2, 4, 6, 8]">
           {{ option }}
         </option>
@@ -43,7 +59,7 @@
     </div>
     <div class="item">
       <label for="height">height:</label>
-      <select name="height" id="height" v-model="config.height">
+      <select name="height" id="height" :disabled="disabled" v-model="config.height">
         <option
           :value="option"
           :key="option"
@@ -60,6 +76,10 @@
   import { defineComponent, PropType } from 'vue'
   export default defineComponent({
     props: {
+      disabled: {
+        type: Boolean,
+        default: false
+      },
       config: {
         type: Object,
         required: true
