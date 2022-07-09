@@ -2,8 +2,13 @@
   <div class="toolbar">
     <div class="item">
       <label for="language">language:</label>
-      <select name="language" id="language" v-model="config.language">
-        <option :value="option" :key="option" v-for="option in lks">
+      <select
+        name="language"
+        id="language"
+        :value="config.language"
+        @change="handleSelectLanguage"
+      >
+        <option :value="option" :key="option" v-for="option in languages">
           {{ option }}
         </option>
       </select>
@@ -11,7 +16,7 @@
     <div class="item">
       <label for="theme">theme:</label>
       <select name="theme" id="theme" v-model="config.theme">
-        <option :value="option" :key="option" v-for="option in ['default', ...tks]">
+        <option :value="option" :key="option" v-for="option in ['default', ...themes]">
           {{ option }}
         </option>
       </select>
@@ -55,9 +60,23 @@
   import { defineComponent, PropType } from 'vue'
   export default defineComponent({
     props: {
-      config: Object,
-      lks: Array as PropType<Array<string>>,
-      tks: Array as PropType<Array<string>>
+      config: {
+        type: Object,
+        required: true
+      },
+      languages: {
+        type: Array as PropType<Array<string>>,
+        required: true
+      },
+      themes: {
+        type: Array as PropType<Array<string>>,
+        required: true
+      }
+    },
+    methods: {
+      handleSelectLanguage(event: any) {
+        this.$emit('language', event.target.value)
+      }
     }
   })
 </script>

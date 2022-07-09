@@ -1,20 +1,32 @@
 <template>
-  <transition name="module" mode="out-in">
-    <div class="loading-box" v-if="!initiated">
+  <div class="example">
+    <toolbar
+      :config="config"
+      :languages="languages"
+      :themes="Object.keys(themes)"
+      @language="handleSwitchLanguage"
+    />
+    <div class="divider"></div>
+    <div class="loading-box" v-if="loading">
       <loading />
     </div>
-    <div class="example" v-else>
-      <toolbar :config="config" :lks="Object.keys(languages)" :tks="Object.keys(themes)" />
-      <div class="divider"></div>
-      <editor :config="config" :languages="languages" :themes="themes" :codes="codes" />
-    </div>
-  </transition>
+    <editor
+      v-else
+      :config="config"
+      :theme="currentTheme"
+      :language="currentLangCode.language"
+      :code="currentLangCode.code"
+    />
+  </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, shallowRef, onBeforeMount } from 'vue'
+  import { defineComponent, reactive, computed, shallowRef, shallowReactive } from 'vue'
   import { Theme, useTheme } from '@/composables/theme'
   import Loading from '@/components/common/loading.vue'
+  import javascriptLang from './lang-code/javascript'
+  import themes from './themes'
+  import languages from './languages'
   import Toolbar from './toolbar.vue'
   import Editor from './editor.vue'
 
@@ -28,10 +40,6 @@
       Editor
     },
     setup() {
-      const initiated = shallowRef(false)
-      const languages = shallowRef<{ [key: string]: any }>({})
-      const themes = shallowRef<{ [key: string]: any }>({})
-      const codes = shallowRef<{ [key: string]: string }>({})
       const config = reactive({
         disabled: false,
         indentWithTab: true,
@@ -42,36 +50,33 @@
         theme: useTheme().theme.value === Theme.Light ? 'default' : 'oneDark'
       })
 
-      onBeforeMount(async () => {
-        let _languages = {}
-        let _legacyModes = {}
-        await Promise.all([
-          import('./chunk-codes').then((result) => {
-            codes.value = result.default
-          }),
-          import('./chunk-themes').then((result) => {
-            themes.value = result.default
-          }),
-          import('./chunk-languages').then((result) => {
-            _languages = result.default
-          }),
-          import('./chunk-legacy-modes').then((result) => {
-            _legacyModes = result.default
-          })
-        ])
-        languages.value = {
-          ..._languages,
-          ..._legacyModes
-        }
-        initiated.value = true
+      const loading = shallowRef(false)
+      const langCodeMap = shallowReactive(new Map([['javascript', javascriptLang]]))
+      const currentLangCode = computed(() => langCodeMap.get(config.language)!)
+      const currentTheme = computed(() => {
+        return config.theme !== 'default' ? themes[config.theme] : void 0
       })
 
+      const handleSwitchLanguage = async (targetLanguage: string) => {
+        loading.value = true
+        if (langCodeMap.has(targetLanguage)) {
+          await new Promise((resolve) => window.setTimeout(resolve, 260))
+        } else {
+          const result = await import(`./lang-code/${targetLanguage}`)
+          langCodeMap.set(targetLanguage, result.default)
+        }
+        config.language = targetLanguage
+        loading.value = false
+      }
+
       return {
-        initiated,
+        loading,
         config,
-        languages,
         themes,
-        codes
+        languages,
+        currentTheme,
+        currentLangCode,
+        handleSwitchLanguage
       }
     }
   })
@@ -80,17 +85,17 @@
 <style lang="scss" scoped>
   @import '@/styles/variables.scss';
 
-  .loading-box {
-    width: 100%;
-    min-height: 20rem;
-    max-height: 60rem;
-    height: calc(100vh - $navbar-height - $banner-height - $footbar-height - 8rem);
-  }
-
   .example {
     .divider {
       height: 1px;
       background-color: $border-color;
+    }
+
+    .loading-box {
+      width: 100%;
+      min-height: 20rem;
+      max-height: 60rem;
+      height: calc(100vh - $navbar-height - $banner-height - $footbar-height - 8rem - 3rem);
     }
   }
 </style>

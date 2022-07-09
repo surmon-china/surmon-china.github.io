@@ -12,28 +12,32 @@
         placeholder="Please enter the code."
         :extensions="extensions"
         :autofocus="config.autofocus"
-        :indent-with-tab="config.indentWithTab"
-        :tabSize="config.tabSize"
         :disabled="config.disabled"
+        :indent-with-tab="config.indentWithTab"
+        :tab-size="config.tabSize"
         @update="handleStateUpdate"
-        @ready="log('ready', $event)"
+        @ready="handleReady"
         @focus="log('focus', $event)"
         @blur="log('blur', $event)"
       />
       <pre
-        class="code"
         v-if="preview"
+        class="code"
         :style="{ height: config.height, width: preview ? '50%' : '0px' }"
         >{{ code }}</pre
       >
     </div>
     <div class="divider"></div>
     <div class="footer">
-      <button class="preview" @click="togglePreview">
-        <span>Preview</span>
-        <i class="iconfont" :class="preview ? 'icon-eye' : 'icon-eye-close'"></i>
-      </button>
-      <div class="right">
+      <div class="buttons">
+        <button class="item" @click="togglePreview">
+          <span>Preview</span>
+          <i class="iconfont" :class="preview ? 'icon-eye' : 'icon-eye-close'"></i>
+        </button>
+        <button class="item" @click="handleUndo">Undo</button>
+        <button class="item" @click="handleRedo">Redo</button>
+      </div>
+      <div class="infos">
         <span class="item">Spaces: {{ config.tabSize }}</span>
         <span class="item">Length: {{ state.length }}</span>
         <span class="item">Lines: {{ state.lines }}</span>
@@ -45,17 +49,10 @@
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    reactive,
-    shallowRef,
-    computed,
-    watch,
-    onMounted,
-    PropType
-  } from 'vue'
+  import { defineComponent, reactive, shallowRef, computed, watch, onMounted } from 'vue'
+  import { EditorView, ViewUpdate } from '@codemirror/view'
+  import { redo, undo } from '@codemirror/commands'
   import { Codemirror } from 'vue-codemirror'
-  import { ViewUpdate } from '@codemirror/view'
 
   export default defineComponent({
     name: 'vue-codemirror-example',
@@ -66,44 +63,54 @@
         type: Object,
         required: true
       },
-      languages: {
-        type: Object as PropType<{ [key: string]: any }>,
+      code: {
+        type: String,
         required: true
       },
-      themes: {
-        type: Object as PropType<{ [key: string]: any }>,
-        required: true
-      },
-      codes: {
-        type: Object as PropType<{ [key: string]: string }>,
-        required: true
-      }
+      theme: [Object, Array],
+      language: Function
     },
     components: {
       Codemirror
     },
     setup(props) {
       const log = console.log
-      const code = shallowRef(props.codes[props.config.language])
-      const resetCode = (language: string) => {
-        code.value = props.codes[language] ?? 'Hello, world!'
-      }
+      const code = shallowRef(props.code)
+      const extensions = computed(() => {
+        const result = []
+        if (props.language) {
+          result.push(props.language())
+        }
+        if (props.theme) {
+          result.push(props.theme)
+        }
+        return result
+      })
 
       const preview = shallowRef(false)
       const togglePreview = () => {
         preview.value = !preview.value
       }
 
-      const extensions = computed(() => {
-        const result = []
-        if (props.languages[props.config.language]) {
-          result.push(props.languages[props.config.language]())
-        }
-        if (props.themes[props.config.theme]) {
-          result.push(props.themes[props.config.theme])
-        }
-        return result
-      })
+      const cmView = shallowRef<EditorView>()
+      const handleReady = ({ view }: any) => {
+        cmView.value = view
+      }
+
+      // https://github.com/codemirror/commands/blob/main/test/test-history.ts
+      const handleUndo = () => {
+        undo({
+          state: cmView.value!.state,
+          dispatch: cmView.value!.dispatch
+        })
+      }
+
+      const handleRedo = () => {
+        redo({
+          state: cmView.value!.state,
+          dispatch: cmView.value!.dispatch
+        })
+      }
 
       const state = reactive({
         lines: null as null | number,
@@ -125,8 +132,10 @@
 
       onMounted(() => {
         watch(
-          () => props.config.language,
-          (language) => resetCode(language)
+          () => props.code,
+          (_code) => {
+            code.value = _code
+          }
         )
       })
 
@@ -136,7 +145,10 @@
         preview,
         togglePreview,
         state,
+        handleReady,
         handleStateUpdate,
+        handleRedo,
+        handleUndo,
         log
       }
     }
@@ -175,26 +187,31 @@
       align-items: center;
       font-size: 90%;
 
-      .preview {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: transparent;
-        border: 1px dashed $border-color;
-        font-size: $font-size-small;
-        color: $text-secondary;
-        cursor: pointer;
-        .iconfont {
-          margin-left: $xs-gap;
-        }
-        &:hover {
-          color: $text-color;
-          border-color: $text-color;
+      .buttons {
+        .item {
+          margin-right: 1em;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          background-color: transparent;
+          border: 1px dashed $border-color;
+          font-size: $font-size-small;
+          color: $text-secondary;
+          cursor: pointer;
+          .iconfont {
+            margin-left: $xs-gap;
+          }
+          &:hover {
+            color: $text-color;
+            border-color: $text-color;
+          }
         }
       }
 
-      .item {
-        margin-left: 2em;
+      .infos {
+        .item {
+          margin-left: 2em;
+        }
       }
     }
   }
