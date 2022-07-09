@@ -2,8 +2,8 @@
   <div class="example">
     <toolbar
       :config="config"
-      :languages="languages"
       :themes="Object.keys(themes)"
+      :languages="Object.keys(languages)"
       @language="handleSwitchLanguage"
     />
     <div class="divider"></div>
@@ -25,8 +25,8 @@
   import { Theme, useTheme } from '@/composables/theme'
   import Loading from '@/components/common/loading.vue'
   import javascriptLang from './lang-code/javascript'
-  import themes from './themes'
   import languages from './languages'
+  import themes from './themes'
   import Toolbar from './toolbar.vue'
   import Editor from './editor.vue'
 
@@ -62,7 +62,7 @@
         if (langCodeMap.has(targetLanguage)) {
           await new Promise((resolve) => window.setTimeout(resolve, 260))
         } else {
-          const result = await import(`./lang-code/${targetLanguage}`)
+          const result = await languages[targetLanguage]()
           langCodeMap.set(targetLanguage, result.default)
         }
         config.language = targetLanguage

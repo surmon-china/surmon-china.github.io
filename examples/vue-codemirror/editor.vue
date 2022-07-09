@@ -140,16 +140,16 @@
       })
 
       return {
+        log,
         code,
         extensions,
         preview,
-        togglePreview,
         state,
+        togglePreview,
         handleReady,
         handleStateUpdate,
         handleRedo,
-        handleUndo,
-        log
+        handleUndo
       }
     }
   })
