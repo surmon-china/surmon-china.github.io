@@ -58,6 +58,7 @@
       })
 
       const ensureLanguageCode = async (targetLanguage: string) => {
+        config.language = targetLanguage
         loading.value = true
         const delayPromise = () => new Promise((resolve) => window.setTimeout(resolve, 260))
         if (langCodeMap.has(targetLanguage)) {
@@ -66,7 +67,6 @@
           const [result] = await Promise.all([languages[targetLanguage](), delayPromise()])
           langCodeMap.set(targetLanguage, result.default)
         }
-        config.language = targetLanguage
         loading.value = false
       }
 
@@ -103,7 +103,13 @@
       width: 100%;
       min-height: 20rem;
       max-height: 60rem;
-      height: calc(100vh - $navbar-height - $banner-height - $footbar-height - 8rem - 3rem);
+      /* loading height = view-height - layout-height - page-height */
+      /* navbar + banner + footer */
+      $layout-height: $navbar-height + $banner-height + $footbar-height;
+      /* single-card-gap * 2 + card-header + editor-header */
+      $page-height: 2rem * 2 + 3.2rem + 3rem;
+      /* editor-border * 2 */
+      height: calc(100vh - $layout-height - $page-height - 2px);
     }
   }
 </style>
