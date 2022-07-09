@@ -70,6 +70,8 @@
         loading.value = false
       }
 
+      // HACK: Make sure the first screen the user sees is the loading placeholder
+      loading.value = true
       onBeforeMount(() => {
         // init default language & code
         ensureLanguageCode(config.language)
