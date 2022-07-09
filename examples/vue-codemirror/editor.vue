@@ -211,6 +211,8 @@
       .infos {
         .item {
           margin-left: 2em;
+          display: inline-block;
+          font-feature-settings: 'tnum';
         }
       }
     }

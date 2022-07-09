@@ -32,7 +32,7 @@
 
   export default defineComponent({
     name: 'vue-codemirror-example',
-    title: 'Web IDE example',
+    title: 'Example source-code',
     url: import.meta.url,
     components: {
       Loading,
@@ -59,10 +59,11 @@
 
       const handleSwitchLanguage = async (targetLanguage: string) => {
         loading.value = true
+        const delayPromise = () => new Promise((resolve) => window.setTimeout(resolve, 260))
         if (langCodeMap.has(targetLanguage)) {
-          await new Promise((resolve) => window.setTimeout(resolve, 260))
+          await delayPromise()
         } else {
-          const result = await languages[targetLanguage]()
+          const [result] = await Promise.all([languages[targetLanguage](), delayPromise()])
           langCodeMap.set(targetLanguage, result.default)
         }
         config.language = targetLanguage
