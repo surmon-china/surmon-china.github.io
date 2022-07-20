@@ -9,6 +9,7 @@
   import HomepageLink from '@/components/homepage/link.vue'
   import HomepageExamples from '@/components/homepage/examples.vue'
   import exampleComponents from '@examples/vue-awesome-swiper'
+
   const id = Repository.VueAwesomeSwiper
   const examples = exampleComponents.map(getExampleComponent)
 

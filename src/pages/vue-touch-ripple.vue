@@ -9,6 +9,7 @@
   import HomepageLink from '@/components/homepage/link.vue'
   import HomepageExamples from '@/components/homepage/examples.vue'
   import exampleComponents from '@examples/vue-touch-ripple'
+
   const id = Repository.VueTouchRipple
   const examples = exampleComponents.map(getExampleComponent)
 

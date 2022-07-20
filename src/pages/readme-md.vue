@@ -3,6 +3,7 @@
   import { Repository } from '@/config'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import VueRenderer from '@/components/renderer/vue.vue'
+
   const id = Repository.Readme
 
   useMeta({

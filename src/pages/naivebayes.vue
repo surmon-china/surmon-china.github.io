@@ -9,6 +9,7 @@
   import HomepageExamples from '@/components/homepage/examples.vue'
   import exampleComponent from '@examples/naivebayes/index.vue'
   import exampleComponentString from '@examples/naivebayes/index.vue?raw'
+
   const id = Repository.NaiveBayes
   const example = getExampleComponent({
     component: exampleComponent,
