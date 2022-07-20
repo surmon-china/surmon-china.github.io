@@ -25,7 +25,7 @@
   import { defineComponent, nextTick, ref } from 'vue'
   import SwiperClass, { Pagination, EffectCreative } from 'swiper'
   import { CreativeEffectOptions } from 'swiper/types'
-  import { Swiper, SwiperSlide } from 'swiper/vue'
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
   import 'swiper/css'
   import 'swiper/css/pagination'
   import 'swiper/css/effect-creative'

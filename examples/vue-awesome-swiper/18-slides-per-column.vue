@@ -23,7 +23,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { Pagination, Grid } from 'swiper'
-  import { Swiper, SwiperSlide } from 'swiper/vue'
+  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
   import 'swiper/css'
   import 'swiper/css/grid'
   import 'swiper/css/pagination'
