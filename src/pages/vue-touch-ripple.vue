@@ -42,9 +42,9 @@
       </template>
       <template #content>
         <homepage-examples :examples="examples" :disabled-auto-ad="true">
-          <template #component="payload">
-            <div class="vtr-example">
-              <component :is="payload.component" />
+          <template #component="example">
+            <div class="touch-ripple-example">
+              <component :is="example.component" />
             </div>
           </template>
         </homepage-examples>
