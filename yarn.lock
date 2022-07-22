@@ -789,6 +789,11 @@ csstype@^2.6.8:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.20.tgz#9229c65ea0b260cf4d3d997cb06288e36a8d6dda"
   integrity sha512-/WwNkdXfckNgw6S5R125rrW8ez139lBHWouiBvX8dfMFtcn6V81REDqnH7+CRpRipfYlyU1CmOnOxrmGcFOjeA==
 
+csstype@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
+  integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
+
 debug@^4.1.1, debug@^4.3.2:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
@@ -1864,16 +1869,16 @@ vue-awesome-swiper@^5.0.1:
   resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-5.0.1.tgz#ba0d20ec9ca4dff2b7b4e99592cf59308335dfcc"
   integrity sha512-mWjFJzUqA4lG+DmsmibvMpoiBnl+IH2SSeiiQ3i5M0t1y9FknTxnGT0DsMb2YdJLgjYMEK3sYOWzqgLnZMH8Lg==
 
-vue-codemirror@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/vue-codemirror/-/vue-codemirror-6.0.0.tgz#11c104603b99876839334ab26e9b1c29869cdbbb"
-  integrity sha512-1zYlS1l6Buxq0/PCw4gn2YQfWbINE0arEjtS/bZV1HcNMsgzotWbKmvRh9F+Ie0POX1F47gQricR731j4B/Ftw==
+vue-codemirror@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/vue-codemirror/-/vue-codemirror-6.0.1.tgz#0d157a121053aaae89f79c3a95711381a70e3193"
+  integrity sha512-tEoaEFU2xZSADcfX0emHwGWXCZB8FEyoyUuGZmEPfLdTxK1nB+hp5WxFxuK7GWQxUD+2+bsAhJWT2IEaTbOpuQ==
   dependencies:
     "@codemirror/commands" "6.x"
     "@codemirror/language" "6.x"
     "@codemirror/state" "6.x"
     "@codemirror/view" "6.x"
-    csstype "^2.6.8"
+    csstype "^3.1.0"
 
 vue-demi@*:
   version "0.13.5"
@@ -1900,10 +1905,10 @@ vue-router@^4.0.14:
   dependencies:
     "@vue/devtools-api" "^6.1.4"
 
-vue-touch-ripple@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/vue-touch-ripple/-/vue-touch-ripple-4.0.2.tgz#3455c710033f8993aacea8ab49fac74ae9b56053"
-  integrity sha512-i2sbkJqtnIB6d/DuZmSLXdJDe/fTOa2bs8YISz3Q1r2VmwOpcN+cAFRido2AkZK0q+sCs3tOROPS5fQdfwcaEg==
+vue-touch-ripple@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/vue-touch-ripple/-/vue-touch-ripple-4.1.0.tgz#bd8b9f9407fd9c033835ea44487e6fdfe2a98c39"
+  integrity sha512-5yABvWzZximHlYN+sXV5rHq+hBvK8KM93HcQhudN7wuX9grO+rRr/Djvk2tYQeDdZP2Fvm3Ffs7YKWtfchSJhQ==
 
 vue@^3.2.31:
   version "3.2.37"
