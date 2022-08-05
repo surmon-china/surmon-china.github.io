@@ -1,0 +1,41 @@
+{
+  "Readme": {
+    "route": "readme-md",
+    "repository": "README.md"
+  },
+  "NaiveBayes": {
+    "route": "naivebayes",
+    "repository": "naivebayes",
+    "packages": ["naivebayes"]
+  },
+  "VideoJsPlayer": {
+    "route": "videojs-player",
+    "repository": "videojs-player",
+    "packages": ["vue-video-player", "@videojs-player/vue", "@videojs-player/react"]
+  },
+  "VueAwesomeSwiper": {
+    "route": "vue-awesome-swiper",
+    "repository": "vue-awesome-swiper",
+    "packages": ["vue-awesome-swiper"]
+  },
+  "VueQuillEditor": {
+    "route": "vue-quill-editor",
+    "repository": "vue-quill-editor",
+    "packages": ["vue-quill-editor"]
+  },
+  "VueCodemirror": {
+    "route": "vue-codemirror",
+    "repository": "vue-codemirror",
+    "packages": ["vue-codemirror"]
+  },
+  "VueTouchRipple": {
+    "route": "vue-touch-ripple",
+    "repository": "vue-touch-ripple",
+    "packages": ["vue-touch-ripple"]
+  },
+  "VueDragZone": {
+    "route": "vue-drag-zone",
+    "repository": "vue-drag-zone",
+    "packages": ["vue-drag-zone"]
+  }
+}
