@@ -1,20 +1,19 @@
 const fs = require('fs')
 const path = require('path')
 const vite = require('vite')
+const projects = require('./projects.json')
+const toAbsolute = (_path) => path.resolve(__dirname, _path)
 
 const INDEX_ROUTE = '/'
-const toAbsolute = (_path) => path.resolve(__dirname, _path)
-const pageRoutes = fs.readdirSync(toAbsolute('src/pages')).map((file) => {
-  const name = file.replace(/\.vue$/, '').toLowerCase()
-  return name === 'home' ? INDEX_ROUTE : `/${name}`
-})
+const PAGE_ROUTES = Object.values(projects).map((project) => `/${project.route}`)
+const ROUTES = [INDEX_ROUTE, ...PAGE_ROUTES]
 
 const renderRedirectionHTML = (url) => `
   <!DOCTYPE html>
   <html lang="en">
     <head>
       <meta charset="UTF-8" />
-      <meta http-equiv="refresh" content="0; url='https://github.surmon.me${url}'" />
+      <meta http-equiv="refresh" content="0; url='${url}'" />
     </head>
   </html>
 `
@@ -29,7 +28,7 @@ const renderRedirectionHTML = (url) => `
 
     console.log('Bundle SSR...\n')
     await vite.build({
-      ssr: { noExternal: ['swiper'] },
+      ssr: { noExternal: ['swiper'], format: 'cjs' },
       build: {
         ssr: true,
         minify: true,
@@ -47,7 +46,7 @@ const renderRedirectionHTML = (url) => `
     const { render } = require('./dist/ssr/ssr.js')
 
     // pre-render each route...
-    for (const url of pageRoutes) {
+    for (const url of ROUTES) {
       const { appHTML, metas } = await render(url)
       const html = template
         .replace(/<title>[\s\S]*<\/title>/, '')
@@ -70,7 +69,7 @@ const renderRedirectionHTML = (url) => `
     }
 
     fs.rmSync(toAbsolute('dist/ssr'), { recursive: true, force: true })
-    console.info(`${pageRoutes.length} pages generate done.`)
+    console.info(`${ROUTES.length} pages generate done.`)
     process.exit(0)
   } catch (error) {
     console.error('Generate ERROR!', error)
