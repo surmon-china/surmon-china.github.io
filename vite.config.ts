@@ -24,13 +24,15 @@ const resolveMetaUrl = (): Plugin => ({
 const fixSwiperCSSOnSSR = (): Plugin => ({
   name: 'fix-swiper-ssr',
   transform(code, id, options = {}) {
-    if (options.ssr) return code.replace(/import .swiper\/(s?css|less).*$/gm, '')
+    if (options.ssr) {
+      return code.replace(/import .swiper\/(s?css|less).*$/gm, '')
+    }
   }
 })
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  plugins: [vue(), react(), resolveMetaUrl(), fixSwiperCSSOnSSR()],
+  plugins: [vue(), react(), resolveMetaUrl() /* fixSwiperCSSOnSSR() */],
   base: mode === 'production' ? CDN_PREFIX : '/',
   resolve: {
     alias: {
