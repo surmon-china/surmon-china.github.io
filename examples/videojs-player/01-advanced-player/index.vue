@@ -6,9 +6,9 @@
       @update:index="handleMediaChange"
     />
     <div class="player-wrapper">
-      <div class="top">
+      <div class="top" :class="{ loading: !state }">
         <video-player
-          class="video-player vjs-big-play-centered"
+          :class="['video-player', 'vjs-big-play-centered']"
           :sources="mediaConfig.sources"
           :poster="mediaConfig.poster"
           :tracks="mediaConfig.tracks"
@@ -132,6 +132,12 @@
       .top {
         display: flex;
         justify-content: space-between;
+        &.loading {
+          > div {
+            min-width: 680px;
+            background-color: $black;
+          }
+        }
 
         .video-player {
           position: relative;

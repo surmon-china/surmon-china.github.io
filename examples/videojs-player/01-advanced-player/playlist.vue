@@ -57,7 +57,7 @@
     list-style: none;
     overflow: hidden;
     display: grid;
-    grid-template-columns: repeat(var(--count), 1fr);
+    grid-template-columns: repeat(var(--count, 6), 1fr);
     grid-gap: 1rem;
 
     .item {
@@ -66,6 +66,7 @@
       overflow: hidden;
       background-size: cover;
       background-position: center;
+      background-color: $header-bg;
       position: relative;
       user-select: none;
       cursor: pointer;

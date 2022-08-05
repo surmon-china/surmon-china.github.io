@@ -51,7 +51,11 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '@/styles/variables.scss';
+  @import '@/styles/mixins.scss';
+
   .video-player {
     width: 100%;
+    background-color: $black;
   }
 </style>
