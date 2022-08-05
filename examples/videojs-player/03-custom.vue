@@ -1,29 +1,31 @@
 <template>
-  <video-player
-    id="CustomVideoPlayer"
-    class="video-player vjs-theme-forest"
-    controls
-    :sources="videoSource.sources"
-    :poster="videoSource.poster"
-    :tracks="videoSource.tracks"
-    :height="320"
-    :volume="0.4"
-    :children="[
-      // custom Video.js children component
-      // https://videojs.com/guides/options/#children
-      'mediaLoader',
-      'posterImage',
-      'bigPlayButton',
-      'loadingSpinner',
-      'controlBar',
-      'textTrackDisplay'
-    ]"
-    :control-bar="{
-      // custom Video.js control bar component
-      // https://videojs.com/guides/options/#componentname
-      volumePanel: false
-    }"
-  />
+  <div class="player-example">
+    <video-player
+      id="CustomVideoPlayer"
+      class="video-player vjs-theme-forest"
+      controls
+      :sources="videoSource.sources"
+      :poster="videoSource.poster"
+      :tracks="videoSource.tracks"
+      :height="320"
+      :volume="0.4"
+      :children="[
+        // custom Video.js children component
+        // https://videojs.com/guides/options/#children
+        'mediaLoader',
+        'posterImage',
+        'bigPlayButton',
+        'loadingSpinner',
+        'controlBar',
+        'textTrackDisplay'
+      ]"
+      :control-bar="{
+        // custom Video.js control bar component
+        // https://videojs.com/guides/options/#componentname
+        volumePanel: false
+      }"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -109,8 +111,11 @@
   @import '@/styles/variables.scss';
   @import '@/styles/mixins.scss';
 
-  .video-player {
-    width: 100%;
+  .player-example {
     background-color: $black;
+
+    .video-player {
+      width: 100%;
+    }
   }
 </style>

@@ -1,25 +1,27 @@
 <template>
-  <video-player
-    class="video-player vjs-theme-forest"
-    poster="/images/example/4.jpg"
-    controls
-    liveui
-    :sources="[videoSource]"
-    :volume="0.6"
-    :height="320"
-    :control-bar="{
-      progressControl: false,
-      currentTimeDisplay: false,
-      remainingTimeDisplay: false
-    }"
-    :html5="{
-      vhs: vhsOptions,
-      nativeAudioTracks: false,
-      nativeVideoTracks: false
-    }"
-    @mounted="handleMounted"
-    @ready="handleReady"
-  />
+  <div class="player-example">
+    <video-player
+      class="video-player vjs-theme-forest"
+      poster="/images/example/4.jpg"
+      controls
+      liveui
+      :sources="[videoSource]"
+      :volume="0.6"
+      :height="320"
+      :control-bar="{
+        progressControl: false,
+        currentTimeDisplay: false,
+        remainingTimeDisplay: false
+      }"
+      :html5="{
+        vhs: vhsOptions,
+        nativeAudioTracks: false,
+        nativeVideoTracks: false
+      }"
+      @mounted="handleMounted"
+      @ready="handleReady"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -73,8 +75,11 @@
   @import '@/styles/variables.scss';
   @import '@/styles/mixins.scss';
 
-  .video-player {
-    width: 100%;
+  .player-example {
     background-color: $black;
+
+    .video-player {
+      width: 100%;
+    }
   }
 </style>

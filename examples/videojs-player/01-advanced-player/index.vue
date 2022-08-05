@@ -133,7 +133,7 @@
         display: flex;
         justify-content: space-between;
         &.loading {
-          > div {
+          > div:first-child {
             min-width: 680px;
             background-color: $black;
           }
