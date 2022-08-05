@@ -2,7 +2,7 @@
   <video-player
     class="video-player vjs-theme-forest"
     poster="/images/example/1.jpg"
-    src="http://dash.akamaized.net/dash264/TestCases/5b/nomor/8.mpd"
+    src="https://dash.akamaized.net/dash264/TestCasesIOP33/adapatationSetSwitching/5/manifest.mpd"
     controls
     :volume="0.6"
     :height="320"
