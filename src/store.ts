@@ -1,10 +1,11 @@
+import axios from '@/services/axios'
 import { decode } from 'js-base64'
 import { defineStore } from 'pinia'
-import axios from '@/services/axios'
-import * as CONFIG from '@/config'
+import { GITHUB_UID } from '@/config'
+import { GitHubAggregateData, GitHubRepository, NPMAggregateData } from './type'
 
 const fetchGitHubProfileFileContent = <T>(filePath: string): Promise<T | null> => {
-  const uid = CONFIG.GITHUB_UID
+  const uid = GITHUB_UID
   const branch = `release`
   // for user client & GitHub Actions generate
   const raw = `https://raw.githubusercontent.com/${uid}/${uid}/${branch}/${filePath}`
@@ -21,22 +22,6 @@ const fetchGitHubProfileFileContent = <T>(filePath: string): Promise<T | null> =
   })
 }
 
-// https://github.com/surmon-china/surmon-china/blob/release/github.json
-export interface GitHubAggregateData {
-  userinfo: any
-  repositories: Array<any>
-  organizations: Array<any>
-  statistics: any
-}
-
-// https://github.com/surmon-china/surmon-china/blob/release/npm.json
-export interface NPMAggregateData {
-  packages: Array<any>
-  downloads: {
-    [name: string]: number
-  }
-}
-
 export const useGlobalStore = defineStore('global', {
   state: () => ({
     initialized: false,
@@ -44,51 +29,42 @@ export const useGlobalStore = defineStore('global', {
     npmData: null as null | NPMAggregateData
   }),
   getters: {
+    // GitHub
     githubUserinfo: (state) => state.githubData?.userinfo,
-    githubRepositories: (state) => state.githubData?.repositories || [],
-    githubOrganizations: (state) => state.githubData?.organizations || [],
-    npmPackages: (state) => state.npmData?.packages || [],
-    npmPackagesDownloadsMap: (state) => {
-      const downloads = state.npmData?.downloads || {}
-      return new Map<string, number>(
-        Object.keys(downloads).map((item) => [item, downloads[item]])
-      )
-    },
-    githubOwnRepositories(): any[] {
+    githubRepositories: (state) => state.githubData?.repositories ?? [],
+    githubOrganizations: (state) => state.githubData?.organizations ?? [],
+    githubOwnRepositories(): GitHubRepository[] {
       return this.githubRepositories
-        .filter((repository: any) => !repository.fork)
+        .filter((repository) => !repository.fork)
         .sort((a: any, b: any) => b.stargazers_count - a.stargazers_count)
     },
-    githubNPMRepositories(): any[] {
-      return this.githubRepositories.filter((repository: any) => {
-        return Boolean(this.getRepositoryNPMPackage(repository.name))
-      })
-    },
-    getGitHubRepositoryDetail(): any {
+    getGitHubRepositoryDetail() {
       return (repositoryName: string) => {
         return this.githubRepositories.find(
           (repository) => repository.name === repositoryName
         )
       }
     },
-    getRepositoryNPMPackage() {
-      return (repositoryName: any): null | any => {
-        const repository = this.getGitHubRepositoryDetail(repositoryName)
-        if (repository) {
-          return this.npmPackages.find((pkg) => {
-            return (
-              // repo name === package name
-              pkg.package.name === repositoryName ||
-              // repo url === package repository url
-              pkg.package.links.repository === repository.html_url
-            )
-          })
-        }
+    // NPM
+    npmPackages: (state) => state.npmData?.packages ?? [],
+    npmPackagesDownloadsMap: (state) => {
+      const downloads = state.npmData?.downloads ?? {}
+      return new Map<string, number>(
+        Object.keys(downloads).map((item) => [item, downloads[item]])
+      )
+    },
+    getNPMPackagesDownloadsTotal() {
+      return (packages: string[]) => {
+        return packages.reduce((total, pkg) => {
+          const downloads = this.npmPackagesDownloadsMap.get(pkg) ?? 0
+          return downloads + total
+        }, 0)
       }
     }
   },
   actions: {
     fetchGitHubAggregateData() {
+      // https://github.com/surmon-china/surmon-china/blob/release/github.json
       return fetchGitHubProfileFileContent<GitHubAggregateData>('github.json').then(
         (data) => {
           this.githubData = data
@@ -96,6 +72,7 @@ export const useGlobalStore = defineStore('global', {
       )
     },
     fetchNPMAggregateData() {
+      // https://github.com/surmon-china/surmon-china/blob/release/npm.json
       return fetchGitHubProfileFileContent<NPMAggregateData>('npm.json').then((data) => {
         this.npmData = data
       })
