@@ -1,6 +1,7 @@
 import path from 'path'
 import { defineConfig, Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import react from '@vitejs/plugin-react'
 import { CDN_PREFIX } from './src/config'
 
 // https://github.com/vitejs/vite/issues/5071
@@ -29,7 +30,7 @@ const fixSwiperCSSOnSSR = (): Plugin => ({
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  plugins: [vue(), resolveMetaUrl(), fixSwiperCSSOnSSR()],
+  plugins: [vue(), react(), resolveMetaUrl(), fixSwiperCSSOnSSR()],
   base: mode === 'production' ? CDN_PREFIX : '/',
   resolve: {
     alias: {
