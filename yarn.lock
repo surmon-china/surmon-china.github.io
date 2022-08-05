@@ -705,10 +705,10 @@
   resolved "https://registry.yarnpkg.com/@videojs-player/react/-/react-1.0.0-beta.0.tgz#b8b54e6be81f4281ab4ad09956ea5137e518aee0"
   integrity sha512-xXRnN7AI5z0x0YA5l0rvqoPYtXROlRnCjI0QfBWtcGzPNga2iSFaxlW/1D2ykiQClUSJkUWOUriW7/Z4Odzutw==
 
-"@videojs-player/vue@^1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@videojs-player/vue/-/vue-1.0.0-beta.0.tgz#a4b5d8678fcef28bb79b33da7e5339228ab7d143"
-  integrity sha512-FPlx4yJpjBW9ox92kwNWjK4zmyDJTvobsiO2eseH4vzppWc9GiU7Urv546Ik299EZs7TtPe352tl3evipk3eag==
+"@videojs-player/vue@^1.0.0-beta.1":
+  version "1.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@videojs-player/vue/-/vue-1.0.0-beta.1.tgz#a63eacb03f3090d6c62eb8de63873e7976c69649"
+  integrity sha512-OA0vnFXiaK3GyDaKp96c+hMRiJCZH/Ze8FMd/0CgxQHyLs6uYojlTqlQRkVzydeXq5SWboJ0bwstL+/0Gkysow==
 
 "@videojs/http-streaming@2.14.2":
   version "2.14.2"
