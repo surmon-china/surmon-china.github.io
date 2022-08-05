@@ -1,6 +1,6 @@
 <template>
   <span class="homepage-button">
-    <ulink :href="link" class="item button">
+    <ulink :href="link" class="item button" :class="{ 'has-count': hasCount }">
       <i class="iconfont" :class="icon"></i>
       <span class="text" v-if="text">{{ text }}</span>
       <slot></slot>
@@ -99,8 +99,10 @@
         padding: 0 $sm-gap;
         background-color: $header-bg;
         border: 1px solid $text-divider;
-        border-right-width: 0px;
         transition: all $transition-time;
+        &.has-count {
+          border-right-width: 0px;
+        }
         &:hover {
           background-color: $body-bg;
         }
