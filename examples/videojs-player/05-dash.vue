@@ -18,7 +18,7 @@
   import '@videojs/themes/dist/forest/index.css'
 
   export default defineComponent({
-    name: 'video-player-example-vue-dash',
+    name: 'vue-dash-player-example',
     title: 'Dash player (Vue)',
     url: import.meta.url,
     components: {

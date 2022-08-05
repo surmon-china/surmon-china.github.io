@@ -35,7 +35,7 @@
   import '@videojs/themes/dist/forest/index.css'
 
   export default defineComponent({
-    name: 'video-player-example-vue-custom',
+    name: 'vue-custom-player-example',
     title: 'Custom player (Vue)',
     url: import.meta.url,
     components: {

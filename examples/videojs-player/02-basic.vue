@@ -28,7 +28,7 @@
   import 'video.js/dist/video-js.css'
 
   export default defineComponent({
-    name: 'video-player-example-vue-basic',
+    name: 'vue-basic-player-example',
     title: 'Basic player (Vue)',
     url: import.meta.url,
     components: {

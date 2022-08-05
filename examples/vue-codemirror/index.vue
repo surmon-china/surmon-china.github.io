@@ -32,7 +32,7 @@
 
   export default defineComponent({
     name: 'vue-codemirror-example',
-    title: 'Example source-code',
+    title: 'Example Source Code',
     url: import.meta.url,
     components: {
       Loading,

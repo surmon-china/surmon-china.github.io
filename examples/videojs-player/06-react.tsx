@@ -117,7 +117,7 @@ const ReactBasicPlayer = () => {
 
 // example site dedicated
 export default transformReactComponentToVue({
-  name: 'video-player-example-react',
+  name: 'react-player-example',
   title: 'Example player (React)',
   url: import.meta.url,
   component: ReactBasicPlayer

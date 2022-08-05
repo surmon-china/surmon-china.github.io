@@ -30,7 +30,7 @@
   import '@videojs/themes/dist/forest/index.css'
 
   export default defineComponent({
-    name: 'video-player-example-vue-hls',
+    name: 'vue-hls-player-example',
     title: 'HLS Live player (Vue)',
     url: import.meta.url,
     components: {
