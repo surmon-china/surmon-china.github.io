@@ -5,16 +5,12 @@
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
+  import HomepageLink from '@/components/homepage/link.vue'
   import HomepageExamples from '@/components/homepage/examples.vue'
-  import exampleComponent from '@examples/naivebayes/index.vue'
-  import exampleComponentString from '@examples/naivebayes/index.vue?raw'
+  import exampleComponents from '@examples/videojs-player'
 
-  const { repository, packages } = PROJECTS.NaiveBayes
-  const example = getExampleComponent({
-    component: exampleComponent,
-    raw: exampleComponentString,
-    language: 'vue'
-  })
+  const { repository, packages } = PROJECTS.VideoJsPlayer
+  const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({
     title: getMetaTitle(repository),
@@ -26,10 +22,32 @@
 <template>
   <vue-renderer :repository="repository">
     <homepage :repository="repository" :packages="packages">
+      <template #actions>
+        <homepage-link
+          icon="doc"
+          text="Video.js Guides"
+          href="https://videojs.com/guides"
+        />
+        <homepage-link
+          icon="doc"
+          text="Video.js API Documentation"
+          href="https://docs.videojs.com/"
+        />
+        <homepage-link
+          icon="doc"
+          text="Video.js Plugins and Skins"
+          href="https://videojs.com/plugins/"
+        />
+        <homepage-link
+          icon="discord"
+          text="Discord Discussions"
+          href="https://discord.gg/5w5cPWWEJ7"
+        />
+      </template>
       <template #content>
-        <homepage-examples :examples="[example]" :disabled-auto-ad="true">
+        <homepage-examples :examples="examples" :disabled-auto-ad="true">
           <template #component="payload">
-            <div class="naivebayes-example">
+            <div class="video-player-example">
               <component :is="payload.component" />
             </div>
           </template>

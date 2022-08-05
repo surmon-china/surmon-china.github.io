@@ -21,7 +21,7 @@
           <div class="projects">
             <div class="container" :class="{ full }">
               <transition name="module" mode="out-in">
-                <loading v-if="!initialized" class="loading" />
+                <loading v-if="!store.initialized" class="loading" />
                 <ul v-else class="list">
                   <li
                     class="item"
@@ -60,13 +60,17 @@
                           <span>{{ countToK(item.stargazers_count) }}</span>
                         </ulink>
                         <ulink
-                          v-if="isNPMPackage(item.name)"
+                          v-if="item.npmPackages.length"
                           class="item npm"
-                          :href="getNPMHomepageURL(item.name)"
-                          :title="`NPM downloads: ${item.stargazers_count}`"
+                          :title="`NPM downloads: ${item.npmDownloads}`"
+                          :href="
+                            item.npmPackages.length === 1
+                              ? getNPMHomepageURL(item.npmPackages[0])
+                              : getGitHubRepositoryURL(item.name)
+                          "
                         >
                           <i class="iconfont icon-npm"></i>
-                          <span>{{ getNPMDownloads(item.name) }}</span>
+                          <span>{{ item.npmDownloads }}</span>
                         </ulink>
                         <span v-if="item.language" class="item language">
                           <i
@@ -127,19 +131,21 @@
     setup() {
       const theme = useTheme()
       const store = useGlobalStore()
-      const initialized = computed(() => store.initialized)
-      const ownRepositories = computed(() => store.githubOwnRepositories)
-      const isNPMPackage = (repository: string): boolean => {
-        return Boolean(store.getRepositoryNPMPackage(repository))
-      }
-      const getNPMDownloads = (repository: string) => {
-        const pkg = store.getRepositoryNPMPackage(repository)
-        if (!pkg) {
-          return '-'
-        }
-        const downloads = store.npmPackagesDownloadsMap.get(pkg.package.name)
-        return downloads ? numberSplit(downloads) : '-'
-      }
+      const ownRepositories = computed(() => {
+        return store.githubOwnRepositories.map((repo) => {
+          const found = Object.values(CONFIG.PROJECTS).find((project) => {
+            return project.repository === repo.name
+          })
+          const npmPackages: string[] = (found as any)?.packages ?? []
+          return {
+            ...repo,
+            npmPackages,
+            npmDownloads: npmPackages.length
+              ? numberSplit(store.getNPMPackagesDownloadsTotal(npmPackages))
+              : '-'
+          }
+        })
+      })
 
       const themeValue = theme.theme
       const toggleTheme = theme.toggle
@@ -157,12 +163,10 @@
 
       return {
         CONFIG,
+        store,
+        ownRepositories,
         themeIcon,
         toggleTheme,
-        ownRepositories,
-        initialized,
-        isNPMPackage,
-        getNPMDownloads,
         getNPMHomepageURL,
         getGitHubRepositoryURL,
         getGitHubLanguageColor,

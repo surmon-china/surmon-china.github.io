@@ -1,12 +1,12 @@
 import { App, inject, reactive, readonly } from 'vue'
 
-export interface VisiorOptions {
+export interface VisitorOptions {
   language: string
   userAgent: string
 }
 
-export type VisiorState = ReturnType<typeof getVisior>
-export const getVisior = (options: VisiorOptions) => {
+export type VisitorState = ReturnType<typeof getVisitor>
+export const getVisitor = (options: VisitorOptions) => {
   return {
     language: options.language,
     userAgent: options.userAgent,
@@ -23,12 +23,12 @@ export const getVisior = (options: VisiorOptions) => {
 }
 
 const VisitorSymbol = Symbol('visitor')
-export const createVisitor = (options: VisiorOptions) => {
-  const state = reactive(getVisior(options))
+export const createVisitor = (options: VisitorOptions) => {
+  const state = reactive(getVisitor(options))
   const resetStateOnClient = () => {
     Object.assign(
       state,
-      getVisior({
+      getVisitor({
         language: navigator.language,
         userAgent: navigator.userAgent
       })
@@ -46,5 +46,5 @@ export const createVisitor = (options: VisiorOptions) => {
 }
 
 export const useVisitor = () => {
-  return inject<VisiorState>(VisitorSymbol)!
+  return inject<VisitorState>(VisitorSymbol)!
 }

@@ -1,6 +1,12 @@
 import { App, computed } from 'vue'
 import type { ComputedGetter } from '@vue/reactivity'
-import { createHead, useHead, HeadObject, HeadAttrs, renderHeadToString } from '@vueuse/head'
+import {
+  createHead,
+  useHead,
+  HeadObject,
+  HeadAttrs,
+  renderHeadToString
+} from '@vueuse/head'
 
 export interface MetaResult {
   readonly headTags: string
@@ -33,7 +39,7 @@ export function useMeta(source: MetaObject | ComputedGetter<MetaObject>) {
     const sourceObject = typeof source === 'function' ? source() : source
     const { title, keywords, description, ...restSource } = sourceObject
 
-    // metas
+    // meta
     const mMeta = (restSource.meta as HeadAttrs[]) || []
 
     // keywords

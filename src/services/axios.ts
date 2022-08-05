@@ -1,9 +1,3 @@
-/**
- * @file Axios service
- * @module service/axios
- * @author Surmon <https://github.com/surmon-china>
- */
-
 import axios from 'axios'
 
 const service = axios.create()

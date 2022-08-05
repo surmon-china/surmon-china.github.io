@@ -58,3 +58,36 @@ select {
   color: $text-color;
   cursor: pointer;
 }
+
+$range-size: 10px;
+input[type='range'] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: $range-size;
+  background: $body-bg;
+  outline: none;
+  opacity: 0.8;
+  -webkit-transition: 180ms;
+  transition: opacity 180ms;
+  &:hover {
+    opacity: 1;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: $range-size;
+    height: $range-size;
+    background: $widget-primary;
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: $range-size;
+    height: $range-size;
+    border: none;
+    border-radius: 1px;
+    background: $widget-primary;
+    cursor: pointer;
+  }
+}

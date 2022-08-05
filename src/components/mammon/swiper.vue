@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-  import { defineComponent } from 'vue'
   import { Pagination, Mousewheel } from 'swiper'
   import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
   import { SWIPER_ADS } from '@/config'

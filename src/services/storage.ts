@@ -1,8 +1,3 @@
-/**
- * @file Local storage
- * @author Surmon <https://github.com/surmon-china>
- */
-
 export const get = (key: string) => localStorage.getItem(key)
 export const set = (key: string, data: any) => localStorage.setItem(key, data)
 export const remove = (key: string) => localStorage.removeItem(key)

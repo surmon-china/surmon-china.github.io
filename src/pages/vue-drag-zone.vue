@@ -1,19 +1,18 @@
 <script lang="ts" setup>
-  import { Repository, getLegacyURL } from '@/config'
+  import { PROJECTS, getLegacyURL } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import IframeRenderer from '@/components/renderer/iframe.vue'
 
-  const id = Repository.VueDragZone
-  const src = getLegacyURL(id)
+  const { repository } = PROJECTS.VueDragZone
 
   useMeta({
-    title: getMetaTitle(id),
-    keywords: getMetaKeywords(id).join(','),
-    description: getMetaDescription(id)
+    title: getMetaTitle(repository),
+    keywords: getMetaKeywords(repository).join(','),
+    description: getMetaDescription(repository)
   })
 </script>
 
 <template>
-  <iframe-renderer :repository="id" :src="src" legacy />
+  <iframe-renderer :repository="repository" :src="getLegacyURL(repository)" legacy />
 </template>

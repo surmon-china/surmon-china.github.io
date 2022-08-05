@@ -23,10 +23,12 @@ export default defineComponent({
       const { text, href, external, blank, ...linkAttrs } = props
       const customAttrs: AnchorHTMLAttributes = {}
 
-      const url = new URL(href)
-      if (external || !url.host.endsWith(GITHUB_PAGES_ROOT_DOMAIN)) {
-        customAttrs.rel = 'external nofollow noopener'
-      }
+      try {
+        const url = new URL(href)
+        if (external || !url.host.endsWith(GITHUB_PAGES_ROOT_DOMAIN)) {
+          customAttrs.rel = 'external nofollow noopener'
+        }
+      } catch {}
 
       if (blank) {
         customAttrs.target = '_blank'

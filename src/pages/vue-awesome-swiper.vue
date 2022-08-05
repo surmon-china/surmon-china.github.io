@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-  import { getLegacyURL } from '@/config'
-  import { Repository } from '@/config'
+  import { PROJECTS, getLegacyURL } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
@@ -10,21 +9,21 @@
   import HomepageExamples from '@/components/homepage/examples.vue'
   import exampleComponents from '@examples/vue-awesome-swiper'
 
-  const id = Repository.VueAwesomeSwiper
+  const { repository, packages } = PROJECTS.VueAwesomeSwiper
   const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({
-    title: getMetaTitle(id),
-    keywords: [getMetaKeywords(id), `How to use Swiper on vue3?`].join(','),
-    description: getMetaDescription(id)
+    title: getMetaTitle(repository),
+    keywords: [getMetaKeywords(repository), `How to use Swiper on vue3?`].join(','),
+    description: getMetaDescription(repository)
   })
 </script>
 
 <template>
-  <vue-renderer :repository="id">
-    <homepage :repository="id">
+  <vue-renderer :repository="repository">
+    <homepage :repository="repository" :packages="packages">
       <template #actions>
-        <homepage-link icon="doc" text="Vue(2) examples" :href="getLegacyURL(id)" />
+        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyURL(repository)" />
         <homepage-link
           icon="doc"
           text="Swiper API Documentation"
@@ -32,12 +31,12 @@
         />
         <homepage-link
           icon="doc"
-          text="Swiper Vue(3) component"
+          text="Swiper Vue(3) Component"
           href="https://swiperjs.com/vue"
         />
         <homepage-link
           icon="discussions"
-          text="Swiper discussions"
+          text="Swiper Discussions"
           href="https://github.com/nolimits4web/swiper/discussions"
         />
       </template>

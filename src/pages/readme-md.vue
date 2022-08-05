@@ -1,20 +1,20 @@
 <script lang="ts" setup>
+  import { PROJECTS } from '@/config'
   import { useMeta } from '@/composables/meta'
-  import { Repository } from '@/config'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import VueRenderer from '@/components/renderer/vue.vue'
 
-  const id = Repository.Readme
+  const { repository } = PROJECTS.Readme
 
   useMeta({
-    title: getMetaTitle(id),
-    keywords: getMetaKeywords(id).join(','),
-    description: getMetaDescription(id)
+    title: getMetaTitle(repository),
+    keywords: getMetaKeywords(repository).join(','),
+    description: getMetaDescription(repository)
   })
 </script>
 
 <template>
-  <vue-renderer class="page" :repository="id" :toolbox="false">
+  <vue-renderer class="page" :repository="repository" :toolbox="false">
     <div class="page-content">README.md homepage is coming soon</div>
   </vue-renderer>
 </template>

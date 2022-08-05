@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-  import { getLegacyURL } from '@/config'
-  import { Repository } from '@/config'
+  import { PROJECTS, getLegacyURL } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
@@ -10,7 +9,7 @@
   import HomepageCard from '@/components/homepage/card.vue'
   import exampleComponent from '@examples/vue-codemirror/index.vue'
 
-  const id = Repository.VueCodemirror
+  const { repository, packages } = PROJECTS.VueCodemirror
   const example = getExampleComponent({
     component: exampleComponent,
     raw: '',
@@ -18,17 +17,17 @@
   })
 
   useMeta({
-    title: getMetaTitle(id),
-    keywords: getMetaKeywords(id).join(','),
-    description: getMetaDescription(id)
+    title: getMetaTitle(repository),
+    keywords: getMetaKeywords(repository).join(','),
+    description: getMetaDescription(repository)
   })
 </script>
 
 <template>
-  <vue-renderer :repository="id">
-    <homepage :repository="id">
+  <vue-renderer :repository="repository">
+    <homepage :repository="repository" :packages="packages">
       <template #actions>
-        <homepage-link icon="doc" text="Vue(2) examples" :href="getLegacyURL(id)" />
+        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyURL(repository)" />
         <homepage-link
           icon="doc"
           text="CodeMirror(6) Guide"
@@ -41,7 +40,7 @@
         />
         <homepage-link
           icon="discord"
-          text="Discord discussions"
+          text="Discord Discussions"
           href="https://discord.gg/nzHEydUvPH"
         />
       </template>

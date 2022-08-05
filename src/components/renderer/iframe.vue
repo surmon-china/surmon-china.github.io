@@ -49,9 +49,9 @@
       const handleIframeLoaded = () => {
         state.loading = false
       }
-      const handleIframeError = (error: Error) => {
+      const handleIframeError = (error: Event) => {
         handleIframeLoaded()
-        state.error = error.message
+        state.error = String(error)
       }
 
       return {

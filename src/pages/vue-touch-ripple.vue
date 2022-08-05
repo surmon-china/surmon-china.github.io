@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-  import { getLegacyURL } from '@/config'
-  import { Repository } from '@/config'
+  import { PROJECTS, getLegacyURL } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
@@ -10,21 +9,21 @@
   import HomepageExamples from '@/components/homepage/examples.vue'
   import exampleComponents from '@examples/vue-touch-ripple'
 
-  const id = Repository.VueTouchRipple
+  const { repository, packages } = PROJECTS.VueTouchRipple
   const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({
-    title: getMetaTitle(id),
-    keywords: getMetaKeywords(id).join(','),
-    description: getMetaDescription(id)
+    title: getMetaTitle(repository),
+    keywords: getMetaKeywords(repository).join(','),
+    description: getMetaDescription(repository)
   })
 </script>
 
 <template>
-  <vue-renderer :repository="id">
-    <homepage :repository="id">
+  <vue-renderer :repository="repository">
+    <homepage :repository="repository" :packages="packages">
       <template #actions>
-        <homepage-link icon="doc" text="Vue(2) examples" :href="getLegacyURL(id)" />
+        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyURL(repository)" />
         <homepage-link
           icon="doc"
           text="Component Props"
@@ -37,7 +36,7 @@
         />
         <homepage-link
           icon="discord"
-          text="Discord discussions"
+          text="Discord Discussions"
           href="https://discord.gg/QF8zwF3vPv"
         />
       </template>

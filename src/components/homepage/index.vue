@@ -17,7 +17,7 @@
             This repository has been archived. It is now read-only.
           </p>
           <h1 class="title">{{ repository }}</h1>
-          <h4 class="subtitle">{{ repoDescription || '...' }}</h4>
+          <h4 class="subtitle">{{ repoDetail?.description || '...' }}</h4>
           <div class="buttons">
             <github-button
               :link="repoUrl"
@@ -45,10 +45,10 @@
               class="item"
               icon="icon-download"
               text="Download"
-              :link="`${repoUrl}/archive/master.zip`"
-              :count-icon="isNPMPackage ? `icon-npm` : void 0"
-              :count-link="isNPMPackage ? npmUrl : void 0"
-              :count-text="isNPMPackage ? packageDownloads : void 0"
+              :link="`${repoUrl}/archive/main.zip`"
+              :count-icon="packages.length ? `icon-npm` : void 0"
+              :count-text="packages.length ? npmDownloads : void 0"
+              :count-link="packages.length === 1 ? getNPMHomepageURL(packages[0]) : repoUrl"
             />
           </div>
           <div class="actions">
@@ -92,6 +92,10 @@
         type: String,
         required: true
       },
+      packages: {
+        type: Array as PropType<string[]>,
+        default: () => [] as string[]
+      },
       headerAdProvider: {
         type: String as PropType<MammonProvider>,
         required: false
@@ -104,30 +108,19 @@
     setup(props) {
       const store = useGlobalStore()
       const initialized = computed(() => store.initialized)
-      const npmUrl = getNPMHomepageURL(props.repository)
       const repoUrl = getGitHubRepositoryURL(props.repository)
-      const repoDescription = computed(() => repoDetail.value?.description)
       const repoDetail = computed(() => store.getGitHubRepositoryDetail(props.repository))
-      const appRepositories = computed(() => store.githubRepositories)
-      const packageDownloads = computed(() => {
-        const downloads = store.npmPackagesDownloadsMap.get(props.repository)
-        return downloads ? numberSplit(downloads) : '0'
-      })
-      const isNPMPackage = computed((): boolean => {
-        return store.githubNPMRepositories
-          .map(({ name }: any) => name)
-          .includes(props.repository)
+      const npmDownloads = computed(() => {
+        const downloads = store.getNPMPackagesDownloadsTotal(props.packages)
+        return numberSplit(downloads)
       })
 
       return {
         initialized,
-        isNPMPackage,
         repoUrl,
-        repoDescription,
         repoDetail,
-        packageDownloads,
-        appRepositories,
-        npmUrl
+        npmDownloads,
+        getNPMHomepageURL
       }
     }
   })
