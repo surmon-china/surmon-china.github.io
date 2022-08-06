@@ -16,7 +16,8 @@
           :playbackRates="config.playbackRates"
           :fluid="config.fluid"
           :loop="config.loop"
-          :crossOrigin="config.crossOrigin"
+          crossorigin="anonymous"
+          playsinline
           v-model:width="config.width"
           v-model:height="config.height"
           v-model:volume="config.volume"
@@ -82,8 +83,7 @@
         controls: true,
         fluid: false,
         muted: false,
-        loop: false,
-        crossOrigin: 'anonymous'
+        loop: false
       })
 
       const playMediaIndex = shallowRef(0)

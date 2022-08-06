@@ -4,6 +4,7 @@
       class="video-player vjs-big-play-centered"
       src="https://vjs.zencdn.net/v/oceans.mp4"
       poster="https://vjs.zencdn.net/v/oceans.png"
+      playsinline
       controls
       :volume="0.6"
       :height="320"

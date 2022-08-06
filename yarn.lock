@@ -700,15 +700,15 @@
   resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-7.3.43.tgz#08a71d652627333a1693c7d4e8e8c92a25417fc0"
   integrity sha512-CEq/I6Np/x8b2Uh4cwt/8eHP8QLOF8pRZsw+GGehjCTP/l0fUqFOiIPhmBeDgnWOaO6zVGKPap0Mroz+W/FSlQ==
 
-"@videojs-player/react@^1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@videojs-player/react/-/react-1.0.0-beta.0.tgz#b8b54e6be81f4281ab4ad09956ea5137e518aee0"
-  integrity sha512-xXRnN7AI5z0x0YA5l0rvqoPYtXROlRnCjI0QfBWtcGzPNga2iSFaxlW/1D2ykiQClUSJkUWOUriW7/Z4Odzutw==
-
-"@videojs-player/vue@^1.0.0-beta.1":
+"@videojs-player/react@^1.0.0-beta.1":
   version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@videojs-player/vue/-/vue-1.0.0-beta.1.tgz#a63eacb03f3090d6c62eb8de63873e7976c69649"
-  integrity sha512-OA0vnFXiaK3GyDaKp96c+hMRiJCZH/Ze8FMd/0CgxQHyLs6uYojlTqlQRkVzydeXq5SWboJ0bwstL+/0Gkysow==
+  resolved "https://registry.yarnpkg.com/@videojs-player/react/-/react-1.0.0-beta.1.tgz#1ed2873d040b10b82a863df025e2cd4117de596c"
+  integrity sha512-DhtaqvX2YO7CL2Rd3WgDovE4vpUC9naW0kFYICG0kNJQrRvnIcC10jIsqNxk7VTfyVOmnVE+QzevL7dSS/yyqQ==
+
+"@videojs-player/vue@^1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@videojs-player/vue/-/vue-1.0.0-beta.2.tgz#3a577e1c55c90de52dac6d27515eb77d463d9579"
+  integrity sha512-BzAfEve85UUgot3ErX7TlL6T6NOb8BeizrO41k05d0zWQ7FBiWd+BBk8MgeXSOXuKACWmpue8m9srpUN71zXtg==
 
 "@videojs/http-streaming@2.14.2":
   version "2.14.2"
