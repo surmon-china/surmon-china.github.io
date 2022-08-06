@@ -1,17 +1,15 @@
 <template>
-  <div class="player-example">
-    <video-player
-      class="video-player vjs-theme-forest"
-      poster="/images/example/1.jpg"
-      src="https://dash.akamaized.net/dash264/TestCasesIOP33/adapatationSetSwitching/5/manifest.mpd"
-      crossorigin="anonymous"
-      playsinline
-      controls
-      :volume="0.6"
-      :height="320"
-      @mounted="handleMounted"
-    />
-  </div>
+  <video-player
+    class="video-player vjs-theme-forest"
+    poster="/images/example/1.jpg"
+    src="https://dash.akamaized.net/dash264/TestCasesIOP33/adapatationSetSwitching/5/manifest.mpd"
+    crossorigin="anonymous"
+    playsinline
+    controls
+    :volume="0.6"
+    :height="320"
+    @mounted="handleMounted"
+  />
 </template>
 
 <script lang="ts">
@@ -44,11 +42,8 @@
   @import '@/styles/variables.scss';
   @import '@/styles/mixins.scss';
 
-  .player-example {
+  .video-player {
     background-color: $black;
-
-    .video-player {
-      width: 100%;
-    }
+    width: 100%;
   }
 </style>

@@ -1,33 +1,31 @@
 <template>
-  <div class="player-example">
-    <video-player
-      class="video-player vjs-theme-forest"
-      poster="/images/example/4.jpg"
-      crossorigin="anonymous"
-      playsinline
-      controls
-      liveui
-      :sources="[videoSource]"
-      :volume="0.6"
-      :height="320"
-      :control-bar="{
-        progressControl: false,
-        currentTimeDisplay: false,
-        remainingTimeDisplay: false
-      }"
-      :html5="{
-        vhs: {
-          // https://github.com/videojs/http-streaming#options
-          overrideNative: !isSafari,
-          maxPlaylistRetries: Infinity
-        },
-        nativeAudioTracks: false,
-        nativeVideoTracks: false
-      }"
-      @mounted="handleMounted"
-      @ready="handleReady"
-    />
-  </div>
+  <video-player
+    class="video-player vjs-theme-forest"
+    poster="/images/example/4.jpg"
+    crossorigin="anonymous"
+    playsinline
+    controls
+    liveui
+    :sources="[videoSource]"
+    :volume="0.6"
+    :height="320"
+    :control-bar="{
+      progressControl: false,
+      currentTimeDisplay: false,
+      remainingTimeDisplay: false
+    }"
+    :html5="{
+      vhs: {
+        // https://github.com/videojs/http-streaming#options
+        overrideNative: !isSafari,
+        maxPlaylistRetries: Infinity
+      },
+      nativeAudioTracks: false,
+      nativeVideoTracks: false
+    }"
+    @mounted="handleMounted"
+    @ready="handleReady"
+  />
 </template>
 
 <script lang="ts">
@@ -80,11 +78,8 @@
   @import '@/styles/variables.scss';
   @import '@/styles/mixins.scss';
 
-  .player-example {
+  .video-player {
     background-color: $black;
-
-    .video-player {
-      width: 100%;
-    }
+    width: 100%;
   }
 </style>

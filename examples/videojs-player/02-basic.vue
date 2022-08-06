@@ -1,28 +1,26 @@
 <template>
-  <div class="player-example">
-    <video-player
-      class="video-player vjs-big-play-centered"
-      src="https://vjs.zencdn.net/v/oceans.mp4"
-      poster="https://vjs.zencdn.net/v/oceans.png"
-      crossorigin="anonymous"
-      playsinline
-      controls
-      :volume="0.6"
-      :height="320"
-      :playback-rates="[0.7, 1.0, 1.5, 2.0]"
-      @mounted="handleMounted"
-      @ready="handleEvent($event)"
-      @play="handleEvent($event)"
-      @pause="handleEvent($event)"
-      @ended="handleEvent($event)"
-      @loadeddata="handleEvent($event)"
-      @waiting="handleEvent($event)"
-      @playing="handleEvent($event)"
-      @canplay="handleEvent($event)"
-      @canplaythrough="handleEvent($event)"
-      @timeupdate="handleEvent(player?.currentTime())"
-    />
-  </div>
+  <video-player
+    class="video-player vjs-big-play-centered"
+    src="https://vjs.zencdn.net/v/oceans.mp4"
+    poster="https://vjs.zencdn.net/v/oceans.png"
+    crossorigin="anonymous"
+    playsinline
+    controls
+    :volume="0.6"
+    :height="320"
+    :playback-rates="[0.7, 1.0, 1.5, 2.0]"
+    @mounted="handleMounted"
+    @ready="handleEvent($event)"
+    @play="handleEvent($event)"
+    @pause="handleEvent($event)"
+    @ended="handleEvent($event)"
+    @loadeddata="handleEvent($event)"
+    @waiting="handleEvent($event)"
+    @playing="handleEvent($event)"
+    @canplay="handleEvent($event)"
+    @canplaythrough="handleEvent($event)"
+    @timeupdate="handleEvent(player?.currentTime())"
+  />
 </template>
 
 <script lang="ts">
@@ -58,11 +56,8 @@
   @import '@/styles/variables.scss';
   @import '@/styles/mixins.scss';
 
-  .player-example {
+  .video-player {
     background-color: $black;
-
-    .video-player {
-      width: 100%;
-    }
+    width: 100%;
   }
 </style>
