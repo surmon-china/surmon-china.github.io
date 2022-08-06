@@ -3,6 +3,8 @@
     <video-player
       id="CustomVideoPlayer"
       class="video-player vjs-theme-forest"
+      crossorigin="anonymous"
+      playsinline
       controls
       :sources="videoSource.sources"
       :poster="videoSource.poster"

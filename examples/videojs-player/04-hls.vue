@@ -3,6 +3,8 @@
     <video-player
       class="video-player vjs-theme-forest"
       poster="/images/example/4.jpg"
+      crossorigin="anonymous"
+      playsinline
       controls
       liveui
       :sources="[videoSource]"
@@ -14,7 +16,11 @@
         remainingTimeDisplay: false
       }"
       :html5="{
-        vhs: vhsOptions,
+        vhs: {
+          // https://github.com/videojs/http-streaming#options
+          overrideNative: !isSafari,
+          maxPlaylistRetries: Infinity
+        },
         nativeAudioTracks: false,
         nativeVideoTracks: false
       }"
@@ -26,7 +32,7 @@
 
 <script lang="ts">
   import { defineComponent, shallowRef } from 'vue'
-  import { VideoJsPlayer } from 'video.js'
+  import videojs, { VideoJsPlayer } from 'video.js'
   import { VideoPlayer } from '@videojs-player/vue'
   import 'video.js/dist/video-js.css'
   import '@videojs/themes/dist/forest/index.css'
@@ -42,12 +48,6 @@
       const videoSource = {
         src: 'https://logos-channel.scaleengine.net/logos-channel/live/biblescreen-ad-free/playlist.m3u8',
         type: 'application/x-mpegURL'
-      }
-
-      // https://github.com/videojs/http-streaming#options
-      const vhsOptions = {
-        overrideNative: true,
-        maxPlaylistRetries: Infinity
       }
 
       const player = shallowRef<VideoJsPlayer>()
@@ -66,7 +66,12 @@
         }
       }
 
-      return { videoSource, vhsOptions, handleMounted, handleReady }
+      return {
+        isSafari: videojs.browser.IS_SAFARI,
+        videoSource,
+        handleMounted,
+        handleReady
+      }
     }
   })
 </script>

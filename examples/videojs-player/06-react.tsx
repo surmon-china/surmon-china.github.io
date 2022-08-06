@@ -52,6 +52,8 @@ const ReactBasicPlayer = () => {
           playerState?.playing ? 'playing' : ''
         }`}
         height={320}
+        crossorigin="anonymous"
+        playsinline
         controls
         src={config.src}
         poster={config.poster}

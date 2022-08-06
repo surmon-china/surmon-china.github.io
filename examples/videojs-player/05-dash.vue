@@ -4,6 +4,8 @@
       class="video-player vjs-theme-forest"
       poster="/images/example/1.jpg"
       src="https://dash.akamaized.net/dash264/TestCasesIOP33/adapatationSetSwitching/5/manifest.mpd"
+      crossorigin="anonymous"
+      playsinline
       controls
       :volume="0.6"
       :height="320"
