@@ -31,7 +31,7 @@
 <script lang="ts">
   import { defineComponent, reactive } from 'vue'
   import SwiperClass, { Pagination, Navigation, Virtual } from 'swiper'
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'
   import 'swiper/css/navigation'

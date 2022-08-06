@@ -27,7 +27,7 @@
   // https://swiperjs.com/swiper-api#manipulation
   // MARK: Manipulation module adds useful Swiper methods to manipulate slides. It makes sense to use it only with Swiper Core version, not intended to be uses with Swiper Angular, React, Svelte or Vue.
   import { Pagination, Navigation } from 'swiper'
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'
 

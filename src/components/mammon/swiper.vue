@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { Pagination, Mousewheel } from 'swiper'
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import { Swiper, SwiperSlide } from 'swiper/vue'
   import { SWIPER_ADS } from '@/config'
 
   import 'swiper/css'

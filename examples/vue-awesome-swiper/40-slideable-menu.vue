@@ -22,7 +22,7 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue'
   import SwiperClass from 'swiper'
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
 
   export default defineComponent({

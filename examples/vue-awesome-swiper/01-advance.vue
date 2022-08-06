@@ -95,7 +95,7 @@
 <script lang="ts">
   import { defineComponent, ref, reactive } from 'vue'
   import SwiperClass, { Pagination, Navigation, Grid, Mousewheel } from 'swiper'
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/navigation'
   import 'swiper/css/pagination'

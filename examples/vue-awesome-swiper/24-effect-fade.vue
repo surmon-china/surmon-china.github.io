@@ -16,7 +16,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { Pagination, Navigation, EffectFade } from 'swiper'
-  import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+  import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'
   import 'swiper/css/navigation'
