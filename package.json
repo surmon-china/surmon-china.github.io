@@ -39,6 +39,7 @@
     "axios": "^0.26.1",
     "codemirror": "^6.0.0",
     "dedent": "^0.7.0",
+    "flv.js": "^1.6.2",
     "gh-lang-colors": "^0.0.19",
     "highlight.js": "^11.5.0",
     "js-base64": "^3.7.2",
@@ -57,9 +58,9 @@
     "vue-touch-ripple": "^4.1.0"
   },
   "devDependencies": {
-    "@types/video.js": "^7.3.43",
     "@types/dedent": "^0.7.0",
     "@types/node": "^17.0.21",
+    "@types/video.js": "^7.3.43",
     "@vitejs/plugin-react": "^2.0.0",
     "@vitejs/plugin-vue": "^3.0.1",
     "eslint": "^8.11.0",

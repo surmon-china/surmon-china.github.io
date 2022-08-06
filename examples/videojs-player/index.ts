@@ -6,8 +6,8 @@ const vueAdvanceExample = {
   language: 'vue'
 }
 
-import ReactBasicPlayer from './06-react'
-import ReactBasicPlayerRaw from './06-react?raw'
+import ReactBasicPlayer from './07-react'
+import ReactBasicPlayerRaw from './07-react?raw'
 const reactBasicExample = {
   component: ReactBasicPlayer,
   raw: ReactBasicPlayerRaw,

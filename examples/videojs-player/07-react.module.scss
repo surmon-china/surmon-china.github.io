@@ -1,0 +1,67 @@
+@import '@/styles/variables.scss';
+
+.reactPlayerExample {
+  .stateView {
+    width: 100%;
+    height: 3rem;
+    line-height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-bottom: 1px solid $border-color;
+
+    .item {
+      font-size: $font-size-small;
+    }
+  }
+}
+
+.videoPlayer {
+  width: 100%;
+  min-height: 300px;
+  background-color: $black;
+
+  .customControls {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 2.6rem;
+    background-color: rgb(63 73 88 / 60%);
+    padding-right: 1rem;
+    color: white;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+    transition: opacity 180ms;
+    &:hover {
+      opacity: 1;
+    }
+
+    .item {
+      margin-left: 1rem;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    progress {
+      flex: 1;
+      border-radius: 0px;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+      &::-webkit-progress-bar {
+        background-color: #fff;
+        border-radius: 2px;
+      }
+      &::-webkit-progress-value {
+        background-color: $widget-primary;
+      }
+    }
+
+    select {
+      color: white;
+      border-color: white;
+    }
+  }
+}
