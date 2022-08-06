@@ -6,7 +6,7 @@
       @update:index="handleMediaChange"
     />
     <div class="player-wrapper">
-      <div class="top" :class="{ loading: !state }">
+      <div class="top" :class="{ mobile: visitor.isMobileDevice, loading: !state }">
         <video-player
           :class="['video-player', 'vjs-big-play-centered']"
           :sources="mediaConfig.sources"
@@ -18,7 +18,7 @@
           :loop="config.loop"
           crossorigin="anonymous"
           playsinline
-          v-model:width="config.width"
+          :width="680"
           v-model:height="config.height"
           v-model:volume="config.volume"
           v-model:playbackRate="config.playbackRate"
@@ -39,7 +39,7 @@
           />
         </div>
       </div>
-      <div class="bottom">
+      <div class="bottom" :class="{ mobile: visitor.isMobileDevice }">
         <player-state :state="state" />
       </div>
     </div>
@@ -52,6 +52,7 @@
   import { VideoJsPlayer } from 'video.js'
   import 'video.js/dist/video-js.css'
 
+  import { useVisitor } from '@/composables/visitor'
   import PlayerConfig, { playbackRatesOptions } from './config.vue'
   import PlayerCustomControls from './advanced.vue'
   import PlayerPlaylist from './playlist.vue'
@@ -70,12 +71,12 @@
       PlayerState
     },
     setup: () => {
+      const visitor = useVisitor()
       const player = shallowRef<VideoJsPlayer>()
       const state = shallowRef<VideoPlayerState>()
       const isEnabledCustomControls = shallowRef(true)
       const config = shallowReactive<VideoPlayerProps>({
         autoplay: false,
-        width: 680,
         height: 376,
         volume: 0.8,
         playbackRate: 1,
@@ -107,6 +108,7 @@
       }
 
       return {
+        visitor,
         state,
         config,
         mediaConfig,
@@ -132,6 +134,9 @@
       .top {
         display: flex;
         justify-content: space-between;
+        &.mobile {
+          flex-direction: column;
+        }
         &.loading {
           > div:first-child {
             min-width: 680px;
@@ -141,6 +146,7 @@
 
         .video-player {
           position: relative;
+          max-width: 100%;
 
           .player-custom-controls {
             position: absolute;
@@ -164,6 +170,9 @@
         padding: 0;
         overflow: hidden;
         border-top: 1px solid $border-color;
+        &.mobile {
+          overflow-x: scroll;
+        }
       }
     }
   }

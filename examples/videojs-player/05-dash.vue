@@ -9,9 +9,6 @@
       controls
       :volume="0.6"
       :height="320"
-      :html5="{
-        vhs: { overrideNative: true }
-      }"
       @mounted="handleMounted"
     />
   </div>
@@ -19,14 +16,14 @@
 
 <script lang="ts">
   import { defineComponent, shallowRef } from 'vue'
-  import videojs, { VideoJsPlayer } from 'video.js'
+  import { VideoJsPlayer } from 'video.js'
   import { VideoPlayer } from '@videojs-player/vue'
   import 'video.js/dist/video-js.css'
   import '@videojs/themes/dist/forest/index.css'
 
   export default defineComponent({
     name: 'vue-dash-player-example',
-    title: 'Dash player (Vue)',
+    title: 'DASH player (Vue)',
     url: import.meta.url,
     components: {
       VideoPlayer
