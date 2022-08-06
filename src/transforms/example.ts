@@ -12,24 +12,29 @@ export interface ExampleComponent {
   component: any
 }
 
-export const getExampleComponent = (payload: {
+export interface ExampleComponentConfig {
   component: any
   raw: string
   language: string
-}): ExampleComponent => {
-  const c = payload.component as DefineComponent & {
+}
+
+export const getExampleComponent = (payload: ExampleComponentConfig): ExampleComponent => {
+  const comp = payload.component as DefineComponent & {
     title: string
     url: string
   }
 
-  const path = new URL(c.url).pathname
+  let path = ''
+  try {
+    path = new URL(comp.url).pathname
+  } catch (error) {}
 
   return {
-    name: c.name,
-    title: c.title || c.name,
+    name: comp.name,
+    title: comp.title || comp.name,
     path: path,
     url: getGitHubFileSourceURL(GITHUB_PROJECT_NAME, path),
-    component: c,
+    component: comp,
     raw: payload.raw,
     language: payload.language
   }
