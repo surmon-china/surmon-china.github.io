@@ -6,9 +6,9 @@
       @update:index="handleMediaChange"
     />
     <div class="player-wrapper">
-      <div class="top" :class="{ mobile: visitor.isMobileDevice, loading: !state }">
+      <div class="top" :class="{ mobile: visitor.isMobileDevice }">
         <video-player
-          :class="['video-player', 'vjs-big-play-centered']"
+          :class="['video-player', 'vjs-big-play-centered', { loading: !state }]"
           :sources="mediaConfig.sources"
           :poster="mediaConfig.poster"
           :tracks="mediaConfig.tracks"
@@ -77,7 +77,7 @@
       const isEnabledCustomControls = shallowRef(true)
       const config = shallowReactive<VideoPlayerProps>({
         autoplay: false,
-        height: visitor.isMobileDevice ? 280 : 376,
+        height: visitor.isMobileDevice ? 280 : 380,
         volume: 0.8,
         playbackRate: 1,
         playbackRates: playbackRatesOptions[0],
@@ -137,16 +137,14 @@
         &.mobile {
           flex-direction: column;
         }
-        &.loading {
-          > div:first-child {
-            min-width: 680px;
-            background-color: $black;
-          }
-        }
 
         .video-player {
           position: relative;
           max-width: 100%;
+          &.loading {
+            min-width: 680px;
+            background-color: $black;
+          }
 
           .player-custom-controls {
             position: absolute;
