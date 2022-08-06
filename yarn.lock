@@ -2568,11 +2568,6 @@ vite@^3.0.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vue-awesome-swiper@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/vue-awesome-swiper/-/vue-awesome-swiper-5.0.1.tgz#ba0d20ec9ca4dff2b7b4e99592cf59308335dfcc"
-  integrity sha512-mWjFJzUqA4lG+DmsmibvMpoiBnl+IH2SSeiiQ3i5M0t1y9FknTxnGT0DsMb2YdJLgjYMEK3sYOWzqgLnZMH8Lg==
-
 vue-codemirror@^6.0.1:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/vue-codemirror/-/vue-codemirror-6.0.2.tgz#5455ba9882a8fe2b90c1a105bf80a59ef4941427"
