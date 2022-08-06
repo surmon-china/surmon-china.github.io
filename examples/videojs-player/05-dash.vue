@@ -10,7 +10,7 @@
       :volume="0.6"
       :height="320"
       :html5="{
-        vhs: { overrideNative: !isSafari }
+        vhs: { overrideNative: true }
       }"
       @mounted="handleMounted"
     />
@@ -38,10 +38,7 @@
         console.log('Dash player mounted', payload)
       }
 
-      return {
-        isSafari: videojs.browser.IS_SAFARI,
-        handleMounted
-      }
+      return { handleMounted }
     }
   })
 </script>
