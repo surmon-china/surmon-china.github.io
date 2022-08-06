@@ -9,6 +9,9 @@
       controls
       :volume="0.6"
       :height="320"
+      :html5="{
+        vhs: { overrideNative: !isSafari }
+      }"
       @mounted="handleMounted"
     />
   </div>
@@ -16,7 +19,7 @@
 
 <script lang="ts">
   import { defineComponent, shallowRef } from 'vue'
-  import { VideoJsPlayer } from 'video.js'
+  import videojs, { VideoJsPlayer } from 'video.js'
   import { VideoPlayer } from '@videojs-player/vue'
   import 'video.js/dist/video-js.css'
   import '@videojs/themes/dist/forest/index.css'
@@ -35,7 +38,10 @@
         console.log('Dash player mounted', payload)
       }
 
-      return { handleMounted }
+      return {
+        isSafari: videojs.browser.IS_SAFARI,
+        handleMounted
+      }
     }
   })
 </script>
