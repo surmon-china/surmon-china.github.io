@@ -77,7 +77,7 @@
       const isEnabledCustomControls = shallowRef(true)
       const config = shallowReactive<VideoPlayerProps>({
         autoplay: false,
-        height: 376,
+        height: visitor.isMobileDevice ? 280 : 376,
         volume: 0.8,
         playbackRate: 1,
         playbackRates: playbackRatesOptions[0],
