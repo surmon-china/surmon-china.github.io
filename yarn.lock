@@ -700,15 +700,15 @@
   resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-7.3.44.tgz#dc64bc4cb4a86d7e06542eb10a93c1947c724847"
   integrity sha512-ov1HXNOjUkt38al/ybw8cj1181I5P3sOXdrqBR8AkDCqQX6GYwxOCzdmsGn/LDwKHTZ/3veNC9Ad6BjR5wSq4g==
 
-"@videojs-player/react@^1.0.0-beta.4":
-  version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@videojs-player/react/-/react-1.0.0-beta.4.tgz#8784c2e880fe5a4d6acc50e0b4829c1c0491b631"
-  integrity sha512-jUx6tHyECjDvnWaJt/yG8+SSPSQ7E7wvMvmkqZ/wLzfVtbzFSThlKyVqXk6FN20MuDxoiR8MTIVGrDrom6wJ7A==
+"@videojs-player/react@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@videojs-player/react/-/react-1.0.0.tgz#6de1eb00139afed95730528a8db0123a7ceb2a60"
+  integrity sha512-cEPvG1b+B4EG494N3oGxACRce8WW2l+ewIznH/SDoNCWvbVMeSqKy1l6qKr0Zy/dejwKtvWiOamoBWuVEfoR3g==
 
-"@videojs-player/vue@^1.0.0-beta.5":
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@videojs-player/vue/-/vue-1.0.0-beta.5.tgz#e3adb4c20c94b9af2ddf132345ebe91804d10f99"
-  integrity sha512-PPtwvNhxjf+rvUUZ3dkzsqbDqUn2AQKdUhGT3kvlUFzjdJ8FymqOBTSmPFtqnW6nRGD5mV7Pz3ArDCTLlVr/Jw==
+"@videojs-player/vue@1.x", "@videojs-player/vue@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@videojs-player/vue/-/vue-1.0.0.tgz#df7db677b43b2d9b6872e71cd0eb2238cc19a8fd"
+  integrity sha512-WonTezRfKu3fYdQLt/ta+nuKH6gMZUv8l40Jke/j4Lae7IqeO/+lLAmBnh3ni88bwR+vkFXIlZ2Ci7VKInIYJg==
 
 "@videojs/http-streaming@2.14.2":
   version "2.14.2"
@@ -2608,6 +2608,13 @@ vue-touch-ripple@^4.1.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/vue-touch-ripple/-/vue-touch-ripple-4.1.1.tgz#48e76c989a30af9db6ba7130c79f339939696f40"
   integrity sha512-pMs5XF8/jBNlZIKOsVtkhOv+YCFNzMOiPB/Y+kD4hbSKmC12Ho7ND7e0pnfR/wMJy1feNqUIrx53cWu/yhkQTQ==
+
+vue-video-player@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/vue-video-player/-/vue-video-player-6.0.0.tgz#fc51581b4b0437e5efd7e30388f18d900e27573d"
+  integrity sha512-WP47OtefsjMEReRCIKIL3tRRgH/PyNm8ELjsbYgr/WWrYAj5Ih9Adzkzp+ylYOI/v57jJ4O7O4XkbXBCmsTqNw==
+  dependencies:
+    "@videojs-player/vue" "1.x"
 
 vue@^3.2.31:
   version "3.2.37"
