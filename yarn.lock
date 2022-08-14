@@ -695,20 +695,20 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==
 
-"@types/video.js@^7.3.43":
-  version "7.3.43"
-  resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-7.3.43.tgz#08a71d652627333a1693c7d4e8e8c92a25417fc0"
-  integrity sha512-CEq/I6Np/x8b2Uh4cwt/8eHP8QLOF8pRZsw+GGehjCTP/l0fUqFOiIPhmBeDgnWOaO6zVGKPap0Mroz+W/FSlQ==
+"@types/video.js@^7.3.44":
+  version "7.3.44"
+  resolved "https://registry.yarnpkg.com/@types/video.js/-/video.js-7.3.44.tgz#dc64bc4cb4a86d7e06542eb10a93c1947c724847"
+  integrity sha512-ov1HXNOjUkt38al/ybw8cj1181I5P3sOXdrqBR8AkDCqQX6GYwxOCzdmsGn/LDwKHTZ/3veNC9Ad6BjR5wSq4g==
 
-"@videojs-player/react@^1.0.0-beta.3":
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@videojs-player/react/-/react-1.0.0-beta.3.tgz#42f468844f4c4ebb8c414fb9c825804a980ae3b9"
-  integrity sha512-DThHZ37eQK6pi/eBIVegGUCG/0xOBG6BPz1Eos0MLcvGSo0qK7soDd2Ury1/XFJByL34iqQt5zz6uZNPMUTF2A==
-
-"@videojs-player/vue@^1.0.0-beta.4":
+"@videojs-player/react@^1.0.0-beta.4":
   version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@videojs-player/vue/-/vue-1.0.0-beta.4.tgz#970ff2d8e7a84f4751a1266d6197d7665f370cd6"
-  integrity sha512-gF6bzeaco5HluhrG+yWtzC4NagPevgzpi4tN3tYkqfLOJVuHumLZDmVf1INTUi4tNDzLEW9QVDl96nzsx4U9kQ==
+  resolved "https://registry.yarnpkg.com/@videojs-player/react/-/react-1.0.0-beta.4.tgz#8784c2e880fe5a4d6acc50e0b4829c1c0491b631"
+  integrity sha512-jUx6tHyECjDvnWaJt/yG8+SSPSQ7E7wvMvmkqZ/wLzfVtbzFSThlKyVqXk6FN20MuDxoiR8MTIVGrDrom6wJ7A==
+
+"@videojs-player/vue@^1.0.0-beta.5":
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@videojs-player/vue/-/vue-1.0.0-beta.5.tgz#e3adb4c20c94b9af2ddf132345ebe91804d10f99"
+  integrity sha512-PPtwvNhxjf+rvUUZ3dkzsqbDqUn2AQKdUhGT3kvlUFzjdJ8FymqOBTSmPFtqnW6nRGD5mV7Pz3ArDCTLlVr/Jw==
 
 "@videojs/http-streaming@2.14.2":
   version "2.14.2"
