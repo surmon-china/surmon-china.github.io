@@ -54,7 +54,8 @@
     "vue": "^3.2.31",
     "vue-codemirror": "^6.0.1",
     "vue-router": "^4.0.14",
-    "vue-touch-ripple": "^4.1.0"
+    "vue-touch-ripple": "^4.1.0",
+    "vue-video-player": "^6.0.0"
   },
   "devDependencies": {
     "@types/dedent": "^0.7.0",
