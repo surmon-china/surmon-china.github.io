@@ -27,8 +27,10 @@ export const render = async (url: string) => {
   const ctx = {}
   const appHTML = await renderToString(app, ctx)
 
+  const metaHTML = await meta.renderToString()
+
   return {
     appHTML,
-    metas: meta.renderToString()
+    metaHTML
   }
 }

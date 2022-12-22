@@ -1,6 +1,11 @@
 <script lang="ts" setup>
-  import { PROJECTS, getLegacyURL } from '@/config'
+  import { PROJECTS } from '@/config'
   import { useMeta } from '@/composables/meta'
+  import {
+    getPageURL,
+    getLegacyPageURL,
+    getGitHubOpenGraphImageURL
+  } from '@/transforms/url'
   import { getExampleComponent } from '@/transforms/example'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import VueRenderer from '@/components/renderer/vue.vue'
@@ -9,13 +14,15 @@
   import HomepageExamples from '@/components/homepage/examples.vue'
   import exampleComponents from '@examples/vue-touch-ripple'
 
-  const { repository, packages } = PROJECTS.VueTouchRipple
+  const { repository, route, packages } = PROJECTS.VueTouchRipple
   const examples = exampleComponents.map(getExampleComponent)
 
   useMeta({
     title: getMetaTitle(repository),
     keywords: getMetaKeywords(repository).join(','),
-    description: getMetaDescription(repository)
+    description: getMetaDescription(repository),
+    ogImage: getGitHubOpenGraphImageURL(repository),
+    ogUrl: getPageURL(route)
   })
 </script>
 
@@ -23,7 +30,11 @@
   <vue-renderer :repository="repository">
     <homepage :repository="repository" :packages="packages">
       <template #actions>
-        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyURL(repository)" />
+        <homepage-link
+          icon="doc"
+          text="Vue(2) Examples"
+          :href="getLegacyPageURL(repository)"
+        />
         <homepage-link
           icon="doc"
           text="Component Props"

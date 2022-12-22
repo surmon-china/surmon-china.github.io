@@ -2,6 +2,7 @@
   import { PROJECTS } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getExampleComponent } from '@/transforms/example'
+  import { getPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
@@ -9,7 +10,7 @@
   import exampleComponent from '@examples/naivebayes/index.vue'
   import exampleComponentString from '@examples/naivebayes/index.vue?raw'
 
-  const { repository, packages } = PROJECTS.NaiveBayes
+  const { repository, route, packages } = PROJECTS.NaiveBayes
   const example = getExampleComponent({
     component: exampleComponent,
     raw: exampleComponentString,
@@ -19,7 +20,9 @@
   useMeta({
     title: getMetaTitle(repository),
     keywords: getMetaKeywords(repository).join(','),
-    description: getMetaDescription(repository)
+    description: getMetaDescription(repository),
+    ogImage: getGitHubOpenGraphImageURL(repository),
+    ogUrl: getPageURL(route)
   })
 </script>
 

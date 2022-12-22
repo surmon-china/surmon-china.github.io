@@ -30,6 +30,7 @@
                     v-for="item in ownRepositories"
                   >
                     <div class="title">
+                      <i class="repo-icon iconfont icon-repo"></i>
                       <ulink
                         class="link"
                         :href="getGitHubRepositoryURL(item.name)"
@@ -37,7 +38,7 @@
                       >
                         {{ item.name }}
                       </ulink>
-                      <i class="iconfont icon-link-external"></i>
+                      <i class="link-icon iconfont icon-link-external"></i>
                       <span
                         v-if="item.archived"
                         class="archived"
@@ -270,7 +271,7 @@
           $min-height: $banner-height - $gap * 2;
           .container {
             min-height: $min-height;
-            max-height: 60vh;
+            max-height: 68vh;
             overflow-y: auto;
           }
           .loading {
@@ -300,6 +301,7 @@
               }
               &.activated,
               &:hover {
+                border-color: $text-secondary;
                 background-color: $header-bg;
                 .title {
                   .archived {
@@ -309,8 +311,10 @@
               }
 
               .title {
-                width: 100%;
                 display: block;
+                width: 100%;
+                height: 20px;
+                line-height: 20px;
                 margin-bottom: $sm-gap;
 
                 .link {
@@ -318,6 +322,7 @@
                   margin-right: 2px;
                   color: $text-color;
                   text-decoration: none;
+                  text-underline-offset: 2px;
                   font-size: $font-size-base + 2;
                   font-weight: 600;
                   @include text-overflow();
@@ -327,7 +332,13 @@
                   }
                 }
 
-                .iconfont {
+                .repo-icon {
+                  font-size: $font-size-base + 1;
+                  margin-right: $xs-gap;
+                  margin-left: -2px;
+                }
+
+                .link-icon {
                   font-size: $font-size-small;
                 }
 

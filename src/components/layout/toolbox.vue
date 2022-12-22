@@ -66,6 +66,7 @@
         right: -10rem;
         width: $width;
         overflow: hidden;
+        border: 1px solid $body-bg;
 
         .item {
           border: none;
@@ -82,7 +83,7 @@
             background-color: $header-bg;
             color: $link-color;
           }
-          &:not(last-child) {
+          &:not(:last-child) {
             border-bottom: 1px solid $body-bg;
           }
           &:first-child {

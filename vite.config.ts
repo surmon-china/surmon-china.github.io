@@ -46,5 +46,9 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     cssCodeSplit: false
+  },
+  optimizeDeps: {
+    // https://github.com/nolimits4web/swiper/issues/5294#issuecomment-999831249
+    exclude: ['swiper/vue', 'swiper/types']
   }
 }))

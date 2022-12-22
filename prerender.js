@@ -47,12 +47,13 @@ const renderRedirectionHTML = (url) => `
 
     // pre-render each route...
     for (const url of ROUTES) {
-      const { appHTML, metas } = await render(url)
+      const { appHTML, metaHTML } = await render(url)
       const html = template
         .replace(/<title>[\s\S]*<\/title>/, '')
-        .replace(`<html`, () => `<html ${metas.htmlAttrs} `)
-        .replace(`<head>`, () => `<head>\n${metas.headTags}`)
-        .replace(`<body>`, () => `<body ${metas.bodyAttrs}>`)
+        // https://github.com/vueuse/head#ssr-rendering
+        .replace(`<html`, () => `<html ${metaHTML.htmlAttrs} `)
+        .replace(`<head>`, () => `<head>\n${metaHTML.headTags}`)
+        .replace(`<body>`, () => `<body ${metaHTML.bodyAttrs}>`)
         .replace(`<!--app-html-->`, () => appHTML)
 
       // ✅ https://github.surmon.me/xxx

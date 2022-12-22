@@ -1,7 +1,12 @@
 <script lang="ts" setup>
-  import { PROJECTS, getLegacyURL } from '@/config'
+  import { PROJECTS } from '@/config'
   import { useMeta } from '@/composables/meta'
   import { getExampleComponent } from '@/transforms/example'
+  import {
+    getPageURL,
+    getLegacyPageURL,
+    getGitHubOpenGraphImageURL
+  } from '@/transforms/url'
   import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
@@ -9,7 +14,7 @@
   import HomepageCard from '@/components/homepage/card.vue'
   import exampleComponent from '@examples/vue-codemirror/index.vue'
 
-  const { repository, packages } = PROJECTS.VueCodemirror
+  const { repository, route, packages } = PROJECTS.VueCodemirror
   const example = getExampleComponent({
     component: exampleComponent,
     raw: '',
@@ -19,7 +24,9 @@
   useMeta({
     title: getMetaTitle(repository),
     keywords: getMetaKeywords(repository).join(','),
-    description: getMetaDescription(repository)
+    description: getMetaDescription(repository),
+    ogImage: getGitHubOpenGraphImageURL(repository),
+    ogUrl: getPageURL(route)
   })
 </script>
 
@@ -27,7 +34,11 @@
   <vue-renderer :repository="repository">
     <homepage :repository="repository" :packages="packages">
       <template #actions>
-        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyURL(repository)" />
+        <homepage-link
+          icon="doc"
+          text="Vue(2) Examples"
+          :href="getLegacyPageURL(repository)"
+        />
         <homepage-link
           icon="doc"
           text="CodeMirror(6) Guide"
