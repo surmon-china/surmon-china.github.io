@@ -16,6 +16,11 @@
         key: 'twitter-new-widgets',
         name: 'twitter:widgets:new-embed-design',
         content: 'on'
+      },
+      {
+        key: 'color-scheme',
+        name: 'color-scheme',
+        content: 'light dark'
       }
     ]
   }))

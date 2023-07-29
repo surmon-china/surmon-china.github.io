@@ -38,6 +38,8 @@ export const normalizeSeoMetaObject = (i: SeoMetaObject): Parameters<typeof useS
     ogDescription: () => i.ogDescription ?? i.description ?? APP_META.description,
     ogUrl: () => i.ogUrl ?? '',
     ogImage: () => i.ogImage ?? '',
-    ogImageAlt: () => i.ogImageAlt ?? i.ogDescription ?? i.description ?? APP_META.description
+    ogImageAlt: () => i.ogImageAlt ?? i.ogDescription ?? i.description ?? APP_META.description,
+    ogImageWidth: () => i.ogImageWidth ?? (i.ogImage ? '' : '1200'),
+    ogImageHeight: () => i.ogImageHeight ?? (i.ogImage ? '' : '600')
   }
 }
