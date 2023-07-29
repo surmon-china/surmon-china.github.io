@@ -26,8 +26,10 @@
 <script lang="ts">
   import { defineComponent, shallowRef } from 'vue'
   import { VideoPlayer } from '@videojs-player/vue'
-  import type { VideoJsPlayer } from 'video.js'
+  import videojs from 'video.js'
   import 'video.js/dist/video-js.css'
+
+  type VideoJsPlayer = ReturnType<typeof videojs>
 
   export default defineComponent({
     name: 'vue-basic-player-example',

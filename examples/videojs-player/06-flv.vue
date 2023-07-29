@@ -13,11 +13,13 @@
 </template>
 
 <script lang="ts">
-  import videojs, { VideoJsPlayer } from 'video.js'
   import { defineComponent } from 'vue'
   import { VideoPlayer } from '@videojs-player/vue'
+  import videojs from 'video.js'
   import 'video.js/dist/video-js.css'
   import '@videojs/themes/dist/forest/index.css'
+
+  type VideoJsPlayer = ReturnType<typeof videojs>
 
   export default defineComponent({
     name: 'vue-flv-player-example',

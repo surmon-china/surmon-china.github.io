@@ -1,10 +1,6 @@
 <template>
   <div class="example">
-    <player-playlist
-      class="playlist"
-      :index="playMediaIndex"
-      @update:index="handleMediaChange"
-    />
+    <player-playlist class="playlist" :index="playMediaIndex" @update:index="handleMediaChange" />
     <div class="player-wrapper">
       <div class="top" :class="{ mobile: visitor.isMobileDevice }">
         <video-player
@@ -33,10 +29,7 @@
           </template>
         </video-player>
         <div class="right" :style="{ height: config.height + 'px' }">
-          <player-config
-            :config="config"
-            v-model:enabled-custom-controls="isEnabledCustomControls"
-          />
+          <player-config :config="config" v-model:enabled-custom-controls="isEnabledCustomControls" />
         </div>
       </div>
       <div class="bottom" :class="{ mobile: visitor.isMobileDevice }">
@@ -49,7 +42,7 @@
 <script lang="ts">
   import { defineComponent, shallowRef, shallowReactive, computed, nextTick } from 'vue'
   import { VideoPlayer, VideoPlayerProps, VideoPlayerState } from '@videojs-player/vue'
-  import { VideoJsPlayer } from 'video.js'
+  import videojs from 'video.js'
   import 'video.js/dist/video-js.css'
 
   import { useVisitor } from '@/composables/visitor'
@@ -58,6 +51,8 @@
   import PlayerPlaylist from './playlist.vue'
   import PlayerState from './state.vue'
   import { playlist } from './playlist'
+
+  type VideoJsPlayer = ReturnType<typeof videojs>
 
   export default defineComponent({
     name: 'vue-advanced-player-example',

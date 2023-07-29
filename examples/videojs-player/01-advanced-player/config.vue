@@ -5,50 +5,26 @@
         height (<code>{{ config.height }}</code
         >)
       </span>
-      <input
-        class="value"
-        type="range"
-        min="280"
-        max="400"
-        v-model.number="config.height"
-      />
+      <input class="value" type="range" min="280" max="400" v-model.number="config.height" />
     </div>
     <div class="item">
       <span class="name">
         volume (<code>{{ config.volume }}</code
         >)
       </span>
-      <input
-        class="value"
-        type="range"
-        min="0"
-        max="1"
-        step="0.1"
-        v-model.number="config.volume"
-      />
+      <input class="value" type="range" min="0" max="1" step="0.1" v-model.number="config.volume" />
     </div>
     <div class="item">
       <span class="name">
         playbackRate (<code>{{ config.playbackRate }}</code
         >)
       </span>
-      <input
-        class="value"
-        type="range"
-        min="0.5"
-        max="3"
-        step="0.25"
-        v-model.number="config.playbackRate"
-      />
+      <input class="value" type="range" min="0.5" max="3" step="0.25" v-model.number="config.playbackRate" />
     </div>
     <div class="item inline">
       <span class="name">playbackRates</span>
       <select class="value" v-model="config.playbackRates">
-        <option
-          :key="index"
-          :value="option"
-          v-for="(option, index) in playbackRatesOptions"
-        >
+        <option :key="index" :value="option" v-for="(option, index) in playbackRatesOptions">
           {{ option }}
         </option>
       </select>
@@ -90,12 +66,7 @@
         class="value"
         type="checkbox"
         :checked="enabledCustomControls"
-        @change="
-          $emit(
-            'update:enabledCustomControls',
-            ($event.target as HTMLInputElement)?.checked
-          )
-        "
+        @change="$emit('update:enabledCustomControls', ($event.target as HTMLInputElement)?.checked)"
       />
     </label>
   </div>

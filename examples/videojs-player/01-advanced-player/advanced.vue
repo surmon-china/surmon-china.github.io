@@ -8,34 +8,20 @@
       {{ state.muted ? '🔇 Unmuted' : '🔈 Mute' }}
     </button>
     <span v-if="state.isLive" class="item live">🔴 LIVE {{ state.currentTime }}</span>
-    <progress
-      v-else
-      class="item progress"
-      :max="duration"
-      :value="state.currentTime"
-    ></progress>
+    <progress v-else class="item progress" :max="duration" :value="state.currentTime"></progress>
     <select
       class="item select"
       :value="config.playbackRate"
       @change="player.playbackRate(Number(($event.target as HTMLSelectElement)?.value))"
     >
-      <option :key="index" :value="option" v-for="(option, index) in state.playbackRates">
-        {{ option }}x
-      </option>
+      <option :key="index" :value="option" v-for="(option, index) in state.playbackRates">{{ option }}x</option>
     </select>
-    <button
-      class="item button"
-      @click="state.isFullscreen ? player.exitFullscreen() : player.requestFullscreen()"
-    >
+    <button class="item button" @click="state.isFullscreen ? player.exitFullscreen() : player.requestFullscreen()">
       {{ state.isFullscreen ? '🖥 Exit' : '💻 Enter' }} FS
     </button>
     <button
       class="item button"
-      @click="
-        state.isInPictureInPicture
-          ? player.exitPictureInPicture()
-          : player.requestPictureInPicture()
-      "
+      @click="state.isInPictureInPicture ? player.exitPictureInPicture() : player.requestPictureInPicture()"
     >
       📺 {{ state.isInPictureInPicture ? 'Exit' : 'Enter' }} PIP
     </button>
@@ -44,8 +30,11 @@
 
 <script lang="ts">
   import { defineComponent, computed, PropType } from 'vue'
-  import { VideoJsPlayer } from 'video.js'
   import { VideoPlayerState } from '@videojs-player/vue'
+  import videojs from 'video.js'
+
+  type VideoJsPlayer = ReturnType<typeof videojs>
+
   export default defineComponent({
     props: {
       player: {

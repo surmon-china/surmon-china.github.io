@@ -14,9 +14,7 @@
           Now Playing
           <span class="dot"></span>
         </span>
-        <span class="duration" v-else-if="media.duration">{{
-          humanizeDuration(media.duration)
-        }}</span>
+        <span class="duration" v-else-if="media.duration">{{ humanizeDuration(media.duration) }}</span>
         <span class="name">{{ media.name }}</span>
       </li>
     </ul>
@@ -86,7 +84,10 @@
         max-width: 86%;
         @include text-overflow();
         color: $white;
-        text-shadow: 1px 1px 2px #000, -1px 1px 2px #000, 1px -1px 2px #000,
+        text-shadow:
+          1px 1px 2px #000,
+          -1px 1px 2px #000,
+          1px -1px 2px #000,
           -1px -1px 2px #000;
       }
 

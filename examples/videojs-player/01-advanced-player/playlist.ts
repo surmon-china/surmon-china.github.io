@@ -58,8 +58,7 @@ export const playlist = [
   },
   {
     name: 'mp4/captions/description/chapters',
-    description:
-      "Elephant's Dream (mp4 with separate text track audio description, captions, and chapters)",
+    description: "Elephant's Dream (mp4 with separate text track audio description, captions, and chapters)",
     duration: 653,
     poster: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/poster.png',
     sources: [

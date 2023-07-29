@@ -30,10 +30,12 @@
 
 <script lang="ts">
   import { defineComponent, shallowRef } from 'vue'
-  import videojs, { VideoJsPlayer } from 'video.js'
   import { VideoPlayer } from '@videojs-player/vue'
+  import videojs from 'video.js'
   import 'video.js/dist/video-js.css'
   import '@videojs/themes/dist/forest/index.css'
+
+  type VideoJsPlayer = ReturnType<typeof videojs>
 
   export default defineComponent({
     name: 'vue-hls-player-example',
@@ -44,7 +46,7 @@
     },
     setup() {
       const videoSource = {
-        src: 'http://amssamples.streaming.mediaservices.windows.net/634cd01c-6822-4630-8444-8dd6279f94c6/CaminandesLlamaDrama4K.ism/manifest(format=m3u8-aapl)',
+        src: 'https://amssamples.streaming.mediaservices.windows.net/634cd01c-6822-4630-8444-8dd6279f94c6/CaminandesLlamaDrama4K.ism/manifest(format=m3u8-aapl)',
         type: 'application/x-mpegURL'
       }
 
