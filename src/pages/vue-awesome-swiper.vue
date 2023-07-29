@@ -18,8 +18,10 @@
       title: getMetaTitle(repository),
       keywords: [getMetaKeywords(repository), `How to use Swiper on vue3?`].join(','),
       description: getMetaDescription(repository),
+      ogUrl: getPageURL(route),
       ogImage: getGitHubOpenGraphImageURL(repository),
-      ogUrl: getPageURL(route)
+      ogImageWidth: 1200,
+      ogImageHeight: 600
     })
   )
 </script>

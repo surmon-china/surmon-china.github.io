@@ -12,8 +12,10 @@
       title: getMetaTitle(repository),
       keywords: getMetaKeywords(repository).join(','),
       description: getMetaDescription(repository),
+      ogUrl: getPageURL(route),
       ogImage: getGitHubOpenGraphImageURL(repository),
-      ogUrl: getPageURL(route)
+      ogImageWidth: 1200,
+      ogImageHeight: 600
     })
   )
 </script>
