@@ -9,18 +9,25 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: setup node
-        uses: actions/setup-node@v1
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
         with:
-          node-version: '16'
+          version: 8
 
-      - name: install
-        run: yarn
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
 
-      - name: generate
-        run: yarn generate
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Vite generate
+        run: pnpm run generate
 
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3

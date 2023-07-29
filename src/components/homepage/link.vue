@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+  defineProps<{
+    text: string
+    href: string
+    icon: string
+  }>()
+</script>
+
 <template>
   <div class="homepage-link">
     <ulink class="link" :href="href">
@@ -8,18 +16,6 @@
     </ulink>
   </div>
 </template>
-
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  export default defineComponent({
-    name: 'homepage-link',
-    props: {
-      text: String,
-      href: String,
-      icon: String
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   @import '@/styles/variables.scss';

@@ -1,10 +1,56 @@
+<script lang="ts" setup>
+  import GH_LANG_COLORS from 'gh-lang-colors'
+  import { computed } from 'vue'
+  import { useGlobalStore } from '@/store'
+  import { useTheme, Theme } from '@/composables/theme'
+  import { numberSplit, countToK } from '@/transforms/unit'
+  import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
+  import * as CONFIG from '@/config'
+  import Loading from '../common/loading.vue'
+
+  const props = defineProps<{
+    repository: string
+    full?: boolean
+  }>()
+
+  const theme = useTheme()
+  const store = useGlobalStore()
+  const ownRepositories = computed(() => {
+    return store.githubOwnRepositories.map((repo) => {
+      const found = Object.values(CONFIG.PROJECTS).find((project) => {
+        return project.repository === repo.name
+      })
+      const npmPackages: string[] = (found as any)?.packages ?? []
+      return {
+        ...repo,
+        npmPackages,
+        npmDownloads: npmPackages.length ? numberSplit(store.getNPMPackagesDownloadsTotal(npmPackages)) : '-'
+      }
+    })
+  })
+
+  const themeValue = theme.theme
+  const toggleTheme = theme.toggle
+  const themeIcon = computed(() => {
+    const themeIconMap = {
+      [Theme.Light]: 'icon-sun',
+      [Theme.Dark]: 'icon-moon'
+    }
+    return themeIconMap[themeValue.value]
+  })
+
+  const getGitHubLanguageColor = (language: string): string => {
+    return (GH_LANG_COLORS as any)[language]
+  }
+</script>
+
 <template>
   <header class="navbar">
     <div class="container" :class="{ full }">
       <div class="left">
         <ulink class="item github" :href="CONFIG.GITHUB_USER_URL">
           <i class="iconfont icon-github"></i>
-          <span class="text">{{ CONFIG.GITHUB_UID }}</span>
+          <span class="text">{{ CONFIG.GITHUB_USERNAME }}</span>
         </ulink>
         <span class="dot">/</span>
         <ulink class="item repository" :href="getGitHubRepositoryURL(repository)">
@@ -33,6 +79,7 @@
                       <i class="repo-icon iconfont icon-repo"></i>
                       <ulink
                         class="link"
+                        :class="{ archived: item.archived }"
                         :href="getGitHubRepositoryURL(item.name)"
                         :title="item.name"
                       >
@@ -41,7 +88,7 @@
                       <i class="link-icon iconfont icon-link-external"></i>
                       <span
                         v-if="item.archived"
-                        class="archived"
+                        class="archived-icon"
                         title="This repository has been archived. It is now read-only."
                       >
                         <i class="iconfont icon-warning-line"></i>
@@ -106,77 +153,6 @@
   </header>
 </template>
 
-<script lang="ts">
-  import GH_LANG_COLORS from 'gh-lang-colors'
-  import { defineComponent, computed } from 'vue'
-  import { useGlobalStore } from '@/store'
-  import { useTheme, Theme } from '@/composables/theme'
-  import { numberSplit, countToK } from '@/transforms/unit'
-  import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
-  import * as CONFIG from '@/config'
-  import Loading from '../common/loading.vue'
-
-  export default defineComponent({
-    name: 'navbar',
-    components: { Loading },
-    props: {
-      repository: {
-        type: String,
-        required: true
-      },
-      full: {
-        type: Boolean,
-        default: false
-      }
-    },
-    setup() {
-      const theme = useTheme()
-      const store = useGlobalStore()
-      const ownRepositories = computed(() => {
-        return store.githubOwnRepositories.map((repo) => {
-          const found = Object.values(CONFIG.PROJECTS).find((project) => {
-            return project.repository === repo.name
-          })
-          const npmPackages: string[] = (found as any)?.packages ?? []
-          return {
-            ...repo,
-            npmPackages,
-            npmDownloads: npmPackages.length
-              ? numberSplit(store.getNPMPackagesDownloadsTotal(npmPackages))
-              : '-'
-          }
-        })
-      })
-
-      const themeValue = theme.theme
-      const toggleTheme = theme.toggle
-      const themeIcon = computed(() => {
-        const themeIconMap = {
-          [Theme.Light]: 'icon-sun',
-          [Theme.Dark]: 'icon-moon'
-        }
-        return themeIconMap[themeValue.value]
-      })
-
-      const getGitHubLanguageColor = (language: string): string => {
-        return (GH_LANG_COLORS as any)[language]
-      }
-
-      return {
-        CONFIG,
-        store,
-        ownRepositories,
-        themeIcon,
-        toggleTheme,
-        getNPMHomepageURL,
-        getGitHubRepositoryURL,
-        getGitHubLanguageColor,
-        countToK
-      }
-    }
-  })
-</script>
-
 <style lang="scss" scoped>
   @use 'sass:math';
   @import '@/styles/variables.scss';
@@ -186,7 +162,7 @@
     height: $navbar-height;
     background-color: $header-bg;
     border-bottom: 1px solid $border-color;
-    box-sizing: content-box;
+    box-sizing: border-box;
     user-select: none;
     z-index: 99999;
 
@@ -262,8 +238,7 @@
           right: 0;
           width: 100vw;
           padding: $gap 0;
-          border: 1px solid $border-color;
-          border-width: 1px 0 1px 0;
+          border-bottom: 1px solid $border-color;
           background-color: $banner-bg;
           @include hidden();
           @include visibility-transition();
@@ -304,7 +279,7 @@
                 border-color: $text-secondary;
                 background-color: $header-bg;
                 .title {
-                  .archived {
+                  .archived-icon {
                     opacity: 1;
                   }
                 }
@@ -330,6 +305,13 @@
                     color: $link-color;
                     text-decoration: underline;
                   }
+
+                  &.archived {
+                    text-decoration: line-through;
+                    text-decoration-style: double;
+                    text-decoration-thickness: inherit;
+                    text-decoration-color: $text-disabled;
+                  }
                 }
 
                 .repo-icon {
@@ -342,7 +324,7 @@
                   font-size: $font-size-small;
                 }
 
-                .archived {
+                .archived-icon {
                   margin-left: $xs-gap;
                   padding: 0 2px;
                   opacity: 0.6;

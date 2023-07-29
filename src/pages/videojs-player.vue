@@ -1,9 +1,10 @@
 <script lang="ts" setup>
   import { PROJECTS } from '@/config'
-  import { useMeta } from '@/composables/meta'
+  import { useSeoMeta } from '@unhead/vue'
   import { getExampleComponent } from '@/transforms/example'
   import { getPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
-  import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
+  import { getMetaTitle, getMetaKeywords, getMetaDescription, normalizeSeoMetaObject } from '@/transforms/meta'
+  import { MammonProvider } from '@/components/mammon'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
   import HomepageLink from '@/components/homepage/link.vue'
@@ -13,39 +14,25 @@
   const { repository, route, packages } = PROJECTS.VideoJsPlayer
   const examples = exampleComponents.map(getExampleComponent)
 
-  useMeta({
-    title: getMetaTitle(repository),
-    keywords: getMetaKeywords(repository).join(','),
-    description: getMetaDescription(repository),
-    ogImage: getGitHubOpenGraphImageURL(repository),
-    ogUrl: getPageURL(route)
-  })
+  useSeoMeta(
+    normalizeSeoMetaObject({
+      title: getMetaTitle(repository),
+      keywords: getMetaKeywords(repository).join(','),
+      description: getMetaDescription(repository),
+      ogImage: getGitHubOpenGraphImageURL(repository),
+      ogUrl: getPageURL(route)
+    })
+  )
 </script>
 
 <template>
   <vue-renderer :repository="repository">
-    <homepage :repository="repository" :packages="packages">
+    <homepage :repository="repository" :packages="packages" :header-ad-provider="MammonProvider.GoogleAdSense">
       <template #actions>
-        <homepage-link
-          icon="doc"
-          text="Video.js Guides"
-          href="https://videojs.com/guides"
-        />
-        <homepage-link
-          icon="doc"
-          text="Video.js API Documentation"
-          href="https://docs.videojs.com/"
-        />
-        <homepage-link
-          icon="doc"
-          text="Video.js Plugins and Skins"
-          href="https://videojs.com/plugins/"
-        />
-        <homepage-link
-          icon="discord"
-          text="Discord Discussions"
-          href="https://discord.gg/5w5cPWWEJ7"
-        />
+        <homepage-link icon="doc" text="Video.js Guides" href="https://videojs.com/guides" />
+        <homepage-link icon="doc" text="Video.js API Documentation" href="https://docs.videojs.com/" />
+        <homepage-link icon="doc" text="Video.js Plugins and Skins" href="https://videojs.com/plugins/" />
+        <homepage-link icon="discord" text="Discord Discussions" href="https://discord.gg/5w5cPWWEJ7" />
       </template>
       <template #content>
         <homepage-examples :examples="examples" :disabled-auto-ad="true">

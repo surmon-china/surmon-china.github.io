@@ -10,8 +10,8 @@
     :navigation="true"
     :pagination="{ clickable: true }"
   >
-    <swiper-slide v-for="slide in 8" :key="slide" class="slide">
-      <img :data-src="`/images/example/${slide}.jpg`" class="swiper-lazy" />
+    <swiper-slide v-for="slide in 8" :key="slide" class="slide" :lazy="true">
+      <img :src="`/images/example/${slide}.jpg`" loading="lazy" class="swiper-lazy" />
       <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
     </swiper-slide>
   </swiper>
@@ -19,10 +19,9 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Lazy, Pagination, Navigation } from 'swiper'
+  import { Pagination, Navigation } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
-  import 'swiper/css/lazy'
   import 'swiper/css/pagination'
   import 'swiper/css/navigation'
 
@@ -36,7 +35,7 @@
     },
     setup() {
       return {
-        modules: [Lazy, Pagination, Navigation]
+        modules: [Pagination, Navigation]
       }
     }
   })

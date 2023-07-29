@@ -1,11 +1,5 @@
 <template>
-  <swiper
-    class="swiper"
-    :modules="modules"
-    :navigation="true"
-    :pagination="{ clickable: true }"
-    dir="rtl"
-  >
+  <swiper class="swiper" :modules="modules" :navigation="true" :pagination="{ clickable: true }" dir="rtl">
     <swiper-slide class="slide">Slide 1</swiper-slide>
     <swiper-slide class="slide">Slide 2</swiper-slide>
     <swiper-slide class="slide">Slide 3</swiper-slide>
@@ -19,7 +13,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Pagination, Navigation } from 'swiper'
+  import { Pagination, Navigation } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'

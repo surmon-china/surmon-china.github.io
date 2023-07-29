@@ -61,9 +61,7 @@
         <i class="iconfont icon-link-external"></i>
       </swiper-slide>
       <swiper-slide class="slide">
-        <ulink class="link" href="https://github.com/nolimits4web/swiper/discussions">
-          discussions
-        </ulink>
+        <ulink class="link" href="https://github.com/nolimits4web/swiper/discussions">discussions</ulink>
         <i class="iconfont icon-link-external"></i>
       </swiper-slide>
       <swiper-slide class="slide">Slide 3</swiper-slide>
@@ -71,20 +69,12 @@
       <swiper-slide class="slide">Slide 5</swiper-slide>
       <swiper-slide class="slide">Slide 6</swiper-slide>
       <template #container-start>
-        <button
-          class="nav-button-prev"
-          :disabled="vSwiperIndex === 0"
-          @click="prevVSwiperSlide"
-        >
+        <button class="nav-button-prev" :disabled="vSwiperIndex === 0" @click="prevVSwiperSlide">
           <i class="iconfont icon-arrow-down"></i>
         </button>
       </template>
       <template #container-end>
-        <button
-          class="nav-button-next"
-          :disabled="vSwiperIndex === 5 - 1"
-          @click="nextVSwiperSlide"
-        >
+        <button class="nav-button-next" :disabled="vSwiperIndex === 5 - 1" @click="nextVSwiperSlide">
           <i class="iconfont icon-arrow-up"></i>
         </button>
       </template>
@@ -94,8 +84,9 @@
 
 <script lang="ts">
   import { defineComponent, ref, reactive } from 'vue'
-  import SwiperClass, { Pagination, Navigation, Grid, Mousewheel } from 'swiper'
+  import { Pagination, Navigation, Grid, Mousewheel } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
+  import type SwiperClass from 'swiper'
   import 'swiper/css'
   import 'swiper/css/navigation'
   import 'swiper/css/pagination'
@@ -238,7 +229,9 @@
       opacity: 0.5;
       color: rgba(white, 0.6);
       background-color: var(--swiper-theme-color);
-      transition: opacity $transition-time, visibility $transition-time;
+      transition:
+        opacity $transition-time,
+        visibility $transition-time;
       &[disabled] {
         cursor: no-drop;
         opacity: 0.3;

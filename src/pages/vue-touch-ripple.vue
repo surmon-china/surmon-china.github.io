@@ -1,13 +1,9 @@
 <script lang="ts" setup>
   import { PROJECTS } from '@/config'
-  import { useMeta } from '@/composables/meta'
-  import {
-    getPageURL,
-    getLegacyPageURL,
-    getGitHubOpenGraphImageURL
-  } from '@/transforms/url'
+  import { useSeoMeta } from '@unhead/vue'
+  import { getPageURL, getLegacyPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
+  import { getMetaTitle, getMetaKeywords, getMetaDescription, normalizeSeoMetaObject } from '@/transforms/meta'
   import { getExampleComponent } from '@/transforms/example'
-  import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
   import HomepageLink from '@/components/homepage/link.vue'
@@ -17,24 +13,22 @@
   const { repository, route, packages } = PROJECTS.VueTouchRipple
   const examples = exampleComponents.map(getExampleComponent)
 
-  useMeta({
-    title: getMetaTitle(repository),
-    keywords: getMetaKeywords(repository).join(','),
-    description: getMetaDescription(repository),
-    ogImage: getGitHubOpenGraphImageURL(repository),
-    ogUrl: getPageURL(route)
-  })
+  useSeoMeta(
+    normalizeSeoMetaObject({
+      title: getMetaTitle(repository),
+      keywords: getMetaKeywords(repository).join(','),
+      description: getMetaDescription(repository),
+      ogImage: getGitHubOpenGraphImageURL(repository),
+      ogUrl: getPageURL(route)
+    })
+  )
 </script>
 
 <template>
   <vue-renderer :repository="repository">
     <homepage :repository="repository" :packages="packages">
       <template #actions>
-        <homepage-link
-          icon="doc"
-          text="Vue(2) Examples"
-          :href="getLegacyPageURL(repository)"
-        />
+        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyPageURL(repository)" />
         <homepage-link
           icon="doc"
           text="Component Props"
@@ -45,11 +39,7 @@
           text="Component Events"
           href="https://github.com/surmon-china/vue-touch-ripple#component-events"
         />
-        <homepage-link
-          icon="discord"
-          text="Discord Discussions"
-          href="https://discord.gg/QF8zwF3vPv"
-        />
+        <homepage-link icon="discord" text="Discord Discussions" href="https://discord.gg/QF8zwF3vPv" />
       </template>
       <template #content>
         <homepage-examples :examples="examples" :disabled-auto-ad="true">

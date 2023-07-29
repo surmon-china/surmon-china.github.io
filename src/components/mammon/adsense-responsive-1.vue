@@ -1,6 +1,5 @@
 <script lang="ts" setup>
-  import { defineProps } from 'vue'
-  import { GOOGLE_ADSENSE_CLIENT } from '@/config'
+  import { GOOGLE_ADSENSE_CLIENT_ID } from '@/config'
   const props = defineProps({
     rootClass: {
       type: String,
@@ -12,7 +11,7 @@
 <template>
   <Adsense
     :class="`g-a-mammon ${rootClass}`"
-    :data-ad-client="GOOGLE_ADSENSE_CLIENT"
+    :data-ad-client="GOOGLE_ADSENSE_CLIENT_ID"
     :data-full-width-responsive="true"
     :is-non-personalized-ads="false"
     data-ad-format="auto"

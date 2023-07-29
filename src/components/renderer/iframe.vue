@@ -1,12 +1,34 @@
+<script lang="ts" setup>
+  import { reactive } from 'vue'
+  import LayoutNavbar from '@/components/layout/navbar.vue'
+  import Loading from '@/components/common/loading.vue'
+
+  const props = defineProps<{
+    src: string
+    repository: string
+    legacy?: boolean
+    fullnav?: boolean
+  }>()
+
+  const state = reactive({
+    loading: true,
+    error: null as null | string
+  })
+
+  const handleIframeLoaded = () => {
+    state.loading = false
+  }
+
+  const handleIframeError = (error: Event) => {
+    state.loading = false
+    state.error = String(error)
+  }
+</script>
+
 <template>
   <div class="iframe-renderer" :class="{ legacy }">
-    <navbar class="header" :repository="repository" :full="fullnav" />
-    <iframe
-      class="iframe"
-      :src="src"
-      @load="handleIframeLoaded"
-      @error="handleIframeError"
-    />
+    <layout-navbar class="navbar" :repository="repository" :full="fullnav" />
+    <iframe class="iframe" :src="src" @load="handleIframeLoaded" @error="handleIframeError" />
     <transition name="module">
       <div class="loading-box" v-if="state.loading">
         <loading />
@@ -14,54 +36,6 @@
     </transition>
   </div>
 </template>
-
-<script lang="ts">
-  import { defineComponent, reactive } from 'vue'
-  import Navbar from '@/components/layout/navbar.vue'
-  import Loading from '@/components/common/loading.vue'
-
-  export default defineComponent({
-    name: 'iframe-renderer',
-    components: { Navbar, Loading },
-    props: {
-      src: {
-        type: String,
-        required: true
-      },
-      repository: {
-        type: String,
-        required: true
-      },
-      legacy: {
-        type: Boolean,
-        default: false
-      },
-      fullnav: {
-        type: Boolean,
-        default: false
-      }
-    },
-    setup() {
-      const state = reactive({
-        loading: true,
-        error: null as null | string
-      })
-      const handleIframeLoaded = () => {
-        state.loading = false
-      }
-      const handleIframeError = (error: Event) => {
-        handleIframeLoaded()
-        state.error = String(error)
-      }
-
-      return {
-        state,
-        handleIframeLoaded,
-        handleIframeError
-      }
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   @import '@/styles/variables.scss';

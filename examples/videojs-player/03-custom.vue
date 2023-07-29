@@ -45,56 +45,56 @@
     },
     setup() {
       const videoSource = {
-        poster: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/poster.png',
+        poster: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/poster.png',
         sources: [
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.mp4',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.mp4',
             type: 'video/mp4'
           },
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.ogg',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.ogg',
             type: 'video/ogg'
           }
         ],
         tracks: [
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.en.vtt',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.en.vtt',
             kind: 'captions',
             srclang: 'en',
             label: 'English'
           },
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.ar.vtt',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.ar.vtt',
             kind: 'captions',
             srclang: 'ar',
             label: 'Arabic'
           },
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.sv.vtt',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.sv.vtt',
             kind: 'captions',
             srclang: 'sv',
             label: 'Swedish'
           },
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.ru.vtt',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.ru.vtt',
             kind: 'captions',
             srclang: 'ru',
             label: 'Russian'
           },
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.ja.vtt',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/captions.ja.vtt',
             kind: 'captions',
             srclang: 'ja',
             label: 'Japanese'
           },
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/descriptions.en.vtt',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/descriptions.en.vtt',
             kind: 'descriptions',
             srclang: 'en',
             label: 'English'
           },
           {
-            src: '//d2zihajmogu5jn.cloudfront.net/elephantsdream/chapters.en.vtt',
+            src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/chapters.en.vtt',
             kind: 'chapters',
             srclang: 'en',
             label: 'English'

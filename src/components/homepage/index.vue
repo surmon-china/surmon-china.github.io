@@ -1,3 +1,34 @@
+<script lang="ts" setup>
+  import { computed } from 'vue'
+  import { useGlobalStore } from '@/store'
+  import { numberSplit } from '@/transforms/unit'
+  import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
+  import Mammon, { MammonProvider } from '@/components/mammon/index'
+  import Skeleton from '@/components/common/skeleton.vue'
+  import HomepageCard from './card.vue'
+  import GithubButton from './button.vue'
+
+  interface Props {
+    repository: string
+    packages?: string[]
+    headerAdProvider?: MammonProvider
+    footerAdProvider?: MammonProvider
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    packages: () => []
+  })
+
+  const store = useGlobalStore()
+  const initialized = computed(() => store.initialized)
+  const repoUrl = getGitHubRepositoryURL(props.repository)
+  const repoDetail = computed(() => store.getGitHubRepositoryDetail(props.repository))
+  const npmDownloads = computed(() => {
+    const downloads = store.getNPMPackagesDownloadsTotal(props.packages)
+    return numberSplit(downloads)
+  })
+</script>
+
 <template>
   <main class="homepage">
     <div class="banner">
@@ -68,63 +99,6 @@
     </div>
   </main>
 </template>
-
-<script lang="ts">
-  import { defineComponent, computed, PropType } from 'vue'
-  import { useGlobalStore } from '@/store'
-  import { numberSplit } from '@/transforms/unit'
-  import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
-  import Mammon, { MammonProvider } from '@/components/mammon/index'
-  import Skeleton from '@/components/common/skeleton.vue'
-  import HomepageCard from './card.vue'
-  import GithubButton from './button.vue'
-
-  export default defineComponent({
-    name: 'homepage',
-    components: {
-      Mammon,
-      Skeleton,
-      HomepageCard,
-      GithubButton
-    },
-    props: {
-      repository: {
-        type: String,
-        required: true
-      },
-      packages: {
-        type: Array as PropType<string[]>,
-        default: () => [] as string[]
-      },
-      headerAdProvider: {
-        type: String as PropType<MammonProvider>,
-        required: false
-      },
-      footerAdProvider: {
-        type: String as PropType<MammonProvider>,
-        required: false
-      }
-    },
-    setup(props) {
-      const store = useGlobalStore()
-      const initialized = computed(() => store.initialized)
-      const repoUrl = getGitHubRepositoryURL(props.repository)
-      const repoDetail = computed(() => store.getGitHubRepositoryDetail(props.repository))
-      const npmDownloads = computed(() => {
-        const downloads = store.getNPMPackagesDownloadsTotal(props.packages)
-        return numberSplit(downloads)
-      })
-
-      return {
-        initialized,
-        repoUrl,
-        repoDetail,
-        npmDownloads,
-        getNPMHomepageURL
-      }
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   @use 'sass:math';

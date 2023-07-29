@@ -24,7 +24,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper'
+  import { Keyboard, Scrollbar, Navigation, Pagination } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/scrollbar'

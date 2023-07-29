@@ -1,9 +1,5 @@
 <template>
-  <swiper
-    class="swiper"
-    :modules="modules"
-    :pagination="{ clickable: true, renderBullet: bulletRenderer }"
-  >
+  <swiper class="swiper" :modules="modules" :pagination="{ clickable: true, renderBullet: bulletRenderer }">
     <swiper-slide class="slide">Slide 1</swiper-slide>
     <swiper-slide class="slide">Slide 2</swiper-slide>
     <swiper-slide class="slide">Slide 3</swiper-slide>
@@ -17,7 +13,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Pagination } from 'swiper'
+  import { Pagination } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'

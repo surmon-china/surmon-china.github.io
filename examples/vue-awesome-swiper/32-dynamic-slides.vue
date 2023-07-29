@@ -15,9 +15,7 @@
       :navigation="true"
       :modules="modules"
     >
-      <swiper-slide v-for="slide in slides" :key="slide" class="slide">
-        Slide {{ slide }}
-      </swiper-slide>
+      <swiper-slide v-for="slide in slides" :key="slide" class="slide">Slide {{ slide }}</swiper-slide>
     </swiper>
   </div>
 </template>
@@ -26,7 +24,7 @@
   import { defineComponent, reactive } from 'vue'
   // https://swiperjs.com/swiper-api#manipulation
   // MARK: Manipulation module adds useful Swiper methods to manipulate slides. It makes sense to use it only with Swiper Core version, not intended to be uses with Swiper Angular, React, Svelte or Vue.
-  import { Pagination, Navigation } from 'swiper'
+  import { Pagination, Navigation } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'
@@ -42,8 +40,8 @@
     setup() {
       const slides = reactive([1, 2, 3, 4, 5])
       return {
-        modules: [Pagination, Navigation],
         slides,
+        modules: [Pagination, Navigation],
         appendSlide: () => slides.push(slides.length + 1),
         prependSlide: () => slides.unshift(slides[0] - 1),
         popSlide: () => slides.pop(),

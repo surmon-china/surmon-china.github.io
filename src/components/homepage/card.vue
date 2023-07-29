@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+  defineProps<{
+    title?: string
+    titleLink?: string
+    contentClass?: string
+  }>()
+</script>
+
 <template>
   <div class="homepage-card">
     <div class="header" v-if="title">
@@ -13,22 +21,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  export default defineComponent({
-    name: 'homepage-card',
-    props: {
-      title: String,
-      titleLink: String,
-      contentClass: {
-        type: String,
-        required: false,
-        default: ''
-      }
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   @import '@/styles/variables.scss';

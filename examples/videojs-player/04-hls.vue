@@ -44,7 +44,7 @@
     },
     setup() {
       const videoSource = {
-        src: 'https://logos-channel.scaleengine.net/logos-channel/live/biblescreen-ad-free/playlist.m3u8',
+        src: 'http://amssamples.streaming.mediaservices.windows.net/634cd01c-6822-4630-8444-8dd6279f94c6/CaminandesLlamaDrama4K.ism/manifest(format=m3u8-aapl)',
         type: 'application/x-mpegURL'
       }
 

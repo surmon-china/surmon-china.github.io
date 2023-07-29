@@ -2,7 +2,8 @@ import path from 'path'
 import { defineConfig, Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import react from '@vitejs/plugin-react'
-import { CDN_PREFIX } from './src/config'
+import UnheadVite from '@unhead/addons/vite'
+import { CDN_URL_PREFIX } from './src/config'
 
 // https://github.com/vitejs/vite/issues/5071
 // https://github.com/vitejs/vite/pull/5535/files
@@ -20,20 +21,10 @@ const resolveMetaUrl = (): Plugin => ({
   }
 })
 
-// https://github.com/antfu/vite-ssg/issues/156#issuecomment-1047341987
-const fixSwiperCSSOnSSR = (): Plugin => ({
-  name: 'fix-swiper-ssr',
-  transform(code, id, options = {}) {
-    if (options.ssr) {
-      return code.replace(/import .swiper\/(s?css|less).*$/gm, '')
-    }
-  }
-})
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  plugins: [vue(), react(), resolveMetaUrl() /* fixSwiperCSSOnSSR() */],
-  base: mode === 'production' ? CDN_PREFIX : '/',
+  plugins: [vue(), react(), resolveMetaUrl(), UnheadVite()],
+  base: mode === 'production' ? CDN_URL_PREFIX : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -47,8 +38,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     cssCodeSplit: false
   },
-  optimizeDeps: {
-    // https://github.com/nolimits4web/swiper/issues/5294#issuecomment-999831249
-    exclude: ['swiper/vue', 'swiper/types']
+  ssr: {
+    noExternal: ['vue-codemirror', '@videojs-player/vue', '@videojs-player/react', 'vue-touch-ripple']
   }
 }))

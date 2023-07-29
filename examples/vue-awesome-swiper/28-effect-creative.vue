@@ -2,7 +2,8 @@
   <div class="creative-example">
     <div class="toolbar">
       <button v-for="(_, index) in effects" :key="index" @click="setEffect(index)">
-        Effect {{ index }}
+        Effect {{ index + 1 }}
+        {{ index === effectIndex ? '⎷' : '' }}
       </button>
     </div>
     <swiper
@@ -23,7 +24,7 @@
 
 <script lang="ts">
   import { defineComponent, nextTick, ref } from 'vue'
-  import SwiperClass, { Pagination, EffectCreative } from 'swiper'
+  import { Pagination, EffectCreative } from 'swiper/modules'
   import { CreativeEffectOptions } from 'swiper/types'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'

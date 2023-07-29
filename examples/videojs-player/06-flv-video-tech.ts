@@ -1,4 +1,5 @@
-// Fork from https://github.com/mister-ben/videojs-flvjs
+// https://github.com/mister-ben/videojs-flvjs/blob/master/src/plugin.js
+// https://github.com/videojs/videojs-youtube/blob/main/src/Youtube.js
 
 import flvjs from 'flv.js'
 import videojs from 'video.js'
@@ -39,7 +40,7 @@ export class FlvJsTech extends Html5 {
     return FlvJsTech.isSupported() && type in FlvJsTech.formats ? 'maybe' : ''
   }
 
-  static canPlaySource = function (source: videojs.Tech.SourceObject) {
+  static canPlaySource = function (source: any) {
     return FlvJsTech.isSupported() && source.src.endsWith('.flv') ? 'maybe' : ''
   }
 }

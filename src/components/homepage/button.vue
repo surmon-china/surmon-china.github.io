@@ -1,3 +1,27 @@
+<script lang="ts" setup>
+  import { computed } from 'vue'
+  import { countToK } from '@/transforms/unit'
+
+  const props = defineProps<{
+    link: string
+    icon: string
+    text?: string
+    count?: number
+    countIcon?: string
+    countText?: string
+    countLink?: string
+  }>()
+
+  const hasCount = computed(() => Number.isFinite(props.count as number) || props.countText)
+  const countContent = computed(() => {
+    if (props.countText) {
+      return props.countText
+    }
+
+    return hasCount ? countToK(props.count as number) : null
+  })
+</script>
+
 <template>
   <span class="homepage-button">
     <ulink :href="link" class="item button" :class="{ 'has-count': hasCount }">
@@ -13,62 +37,6 @@
     </ulink>
   </span>
 </template>
-
-<script lang="ts">
-  import { defineComponent, computed } from 'vue'
-  import { countToK } from '@/transforms/unit'
-
-  export default defineComponent({
-    name: 'homepage-button',
-    props: {
-      link: {
-        type: String,
-        required: true
-      },
-      icon: {
-        type: String,
-        required: true
-      },
-      text: {
-        type: String,
-        required: false
-      },
-      count: {
-        type: Number,
-        required: false
-      },
-      countIcon: {
-        type: String,
-        required: false
-      },
-      countText: {
-        type: String,
-        required: false
-      },
-      countLink: {
-        type: String,
-        required: false
-      }
-    },
-    setup(props) {
-      const hasCount = computed(
-        () => Number.isFinite(props.count as number) || props.countText
-      )
-
-      const countContent = computed(() => {
-        if (props.countText) {
-          return props.countText
-        }
-        return hasCount ? countToK(props.count as number) : null
-      })
-
-      return {
-        hasCount,
-        countContent
-      }
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   @import '@/styles/variables.scss';

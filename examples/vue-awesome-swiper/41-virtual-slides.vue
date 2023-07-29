@@ -17,12 +17,7 @@
     :pagination="{ type: 'fraction' }"
     @swiper="setSwiperRef"
   >
-    <swiper-slide
-      v-for="(slideContent, index) in slides"
-      :key="index"
-      :virtual-index="index"
-      class="slide"
-    >
+    <swiper-slide v-for="(slideContent, index) in slides" :key="index" :virtual-index="index" class="slide">
       Slide {{ slideContent }}
     </swiper-slide>
   </swiper>
@@ -30,8 +25,9 @@
 
 <script lang="ts">
   import { defineComponent, reactive } from 'vue'
-  import SwiperClass, { Pagination, Navigation, Virtual } from 'swiper'
+  import { Pagination, Navigation, Virtual } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
+  import type SwiperClass from 'swiper'
   import 'swiper/css'
   import 'swiper/css/pagination'
   import 'swiper/css/navigation'

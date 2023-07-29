@@ -1,19 +1,21 @@
 <script lang="ts" setup>
   import { PROJECTS } from '@/config'
-  import { useMeta } from '@/composables/meta'
+  import { useSeoMeta } from '@unhead/vue'
   import { getPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
-  import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
+  import { getMetaTitle, getMetaKeywords, getMetaDescription, normalizeSeoMetaObject } from '@/transforms/meta'
   import VueRenderer from '@/components/renderer/vue.vue'
 
   const { repository, route } = PROJECTS.Readme
 
-  useMeta({
-    title: getMetaTitle(repository),
-    keywords: getMetaKeywords(repository).join(','),
-    description: getMetaDescription(repository),
-    ogImage: getGitHubOpenGraphImageURL(repository),
-    ogUrl: getPageURL(route)
-  })
+  useSeoMeta(
+    normalizeSeoMetaObject({
+      title: getMetaTitle(repository),
+      keywords: getMetaKeywords(repository).join(','),
+      description: getMetaDescription(repository),
+      ogImage: getGitHubOpenGraphImageURL(repository),
+      ogUrl: getPageURL(route)
+    })
+  )
 </script>
 
 <template>

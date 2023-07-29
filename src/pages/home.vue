@@ -1,10 +1,10 @@
 <script lang="ts" setup>
   import { reactive, onBeforeMount } from 'vue'
-  import { useMeta } from '@/composables/meta'
+  import { useSeoMeta } from '@unhead/vue'
   import { APP_META, GITHUB_USER_URL } from '@/config'
 
   const meta = reactive({ ...APP_META })
-  useMeta(() => meta)
+  useSeoMeta(() => meta)
   onBeforeMount(() => {
     meta.title = `Redirect to Surmon's GitHub ...`
     location.href = GITHUB_USER_URL

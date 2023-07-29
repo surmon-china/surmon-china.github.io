@@ -3,7 +3,7 @@ import { createWebHistory } from 'vue-router'
 import highlight from './plugins/highlight'
 import adsense from './composables/adsense'
 import { getLocalTheme } from './composables/theme'
-import { GOOGLE_ADSENSE_CLIENT } from './config'
+import { GOOGLE_ADSENSE_CLIENT_ID } from './config'
 import { createUniversalApp } from './main'
 
 import '@/styles/app.scss'
@@ -18,11 +18,11 @@ const { app, router, visitor } = createUniversalApp({
 })
 
 app.use(highlight)
-app.use(adsense, { ID: GOOGLE_ADSENSE_CLIENT, enabledAutoAD: false })
+app.use(adsense, { ID: GOOGLE_ADSENSE_CLIENT_ID, enabledAutoAD: false })
 visitor.resetStateOnClient()
 
 router.isReady().finally(() => {
-  app.mount('#app').$nextTick(() => {
+  app.mount('#app', true).$nextTick(() => {
     console.log('App mounted:', app)
   })
 })

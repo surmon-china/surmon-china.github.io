@@ -13,9 +13,8 @@
     :class="`g-a-mammon ${rootClass}`"
     :data-ad-client="GOOGLE_ADSENSE_CLIENT_ID"
     :data-full-width-responsive="true"
-    :is-non-personalized-ads="false"
     data-ad-format="auto"
-    data-ad-slot="4010319351"
+    data-ad-slot="5885388786"
   ></Adsense>
 </template>
 
@@ -24,7 +23,6 @@
   @import '@/styles/mixins.scss';
   .g-a-mammon {
     width: 100%;
-    min-height: 6rem;
-    height: auto;
+    height: 10rem;
   }
 </style>

@@ -21,7 +21,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Pagination, Mousewheel } from 'swiper'
+  import { Pagination, Mousewheel } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'

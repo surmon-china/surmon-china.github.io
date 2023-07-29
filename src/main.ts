@@ -1,7 +1,7 @@
 import { CreateAppFunction } from 'vue'
 import { createRouter, RouterHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-import { createMeta } from './composables/meta'
+import { createHead } from '@unhead/vue'
 import { createVisitor } from './composables/visitor'
 import { createTheme, Theme } from './composables/theme'
 import UlinkComponent from './components/common/ulink'
@@ -19,12 +19,14 @@ export interface AppCreatorOptions {
 export const createUniversalApp = (options: AppCreatorOptions) => {
   const app = options.appCreator(App)
   const pinia = createPinia()
-  const meta = createMeta()
+  const head = createHead()
   const theme = createTheme(options.initTheme)
+
   const visitor = createVisitor({
     language: options.language,
     userAgent: options.userAgent
   })
+
   const router = createRouter({
     routes,
     strict: true,
@@ -35,7 +37,7 @@ export const createUniversalApp = (options: AppCreatorOptions) => {
 
   app.use(router)
   app.use(pinia)
-  app.use(meta)
+  app.use(head)
   app.use(theme)
   app.use(visitor)
   app.component(UlinkComponent.name, UlinkComponent)
@@ -44,7 +46,7 @@ export const createUniversalApp = (options: AppCreatorOptions) => {
     app,
     router,
     pinia,
-    meta,
+    head,
     theme,
     visitor
   }

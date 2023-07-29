@@ -34,8 +34,9 @@
 
 <script lang="ts">
   import { defineComponent, ref } from 'vue'
-  import SwiperClass, { Navigation, Thumbs } from 'swiper'
+  import { Navigation, Thumbs } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
+  import type SwiperClass from 'swiper'
   import 'swiper/css'
   import 'swiper/css/navigation'
   import 'swiper/css/thumbs'

@@ -1,4 +1,5 @@
 import { defineComponent, PropType, h } from 'vue'
+import GoogleAdSense from './adsense-responsive.vue'
 import GoogleAdSense1 from './adsense-responsive-1.vue'
 import GoogleAdSense2 from './adsense-responsive-2.vue'
 import GoogleAdSense3 from './adsense-responsive-3.vue'
@@ -8,6 +9,7 @@ import ImageAd from './image.vue'
 export enum MammonProvider {
   Image = 'Image',
   Swiper = 'Swiper',
+  GoogleAdSense = 'GoogleAdSense',
   GoogleAdSense1 = 'GoogleAdSense1',
   GoogleAdSense2 = 'GoogleAdSense2',
   GoogleAdSense3 = 'GoogleAdSense3'
@@ -35,6 +37,9 @@ export default defineComponent({
       }
       if (props.provider === MammonProvider.Swiper) {
         return h(SwiperAd)
+      }
+      if (props.provider === MammonProvider.GoogleAdSense) {
+        return h(GoogleAdSense)
       }
       if (props.provider === MammonProvider.GoogleAdSense1) {
         return h(GoogleAdSense1)

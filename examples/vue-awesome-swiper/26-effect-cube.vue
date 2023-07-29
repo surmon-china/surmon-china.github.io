@@ -22,7 +22,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Pagination, EffectCube } from 'swiper'
+  import { Pagination, EffectCube } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'

@@ -1,3 +1,19 @@
+<script lang="ts" setup>
+  import { openWindow } from '@/services/opener'
+  import { APP_META } from '@/config'
+
+  const props = defineProps<{
+    repository: string
+  }>()
+
+  const handleShare = () => {
+    const url = window.location.href
+    const title = document.title || APP_META.title
+    const tweetURL = `https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`
+    openWindow(tweetURL, { name: `Share: ${props.repository}` })
+  }
+</script>
+
 <template>
   <div id="share">
     <button class="share-button" title="Share to Twitter" @click="handleShare">
@@ -6,35 +22,6 @@
     </button>
   </div>
 </template>
-
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  import { openWindow } from '@/services/opener'
-  import { APP_META } from '@/config'
-  export default defineComponent({
-    name: 'share',
-    props: {
-      repository: {
-        type: String,
-        required: true
-      }
-    },
-    setup(props) {
-      const handleShare = () => {
-        const url = window.location.href
-        const title = document.title || APP_META.title
-        const tweetURL = `https://twitter.com/share?url=${encodeURIComponent(
-          url
-        )}&text=${encodeURIComponent(title)}`
-        openWindow(tweetURL, { name: `Share: ${props.repository}` })
-      }
-
-      return {
-        handleShare
-      }
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   @import '@/styles/variables.scss';
@@ -72,7 +59,9 @@
       border-bottom-right-radius: $lg-radius;
       color: $twitter-primary;
       background-color: $banner-bg;
-      transition: background-color $transition-time, color $transition-time;
+      transition:
+        background-color $transition-time,
+        color $transition-time;
       &:hover {
         color: $white;
         background-color: $twitter-primary;

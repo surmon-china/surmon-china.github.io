@@ -25,8 +25,8 @@
 
 <script lang="ts">
   import { defineComponent, shallowRef } from 'vue'
-  import { VideoJsPlayer } from 'video.js'
   import { VideoPlayer } from '@videojs-player/vue'
+  import type { VideoJsPlayer } from 'video.js'
   import 'video.js/dist/video-js.css'
 
   export default defineComponent({

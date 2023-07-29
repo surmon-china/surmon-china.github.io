@@ -1,10 +1,5 @@
 <template>
-  <swiper
-    class="swiper swiper-h"
-    :modules="modules"
-    :space-between="50"
-    :pagination="{ clickable: true }"
-  >
+  <swiper class="swiper swiper-h" :modules="modules" :space-between="50" :pagination="{ clickable: true }">
     <swiper-slide class="slide">Horizontal Slide 1</swiper-slide>
     <swiper-slide class="slide">
       <swiper
@@ -28,7 +23,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Pagination } from 'swiper'
+  import { Pagination } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/pagination'

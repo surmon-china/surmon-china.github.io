@@ -12,7 +12,6 @@ import bash from 'highlight.js/lib/languages/bash'
 import less from 'highlight.js/lib/languages/less'
 import scss from 'highlight.js/lib/languages/scss'
 import shell from 'highlight.js/lib/languages/shell'
-import nginx from 'highlight.js/lib/languages/nginx'
 import stylus from 'highlight.js/lib/languages/stylus'
 import python from 'highlight.js/lib/languages/python'
 import javascript from 'highlight.js/lib/languages/javascript'
@@ -29,7 +28,6 @@ const languages: Record<string, LanguageFn> = {
   less,
   scss,
   shell,
-  nginx,
   stylus,
   python,
   javascript,

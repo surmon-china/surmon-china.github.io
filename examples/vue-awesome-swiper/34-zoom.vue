@@ -20,7 +20,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Pagination, Navigation, Zoom } from 'swiper'
+  import { Pagination, Navigation, Zoom } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/zoom'

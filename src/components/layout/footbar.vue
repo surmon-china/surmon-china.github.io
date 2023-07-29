@@ -1,36 +1,23 @@
+<script lang="ts" setup>
+  import { getGitHubRepositoryURL } from '@/transforms/url'
+  import * as CONFIG from '@/config'
+
+  const props = defineProps<{
+    repository: string
+  }>()
+</script>
+
 <template>
   <footer class="footbar">
     <div class="container">
       <span class="footer-content">
         <ulink :href="getGitHubRepositoryURL(repository)">{{ repository }}</ulink>
         <span> is maintained by </span>
-        <ulink :href="CONFIG.GITHUB_USER_URL">@{{ CONFIG.GITHUB_UID }}</ulink>
+        <ulink :href="CONFIG.GITHUB_USER_URL">@{{ CONFIG.GITHUB_USERNAME }}</ulink>
       </span>
     </div>
   </footer>
 </template>
-
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  import { getGitHubRepositoryURL } from '@/transforms/url'
-  import * as CONFIG from '@/config'
-
-  export default defineComponent({
-    name: 'footbar',
-    props: {
-      repository: {
-        type: String,
-        required: true
-      }
-    },
-    setup() {
-      return {
-        CONFIG,
-        getGitHubRepositoryURL
-      }
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   @import '@/styles/variables.scss';

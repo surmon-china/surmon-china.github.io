@@ -1,3 +1,19 @@
+<script lang="ts" setup>
+  import { getGitHubRepositoryURL } from '@/transforms/url'
+  import * as CONFIG from '@/config'
+
+  const props = defineProps<{
+    repository: string
+  }>()
+
+  const emit = defineEmits<{
+    (e: 'toTop'): void
+  }>()
+
+  const repoURL = getGitHubRepositoryURL(props.repository)
+  const handleToPageTop = () => emit('toTop')
+</script>
+
 <template>
   <div id="toolbox">
     <div class="container">
@@ -16,29 +32,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  import { getGitHubRepositoryURL } from '@/transforms/url'
-  import * as CONFIG from '@/config'
-  export default defineComponent({
-    name: 'toolbox',
-    props: {
-      repository: {
-        type: String,
-        required: true
-      }
-    },
-    emits: ['toTop'],
-    setup(props, content) {
-      return {
-        CONFIG,
-        repoURL: getGitHubRepositoryURL(props.repository),
-        handleToPageTop: () => content.emit('toTop')
-      }
-    }
-  })
-</script>
 
 <style lang="scss" scoped>
   @import '@/styles/variables.scss';

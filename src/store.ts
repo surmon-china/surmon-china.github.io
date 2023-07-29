@@ -1,16 +1,16 @@
-import axios from '@/services/axios'
 import { decode } from 'js-base64'
 import { defineStore } from 'pinia'
-import { GITHUB_UID } from '@/config'
+import { GITHUB_USERNAME } from '@/config'
 import { GitHubAggregateData, GitHubRepository, NPMAggregateData } from './type'
+import axios from '@/services/axios'
 
 const fetchGitHubProfileFileContent = <T>(filePath: string): Promise<T | null> => {
-  const uid = GITHUB_UID
+  const user = GITHUB_USERNAME
   const branch = `release`
   // for user client & GitHub Actions generate
-  const raw = `https://raw.githubusercontent.com/${uid}/${uid}/${branch}/${filePath}`
+  const raw = `https://raw.githubusercontent.com/${user}/${user}/${branch}/${filePath}`
   // for China user client & fallback
-  const api = `https://api.github.com/repos/${uid}/${uid}/contents/${filePath}?ref=${branch}`
+  const api = `https://api.github.com/repos/${user}/${user}/contents/${filePath}?ref=${branch}`
   return axios.get<never, T>(raw).catch(() => {
     return axios.get<never, { content: string; encoding: string }>(api).then((response) => {
       if (response.encoding === 'base64') {
@@ -40,18 +40,14 @@ export const useGlobalStore = defineStore('global', {
     },
     getGitHubRepositoryDetail() {
       return (repositoryName: string) => {
-        return this.githubRepositories.find(
-          (repository) => repository.name === repositoryName
-        )
+        return this.githubRepositories.find((repository) => repository.name === repositoryName)
       }
     },
     // NPM
     npmPackages: (state) => state.npmData?.packages ?? [],
     npmPackagesDownloadsMap: (state) => {
       const downloads = state.npmData?.downloads ?? {}
-      return new Map<string, number>(
-        Object.keys(downloads).map((item) => [item, downloads[item]])
-      )
+      return new Map<string, number>(Object.keys(downloads).map((item) => [item, downloads[item]]))
     },
     getNPMPackagesDownloadsTotal() {
       return (packages: string[]) => {
@@ -65,11 +61,9 @@ export const useGlobalStore = defineStore('global', {
   actions: {
     fetchGitHubAggregateData() {
       // https://github.com/surmon-china/surmon-china/blob/release/github.json
-      return fetchGitHubProfileFileContent<GitHubAggregateData>('github.json').then(
-        (data) => {
-          this.githubData = data
-        }
-      )
+      return fetchGitHubProfileFileContent<GitHubAggregateData>('github.json').then((data) => {
+        this.githubData = data
+      })
     },
     fetchNPMAggregateData() {
       // https://github.com/surmon-china/surmon-china/blob/release/npm.json
@@ -78,10 +72,7 @@ export const useGlobalStore = defineStore('global', {
       })
     },
     init() {
-      return Promise.all([
-        this.fetchGitHubAggregateData(),
-        this.fetchNPMAggregateData()
-      ]).finally(() => {
+      return Promise.all([this.fetchGitHubAggregateData(), this.fetchNPMAggregateData()]).finally(() => {
         this.initialized = true
       })
     }

@@ -4,22 +4,11 @@ export interface ScriptLoaderOption extends Partial<HTMLScriptElement> {
   domain?: string
 }
 
-export const loadScript = (
-  source: string,
-  options: ScriptLoaderOption = {} as ScriptLoaderOption
-) => {
+export const loadScript = (source: string, options: ScriptLoaderOption = {} as ScriptLoaderOption) => {
   return new Promise((resolve, reject) => {
     const head = document.head || document.getElementsByTagName('head')[0]
     const script = document.createElement('script')
-    const {
-      src,
-      domain,
-      type = 'text/javascript',
-      charset = 'utf-8',
-      defer = false,
-      async = false,
-      ...restAttrs
-    } = options
+    const { src, domain, type = 'text/javascript', defer = false, async = false, ...restAttrs } = options
     script.type = type
     script.defer = defer
     script.async = async

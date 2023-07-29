@@ -22,14 +22,15 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import SwiperClass, { Navigation } from 'swiper'
+  import { Navigation } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
+  import type SwiperClass from 'swiper'
   import 'swiper/css'
   import 'swiper/css/navigation'
 
   export default defineComponent({
     name: 'swiper-example-change-direction',
-    title: 'Change direction',
+    title: 'Change direction (→ resize ←)',
     url: import.meta.url,
     components: {
       Swiper,

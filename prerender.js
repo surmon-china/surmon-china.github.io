@@ -1,11 +1,14 @@
-const fs = require('fs')
-const path = require('path')
-const vite = require('vite')
-const projects = require('./projects.json')
+import fs from 'fs'
+import path from 'path'
+import { build } from 'vite'
+import { fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const toAbsolute = (_path) => path.resolve(__dirname, _path)
+const projectsJSON = JSON.parse(fs.readFileSync(toAbsolute('projects.json'), 'utf-8'))
 
 const INDEX_ROUTE = '/'
-const PAGE_ROUTES = Object.values(projects).map((project) => `/${project.route}`)
+const PAGE_ROUTES = Object.values(projectsJSON).map((project) => `/${project.route}`)
 const ROUTES = [INDEX_ROUTE, ...PAGE_ROUTES]
 
 const renderRedirectionHTML = (url) => `
@@ -18,62 +21,63 @@ const renderRedirectionHTML = (url) => `
   </html>
 `
 
-;(async () => {
-  try {
-    // empty dist dir
-    fs.rmSync(toAbsolute('dist'), { recursive: true, force: true })
+try {
+  // empty dist dir
+  fs.rmSync(toAbsolute('dist'), { recursive: true, force: true })
 
-    console.log('Bundle CSR...\n')
-    await vite.build({ build: { emptyOutDir: true } })
+  console.log('1. Client render bundling...\n')
+  await build({ build: { emptyOutDir: true } })
+  console.info('\nClient bundle done.\n')
 
-    console.log('Bundle SSR...\n')
-    await vite.build({
-      ssr: { noExternal: ['swiper'], format: 'cjs' },
-      build: {
-        ssr: true,
-        minify: true,
-        manifest: false,
-        emptyOutDir: false,
-        outDir: toAbsolute('dist/ssr'),
-        rollupOptions: {
-          input: toAbsolute('src/ssr.ts')
-        }
+  console.log('2. Server render bundling...\n')
+  await build({
+    build: {
+      ssr: true,
+      minify: false,
+      manifest: false,
+      emptyOutDir: false,
+      ssrEmitAssets: false,
+      copyPublicDir: false,
+      outDir: toAbsolute('dist/ssr'),
+      rollupOptions: {
+        input: toAbsolute('src/ssr.ts')
       }
-    })
-
-    // MARK: after CSR bundled & before pre-render routes
-    const template = fs.readFileSync(toAbsolute('dist/index.html'), 'utf-8')
-    const { render } = require('./dist/ssr/ssr.js')
-
-    // pre-render each route...
-    for (const url of ROUTES) {
-      const { appHTML, metaHTML } = await render(url)
-      const html = template
-        .replace(/<title>[\s\S]*<\/title>/, '')
-        // https://github.com/vueuse/head#ssr-rendering
-        .replace(`<html`, () => `<html ${metaHTML.htmlAttrs} `)
-        .replace(`<head>`, () => `<head>\n${metaHTML.headTags}`)
-        .replace(`<body>`, () => `<body ${metaHTML.bodyAttrs}>`)
-        .replace(`<!--app-html-->`, () => appHTML)
-
-      // ✅ https://github.surmon.me/xxx
-      // ❌ https://github.surmon.me/xxx/
-      // 🔗 https://ahrefs.com/blog/trailing-slash/
-      const fileName = `dist${url === INDEX_ROUTE ? '/index' : url}`
-      fs.writeFileSync(toAbsolute(`${fileName}.html`), html)
-      if (url !== INDEX_ROUTE) {
-        // redirect `x/` to 'x'
-        fs.mkdirSync(toAbsolute(`${fileName}/`), { recursive: true })
-        fs.writeFileSync(toAbsolute(`${fileName}/index.html`), renderRedirectionHTML(url))
-      }
-      console.log('pre-rendered:', url)
     }
+  })
+  console.info('\nServer render bundle done.\n')
 
-    fs.rmSync(toAbsolute('dist/ssr'), { recursive: true, force: true })
-    console.info(`${ROUTES.length} pages generate done.`)
-    process.exit(0)
-  } catch (error) {
-    console.error('Generate ERROR!', error)
-    process.exit(1)
+  // MARK: after CSR bundled & before pre-render routes
+  const template = fs.readFileSync(toAbsolute('dist/index.html'), 'utf-8')
+  const { render } = await import('./dist/ssr/ssr.js')
+
+  // pre-render each route...
+  for (const url of ROUTES) {
+    const { appHTML, heads } = await render(url)
+    const html = template
+      .replace(/<title>[\s\S]*<\/title>/, '')
+      .replace(`<html`, () => `<html ${heads.htmlAttrs} `)
+      .replace(`<head>`, () => `<head>\n${heads.headTags}`)
+      .replace(`<body>`, () => `<body ${heads.bodyAttrs}>`)
+      .replace(`<!--app-html-->`, () => appHTML)
+      .replace(`</body>`, () => `\n${heads.bodyTags}\n</body>`)
+
+    // ✅ https://github.surmon.me/xxx
+    // ❌ https://github.surmon.me/xxx/
+    // 🔗 https://ahrefs.com/blog/trailing-slash/
+    const fileName = `dist${url === INDEX_ROUTE ? '/index' : url}`
+    fs.writeFileSync(toAbsolute(`${fileName}.html`), html)
+    if (url !== INDEX_ROUTE) {
+      // redirect `x/` to 'x'
+      fs.mkdirSync(toAbsolute(`${fileName}/`), { recursive: true })
+      fs.writeFileSync(toAbsolute(`${fileName}/index.html`), renderRedirectionHTML(url))
+    }
+    console.log('pre-rendered:', url)
   }
-})()
+
+  fs.rmSync(toAbsolute('dist/ssr'), { recursive: true, force: true })
+  console.info(`\n${ROUTES.length} pages generate done.`)
+  process.exit(0)
+} catch (error) {
+  console.error('Generate ERROR!', error)
+  process.exit(1)
+}

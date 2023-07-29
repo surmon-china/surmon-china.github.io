@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
-  import { Scrollbar } from 'swiper'
+  import { Scrollbar } from 'swiper/modules'
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
   import 'swiper/css/scrollbar'

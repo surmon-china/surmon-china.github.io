@@ -1,11 +1,14 @@
+// @ts-nocheck
 import React, { useRef, useState } from 'react'
-import { VideoJsPlayer } from 'video.js'
 import { VideoPlayer, VideoPlayerProps, VideoPlayerState } from '@videojs-player/react'
+import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 import style from './07-react.module.scss'
 
 // example site dedicated
 import { transformReactComponentToVue } from '@/transforms/component'
+
+type VideoJsPlayer = ReturnType<typeof videojs>
 
 const ReactBasicPlayer = () => {
   const playerRef = useRef()
@@ -33,18 +36,12 @@ const ReactBasicPlayer = () => {
         <div className={style.stateView}>
           <span className={style.item}>playing: {String(playerState.playing)}</span>
           <span className={style.item}>duration: {playerState.duration.toFixed(2)}</span>
-          <span className={style.item}>
-            currentTime: {playerState.currentTime.toFixed(2)}
-          </span>
+          <span className={style.item}>currentTime: {playerState.currentTime.toFixed(2)}</span>
           <span className={style.item}>volume: {playerState.volume}</span>
           <span className={style.item}>muted: {String(playerState.muted)}</span>
           <span className={style.item}>playbackRate: {playerState.playbackRate}</span>
-          <span className={style.item}>
-            isFullscreen: {String(playerState.isFullscreen)}
-          </span>
-          <span className={style.item}>
-            isPIP: {String(playerState.isInPictureInPicture)}
-          </span>
+          <span className={style.item}>isFullscreen: {String(playerState.isFullscreen)}</span>
+          <span className={style.item}>isPIP: {String(playerState.isInPictureInPicture)}</span>
         </div>
       )}
       <VideoPlayer
@@ -65,10 +62,7 @@ const ReactBasicPlayer = () => {
         {({ player, state }: { player: VideoJsPlayer; state: VideoPlayerState }) => (
           <div className={style.customControls}>
             <span className={style.item}>🔊 {state.volume}</span>
-            <button
-              className={style.item}
-              onClick={() => (state.playing ? player.pause() : player.play())}
-            >
+            <button className={style.item} onClick={() => (state.playing ? player.pause() : player.play())}>
               {state.playing ? '⏸ Pause' : '▶️ Play'}
             </button>
             <button className={style.item} onClick={() => player.muted(!state.muted)}>
@@ -95,9 +89,7 @@ const ReactBasicPlayer = () => {
             <button
               className={style.item}
               onClick={() => {
-                state.isInPictureInPicture
-                  ? player.exitPictureInPicture()
-                  : player.requestPictureInPicture()
+                state.isInPictureInPicture ? player.exitPictureInPicture() : player.requestPictureInPicture()
               }}
             >
               📺 {state.isInPictureInPicture ? 'Exit' : 'Enter'} PIP
