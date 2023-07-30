@@ -6,7 +6,7 @@
 <template>
   <Adsense
     :class="`g-a-mammon ${rootClass}`"
-    ins-style="display:inline-block;height:240px"
+    ins-style="display:inline-block;width:960px;height:240px"
     :data-ad-client="GOOGLE_ADSENSE_CLIENT_ID"
     data-ad-slot="5885388786"
   ></Adsense>
