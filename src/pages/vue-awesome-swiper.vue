@@ -4,6 +4,7 @@
   import { getExampleComponent } from '@/transforms/example'
   import { getPageURL, getLegacyPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
   import { getMetaTitle, getMetaKeywords, getMetaDescription, normalizeSeoMetaObject } from '@/transforms/meta'
+  import { MammonProvider } from '@/components/mammon'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
   import HomepageLink from '@/components/homepage/link.vue'
@@ -28,7 +29,7 @@
 
 <template>
   <vue-renderer :repository="repository">
-    <homepage :repository="repository" :packages="packages">
+    <homepage :repository="repository" :packages="packages" :header-ad-provider="MammonProvider.GoogleAdSense">
       <template #actions>
         <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyPageURL(repository)" />
         <homepage-link icon="doc" text="Swiper API Documentation" href="https://swiperjs.com/swiper-api" />
