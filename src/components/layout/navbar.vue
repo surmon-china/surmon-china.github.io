@@ -16,17 +16,22 @@
   const theme = useTheme()
   const store = useGlobalStore()
   const ownRepositories = computed(() => {
-    return store.githubOwnRepositories.map((repo) => {
-      const found = Object.values(CONFIG.PROJECTS).find((project) => {
-        return project.repository === repo.name
+    return store.githubOwnRepositories
+      .filter((repository) => {
+        // exclusion of some special-purpose repositories
+        return !['.github'].includes(repository.name)
       })
-      const npmPackages: string[] = (found as any)?.packages ?? []
-      return {
-        ...repo,
-        npmPackages,
-        npmDownloads: npmPackages.length ? numberSplit(store.getNPMPackagesDownloadsTotal(npmPackages)) : '-'
-      }
-    })
+      .map((repository) => {
+        const found = Object.values(CONFIG.PROJECTS).find((project) => {
+          return project.repository === repository.name
+        })
+        const npmPackages: string[] = (found as any)?.packages ?? []
+        return {
+          ...repository,
+          npmPackages,
+          npmDownloads: npmPackages.length ? numberSplit(store.getNPMPackagesDownloadsTotal(npmPackages)) : '-'
+        }
+      })
   })
 
   const themeValue = theme.theme
