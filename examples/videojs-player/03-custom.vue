@@ -45,7 +45,7 @@
     },
     setup() {
       const videoSource = {
-        poster: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/poster.png',
+        poster: '/images/poster/elephants-dream.jpg',
         sources: [
           {
             src: 'https://d2zihajmogu5jn.cloudfront.net/elephantsdream/ed_hd.mp4',

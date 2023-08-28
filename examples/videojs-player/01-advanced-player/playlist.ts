@@ -4,7 +4,7 @@ export const playlist = [
     name: 'mp4/webm/ogv',
     description: "Disney's Oceans",
     duration: 45,
-    poster: '//vjs.zencdn.net/v/oceans.png',
+    poster: '/images/poster/oceans.png',
     sources: [
       { src: '//vjs.zencdn.net/v/oceans.mp4', type: 'video/mp4' },
       { src: '//vjs.zencdn.net/v/oceans.webm', type: 'video/webm' },

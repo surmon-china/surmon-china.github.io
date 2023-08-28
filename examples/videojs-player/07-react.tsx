@@ -15,7 +15,7 @@ const ReactBasicPlayer = () => {
   const [playerState, setPlayerState] = useState()
   const [config] = useState(() => ({
     src: 'https://vjs.zencdn.net/v/oceans.mp4',
-    poster: 'https://vjs.zencdn.net/v/oceans.png',
+    poster: '/images/poster/oceans.png',
     playbackRates: [0.75, 1, 1.5, 2, 3],
     volume: 0.6
   }))
