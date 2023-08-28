@@ -3,7 +3,6 @@ import { defineConfig, Plugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import react from '@vitejs/plugin-react'
 import UnheadVite from '@unhead/addons/vite'
-import { CDN_URL_PREFIX } from './src/config'
 
 // https://github.com/vitejs/vite/issues/5071
 // https://github.com/vitejs/vite/pull/5535/files
@@ -22,9 +21,10 @@ const resolveMetaUrl = (): Plugin => ({
 })
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(() => ({
   plugins: [vue(), react(), resolveMetaUrl(), UnheadVite()],
-  base: mode === 'production' ? CDN_URL_PREFIX : '/',
+  // jsDelivr is closed in China, so use cloudflare directly.
+  // base: mode === 'production' ? CDN_URL_PREFIX : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

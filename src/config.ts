@@ -12,7 +12,10 @@ export const IMAGE_AD = { image: '', url: '' }
 export const SWIPER_ADS = [{ image: '', url: '' }]
 
 // https://www.jsdelivr.com/github
-export const CDN_URL_PREFIX = `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_PROJECT_NAME}@release/`
+// - cdn.jsdelivr.net
+// - gcore.jsdelivr.net
+// - fastly.jsdelivr.net
+// export const CDN_URL_PREFIX = `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_PROJECT_NAME}@release/`
 export const V1_LEGACY_URL = 'https://v1.github.surmon.me/'
 export const V2_ONLINE_URL = 'https://github.surmon.me/'
 

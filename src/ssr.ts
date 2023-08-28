@@ -6,7 +6,7 @@ import { Theme } from './composables/theme'
 import { useGlobalStore } from './store'
 import { createUniversalApp } from './main'
 
-export const render = async (url: string) => {
+export const render = async (url: string, storeCache?: any) => {
   // 1. app
   const { app, router, pinia, head } = createUniversalApp({
     appCreator: createSSRApp,
@@ -22,13 +22,15 @@ export const render = async (url: string) => {
 
   // 3. store
   const store = useGlobalStore(pinia)
-  await store.init()
+  if (storeCache) {
+    pinia.state.value = storeCache
+  } else {
+    await store.init()
+  }
 
   // 4. render
-  const ctx = {}
-  const appHTML = await renderToString(app, ctx)
-
+  const appHTML = await renderToString(app)
   const heads = await renderSSRHead(head)
 
-  return { appHTML, heads }
+  return { appHTML, heads, storeCache: pinia.state.value }
 }

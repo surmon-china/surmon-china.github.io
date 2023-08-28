@@ -1,4 +1,4 @@
-import { UseSeoMetaInput } from 'unhead'
+import { UseSeoMetaInput } from '@unhead/schema'
 import { useSeoMeta } from '@unhead/vue'
 import { APP_META, TWITTER_USERNAME } from '@/config'
 

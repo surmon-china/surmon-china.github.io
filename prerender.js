@@ -49,10 +49,13 @@ try {
   // MARK: after CSR bundled & before pre-render routes
   const template = fs.readFileSync(toAbsolute('dist/index.html'), 'utf-8')
   const { render } = await import('./dist/ssr/ssr.js')
+  let appStoreCache = null
 
   // pre-render each route...
   for (const url of ROUTES) {
-    const { appHTML, heads } = await render(url)
+    const { appHTML, heads, storeCache } = await render(url, appStoreCache)
+    // cache the first render store data
+    appStoreCache = storeCache
     const html = template
       .replace(/<title>[\s\S]*<\/title>/, '')
       .replace(`<html`, () => `<html ${heads.htmlAttrs} `)
