@@ -1,6 +1,11 @@
 <script lang="ts" setup>
   import { GOOGLE_ADSENSE_CLIENT_ID } from '@/config'
-  const props = defineProps<{ rootClass: string }>()
+  const props = defineProps({
+    rootClass: {
+      type: String,
+      default: ''
+    }
+  })
 </script>
 
 <template>

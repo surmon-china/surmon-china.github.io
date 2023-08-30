@@ -43,10 +43,6 @@
     }
     return themeIconMap[themeValue.value]
   })
-
-  const getGitHubLanguageColor = (language: string): string => {
-    return (GH_LANG_COLORS as any)[language]
-  }
 </script>
 
 <template>
@@ -126,12 +122,7 @@
                           <span>{{ item.npmDownloads }}</span>
                         </ulink>
                         <span v-if="item.language" class="item language">
-                          <i
-                            class="color"
-                            :style="{
-                              backgroundColor: getGitHubLanguageColor(item.language)
-                            }"
-                          ></i>
+                          <i class="color" :style="{ backgroundColor: GH_LANG_COLORS[item.language] }"></i>
                           <span>{{ item.language }}</span>
                         </span>
                       </div>
