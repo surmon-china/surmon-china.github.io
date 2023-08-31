@@ -93,6 +93,7 @@
         <div class="item project">
           <span class="text">Projects</span>
           <i class="iconfont icon-arrow-down"></i>
+          <div class="mask"></div>
           <div class="projects">
             <div class="container" :class="{ full }">
               <transition name="module" mode="out-in">
@@ -113,7 +114,8 @@
                       :class="{ activated: activatedTopicIndex === index }"
                       :key="item.name"
                     >
-                      {{ item.name }}
+                      <span class="symbol">#</span>
+                      <span>{{ item.name }}</span>
                     </li>
                   </ul>
                   <ul class="list">
@@ -265,6 +267,7 @@
         height: 100%;
         position: relative;
         &:hover {
+          .mask,
           .projects {
             @include visible();
           }
@@ -272,6 +275,20 @@
 
         > .text {
           margin: 0 $xs-gap;
+        }
+
+        .mask {
+          display: block;
+          position: fixed;
+          z-index: 8;
+          left: 0;
+          top: $navbar-height;
+          width: 100vw;
+          height: 100vh;
+          backdrop-filter: blur(5px);
+          pointer-events: none;
+          @include hidden();
+          @include visibility-transition();
         }
 
         .projects {
@@ -316,6 +333,10 @@
               background: $header-bg;
               color: $text-secondary;
               cursor: pointer;
+              .symbol {
+                font-size: $font-size-small;
+              }
+
               &:hover {
                 color: $text-color;
                 border-color: $text-secondary;
