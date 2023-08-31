@@ -102,10 +102,14 @@
         }
 
         .name {
-          font-weight: bold;
           margin-right: $xs-gap;
-          font-family: monospace;
           font-size: $font-size-small + 1;
+          font-weight: bold;
+          font-family:
+            Consolas,
+            Liberation Mono,
+            Menlo,
+            monospace;
         }
 
         .percent {
