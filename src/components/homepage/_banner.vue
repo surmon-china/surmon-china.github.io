@@ -9,7 +9,6 @@
   interface Props {
     repository: string
     packages?: string[]
-    loading?: boolean
   }
 
   const props = withDefaults(defineProps<Props>(), {
@@ -28,7 +27,7 @@
 <template>
   <div class="banner">
     <transition name="module" mode="out-in">
-      <div v-if="!store.initialized || props.loading" class="banner-content" key="skeleton">
+      <div v-if="!store.initialized" class="banner-content" key="skeleton">
         <div class="title-skeleton"><skeleton /></div>
         <div class="subtitle-skeleton"><skeleton /></div>
         <div class="buttons-skeleton">
