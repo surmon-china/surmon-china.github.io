@@ -102,8 +102,15 @@ export interface GitHubStatistics {
   open_issues: number
   size: number
   stars: number
-  languages: string[]
-  topics: string[]
+  topics: {
+    [key: string]: number
+  }
+  languages: Array<{
+    name: string
+    size: number
+    color: string
+    percentage: string
+  }>
 }
 
 export interface GitHubAggregateData {

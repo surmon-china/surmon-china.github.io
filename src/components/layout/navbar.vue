@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import GH_LANG_COLORS from 'gh-lang-colors'
-  import { computed } from 'vue'
+  import { ref, computed } from 'vue'
   import { useGlobalStore } from '@/store'
   import { useTheme, Theme } from '@/composables/theme'
   import { numberSplit, countToK } from '@/transforms/unit'
@@ -15,6 +15,29 @@
 
   const theme = useTheme()
   const store = useGlobalStore()
+  const themeValue = theme.theme
+  const toggleTheme = theme.toggle
+  const themeIcon = computed(() => {
+    const themeIconMap = {
+      [Theme.Light]: 'icon-sun',
+      [Theme.Dark]: 'icon-moon'
+    }
+    return themeIconMap[themeValue.value]
+  })
+
+  const activatedTopicIndex = ref<number | null>(null)
+  const topics = computed(() => {
+    const data = store.githubData?.statistics.topics ?? {}
+    return Object.keys(data)
+      .map((key) => ({
+        name: key,
+        count: data[key]
+      }))
+      .sort((a, b) => {
+        return b.count - a.count
+      })
+  })
+
   const ownRepositories = computed(() => {
     return store.githubOwnRepositories
       .filter((repository) => {
@@ -34,14 +57,19 @@
       })
   })
 
-  const themeValue = theme.theme
-  const toggleTheme = theme.toggle
-  const themeIcon = computed(() => {
-    const themeIconMap = {
-      [Theme.Light]: 'icon-sun',
-      [Theme.Dark]: 'icon-moon'
+  const filteredRepositories = computed(() => {
+    if (activatedTopicIndex.value === null) {
+      return ownRepositories.value
     }
-    return themeIconMap[themeValue.value]
+    const topic = topics.value[activatedTopicIndex.value].name
+    return ownRepositories.value.filter((repository) => {
+      return (
+        repository.name.includes(topic) ||
+        repository.description.includes(topic) ||
+        repository.topics.includes(topic) ||
+        repository.npmPackages.includes(topic)
+      )
+    })
   })
 </script>
 
@@ -69,77 +97,97 @@
             <div class="container" :class="{ full }">
               <transition name="module" mode="out-in">
                 <loading v-if="!store.initialized" class="loading" />
-                <ul v-else class="list">
-                  <li
-                    class="item"
-                    :key="item.name"
-                    :class="{ activated: item.name === repository }"
-                    v-for="item in ownRepositories"
-                  >
-                    <div class="title">
-                      <i class="repo-icon iconfont icon-repo"></i>
-                      <ulink
-                        class="link"
-                        :class="{ archived: item.archived }"
-                        :href="getGitHubRepositoryURL(item.name)"
-                        :title="item.name"
-                      >
-                        {{ item.name }}
-                      </ulink>
-                      <i class="link-icon iconfont icon-link-external"></i>
-                      <span
-                        v-if="item.archived"
-                        class="archived-icon"
-                        title="This repository has been archived. It is now read-only."
-                      >
-                        <i class="iconfont icon-warning-line"></i>
-                      </span>
-                    </div>
-                    <div class="description" :title="item.description">
-                      {{ item.description || '-' }}
-                    </div>
-                    <div class="meta">
-                      <div class="left">
+                <div v-else class="list-wrapper">
+                  <ul class="topics">
+                    <li
+                      class="item all"
+                      :class="{ activated: activatedTopicIndex === null }"
+                      @click="activatedTopicIndex = null"
+                    >
+                      All projects
+                    </li>
+                    <li
+                      class="item"
+                      @click="activatedTopicIndex = index"
+                      v-for="(item, index) in topics.slice(0, 24)"
+                      :class="{ activated: activatedTopicIndex === index }"
+                      :key="item.name"
+                    >
+                      {{ item.name }}
+                    </li>
+                  </ul>
+                  <ul class="list">
+                    <li
+                      class="item"
+                      :key="item.name"
+                      :class="{ activated: item.name === repository }"
+                      v-for="item in filteredRepositories"
+                    >
+                      <div class="title">
+                        <i class="repo-icon iconfont icon-repo"></i>
                         <ulink
-                          class="item"
+                          class="link"
+                          :class="{ archived: item.archived }"
                           :href="getGitHubRepositoryURL(item.name)"
-                          :title="`GitHub stars: ${item.stargazers_count}`"
+                          :title="item.name"
                         >
-                          <i class="iconfont icon-star"></i>
-                          <span>{{ countToK(item.stargazers_count) }}</span>
+                          {{ item.name }}
                         </ulink>
-                        <ulink
-                          v-if="item.npmPackages.length"
-                          class="item npm"
-                          :title="`NPM downloads: ${item.npmDownloads}`"
-                          :href="
-                            item.npmPackages.length === 1
-                              ? getNPMHomepageURL(item.npmPackages[0])
-                              : getGitHubRepositoryURL(item.name)
-                          "
+                        <i class="link-icon iconfont icon-link-external"></i>
+                        <span
+                          v-if="item.archived"
+                          class="archived-icon"
+                          title="This repository has been archived. It is now read-only."
                         >
-                          <i class="iconfont icon-npm"></i>
-                          <span>{{ item.npmDownloads }}</span>
-                        </ulink>
-                        <span v-if="item.language" class="item language">
-                          <i class="color" :style="{ backgroundColor: GH_LANG_COLORS[item.language] }"></i>
-                          <span>{{ item.language }}</span>
+                          <i class="iconfont icon-warning-line"></i>
                         </span>
                       </div>
-                      <div class="right">
-                        <ulink
-                          v-if="item.homepage"
-                          :href="item.homepage"
-                          :title="`${item.name}'s homepage`"
-                          class="homepage"
-                        >
-                          <i class="iconfont icon-website"></i>
-                          <span class="text">HP</span>
-                        </ulink>
+                      <div class="description" :title="item.description">
+                        {{ item.description || '-' }}
                       </div>
-                    </div>
-                  </li>
-                </ul>
+                      <div class="meta">
+                        <div class="left">
+                          <ulink
+                            class="item"
+                            :href="getGitHubRepositoryURL(item.name)"
+                            :title="`GitHub stars: ${item.stargazers_count}`"
+                          >
+                            <i class="iconfont icon-star"></i>
+                            <span>{{ countToK(item.stargazers_count) }}</span>
+                          </ulink>
+                          <ulink
+                            v-if="item.npmPackages.length"
+                            class="item npm"
+                            :title="`NPM downloads: ${item.npmDownloads}`"
+                            :href="
+                              item.npmPackages.length === 1
+                                ? getNPMHomepageURL(item.npmPackages[0])
+                                : getGitHubRepositoryURL(item.name)
+                            "
+                          >
+                            <i class="iconfont icon-npm"></i>
+                            <span>{{ item.npmDownloads }}</span>
+                          </ulink>
+                          <span v-if="item.language" class="item language">
+                            <i class="color" :style="{ backgroundColor: GH_LANG_COLORS[item.language] }"></i>
+                            <span>{{ item.language }}</span>
+                          </span>
+                        </div>
+                        <div class="right">
+                          <ulink
+                            v-if="item.homepage"
+                            :href="item.homepage"
+                            :title="`${item.name}'s homepage`"
+                            class="homepage"
+                          >
+                            <i class="iconfont icon-website"></i>
+                            <span class="text">HP</span>
+                          </ulink>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </transition>
             </div>
           </div>
@@ -248,6 +296,36 @@
           .loading {
             width: 100%;
             min-height: $min-height;
+          }
+
+          .topics {
+            padding: 0;
+            margin: 0;
+            margin-bottom: $sm-gap;
+
+            .item {
+              display: inline-block;
+              box-sizing: content-box;
+              margin-right: $gap;
+              margin-bottom: $gap;
+              height: 2rem;
+              line-height: 2rem;
+              padding: 0 0.6em;
+              border-radius: $sm-radius;
+              border: 1px solid transparent;
+              background: $header-bg;
+              color: $text-secondary;
+              cursor: pointer;
+              &:hover {
+                color: $text-color;
+                border-color: $text-secondary;
+              }
+              &.activated {
+                color: $text-color;
+                border-color: $text-secondary;
+                font-weight: bold;
+              }
+            }
           }
 
           .list {
