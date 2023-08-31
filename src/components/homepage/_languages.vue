@@ -124,6 +124,7 @@
     .languages {
       &:hover {
         border-bottom: 1px solid $border-color;
+
         .percent-list {
           opacity: 1;
           height: 12px;
@@ -131,7 +132,7 @@
 
         .language-list {
           height: auto;
-          padding: 2rem 0;
+          padding: 1.4rem 0;
           visibility: visible;
         }
       }

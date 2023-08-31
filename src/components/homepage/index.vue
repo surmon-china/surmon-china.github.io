@@ -14,6 +14,7 @@
     footerAdProvider?: MammonProvider
   }>()
 
+  const isLoadingLanguages = ref(false)
   const languages = ref<{ [key: string]: number } | null>(null)
   const fetchLanguages = async () => {
     // https://docs.github.com/en/rest/repos/repos#list-repository-languages--parameters
@@ -21,9 +22,12 @@
     const user = CONFIG.GITHUB_USERNAME
     const url = `https://api.github.com/repos/${user}/${repo}/languages`
     try {
+      isLoadingLanguages.value = true
       languages.value = await axios.get(url)
     } catch (error) {
       console.warn('Fetch repository languages error:', error)
+    } finally {
+      isLoadingLanguages.value = false
     }
   }
 
@@ -37,7 +41,7 @@
     <transition name="module">
       <homepage-languages :languages="languages" v-if="languages" />
     </transition>
-    <homepage-banner :repository="props.repository" :packages="props.packages">
+    <homepage-banner :repository="props.repository" :packages="props.packages" :loading="isLoadingLanguages">
       <template #actions>
         <slot name="actions"></slot>
       </template>
