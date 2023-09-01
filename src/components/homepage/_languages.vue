@@ -52,6 +52,7 @@
   .languages {
     position: relative;
     background-color: $banner-bg;
+    border-bottom: 1px solid transparent;
 
     .handle {
       position: absolute;
@@ -82,6 +83,7 @@
       list-style: none;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       width: $container-width;
       /* default: hidden */
       height: 0;
@@ -123,17 +125,18 @@
   @media screen and (min-width: $container-width) {
     .languages {
       &:hover {
-        border-bottom: 1px solid $border-color;
+        border-color: $border-color;
+        transition-delay: 40ms;
 
         .percent-list {
           opacity: 1;
           height: 12px;
+          transition-delay: 40ms;
         }
-
         .language-list {
-          height: auto;
-          padding: 1.4rem 0;
+          height: 52px;
           visibility: visible;
+          transition-delay: 60ms;
         }
       }
     }

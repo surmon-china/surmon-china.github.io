@@ -6,7 +6,7 @@
   const meta = reactive({ ...APP_META })
   useSeoMeta(() => meta)
   onBeforeMount(() => {
-    meta.title = `Redirect to Surmon's GitHub ...`
+    meta.title = `Redirect to GitHub ...`
     location.href = GITHUB_USER_URL
   })
 </script>
@@ -30,7 +30,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $github-dimmed;
+    background-color: $banner-bg;
 
     .logo {
       $size: 8rem;
@@ -38,7 +38,7 @@
       height: $size;
       line-height: $size;
       text-align: center;
-      color: rgba($white, 0.7);
+      color: $text-color;
 
       .iconfont {
         font-size: $font-size-huge * 4;
