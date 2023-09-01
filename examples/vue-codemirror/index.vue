@@ -26,7 +26,7 @@
   import { Theme, useTheme } from '@/composables/theme'
   import Loading from '@/components/common/loading.vue'
   import languages from './languages'
-  import themes from './themes'
+  import * as themes from './themes'
   import Toolbar from './toolbar.vue'
   import Editor from './editor.vue'
 
@@ -54,7 +54,7 @@
       const langCodeMap = reactive(new Map<string, { code: string; language: () => any }>())
       const currentLangCode = computed(() => langCodeMap.get(config.language)!)
       const currentTheme = computed(() => {
-        return config.theme !== 'default' ? themes[config.theme] : void 0
+        return config.theme !== 'default' ? (themes as any)[config.theme] : void 0
       })
 
       const ensureLanguageCode = async (targetLanguage: string) => {

@@ -8,7 +8,7 @@ import { createUniversalApp } from './main'
 
 import '@/styles/app.scss'
 
-const { app, router, visitor } = createUniversalApp({
+const { app, router, visitor, theme } = createUniversalApp({
   // MARK: use `createApp`, not `createSSRApp`, to avoid hydrate
   appCreator: createApp,
   routerHistory: createWebHistory(),
@@ -20,6 +20,7 @@ const { app, router, visitor } = createUniversalApp({
 app.use(highlight)
 app.use(adsense, { ID: GOOGLE_ADSENSE_CLIENT_ID, enabledAutoAD: false })
 visitor.resetStateOnClient()
+theme.initOnClient()
 
 router.isReady().finally(() => {
   app.mount('#app', true).$nextTick(() => {

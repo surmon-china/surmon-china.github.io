@@ -18,7 +18,7 @@
   const toggleTheme = () => {
     const currentIndex = THEMES.indexOf(theme.theme.value)
     const newIndex = currentIndex === THEMES.length - 1 ? 0 : currentIndex + 1
-    theme.set(THEMES[newIndex])
+    theme.setTheme(THEMES[newIndex])
   }
 
   const activatedTheme = computed(() => {

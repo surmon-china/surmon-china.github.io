@@ -1,4 +1,4 @@
-import { App, inject, ref, readonly } from 'vue'
+import { App, inject, ref, computed, readonly } from 'vue'
 import storage from '@/services/storage'
 
 export enum Theme {
@@ -38,9 +38,27 @@ const createThemeStore = (defaultTheme: Theme) => {
     }
   }
 
+  const systemTheme = ref(defaultTheme)
+  const initOnClient = () => {
+    systemTheme.value = getSystemTheme() || defaultTheme
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
+      systemTheme.value = matches ? Theme.Dark : Theme.Light
+    })
+  }
+
+  const currentTheme = computed(() => {
+    if (theme.value === Theme.System) {
+      return systemTheme.value
+    } else {
+      return theme.value
+    }
+  })
+
   return {
     theme: readonly(theme),
-    set: setTheme
+    currentTheme,
+    setTheme,
+    initOnClient
   }
 }
 

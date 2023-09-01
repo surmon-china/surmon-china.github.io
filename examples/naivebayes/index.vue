@@ -26,12 +26,7 @@
       </div>
     </div>
     <div class="divider"></div>
-    <codemirror
-      v-model="codes.disabled"
-      :style="{ height: 'auto' }"
-      :extensions="editorExtensions"
-      disabled
-    />
+    <codemirror v-model="codes.disabled" :style="{ height: 'auto' }" :extensions="editorExtensions" disabled />
     <div class="divider"></div>
     <codemirror
       v-model="codes.enabled"
@@ -54,7 +49,7 @@
   import { Codemirror } from 'vue-codemirror'
   import { javascript } from '@codemirror/lang-javascript'
   import { oneDark } from '@codemirror/theme-one-dark'
-  import { Theme, useTheme } from '@/composables/theme'
+  import { useTheme, Theme } from '@/composables/theme'
   import case1 from './01-base'
   import case2 from './02-spam'
   import case3 from './03-news'
@@ -92,8 +87,9 @@
       const handleEditorReady = (payload: any) => {
         editor.value = payload.view
       }
+
       const editorExtensions = computed(() => {
-        return [javascript(), useTheme().theme.value === Theme.Dark ? oneDark : []]
+        return [javascript(), useTheme().currentTheme.value === Theme.Dark ? oneDark : []]
       })
 
       const loading = ref(false)
