@@ -71,7 +71,7 @@
       display: flex;
       /* default: line */
       opacity: 0.6;
-      height: 4px;
+      height: 3px;
       transition:
         height $transition-time,
         opacity $transition-time;
