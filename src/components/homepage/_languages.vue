@@ -86,6 +86,7 @@
       align-items: center;
       width: $container-width;
       /* default: hidden */
+      opacity: 0;
       height: 0;
       visibility: hidden;
       transition: all $transition-time;
@@ -134,6 +135,7 @@
           transition-delay: 40ms;
         }
         .language-list {
+          opacity: 1;
           height: 52px;
           visibility: visible;
           transition-delay: 60ms;
