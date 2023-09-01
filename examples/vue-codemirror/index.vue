@@ -23,7 +23,7 @@
 
 <script lang="ts">
   import { defineComponent, reactive, computed, shallowRef, onBeforeMount } from 'vue'
-  import { Theme, useTheme } from '@/composables/theme'
+  import { Theme, useTheme, getSystemTheme } from '@/composables/theme'
   import Loading from '@/components/common/loading.vue'
   import languages from './languages'
   import themes from './themes'
@@ -40,6 +40,7 @@
       Editor
     },
     setup() {
+      const themeState = useTheme()
       const config = reactive({
         disabled: false,
         indentWithTab: true,
@@ -47,7 +48,14 @@
         autofocus: true,
         height: 'auto',
         language: 'javascript',
-        theme: useTheme().theme.value === Theme.Light ? 'default' : 'oneDark'
+        theme:
+          themeState.theme.value === Theme.Light
+            ? 'default'
+            : themeState.theme.value === Theme.Dark
+            ? 'oneDark'
+            : getSystemTheme() === Theme.Light
+            ? 'default'
+            : 'oneDark'
       })
 
       const loading = shallowRef(false)

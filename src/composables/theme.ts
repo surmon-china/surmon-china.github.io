@@ -10,21 +10,29 @@ export enum Theme {
 const THEME_STORAGE_KEY = '__theme'
 export const THEMES = [Theme.System, Theme.Light, Theme.Dark]
 
-export const getLocalTheme = () => {
-  // local theme
-  const historyTheme = storage.get(THEME_STORAGE_KEY)
-  if (historyTheme && THEMES.includes(historyTheme as Theme)) {
-    return historyTheme as Theme
-  }
-  // system theme
+export const getSystemTheme = () => {
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     return Theme.Dark
   }
   if (window.matchMedia('(prefers-color-scheme: light)').matches) {
     return Theme.Light
   }
+}
+
+export const getLocalTheme = () => {
+  const historyTheme = storage.get(THEME_STORAGE_KEY) as Theme
+  if (historyTheme && THEMES.includes(historyTheme)) {
+    return historyTheme
+  }
+}
+
+export const getClientTheme = () => {
+  // local theme
+  const localTheme = getLocalTheme()
+  // system theme
+  const systemTheme = getSystemTheme()
   // not specified
-  return Theme.System
+  return localTheme ?? systemTheme ?? Theme.System
 }
 
 const ThemeSymbol = Symbol('theme')
