@@ -8,18 +8,13 @@ export const GITHUB_PROJECT_NAME = 'surmon-china.github.io'
 export const GITHUB_PAGES_ROOT_DOMAIN = 'surmon.me'
 export const GITHUB_USER_URL = `https://github.com/${GITHUB_USERNAME}`
 export const GITHUB_SPONSORS_URL = `https://github.com/sponsors/${GITHUB_USERNAME}`
+
+export const GOOGLE_ADSENSE_CLIENT_ID = 'ca-pub-4710915636313788'
 export const IMAGE_AD = { image: '', url: '' }
 export const SWIPER_ADS = [{ image: '', url: '' }]
 
-// https://www.jsdelivr.com/github
-// - cdn.jsdelivr.net
-// - gcore.jsdelivr.net
-// - fastly.jsdelivr.net
-// export const CDN_URL_PREFIX = `https://cdn.jsdelivr.net/gh/${GITHUB_USERNAME}/${GITHUB_PROJECT_NAME}@release/`
 export const V1_LEGACY_URL = 'https://v1.github.surmon.me/'
 export const V2_ONLINE_URL = 'https://github.surmon.me/'
-
-export const GOOGLE_ADSENSE_CLIENT_ID = 'ca-pub-4710915636313788'
 
 export const APP_META = {
   title: `Surmon's open-source projects`,

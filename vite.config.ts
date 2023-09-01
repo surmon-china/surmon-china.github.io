@@ -23,8 +23,6 @@ const resolveMetaUrl = (): Plugin => ({
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
   plugins: [vue(), react(), resolveMetaUrl(), UnheadVite()],
-  // jsDelivr is closed in China, so use cloudflare directly.
-  // base: mode === 'production' ? CDN_URL_PREFIX : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),

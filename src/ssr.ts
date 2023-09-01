@@ -11,7 +11,7 @@ export const render = async (url: string, storeCache?: any) => {
   const { app, router, pinia, head } = createUniversalApp({
     appCreator: createSSRApp,
     routerHistory: createMemoryHistory(),
-    initTheme: Theme.Dark,
+    initTheme: Theme.System,
     language: '',
     userAgent: ''
   })

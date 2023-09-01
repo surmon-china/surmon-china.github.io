@@ -1,8 +1,9 @@
 @font-face {
-  font-family: 'iconfont';
-  src: url('/icons/iconfont.woff2?t=1671697853868') format('woff2'),
-    url('/icons/iconfont.woff?t=1671697853868') format('woff'),
-    url('/icons/iconfont.ttf?t=1671697853868') format('truetype');
+  font-family: 'iconfont'; /* Project id 1492229 */
+  src:
+    url('//at.alicdn.com/t/c/font_1492229_yvmvg6pl0qo.woff2?t=1693569913342') format('woff2'),
+    url('//at.alicdn.com/t/c/font_1492229_yvmvg6pl0qo.woff?t=1693569913342') format('woff'),
+    url('//at.alicdn.com/t/c/font_1492229_yvmvg6pl0qo.ttf?t=1693569913342') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +12,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-system-theme:before {
+  content: '\e947';
 }
 
 .icon-twitter:before {

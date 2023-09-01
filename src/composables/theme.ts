@@ -2,16 +2,19 @@ import { App, inject, ref, readonly } from 'vue'
 import storage from '@/services/storage'
 
 export enum Theme {
+  System = 'system',
   Light = 'light',
   Dark = 'dark'
 }
 
-export const THEME_STORAGE_KEY = '__theme'
+const THEME_STORAGE_KEY = '__theme'
+export const THEMES = [Theme.System, Theme.Light, Theme.Dark]
+
 export const getLocalTheme = () => {
   // local theme
   const historyTheme = storage.get(THEME_STORAGE_KEY)
-  if (historyTheme) {
-    return historyTheme === Theme.Dark ? Theme.Dark : Theme.Light
+  if (historyTheme && THEMES.includes(historyTheme as Theme)) {
+    return historyTheme as Theme
   }
   // system theme
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -20,30 +23,23 @@ export const getLocalTheme = () => {
   if (window.matchMedia('(prefers-color-scheme: light)').matches) {
     return Theme.Light
   }
-  // not specified || not support
-  return Theme.Light
+  // not specified
+  return Theme.System
 }
 
 const ThemeSymbol = Symbol('theme')
 const createThemeStore = (defaultTheme: Theme) => {
   const theme = ref(defaultTheme)
-  const set = (newTheme: Theme) => {
-    if ([Theme.Light, Theme.Dark].includes(newTheme)) {
-      if (newTheme !== theme.value) {
-        theme.value = newTheme
-        storage.set(THEME_STORAGE_KEY, newTheme)
-      }
+  const setTheme = (newTheme: Theme) => {
+    if (THEMES.includes(newTheme)) {
+      theme.value = newTheme
+      storage.set(THEME_STORAGE_KEY, newTheme)
     }
-  }
-
-  const toggle = () => {
-    set(theme.value === Theme.Dark ? Theme.Light : Theme.Dark)
   }
 
   return {
     theme: readonly(theme),
-    set,
-    toggle
+    set: setTheme
   }
 }
 

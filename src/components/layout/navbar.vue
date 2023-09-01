@@ -2,7 +2,7 @@
   import GH_LANG_COLORS from 'gh-lang-colors'
   import { ref, computed } from 'vue'
   import { useGlobalStore } from '@/store'
-  import { useTheme, Theme } from '@/composables/theme'
+  import { useTheme, Theme, THEMES } from '@/composables/theme'
   import { numberSplit, countToK } from '@/transforms/unit'
   import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
   import * as CONFIG from '@/config'
@@ -13,16 +13,30 @@
     full?: boolean
   }>()
 
-  const theme = useTheme()
   const store = useGlobalStore()
-  const themeValue = theme.theme
-  const toggleTheme = theme.toggle
-  const themeIcon = computed(() => {
-    const themeIconMap = {
-      [Theme.Light]: 'icon-sun',
-      [Theme.Dark]: 'icon-moon'
+  const theme = useTheme()
+  const toggleTheme = () => {
+    const currentIndex = THEMES.indexOf(theme.theme.value)
+    const newIndex = currentIndex === THEMES.length - 1 ? 0 : currentIndex + 1
+    theme.set(THEMES[newIndex])
+  }
+
+  const activatedTheme = computed(() => {
+    const iconInfoMap = {
+      [Theme.System]: {
+        icon: 'icon-system-theme',
+        name: 'System theme'
+      },
+      [Theme.Light]: {
+        icon: 'icon-sun',
+        name: 'Light theme'
+      },
+      [Theme.Dark]: {
+        icon: 'icon-moon',
+        name: 'Dark theme'
+      }
     }
-    return themeIconMap[themeValue.value]
+    return iconInfoMap[theme.theme.value]
   })
 
   const activatedTopicIndex = ref<number | null>(null)
@@ -87,8 +101,8 @@
         </ulink>
       </div>
       <div class="right">
-        <button class="item theme" @click="toggleTheme">
-          <i class="iconfont" :class="themeIcon"></i>
+        <button class="item theme" :title="activatedTheme.name" @click="toggleTheme">
+          <i class="iconfont" :class="activatedTheme.icon"></i>
         </button>
         <div class="item project">
           <span class="text">Projects</span>

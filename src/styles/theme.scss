@@ -1,13 +1,6 @@
-/// @name theme
+@use 'sass:meta';
 
-@mixin css-var(
-  $theme-header,
-  $theme-banner,
-  $theme-body,
-  $theme-border,
-  $theme-text,
-  $theme-link
-) {
+@mixin css-var($theme-header, $theme-banner, $theme-body, $theme-border, $theme-text, $theme-link) {
   #{--theme-header}: $theme-header;
   #{--theme-banner}: $theme-banner;
   #{--theme-body}: $theme-body;
@@ -19,7 +12,8 @@
   #{--text-divider}: rgba($theme-text, 0.26);
 }
 
-@mixin defaultTheme() {
+@mixin lightTheme() {
+  @include meta.load-css('highlight.js/styles/github');
   @include css-var(
     $theme-body: #ebebeb,
     $theme-header: #f8f8f8,
@@ -31,6 +25,7 @@
 }
 
 @mixin darkTheme() {
+  @include meta.load-css('highlight.js/styles/github-dark-dimmed');
   @include css-var(
     $theme-body: #0d1117,
     $theme-header: #2d333b,
