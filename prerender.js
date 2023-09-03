@@ -1,10 +1,13 @@
 import fs from 'fs'
 import path from 'path'
-import { build } from 'vite'
+import { Readable } from 'stream'
 import { fileURLToPath } from 'url'
+import { build } from 'vite'
+import { SitemapStream, streamToPromise, EnumChangefreq } from 'sitemap'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const toAbsolute = (_path) => path.resolve(__dirname, _path)
+const packageJSON = JSON.parse(fs.readFileSync(toAbsolute('package.json'), 'utf-8'))
 const projectsJSON = JSON.parse(fs.readFileSync(toAbsolute('projects.json'), 'utf-8'))
 
 const INDEX_ROUTE = '/'
@@ -78,7 +81,25 @@ try {
   }
 
   fs.rmSync(toAbsolute('dist/ssr'), { recursive: true, force: true })
-  console.info(`\n${ROUTES.length} pages generate done.`)
+  console.info(`\n${ROUTES.length} pages has been generated.`)
+
+  // sitemap each route...
+  const sitemapStream = new SitemapStream({
+    hostname: packageJSON.homepage
+  })
+  const sitemapItemList = [
+    { url: packageJSON.homepage, changefreq: EnumChangefreq.NEVER, priority: 1 },
+    ...ROUTES.filter((route) => route !== INDEX_ROUTE).map((route) => ({
+      url: route,
+      changefreq: EnumChangefreq.MONTHLY,
+      priority: 1.0
+    }))
+  ]
+  const finallySitemapStream = Readable.from(sitemapItemList).pipe(sitemapStream)
+  const sitemapXML = await streamToPromise(finallySitemapStream).then((data) => data.toString())
+  fs.writeFileSync(toAbsolute(`dist/sitemap.xml`), sitemapXML)
+  console.info(`Sitemap has been generated.`)
+
   process.exit(0)
 } catch (error) {
   console.error('Generate ERROR!', error)

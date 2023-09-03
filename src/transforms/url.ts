@@ -1,11 +1,11 @@
 import { GITHUB_USERNAME, V2_ONLINE_URL, V1_LEGACY_URL } from '@/config'
 
 export const getPageURL = (route: string) => {
-  return `${V2_ONLINE_URL}${route}`
+  return `${V2_ONLINE_URL}/${route}`.replace(/\/+/g, '/')
 }
 
 export const getLegacyPageURL = (route: string) => {
-  return `${V1_LEGACY_URL}${route}`
+  return `${V1_LEGACY_URL}/${route}`.replace(/\/+/g, '/')
 }
 
 export function getNPMHomepageURL(packageName: string) {

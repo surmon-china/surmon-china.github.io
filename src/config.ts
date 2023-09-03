@@ -1,3 +1,4 @@
+import PACKAGE_JSON from '../package.json'
 import PROJECTS_JSON from '../projects.json'
 
 export const PROJECTS = PROJECTS_JSON
@@ -14,7 +15,7 @@ export const IMAGE_AD = { image: '', url: '' }
 export const SWIPER_ADS = [{ image: '', url: '' }]
 
 export const V1_LEGACY_URL = 'https://v1.github.surmon.me/'
-export const V2_ONLINE_URL = 'https://github.surmon.me/'
+export const V2_ONLINE_URL = PACKAGE_JSON.homepage
 
 export const APP_META = {
   title: `Surmon's open-source projects`,
