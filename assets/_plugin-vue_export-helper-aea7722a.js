@@ -1,0 +1,1 @@
+import{f as c,af as f,ag as u,ah as p,ai as l}from"./index-2f6da573.js";function m(t,a){const e=c({});return f(()=>{const s=p(t),{title:o,titleTemplate:n,...r}=s;e.value={title:o,titleTemplate:n,meta:l(r)}}),u(e,a)}const v=(t,a)=>{const e=t.__vccOpts||t;for(const[s,o]of a)e[s]=o;return e};export{v as _,m as u};
