@@ -1,7 +1,7 @@
 {
   "Readme": {
-    "route": "readme-md",
-    "repository": "README.md"
+    "route": "readme-vue",
+    "repository": "README.vue"
   },
   "NaiveBayes": {
     "route": "naivebayes",

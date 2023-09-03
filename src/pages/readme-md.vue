@@ -22,7 +22,7 @@
 
 <template>
   <vue-renderer class="page" :repository="repository" :toolbox="false">
-    <div class="page-content">README.md homepage is coming soon</div>
+    <div class="page-content">README.vue homepage is coming soon</div>
   </vue-renderer>
 </template>
 
