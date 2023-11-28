@@ -7,9 +7,10 @@
   }>()
 
   const handleShare = () => {
-    const url = window.location.href
-    const title = document.title || APP_META.title
-    const tweetURL = `https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`
+    const url = encodeURIComponent(window.location.href)
+    const title = encodeURIComponent(document.title || APP_META.title)
+    // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
+    const tweetURL = `https://twitter.com/intent/tweet?url=${url}&text=${title}`
     openWindow(tweetURL, { name: `Share: ${props.repository}` })
   }
 </script>
