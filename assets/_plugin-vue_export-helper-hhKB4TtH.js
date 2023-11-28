@@ -1,0 +1,1 @@
+import{af as c,ag as f}from"./index-3k4ISoYh.js";function u(t,a){const{title:e,titleTemplate:o,...r}=t;return c({title:e,titleTemplate:o,_flatMeta:r},{...a,transform(s){const n=f({...s._flatMeta});return delete s._flatMeta,{...s,meta:n}}})}const _=(t,a)=>{const e=t.__vccOpts||t;for(const[o,r]of a)e[o]=r;return e};export{_,u};
