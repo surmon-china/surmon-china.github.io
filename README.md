@@ -1,3 +1,3 @@
 # github.surmon.me
 
-> My GitHub repositories homepage.
+> Homepages for my open-source projects.
