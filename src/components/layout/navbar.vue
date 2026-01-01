@@ -417,7 +417,6 @@
 
                   &.archived {
                     text-decoration: line-through;
-                    text-decoration-style: double;
                     text-decoration-thickness: inherit;
                   }
                 }
