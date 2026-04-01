@@ -28,14 +28,9 @@
   <vue-renderer :repository="repository">
     <homepage :repository="repository" :packages="packages">
       <template #actions>
-        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyPageURL(repository)" />
+        <homepage-link text="Vue(2) Legacy Examples" :href="getLegacyPageURL(repository)" />
+        <homepage-link text="Component Props" href="https://github.com/surmon-china/vue-touch-ripple#component-props" />
         <homepage-link
-          icon="doc"
-          text="Component Props"
-          href="https://github.com/surmon-china/vue-touch-ripple#component-props"
-        />
-        <homepage-link
-          icon="doc"
           text="Component Events"
           href="https://github.com/surmon-china/vue-touch-ripple#component-events"
         />

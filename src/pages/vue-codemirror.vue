@@ -34,9 +34,9 @@
   <vue-renderer :repository="repository">
     <homepage :repository="repository" :packages="packages" :header-ad-provider="MammonProvider.GoogleAdSense">
       <template #actions>
-        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyPageURL(repository)" />
-        <homepage-link icon="doc" text="CodeMirror(6) Guide" href="https://codemirror.net/docs/guide/" />
-        <homepage-link icon="discussions" text="CodeMirror Forum" href="https://discuss.codemirror.net/" />
+        <homepage-link text="Vue(2) Legacy Examples" :href="getLegacyPageURL(repository)" />
+        <homepage-link text="CodeMirror(6) Guide" href="https://codemirror.net/docs/guide/" />
+        <homepage-link text="CodeMirror Forum" href="https://discuss.codemirror.net/" />
         <homepage-link icon="discord" text="Discord Discussions" href="https://discord.gg/nzHEydUvPH" />
       </template>
       <template #content>

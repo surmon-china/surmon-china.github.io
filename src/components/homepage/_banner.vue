@@ -51,7 +51,7 @@
           <github-button
             :link="`${repoUrl}/issues`"
             :count="repoDetail?.open_issues_count || 0"
-            icon="icon-issue"
+            icon="icon-issues"
             class="item"
             text="Issues"
           />

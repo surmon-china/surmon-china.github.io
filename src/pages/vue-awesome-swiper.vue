@@ -29,14 +29,10 @@
   <vue-renderer :repository="repository">
     <homepage :repository="repository" :packages="packages" :header-ad-provider="MammonProvider.GoogleAdSense">
       <template #actions>
-        <homepage-link icon="doc" text="Vue(2) Examples" :href="getLegacyPageURL(repository)" />
-        <homepage-link icon="doc" text="Swiper API Documentation" href="https://swiperjs.com/swiper-api" />
-        <homepage-link icon="doc" text="Swiper Vue(3) Component" href="https://swiperjs.com/vue" />
-        <homepage-link
-          icon="discussions"
-          text="Swiper Discussions"
-          href="https://github.com/nolimits4web/swiper/discussions"
-        />
+        <homepage-link text="Vue(2) Examples" :href="getLegacyPageURL(repository)" />
+        <homepage-link text="Swiper Vue(3) Component" href="https://swiperjs.com/vue" />
+        <homepage-link text="Swiper API Documentation" href="https://swiperjs.com/swiper-api" />
+        <homepage-link text="Swiper Discussions" href="https://github.com/nolimits4web/swiper/discussions" />
       </template>
       <template #content>
         <homepage-examples :examples="examples">

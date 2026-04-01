@@ -2,14 +2,14 @@
   defineProps<{
     text: string
     href: string
-    icon: string
+    icon?: string
   }>()
 </script>
 
 <template>
   <div class="homepage-link">
     <ulink class="link" :href="href">
-      <i class="iconfont" :class="`icon-${icon}`" />
+      <i class="iconfont" :class="`icon-${icon}`" v-if="icon" />
       <slot>
         <span>{{ text }}</span>
       </slot>
@@ -36,7 +36,10 @@
 
       .iconfont {
         font-size: $font-size-base - 1;
-        margin-right: 2px;
+
+        & + * {
+          margin-left: $gap-xs;
+        }
       }
     }
   }

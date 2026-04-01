@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'iconfont'; /* Project id 1492229 */
   src:
-    url('//at.alicdn.com/t/c/font_1492229_1mnieagq9va.woff2?t=1723905773870') format('woff2'),
-    url('//at.alicdn.com/t/c/font_1492229_1mnieagq9va.woff?t=1723905773870') format('woff'),
-    url('//at.alicdn.com/t/c/font_1492229_1mnieagq9va.ttf?t=1723905773870') format('truetype');
+    url('//at.alicdn.com/t/c/font_1492229_g513m5o0oc.woff2?t=1775085255466') format('woff2'),
+    url('//at.alicdn.com/t/c/font_1492229_g513m5o0oc.woff?t=1775085255466') format('woff'),
+    url('//at.alicdn.com/t/c/font_1492229_g513m5o0oc.ttf?t=1775085255466') format('truetype');
 }
 
 .iconfont {
@@ -14,16 +14,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-issues:before {
+  content: '\e60a';
+}
+
+.icon-star:before {
+  content: '\ee3e';
+}
+
+.icon-fork:before {
+  content: '\e9f5';
+}
+
 .icon-twitter-x:before {
   content: '\e61c';
-}
-
-.icon-system-theme:before {
-  content: '\e947';
-}
-
-.icon-twitter:before {
-  content: '\ee49';
 }
 
 .icon-website:before {
@@ -58,10 +62,6 @@
   content: '\e74c';
 }
 
-.icon-discussions:before {
-  content: '\e666';
-}
-
 .icon-sun:before {
   content: '\e68b';
 }
@@ -70,28 +70,12 @@
   content: '\e63e';
 }
 
-.icon-npm-logo:before {
-  content: '\e6cc';
-}
-
 .icon-npm:before {
   content: '\e685';
 }
 
-.icon-load:before {
-  content: '\e60b';
-}
-
-.icon-upload:before {
-  content: '\e616';
-}
-
 .icon-law:before {
   content: '\e69d';
-}
-
-.icon-clock:before {
-  content: '\e60a';
 }
 
 .icon-close:before {
@@ -106,28 +90,8 @@
   content: '\e9e5';
 }
 
-.icon-experiment:before {
-  content: '\e655';
-}
-
-.icon-issue:before {
-  content: '\e6c6';
-}
-
-.icon-watch:before {
-  content: '\e607';
-}
-
 .icon-link-external:before {
   content: '\e604';
-}
-
-.icon-link-horizontal:before {
-  content: '\e600';
-}
-
-.icon-star:before {
-  content: '\e603';
 }
 
 .icon-stop:before {
@@ -142,15 +106,11 @@
   content: '\e790';
 }
 
-.icon-doc:before {
+.icon-book:before {
   content: '\e611';
 }
 
-.icon-fork:before {
-  content: '\e6d8';
-}
-
-.icon-repo:before {
+.icon-repository:before {
   content: '\e601';
 }
 

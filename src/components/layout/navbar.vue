@@ -131,7 +131,7 @@
                       v-for="item in filteredRepositories"
                     >
                       <div class="title">
-                        <i class="repo-icon iconfont icon-repo"></i>
+                        <i class="repo-icon iconfont icon-repository"></i>
                         <ulink
                           class="link"
                           :class="{ archived: item.archived }"

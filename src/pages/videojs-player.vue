@@ -29,9 +29,9 @@
   <vue-renderer :repository="repository">
     <homepage :repository="repository" :packages="packages" :header-ad-provider="MammonProvider.GoogleAdSense">
       <template #actions>
-        <homepage-link icon="doc" text="Video.js Guides" href="https://videojs.com/guides" />
-        <homepage-link icon="doc" text="Video.js API Documentation" href="https://docs.videojs.com/" />
-        <homepage-link icon="doc" text="Video.js Plugins and Skins" href="https://videojs.com/plugins/" />
+        <homepage-link text="Video.js Guides" href="https://videojs.com/guides" />
+        <homepage-link text="Video.js API Documentation" href="https://docs.videojs.com/" />
+        <homepage-link text="Video.js Plugins and Skins" href="https://videojs.com/plugins/" />
         <homepage-link icon="discord" text="Discord Discussions" href="https://discord.gg/5w5cPWWEJ7" />
       </template>
       <template #content>
