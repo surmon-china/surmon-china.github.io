@@ -16,7 +16,7 @@
         <span>item 4</span>
       </div>
     </drag-content>
-  <!--    <drag-content class="content c5">
+    <!-- <drag-content class="content c5">
       <div class="item i5">item 5</div>
     </drag-content>
     <drag-content class="content c6">
@@ -35,8 +35,7 @@
 <script>
   export default {
     data() {
-      return {
-      }
+      return {}
     }
   }
 </script>
@@ -62,7 +61,7 @@
     width: calc((100% - 30px) / 6);
   }
   .zone .content.threshold {
-    opacity: .4;
+    opacity: 0.4;
     background-color: red;
   }
   .zone .content.c1 {

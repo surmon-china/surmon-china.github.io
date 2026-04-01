@@ -29,14 +29,14 @@
         class="item"
         :key="item.key"
         :style="{
-          backgroundColor: (GH_LANG_COLORS as any)[item.key],
+          backgroundColor: GH_LANG_COLORS[item.key as keyof typeof GH_LANG_COLORS],
           width: `${item.percent}%`
         }"
       ></li>
     </ul>
     <ul class="language-list">
       <li class="item" v-for="item in languageList" :key="item.key">
-        <span class="color" :style="`background-color: ${(GH_LANG_COLORS as any)[item.key]}`" />
+        <span class="color" :style="`background-color: ${GH_LANG_COLORS[item.key as keyof typeof GH_LANG_COLORS]}`" />
         <span class="name">{{ item.key }}</span>
         <span class="percent">{{ item.percent }}%</span>
       </li>
@@ -46,8 +46,8 @@
 
 <style lang="scss" scoped>
   @use 'sass:math';
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .languages {
     position: relative;
@@ -73,8 +73,8 @@
       opacity: 0.6;
       height: 3px;
       transition:
-        height $transition-time,
-        opacity $transition-time;
+        height $motion-duration,
+        opacity $motion-duration;
     }
 
     .language-list {
@@ -89,7 +89,7 @@
       opacity: 0;
       height: 0;
       visibility: hidden;
-      transition: all $transition-time;
+      transition: all $motion-duration;
 
       .item {
         display: inline-flex;
@@ -100,20 +100,16 @@
           display: inline-block;
           width: 14px;
           height: 10px;
-          margin-right: $sm-gap;
-          border-radius: $xs-radius;
+          margin-right: $gap-sm;
+          border-radius: $radius-tiny;
         }
 
         .name {
-          margin-right: $xs-gap;
+          margin-right: $gap-xs;
           margin-top: 2px;
           font-size: $font-size-small + 1;
+          font-family: $code-font-family;
           font-weight: bold;
-          font-family:
-            Consolas,
-            Liberation Mono,
-            Menlo,
-            monospace;
         }
 
         .percent {
@@ -135,9 +131,10 @@
           height: 12px;
           transition-delay: 40ms;
         }
+
         .language-list {
           opacity: 1;
-          height: 52px;
+          height: 46px;
           visibility: visible;
           transition-delay: 60ms;
         }

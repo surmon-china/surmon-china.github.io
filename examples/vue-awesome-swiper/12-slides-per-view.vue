@@ -1,11 +1,5 @@
 <template>
-  <swiper
-    class="swiper"
-    :modules="modules"
-    :space-between="30"
-    :slides-per-view="3"
-    :pagination="{ clickable: true }"
-  >
+  <swiper class="swiper" :modules="modules" :space-between="30" :slides-per-view="3" :pagination="{ clickable: true }">
     <swiper-slide class="slide">Slide 1</swiper-slide>
     <swiper-slide class="slide">Slide 2</swiper-slide>
     <swiper-slide class="slide">Slide 3</swiper-slide>
@@ -27,7 +21,6 @@
   export default defineComponent({
     name: 'swiper-example-multiple-slides-per-biew',
     title: 'Multiple slides per view',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -41,15 +34,15 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .swiper {
-    @include swiper-wrapper();
+    @include swiperMix.swiper-wrapper();
   }
 
   .slide {
-    @include swiper-slide();
+    @include swiperMix.swiper-slide();
   }
 </style>

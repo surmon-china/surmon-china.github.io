@@ -1,3 +1,30 @@
+<script lang="ts" setup>
+  import { type PropType } from 'vue'
+
+  const config = defineModel<any>('config', { required: true })
+
+  const props = defineProps({
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    languages: {
+      type: Array as PropType<Array<string>>,
+      required: true
+    },
+    themes: {
+      type: Array as PropType<Array<string>>,
+      required: true
+    }
+  })
+
+  const emit = defineEmits(['language'])
+
+  const handleSelectLanguage = (event: any) => {
+    emit('language', event.target.value)
+  }
+</script>
+
 <template>
   <div class="toolbar">
     <div class="item">
@@ -28,30 +55,15 @@
     </div>
     <div class="item">
       <label for="autofocus">autofocus:</label>
-      <input
-        type="checkbox"
-        id="autofocus"
-        :disabled="disabled"
-        v-model="config.autofocus"
-      />
+      <input type="checkbox" id="autofocus" :disabled="disabled" v-model="config.autofocus" />
     </div>
     <div class="item">
       <label for="indentWithTab">indentWithTab:</label>
-      <input
-        type="checkbox"
-        id="indentWithTab"
-        :disabled="disabled"
-        v-model="config.indentWithTab"
-      />
+      <input type="checkbox" id="indentWithTab" :disabled="disabled" v-model="config.indentWithTab" />
     </div>
     <div class="item">
       <label for="tabSize">tabSize:</label>
-      <select
-        name="tabSize"
-        id="tabSize"
-        :disabled="disabled"
-        v-model.number="config.tabSize"
-      >
+      <select name="tabSize" id="tabSize" :disabled="disabled" v-model.number="config.tabSize">
         <option :value="option" :key="option" v-for="option in [2, 4, 6, 8]">
           {{ option }}
         </option>
@@ -60,11 +72,7 @@
     <div class="item">
       <label for="height">height:</label>
       <select name="height" id="height" :disabled="disabled" v-model="config.height">
-        <option
-          :value="option"
-          :key="option"
-          v-for="option in ['auto', '200px', '40em', '60vh']"
-        >
+        <option :value="option" :key="option" v-for="option in ['auto', '200px', '40em', '60vh']">
           {{ option }}
         </option>
       </select>
@@ -72,37 +80,8 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, PropType } from 'vue'
-  export default defineComponent({
-    props: {
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      config: {
-        type: Object,
-        required: true
-      },
-      languages: {
-        type: Array as PropType<Array<string>>,
-        required: true
-      },
-      themes: {
-        type: Array as PropType<Array<string>>,
-        required: true
-      }
-    },
-    methods: {
-      handleSelectLanguage(event: any) {
-        this.$emit('language', event.target.value)
-      }
-    }
-  })
-</script>
-
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
+  @use '@/styles/variables.scss' as *;
 
   .toolbar {
     display: flex;

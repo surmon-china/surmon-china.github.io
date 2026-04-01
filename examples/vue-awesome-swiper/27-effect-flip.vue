@@ -27,7 +27,6 @@
   export default defineComponent({
     name: 'swiper-example-3d-flip',
     title: '3D Flip effect',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -41,9 +40,9 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .flip-example {
     position: relative;

@@ -37,10 +37,6 @@
         </div>
       </div>
       <div v-else class="banner-content" key="content">
-        <p class="archived" v-if="repoDetail?.archived">
-          <i class="iconfont icon-warning-line"></i>
-          This repository has been archived. It is now read-only.
-        </p>
         <h1 class="title">{{ repository }}</h1>
         <h4 class="subtitle">{{ repoDetail?.description || '...' }}</h4>
         <div class="buttons">
@@ -57,7 +53,7 @@
             :count="repoDetail?.open_issues_count || 0"
             icon="icon-issue"
             class="item"
-            text="Issue"
+            text="Issues"
           />
           <github-button
             :link="`${repoUrl}/fork`"
@@ -86,8 +82,8 @@
 
 <style lang="scss" scoped>
   @use 'sass:math';
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .banner {
     position: relative;
@@ -106,14 +102,16 @@
       width: 400px;
       max-width: 40%;
       height: 38px;
-      margin-bottom: $lg-gap;
+      margin-bottom: $gap-lg;
     }
+
     .subtitle-skeleton {
       width: 300px;
       max-width: 36%;
       height: 30px;
       margin-bottom: 4rem;
     }
+
     .buttons-skeleton {
       display: flex;
       height: 34px;
@@ -123,12 +121,6 @@
         flex: 1;
         margin: 0 $gap;
       }
-    }
-
-    .archived {
-      color: $github-attention;
-      margin-top: 1rem;
-      margin-bottom: 0;
     }
 
     .title {
@@ -154,7 +146,7 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        padding: 0 $sm-gap;
+        padding: 0 $gap-sm;
         background-color: $banner-bg;
         color: $text-color;
 

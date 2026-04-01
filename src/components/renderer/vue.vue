@@ -2,7 +2,6 @@
   import LayoutNavbar from '@/components/layout/navbar.vue'
   import LayoutFootbar from '@/components/layout/footbar.vue'
   import LayoutToolbox from '@/components/layout/toolbox.vue'
-  import LayoutShare from '@/components/layout/share.vue'
 
   interface Props {
     repository: string
@@ -21,7 +20,6 @@
 <template>
   <div class="vue-renderer">
     <layout-navbar class="navbar" :repository="repository" />
-    <layout-share :repository="repository" />
     <layout-toolbox v-if="toolbox" class="toolbox" :repository="repository" @to-top="handleToTop" />
     <slot></slot>
     <layout-footbar class="footbar" :repository="repository" />
@@ -29,8 +27,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .vue-renderer {
     .navbar {

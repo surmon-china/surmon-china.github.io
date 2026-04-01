@@ -38,8 +38,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   /* for legacy */
   .iframe-renderer.legacy {

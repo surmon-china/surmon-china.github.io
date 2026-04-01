@@ -1,6 +1,18 @@
-import { DefineComponent } from 'vue'
+import { Component } from 'vue'
 import { getGitHubFileSourceURL } from '@/transforms/url'
 import { GITHUB_PROJECT_NAME } from '@/config'
+
+type ExampleComponentDefinition = Component & {
+  name?: string
+  title?: string
+}
+
+export interface ExampleComponentInput {
+  component: ExampleComponentDefinition
+  raw: string
+  language: string
+  path: string
+}
 
 export interface ExampleComponent {
   name?: string
@@ -9,33 +21,17 @@ export interface ExampleComponent {
   url: string
   raw: string
   language: string
-  component: any
+  component: ExampleComponentDefinition
 }
 
-export interface ExampleComponentConfig {
-  component: any
-  raw: string
-  language: string
-}
-
-export const getExampleComponent = (payload: ExampleComponentConfig): ExampleComponent => {
-  const comp = payload.component as DefineComponent & {
-    title: string
-    url: string
-  }
-
-  let path = ''
-  try {
-    path = new URL(comp.url).pathname
-  } catch (error) {}
-
+export const normalizeExample = (input: ExampleComponentInput): ExampleComponent => {
   return {
-    name: comp.name,
-    title: comp.title || comp.name,
-    path: path,
-    url: getGitHubFileSourceURL(GITHUB_PROJECT_NAME, path),
-    component: comp,
-    raw: payload.raw,
-    language: payload.language
+    name: input.component.name,
+    title: input.component.title || input.component.name,
+    path: input.path,
+    url: getGitHubFileSourceURL(GITHUB_PROJECT_NAME, input.path),
+    raw: input.raw,
+    language: input.language,
+    component: input.component
   }
 }

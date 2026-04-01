@@ -44,7 +44,6 @@
   export default defineComponent({
     name: 'swiper-example-responsive-breakpoints',
     title: 'Responsive breakpoints',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -58,22 +57,22 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .tip {
     width: 100%;
     line-height: 3em;
     text-align: center;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border-color-secondary;
   }
 
   .swiper {
-    @include swiper-wrapper();
+    @include swiperMix.swiper-wrapper();
   }
 
   .slide {
-    @include swiper-slide();
+    @include swiperMix.swiper-slide();
   }
 </style>

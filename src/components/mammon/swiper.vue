@@ -30,8 +30,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .swiper-mammon {
     height: 9rem;
@@ -54,9 +54,8 @@
           height: 100%;
           cursor: pointer;
           background-size: cover;
+          transition: opacity $motion-duration;
           opacity: 0.9;
-          transition: opacity $transition-time;
-
           &:hover {
             opacity: 1;
           }

@@ -4,7 +4,11 @@
       <div class="md-subhead">
         <span>01 Example (theme snow)</span>
       </div>
-      <md-button class="md-icon-button" target="_blank" href="https://github.com/surmon-china/vue-quill-editor/tree/master/examples/01-example.vue">
+      <md-button
+        class="md-icon-button"
+        target="_blank"
+        href="https://github.com/surmon-china/vue-quill-editor/tree/master/examples/01-example.vue"
+      >
         <md-icon>code</md-icon>
       </md-button>
     </md-card-actions>
@@ -13,11 +17,12 @@
         <!-- quill-editor -->
         <quill-editor
           ref="myTextEditor"
-          :options="editorOption1"
           v-model="content"
+          :options="editorOption1"
           @blur="onEditorBlur($event)"
           @focus="onEditorFocus($event)"
-          @ready="onEditorReady($event)">
+          @ready="onEditorReady($event)"
+        >
         </quill-editor>
         <!-- <quill-editor v-model="content"
                       :options="editorOption"
@@ -50,7 +55,7 @@
         </quill-editor> -->
         <!-- <quill-editor v-model="content" :options="editorOption1"></quill-editor> -->
         <!-- <div class="quill-editor" v-model="content" v-quill:myQuillEditor="editorOption1"></div> -->
-        <hr>
+        <hr />
         <div v-text="content"></div>
       </div>
     </md-card-media>
@@ -65,8 +70,8 @@
   // ];
   // Quill.register(FontAttributor, true);
   const Font = Quill.import('formats/font')
-  Font.whitelist = ['mirza', 'roboto'];
-  Quill.register(Font, true);
+  Font.whitelist = ['mirza', 'roboto']
+  Quill.register(Font, true)
   // import { ImageImport } from '@/components/vue-quill-editor/modules/ImageImport.js'
   // import { ImageResize } from '@/components/vue-quill-editor/modules/ImageResize.js'
   // console.log(ImageResize)
@@ -88,17 +93,17 @@
               [{ header: [1, 2, 3, 4, 5, 6, false] }],
               ['bold', 'italic', 'underline', 'strike'],
               ['blockquote', 'code-block'],
-              [{ 'header': 1 }, { 'header': 2 }],
-              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-              [{ 'script': 'sub'}, { 'script': 'super' }],
-              [{ 'indent': '-1'}, { 'indent': '+1' }],
-              [{ 'direction': 'rtl' }],
-              [{ 'color': [] }, { 'background': [] }],
+              [{ header: 1 }, { header: 2 }],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              [{ script: 'sub' }, { script: 'super' }],
+              [{ indent: '-1' }, { indent: '+1' }],
+              [{ direction: 'rtl' }],
+              [{ color: [] }, { background: [] }],
               // [{ 'font': ['Arial', 'serif', 'sans-serif', '宋体', '黑体', 'Microsoft YaHei', 'monospace', 'cursive'] }],
-              [{ 'font': ['mirza', 'roboto'] }],
+              [{ font: ['mirza', 'roboto'] }],
               ['link', 'image', 'video']
             ]
-          },
+          }
           // placeholder: 'Compose an epic...'
         },
         editorOption2: {
@@ -107,6 +112,18 @@
           }
         }
       }
+    },
+    computed: {
+      editor() {
+        return this.$refs.myTextEditor.quill
+      }
+    },
+    mounted() {
+      console.log('this is my editor', this.editor)
+      setTimeout(() => {
+        this.editor.insertEmbed(10, 'image', 'http://quilljs.com/images/cloud.png')
+        // this.content = '<h1>content changed!</h1><p><img src="/vue-quill-editor/static/images/surmon-6.jpg" width="500" style=""></p>'
+      }, 1800)
     },
     methods: {
       onEditorBlur(editor) {
@@ -126,18 +143,6 @@
         event.preventDefault()
         return false
       }
-    },
-    computed: {
-      editor() {
-        return this.$refs.myTextEditor.quill
-      }
-    },
-    mounted() {
-      console.log('this is my editor', this.editor)
-      setTimeout(() => {
-        this.editor.insertEmbed(10, 'image', 'http://quilljs.com/images/cloud.png');
-        // this.content = '<h1>content changed!</h1><p><img src="/vue-quill-editor/static/images/surmon-6.jpg" width="500" style=""></p>'
-      }, 1800)
     }
   }
 </script>

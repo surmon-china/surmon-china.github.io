@@ -61,7 +61,7 @@ try {
     appStoreCache = storeCache
     const html = template
       .replace(/<title>[\s\S]*<\/title>/, '')
-      .replace(`<html`, () => `<html ${heads.htmlAttrs} `)
+      .replace(`<html`, () => `<html ${heads.htmlAttrs}`)
       .replace(`<head>`, () => `<head>\n${heads.headTags}`)
       .replace(`<body>`, () => `<body ${heads.bodyAttrs}>`)
       .replace(`<!--app-html-->`, () => appHTML)

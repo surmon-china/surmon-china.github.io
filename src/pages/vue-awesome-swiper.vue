@@ -1,9 +1,9 @@
 <script lang="ts" setup>
   import { PROJECTS } from '@/config'
-  import { useSeoMeta } from '@unhead/vue'
-  import { getExampleComponent } from '@/transforms/example'
+  import { usePageSeo } from '@/composables/head'
+  import { normalizeExample } from '@/transforms/example'
   import { getPageURL, getLegacyPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
-  import { getMetaTitle, getMetaKeywords, getMetaDescription, normalizeSeoMetaObject } from '@/transforms/meta'
+  import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import { MammonProvider } from '@/components/mammon'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
@@ -12,19 +12,17 @@
   import exampleComponents from '@examples/vue-awesome-swiper'
 
   const { repository, route, packages } = PROJECTS.VueAwesomeSwiper
-  const examples = exampleComponents.map(getExampleComponent)
+  const examples = exampleComponents.map(normalizeExample)
 
-  useSeoMeta(
-    normalizeSeoMetaObject({
-      title: getMetaTitle(repository),
-      keywords: [getMetaKeywords(repository), `How to use Swiper on vue3?`].join(','),
-      description: getMetaDescription(repository),
-      ogUrl: getPageURL(route),
-      ogImage: getGitHubOpenGraphImageURL(repository),
-      ogImageWidth: 1200,
-      ogImageHeight: 600
-    })
-  )
+  usePageSeo({
+    title: getMetaTitle(repository),
+    keywords: [getMetaKeywords(repository), `How to use Swiper on vue3?`].join(','),
+    description: getMetaDescription(repository),
+    ogUrl: getPageURL(route),
+    ogImage: getGitHubOpenGraphImageURL(repository),
+    ogImageWidth: 1200,
+    ogImageHeight: 600
+  })
 </script>
 
 <template>
@@ -54,8 +52,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .swiper-example {
     width: 100%;

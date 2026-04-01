@@ -28,7 +28,6 @@
   export default defineComponent({
     name: 'swiper-example-slideable-navigation-drawer',
     title: 'Slideable navigation drawer',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -41,7 +40,11 @@
 
       const menuOpened = ref(false)
       const toggleMenu = () => {
-        menuOpened.value ? swiperRef?.slideNext() : swiperRef?.slidePrev()
+        if (menuOpened.value) {
+          swiperRef?.slideNext()
+        } else {
+          swiperRef?.slidePrev()
+        }
       }
 
       const handleSlideChange = () => {
@@ -59,16 +62,16 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .swiper {
-    @include swiper-wrapper();
+    @include swiperMix.swiper-wrapper();
 
     .menu,
     .content {
-      @include swiper-slide();
+      @include swiperMix.swiper-slide();
     }
 
     .menu {

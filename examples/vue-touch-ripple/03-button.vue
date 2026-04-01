@@ -26,7 +26,6 @@
   export default defineComponent({
     name: 'touch-ripper-example-button-element',
     title: 'Button element',
-    url: import.meta.url,
     components: {
       TouchRipple
     }
@@ -42,11 +41,12 @@
 
     .button {
       width: auto;
-      height: 3em;
-      line-height: 3em;
+      height: 3rem;
+      line-height: 3rem;
       border: none;
       border-radius: 4px;
       padding: 0 1rem;
+      font-size: 1rem;
       color: white;
       cursor: pointer;
       transition: filter 0.2s;

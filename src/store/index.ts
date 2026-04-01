@@ -1,7 +1,7 @@
 import { decode } from 'js-base64'
 import { defineStore } from 'pinia'
 import { GITHUB_USERNAME } from '@/config'
-import { GitHubAggregateData, GitHubRepository, NPMAggregateData } from './type'
+import { GitHubAggregateData, GitHubRepository, NPMAggregateData } from './interface'
 import axios from '@/services/axios'
 
 const fetchGitHubProfileFileContent = <T>(filePath: string): Promise<T | null> => {

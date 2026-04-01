@@ -99,8 +99,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .state-detail {
     margin: 0;
@@ -109,7 +109,7 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 1px;
-    background-color: $border-color;
+    background-color: $border-color-secondary;
 
     .item.col-2 {
       grid-column: span 2;
@@ -144,7 +144,7 @@
       }
 
       .value {
-        @include text-overflow();
+        @include mix.text-overflow();
       }
     }
   }

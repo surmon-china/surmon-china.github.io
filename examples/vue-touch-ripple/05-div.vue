@@ -47,7 +47,6 @@
   export default defineComponent({
     name: 'touch-ripper-example-cubic-bezier',
     title: 'Cubic Bezier',
-    url: import.meta.url,
     components: {
       TouchRipple
     }

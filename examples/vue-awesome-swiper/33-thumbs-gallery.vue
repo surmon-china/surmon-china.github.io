@@ -44,7 +44,6 @@
   export default defineComponent({
     name: 'swiper-example-thumbs-gallery',
     title: 'Thumbs gallery with Two-way control',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -65,9 +64,9 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .thumb-example {
     height: 480px;

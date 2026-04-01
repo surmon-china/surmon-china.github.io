@@ -1,10 +1,10 @@
 <script lang="ts" setup>
   import { reactive, onBeforeMount } from 'vue'
-  import { useSeoMeta } from '@unhead/vue'
+  import { usePageSeo } from '@/composables/head'
   import { APP_META, GITHUB_USER_URL } from '@/config'
 
   const meta = reactive({ ...APP_META })
-  useSeoMeta(meta)
+  usePageSeo(meta)
   onBeforeMount(() => {
     meta.title = `Redirect to GitHub ...`
     location.href = GITHUB_USER_URL
@@ -20,8 +20,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .index-page {
     width: 100%;

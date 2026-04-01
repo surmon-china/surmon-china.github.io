@@ -11,7 +11,6 @@
   }>()
 
   const repoURL = getGitHubRepositoryURL(props.repository)
-  const handleToPageTop = () => emit('toTop')
 </script>
 
 <template>
@@ -25,7 +24,7 @@
         <ulink class="item github" title="to GitHub homepage" :href="repoURL">
           <i class="iconfont icon-github"></i>
         </ulink>
-        <button class="item to-top" @click="handleToPageTop">
+        <button class="item to-top" @click="emit('toTop')">
           <i class="iconfont icon-arrow-up"></i>
         </button>
       </div>
@@ -34,8 +33,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   @media screen and (max-width: $container-width) {
     #toolbox {
@@ -50,16 +49,19 @@
     bottom: 20rem;
 
     .container {
-      $width: $lg-gap * 2.6;
-      $height: $width * 0.9;
       position: relative;
 
       .tools {
+        $width: 3.6rem;
+        $height: $width * 0.8;
+        $radius-size: $radius-sm;
+
         position: absolute;
-        right: -10rem;
+        right: -12rem;
         width: $width;
         overflow: hidden;
         border: 1px solid $body-bg;
+        border-radius: $radius-size;
 
         .item {
           border: none;
@@ -80,12 +82,16 @@
             border-bottom: 1px solid $body-bg;
           }
           &:first-child {
-            border-top-left-radius: $sm-radius;
-            border-top-right-radius: $sm-radius;
+            border-top-left-radius: $radius-size;
+            border-top-right-radius: $radius-size;
           }
           &:last-child {
-            border-bottom-left-radius: $sm-radius;
-            border-bottom-right-radius: $sm-radius;
+            border-bottom-left-radius: $radius-size;
+            border-bottom-right-radius: $radius-size;
+          }
+
+          .iconfont {
+            font-size: $font-size-large;
           }
 
           &.sponsor {

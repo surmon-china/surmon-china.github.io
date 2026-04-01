@@ -14,9 +14,7 @@
 
   const hasCount = computed(() => Number.isFinite(props.count as number) || props.countText)
   const countContent = computed(() => {
-    if (props.countText) {
-      return props.countText
-    }
+    if (props.countText) return props.countText
     return hasCount.value ? countToK(props.count as number) : null
   })
 </script>
@@ -38,14 +36,15 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .homepage-button {
+    $radius-size: $radius-xs;
     display: inline-flex;
-    height: 2.3em;
-    border-radius: $sm-radius;
-    font-weight: bold;
+    height: 2.4rem;
+    border-radius: $radius-size;
+    font-weight: 500;
     user-select: none;
     vertical-align: middle;
     white-space: nowrap;
@@ -54,24 +53,36 @@
     .item {
       cursor: pointer;
       text-decoration: none;
+
       .iconfont {
-        margin-right: $xs-gap;
+        margin-right: $gap-xs;
         font-weight: normal;
+      }
+
+      &:first-child {
+        border-top-left-radius: $radius-size;
+        border-bottom-left-radius: $radius-size;
+      }
+
+      &:last-child {
+        border-top-right-radius: $radius-size;
+        border-bottom-right-radius: $radius-size;
       }
 
       &.button {
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        padding: 0 $sm-gap;
-        background-color: $header-bg;
+        padding: 0 $gap-sm;
         border: 1px solid $text-divider;
-        transition: all $transition-time;
-        &.has-count {
-          border-right-width: 0px;
-        }
+        transition: all $motion-duration;
+        background-color: $header-bg;
         &:hover {
           background-color: $body-bg;
+        }
+
+        &.has-count {
+          border-right-width: 0px;
         }
       }
 
@@ -79,9 +90,10 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        padding: 0 $sm-gap;
+        padding: 0 $gap-sm;
         border: 1px solid $text-divider;
-        transition: all $transition-time;
+        transition: all $motion-duration;
+
         &:hover {
           color: $link-color;
           border-color: $text-disabled;

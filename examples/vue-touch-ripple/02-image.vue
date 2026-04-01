@@ -3,13 +3,7 @@
     <touch-ripple class="image-box">
       <img class="image" draggable="false" src="/images/example/1.jpg" />
     </touch-ripple>
-    <touch-ripple
-      class="image-box"
-      color="yellow"
-      :opacity="0.2"
-      :duration="600"
-      transition="ease-in"
-    >
+    <touch-ripple class="image-box" color="yellow" :opacity="0.2" :duration="600" transition="ease-in">
       <img class="image" draggable="false" src="/images/example/2.jpg" />
     </touch-ripple>
     <touch-ripple
@@ -32,7 +26,6 @@
   export default defineComponent({
     name: 'touch-ripper-example-image-element',
     title: 'Image element',
-    url: import.meta.url,
     components: {
       TouchRipple
     }

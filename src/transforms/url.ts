@@ -21,7 +21,7 @@ export function getGitHubRepositoryURL(repository: string) {
 }
 
 export function getGitHubFileSourceURL(repository: string, filepath: string) {
-  return `https://github.com/${GITHUB_USERNAME}/${repository}/tree/source${filepath}`
+  return `https://github.com/${GITHUB_USERNAME}/${repository}/tree/source/${filepath}`
 }
 
 // https://stackoverflow.com/questions/68839829/how-can-i-get-the-open-graph-image-for-a-github-repository

@@ -31,7 +31,6 @@
   export default defineComponent({
     name: 'swiper-example-3d-cube',
     title: '3D Cube effect',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -45,12 +44,12 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .cube-example {
-    @include swiper-wrapper($height: 380px);
+    @include swiperMix.swiper-wrapper($height: 380px);
     position: relative;
   }
 
@@ -64,7 +63,7 @@
     margin-top: -150px;
 
     .slide {
-      @include swiper-slide();
+      @include swiperMix.swiper-slide();
 
       img {
         display: block;

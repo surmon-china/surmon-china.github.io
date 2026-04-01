@@ -34,7 +34,6 @@
   export default defineComponent({
     name: 'swiper-example-effect-creative',
     title: 'Creative effect',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -132,9 +131,9 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .creative-example {
     position: relative;
@@ -147,7 +146,7 @@
     height: 300px;
 
     .slide {
-      @include swiper-slide();
+      @include swiperMix.swiper-slide();
 
       img {
         display: block;
@@ -159,10 +158,10 @@
   }
 
   .toolbar {
-    @include toolbar();
+    @include swiperMix.toolbar();
 
     button {
-      @include toolbar-button();
+      @include swiperMix.toolbar-button();
     }
   }
 </style>

@@ -1,5 +1,4 @@
-@import '@/styles/variables.scss';
-@import '@/styles/mixins.scss';
+@use '@/styles/variables.scss' as *;
 
 @mixin swiper-wrapper($height: 260px) {
   width: 100%;
@@ -12,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  font-weight: 400;
   font-size: $font-size-huge * 1.6;
   background-color: $banner-bg;
   color: $text-secondary;
@@ -22,7 +21,7 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid $border-color-secondary;
 }
 
 @mixin toolbar-button() {
@@ -30,7 +29,7 @@
   padding: 0;
   margin: 0;
   border: none;
-  border-right: 1px solid $border-color;
+  border-right: 1px solid $border-color-secondary;
   line-height: 3em;
   background-color: $banner-bg;
   color: $text-color;

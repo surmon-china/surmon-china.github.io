@@ -22,14 +22,7 @@
       </p>
       <p class="item">
         <label for="opacity">opacity: ({{ state.opacity }})</label>
-        <input
-          type="range"
-          id="opacity"
-          min="0.1"
-          max="0.9"
-          step="0.1"
-          v-model.number="state.opacity"
-        />
+        <input type="range" id="opacity" min="0.1" max="0.9" step="0.1" v-model.number="state.opacity" />
       </p>
       <p class="item">
         <label for="transition">transition:</label>
@@ -52,14 +45,7 @@
       </p>
       <p class="item">
         <label for="duration">duration: ({{ state.duration }})</label>
-        <input
-          type="range"
-          id="duration"
-          min="100"
-          max="2000"
-          step="100"
-          v-model.number="state.duration"
-        />
+        <input type="range" id="duration" min="100" max="2000" step="100" v-model.number="state.duration" />
       </p>
       <p class="item">
         <label for="keepLastRipple">keep last ripple:</label>
@@ -74,23 +60,12 @@
       <div class="divider"></div>
       <p class="item">
         <label for="background">background:</label>
-        <input
-          type="color"
-          id="background"
-          name="background"
-          v-model="styles.backgroundColor"
-        />
+        <input type="color" id="background" name="background" v-model="styles.backgroundColor" />
       </p>
       <p class="item">
         <svg height="0" width="0" viewBox="0 0 100 100">
-          <clipPath
-            id="heart"
-            clipPathUnits="objectBoundingBox"
-            transform="scale(0.01, 0.01)"
-          >
-            <path
-              d="M 10,30 A 20,20 0,0,1 50,30 A 20,20 0,0,1 90,30 Q 90,60 50,90 Q 10,60 10,30 z"
-            />
+          <clipPath id="heart" clipPathUnits="objectBoundingBox" transform="scale(0.01, 0.01)">
+            <path d="M 10,30 A 20,20 0,0,1 50,30 A 20,20 0,0,1 90,30 Q 90,60 50,90 Q 10,60 10,30 z" />
           </clipPath>
         </svg>
         <label for="clipPath">CSS clip path:</label>
@@ -126,7 +101,6 @@
   export default defineComponent({
     name: 'touch-ripper-example-customize-element',
     title: 'Customize element',
-    url: import.meta.url,
     components: {
       TouchRipple
     },
@@ -154,7 +128,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
+  @use '@/styles/variables.scss' as *;
 
   .example {
     display: flex;
@@ -190,14 +164,14 @@
 
       input:not([type='checkbox']),
       select {
-        width: 20em;
+        width: 20rem;
         margin: 0;
       }
 
       .divider {
         height: 1px;
-        margin: 1.4em 0;
-        background-color: $border-color;
+        margin: 1.4rem 0;
+        background-color: $border-color-secondary;
       }
     }
   }

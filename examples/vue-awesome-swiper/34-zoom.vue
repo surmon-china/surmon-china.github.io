@@ -30,7 +30,6 @@
   export default defineComponent({
     name: 'swiper-example-zoom',
     title: 'Zoom',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -44,16 +43,16 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .swiper {
-    @include swiper-wrapper($height: 400px);
+    @include swiperMix.swiper-wrapper($height: 400px);
   }
 
   .slide {
-    @include swiper-slide();
+    @include swiperMix.swiper-slide();
     overflow: hidden;
   }
 </style>

@@ -107,7 +107,7 @@ const getComponent = (clientID: string) =>
 export default {
   install(app: App, adsenseConfig: AdSenseConfig) {
     const component = getComponent(adsenseConfig.ID)
-    app.component(component.name, component)
+    app.component(component.name!, component)
 
     if (adsenseConfig.enabledAutoAD) {
       loadScript(ADS_SCRIPT, { async: true }).then(() => {

@@ -33,7 +33,6 @@
     // MARK: GA only
     const gaOnly = true
     // const gaOnly = !visitor.isZhLangGuest || visitor.isMobileDevice
-    // 如果总数小于临界值，则仅在中间显示一个
     if (count <= AD_BOUNDARY) {
       const targetIndex = Math.ceil(count / 2)
       // Global User || Mobile -> GA -> GA(60%)
@@ -67,7 +66,10 @@
         <highlightjs
           class="highlight"
           contenteditable="true"
-          onkeydown="if(event.metaKey) return true; return false;"
+          onkeydown="
+            if (event.metaKey) return true
+            return false
+          "
           :code="activeExample?.raw"
           :language="activeExample?.language"
         />
@@ -95,8 +97,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .highlight {
     margin: 0;

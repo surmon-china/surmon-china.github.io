@@ -34,7 +34,6 @@
   export default defineComponent({
     name: 'swiper-example-3d-coverflow',
     title: '3D Coverflow effect',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -48,12 +47,12 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .coverflow-example {
-    @include swiper-wrapper($height: 380px);
+    @include swiperMix.swiper-wrapper($height: 380px);
     position: relative;
   }
 

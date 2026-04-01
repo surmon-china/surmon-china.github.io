@@ -20,5 +20,5 @@
       "@examples/*": ["examples/*"]
     }
   },
-  "include": ["src", "examples", "vite-env.d.ts"]
+  "include": ["src", "examples"]
 }

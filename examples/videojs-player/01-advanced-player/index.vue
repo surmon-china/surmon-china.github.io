@@ -4,32 +4,36 @@
     <div class="player-wrapper">
       <div class="top" :class="{ mobile: visitor.isMobileDevice }">
         <video-player
+          playsinline
+          crossorigin="anonymous"
           :class="['video-player', 'vjs-big-play-centered', { loading: !state }]"
+          :width="680"
           :sources="mediaConfig.sources"
           :poster="mediaConfig.poster"
           :tracks="mediaConfig.tracks"
           :autoplay="config.autoplay"
-          :playbackRates="config.playbackRates"
+          :playback-rates="config.playbackRates"
           :fluid="config.fluid"
           :loop="config.loop"
-          crossorigin="anonymous"
-          playsinline
-          :width="680"
           v-model:height="config.height"
           v-model:volume="config.volume"
-          v-model:playbackRate="config.playbackRate"
+          v-model:playback-rate="config.playbackRate"
           v-model:controls="config.controls"
           v-model:muted="config.muted"
           @mounted="handleMounted"
         >
-          <template v-slot="{ player, state }">
+          <template #default="{ player, state }">
             <div class="player-custom-controls" v-if="isEnabledCustomControls">
               <player-custom-controls :player="player" :state="state" :config="config" />
             </div>
           </template>
         </video-player>
         <div class="right" :style="{ height: config.height + 'px' }">
-          <player-config :config="config" v-model:enabled-custom-controls="isEnabledCustomControls" />
+          <player-config
+            :config="config"
+            :playback-rates-options="playbackRatesOptions"
+            v-model:enabled-custom-controls="isEnabledCustomControls"
+          />
         </div>
       </div>
       <div class="bottom" :class="{ mobile: visitor.isMobileDevice }">
@@ -46,18 +50,22 @@
   import 'video.js/dist/video-js.css'
 
   import { useVisitor } from '@/composables/visitor'
-  import PlayerConfig, { playbackRatesOptions } from './config.vue'
   import PlayerCustomControls from './advanced.vue'
   import PlayerPlaylist from './playlist.vue'
   import PlayerState from './state.vue'
+  import PlayerConfig from './config.vue'
   import { playlist } from './playlist'
 
   type VideoJsPlayer = ReturnType<typeof videojs>
 
+  const playbackRatesOptions = [
+    [1, 2, 3],
+    [0.5, 1.5, 2.5]
+  ]
+
   export default defineComponent({
     name: 'vue-advanced-player-example',
     title: 'Advanced player (Vue)',
-    url: import.meta.url,
     components: {
       VideoPlayer,
       PlayerCustomControls,
@@ -107,6 +115,7 @@
         state,
         config,
         mediaConfig,
+        playbackRatesOptions,
         isEnabledCustomControls,
         playMediaIndex,
         handleMounted,
@@ -117,12 +126,12 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .example {
     .playlist {
-      border-bottom: 1px solid $border-color;
+      border-bottom: 1px solid $border-color-secondary;
     }
 
     .player-wrapper {
@@ -152,7 +161,7 @@
         .right {
           flex: 1;
           min-width: 18rem;
-          border-left: 1px solid $border-color;
+          border-left: 1px solid $border-color-secondary;
           overflow-x: hidden;
           overflow-y: scroll;
         }
@@ -162,7 +171,7 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
-        border-top: 1px solid $border-color;
+        border-top: 1px solid $border-color-secondary;
         &.mobile {
           overflow-x: scroll;
         }

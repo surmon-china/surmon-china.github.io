@@ -27,10 +27,7 @@ export const factory = async () => {
   const segmentit = useDefault(new Segment())
   return new NaiveBayes({
     tokenizer(sentence: string) {
-      return segmentit.doSegment(
-        sentence.replace(/[^(a-zA-Z\u4e00-\u9fa50-9_)+\s]/g, ' '),
-        { simple: true }
-      )
+      return segmentit.doSegment(sentence.replace(/[^(a-zA-Z\u4e00-\u9fa50-9_)+\s]/g, ' '), { simple: true })
     }
   })
 }

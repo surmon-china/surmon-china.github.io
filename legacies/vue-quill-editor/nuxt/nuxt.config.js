@@ -1,9 +1,6 @@
-
 module.exports = {
   // some nuxt config...
-  plugins: [
-    { src: '~plugins/nuxt-quill-plugin', ssr: false }
-  ],
+  plugins: [{ src: '~plugins/nuxt-quill-plugin', ssr: false }],
   // some nuxt config...
   css: [
     // ...
@@ -13,6 +10,6 @@ module.exports = {
     // for bubble theme
     'quill/dist/quill.bubble.css'
     // ...
-  ],
+  ]
   // some nuxt config...
 }

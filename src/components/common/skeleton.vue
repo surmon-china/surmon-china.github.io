@@ -15,7 +15,7 @@
       },
       radius: {
         type: Number,
-        default: 2
+        default: 4
       }
     },
     setup(props) {
@@ -33,8 +33,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   $skeleton-background: $header-bg;
   $skeleton-spinner: $body-bg;

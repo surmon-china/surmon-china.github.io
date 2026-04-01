@@ -1,7 +1,7 @@
 import { createSSRApp } from 'vue'
 import { createMemoryHistory } from 'vue-router'
 import { renderToString } from 'vue/server-renderer'
-import { renderSSRHead } from '@unhead/ssr'
+import { createHead, renderSSRHead } from '@unhead/vue/server'
 import { Theme } from './composables/theme'
 import { useGlobalStore } from './store'
 import { createUniversalApp } from './main'
@@ -10,8 +10,9 @@ export const render = async (url: string, storeCache?: any) => {
   // 1. app
   const { app, router, pinia, head } = createUniversalApp({
     appCreator: createSSRApp,
+    headCreator: createHead,
     routerHistory: createMemoryHistory(),
-    initTheme: Theme.System,
+    initialTheme: Theme.Light,
     language: '',
     userAgent: ''
   })

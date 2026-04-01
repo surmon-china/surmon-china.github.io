@@ -39,7 +39,6 @@
   export default defineComponent({
     name: 'vue-custom-player-example',
     title: 'Custom player (Vue)',
-    url: import.meta.url,
     components: {
       VideoPlayer
     },
@@ -108,8 +107,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .video-player {
     background-color: $black;

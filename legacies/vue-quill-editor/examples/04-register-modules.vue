@@ -1,13 +1,9 @@
 <template>
   <div class="example">
-    <quill-editor
-      class="editor"
-      v-model="content"
-      :options="editorOption"
-    />
+    <quill-editor class="editor" v-model="content" :options="editorOption" />
     <div class="output ql-snow">
       <div class="title">Output</div>
-      <div class="ql-editor" v-html="this.content"></div>
+      <div class="ql-editor" v-html="content"></div>
     </div>
   </div>
 </template>
@@ -31,19 +27,17 @@
       return {
         name: 'register-modules-example',
         content: dedent`
-          <p><span class="ql-emojiblot" data-name="grinning">﻿<span contenteditable="false"><span class="ap ap-grinning">😀</span></span>﻿</span></p><p><br></p><p><em>Register </em><a href="https://github.com/contentco/quill-emoji" rel="noopener noreferrer" target="_blank"><em>Quill emoji module</em></a></p><p><br></p><p><em>Register </em><a href="https://github.com/NextBoy/quill-image-extend-module" rel="noopener noreferrer" target="_blank"><em>Quill image extend module</em></a></p>
+          <p><span class="ql-emojiblot" data-name="grinning"><span contenteditable="false"><span class="ap ap-grinning">😀</span></span></span></p><p><br></p><p><em>Register </em><a href="https://github.com/contentco/quill-emoji" rel="noopener noreferrer" target="_blank"><em>Quill emoji module</em></a></p><p><br></p><p><em>Register </em><a href="https://github.com/NextBoy/quill-image-extend-module" rel="noopener noreferrer" target="_blank"><em>Quill image extend module</em></a></p>
         `,
         editorOption: {
           theme: 'snow',
           modules: {
-            "emoji-toolbar": true,
-            "emoji-shortname": true,
+            'emoji-toolbar': true,
+            'emoji-shortname': true,
             toolbar: {
-              container: [
-                ['link', 'image', 'emoji']
-              ],
+              container: [['link', 'image', 'emoji']],
               handlers: {
-                'image': function () {
+                image: function () {
                   QuillWatch.emit(this.quill.id)
                 }
               }

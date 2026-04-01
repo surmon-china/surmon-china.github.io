@@ -1,0 +1,73 @@
+@use 'sass:meta';
+@use './variables.scss' as *;
+@use './mixins.scss' as mix;
+@use './themes.scss' as themes;
+
+:root {
+  color-scheme: light dark;
+  scrollbar-gutter: stable;
+
+  &[data-theme='light'] {
+    color-scheme: light;
+    @include themes.lightTheme();
+    @include meta.load-css('highlight.js/styles/github');
+  }
+
+  &[data-theme='dark'] {
+    color-scheme: dark;
+    @include themes.darkTheme();
+    @include meta.load-css('highlight.js/styles/github-dark-dimmed');
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: $font-size-base;
+  font-weight: $global-font-weight;
+  font-family: $global-font-family;
+  background-color: $body-bg;
+  color: $text-color;
+  scroll-behavior: smooth;
+}
+
+button {
+  font-family: $global-font-family;
+}
+
+pre,
+code {
+  font-family: $code-font-family;
+}
+
+* {
+  outline: none;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+a {
+  color: $link-color;
+}
+
+.container {
+  width: $container-width;
+  margin: 0 auto;
+}
+
+// for module transition
+.module-enter-active,
+.module-leave-active {
+  transition: opacity $motion-duration ease;
+}
+.module-slow-enter-active,
+.module-slow-leave-active {
+  transition: opacity $motion-duration * 2 ease;
+}
+.module-enter-from,
+.module-leave-to,
+.module-slow-enter-from,
+.module-slow-leave-to {
+  opacity: 0;
+}

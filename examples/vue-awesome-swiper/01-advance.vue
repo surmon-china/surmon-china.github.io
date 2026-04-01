@@ -94,7 +94,6 @@
   export default defineComponent({
     name: 'swiper-example-advance',
     title: 'Advance example',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -146,9 +145,9 @@
 
 <style lang="scss" scoped>
   @use 'sass:math';
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .advance-example {
     height: auto;
@@ -156,11 +155,11 @@
     .horizontal-swiper {
       width: 100%;
       height: 240px;
-      margin-bottom: $lg-gap;
+      margin-bottom: $gap-lg;
 
       /* for swiper loop mode */
       ::v-deep(.slide) {
-        @include swiper-slide();
+        @include swiperMix.swiper-slide();
         flex-direction: column;
         font-size: $font-size-huge;
         background-color: $banner-bg;
@@ -172,17 +171,17 @@
     }
 
     .vertical-swiper {
-      @include swiper-wrapper($height: 200px);
+      @include swiperMix.swiper-wrapper($height: 200px);
       position: relative;
     }
 
     .slide {
-      @include swiper-slide();
+      @include swiperMix.swiper-slide();
       font-size: $font-size-huge;
 
       .link {
         text-decoration: none;
-        margin-right: $xs-gap;
+        margin-right: $gap-xs;
         color: $text-color;
         &:hover {
           color: $link-color;
@@ -198,7 +197,7 @@
         margin-top: 1.4rem;
         padding: 0.5em 1em;
         border: 1px dashed $text-divider;
-        border-radius: $sm-radius;
+        border-radius: $radius-xs;
         color: $text-color;
         background-color: $header-bg;
         opacity: 0.8;
@@ -230,8 +229,8 @@
       color: rgba(white, 0.6);
       background-color: var(--swiper-theme-color);
       transition:
-        opacity $transition-time,
-        visibility $transition-time;
+        opacity $motion-duration,
+        visibility $motion-duration;
       &[disabled] {
         cursor: no-drop;
         opacity: 0.3;
@@ -250,11 +249,11 @@
     }
 
     .nav-button-next {
-      right: $lg-gap * 2;
+      right: $gap-lg * 2;
     }
 
     .nav-button-prev {
-      left: $lg-gap * 2;
+      left: $gap-lg * 2;
     }
   }
 </style>

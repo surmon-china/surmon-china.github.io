@@ -31,7 +31,6 @@
   export default defineComponent({
     name: 'swiper-example-slides-per-column',
     title: 'Multi row slides layout',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -45,16 +44,16 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .swiper {
-    @include swiper-wrapper($height: 430px);
+    @include swiperMix.swiper-wrapper($height: 430px);
   }
 
   .slide {
-    @include swiper-slide();
+    @include swiperMix.swiper-slide();
     height: 200px;
   }
 </style>

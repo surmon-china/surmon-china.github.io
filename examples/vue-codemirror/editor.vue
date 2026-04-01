@@ -2,7 +2,7 @@
   <div class="editor">
     <div class="main">
       <codemirror
-        v-model="code"
+        v-model="inputCode"
         :style="{
           width: preview ? '50%' : '100%',
           height: config.height,
@@ -20,12 +20,9 @@
         @focus="log('focus', $event)"
         @blur="log('blur', $event)"
       />
-      <pre
-        v-if="preview"
-        class="code"
-        :style="{ height: config.height, width: preview ? '50%' : '0px' }"
-        >{{ code }}</pre
-      >
+      <pre v-if="preview" class="code" :style="{ height: config.height, width: preview ? '50%' : '0px' }">{{
+        code
+      }}</pre>
     </div>
     <div class="divider"></div>
     <div class="footer">
@@ -57,7 +54,9 @@
   export default defineComponent({
     name: 'vue-codemirror-example',
     title: 'Web IDE example',
-    url: import.meta.url,
+    components: {
+      Codemirror
+    },
     props: {
       config: {
         type: Object,
@@ -70,12 +69,9 @@
       theme: [Object, Array],
       language: Function
     },
-    components: {
-      Codemirror
-    },
     setup(props) {
       const log = console.log
-      const code = shallowRef(props.code)
+      const inputCode = shallowRef(props.code)
       const extensions = computed(() => {
         const result = []
         if (props.language) {
@@ -134,14 +130,14 @@
         watch(
           () => props.code,
           (_code) => {
-            code.value = _code
+            inputCode.value = _code
           }
         )
       })
 
       return {
         log,
-        code,
+        inputCode,
         extensions,
         preview,
         state,
@@ -156,12 +152,12 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
+  @use '@/styles/variables.scss' as *;
 
   .editor {
     .divider {
       height: 1px;
-      background-color: $border-color;
+      background-color: $border-color-secondary;
     }
 
     .main {
@@ -174,7 +170,7 @@
         margin: 0;
         padding: 0.4em;
         overflow: scroll;
-        border-left: 1px solid $border-color;
+        border-left: 1px solid $border-color-secondary;
         font-family: monospace;
       }
     }
@@ -195,11 +191,12 @@
           align-items: center;
           background-color: transparent;
           border: 1px dashed $border-color;
+          border-radius: $radius-tiny;
           font-size: $font-size-small;
           color: $text-secondary;
           cursor: pointer;
           .iconfont {
-            margin-left: $xs-gap;
+            margin-left: $gap-xs;
           }
           &:hover {
             color: $text-color;

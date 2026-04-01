@@ -31,15 +31,15 @@
       return {
         editorOption: {
           theme: 'bubble',
-          placeholder: "every content，support html",
+          placeholder: 'every content，support html',
           modules: {
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],
-              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-              [{ 'color': [] }, { 'background': [] }],
-              [{ 'font': [] }],
-              [{ 'align': [] }],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              [{ header: [1, 2, 3, 4, 5, 6, false] }],
+              [{ color: [] }, { background: [] }],
+              [{ font: [] }],
+              [{ align: [] }],
               ['link', 'image'],
               ['clean']
             ]
@@ -50,12 +50,6 @@
         `
       }
     },
-    methods: {
-      onEditorChange({ html, text }) {
-        console.debug('editor change!', html, text)
-        this.content = html
-      }
-    },
     computed: {
       editor() {
         return this.$refs.myTextEditor.quill
@@ -63,6 +57,12 @@
     },
     mounted() {
       console.log('this is my editor, bubble example', this.editor)
+    },
+    methods: {
+      onEditorChange({ html, text }) {
+        console.debug('editor change!', html, text)
+        this.content = html
+      }
     }
   }
 </script>

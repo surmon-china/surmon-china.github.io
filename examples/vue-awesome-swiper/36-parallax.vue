@@ -23,11 +23,11 @@
       <h2 class="subtitle" data-swiper-parallax="-200">Subtitle</h2>
       <div class="text" data-swiper-parallax="-100">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus
-          felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer
-          laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis
-          rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean
-          feugiat non eros quis feugiat.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis
+          iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna
+          nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at
+          ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros
+          quis feugiat.
         </p>
       </div>
     </swiper-slide>
@@ -36,11 +36,11 @@
       <h2 class="subtitle" data-swiper-parallax="-200">Subtitle</h2>
       <div class="text" data-swiper-parallax="-100">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus
-          felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer
-          laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis
-          rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean
-          feugiat non eros quis feugiat.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis
+          iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna
+          nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at
+          ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros
+          quis feugiat.
         </p>
       </div>
     </swiper-slide>
@@ -49,11 +49,11 @@
       <h2 class="subtitle" data-swiper-parallax="-200">Subtitle</h2>
       <div class="text" data-swiper-parallax="-100">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus
-          felis iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer
-          laoreet magna nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis
-          rutrum. Ut at ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean
-          feugiat non eros quis feugiat.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum mattis velit, sit amet faucibus felis
+          iaculis nec. Nulla laoreet justo vitae porttitor porttitor. Suspendisse in sem justo. Integer laoreet magna
+          nec elit suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at elit facilisis rutrum. Ut at
+          ullamcorper velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean feugiat non eros
+          quis feugiat.
         </p>
       </div>
     </swiper-slide>
@@ -71,7 +71,6 @@
   export default defineComponent({
     name: 'swiper-example-parallax',
     title: 'Parallax',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -85,9 +84,9 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .parallax-bg {
     position: absolute;
@@ -100,7 +99,7 @@
   }
 
   .swiper {
-    @include swiper-wrapper($height: 380px);
+    @include swiperMix.swiper-wrapper($height: 380px);
 
     .slide {
       display: flex;
@@ -113,7 +112,7 @@
 
       .title {
         margin-top: 0;
-        margin-bottom: $lg-gap;
+        margin-bottom: $gap-lg;
       }
 
       .subtitle {

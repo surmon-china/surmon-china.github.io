@@ -1,7 +1,7 @@
 import { CreateAppFunction } from 'vue'
 import { createRouter, RouterHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-import { createHead } from '@unhead/vue'
+import type { VueHeadClient } from '@unhead/vue/client'
 import { createVisitor } from './composables/visitor'
 import { createTheme, Theme } from './composables/theme'
 import UlinkComponent from './components/common/ulink'
@@ -10,17 +10,18 @@ import App from './app.vue'
 
 export interface AppCreatorOptions {
   appCreator: CreateAppFunction<Element>
+  headCreator: () => VueHeadClient
   routerHistory: RouterHistory
-  initTheme: Theme
+  initialTheme: Theme
   language: string
   userAgent: string
 }
 
 export const createUniversalApp = (options: AppCreatorOptions) => {
   const app = options.appCreator(App)
+  const head = options.headCreator()
   const pinia = createPinia()
-  const head = createHead()
-  const theme = createTheme(options.initTheme)
+  const theme = createTheme(options.initialTheme)
 
   const visitor = createVisitor({
     language: options.language,

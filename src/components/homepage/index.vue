@@ -28,7 +28,8 @@
   }
 
   onBeforeMount(() => {
-    fetchLanguages()
+    // MARK: Temporarily disabled languages display
+    // fetchLanguages()
   })
 </script>
 
@@ -56,8 +57,8 @@
 
 <style lang="scss" scoped>
   @use 'sass:math';
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .homepage {
     padding: 0;

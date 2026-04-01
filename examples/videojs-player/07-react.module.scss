@@ -1,4 +1,4 @@
-@import '@/styles/variables.scss';
+@use '@/styles/variables.scss' as *;
 
 .reactPlayerExample {
   .stateView {
@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 1rem;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border-color-secondary;
 
     .item {
       font-size: $font-size-small;

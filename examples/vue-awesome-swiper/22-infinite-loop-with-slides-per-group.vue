@@ -32,7 +32,6 @@
   export default defineComponent({
     name: 'swiper-example-loop-group',
     title: 'Loop mode with multiple slides per group',
-    url: import.meta.url,
     components: {
       Swiper,
       SwiperSlide
@@ -46,15 +45,15 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
-  @import './style.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
+  @use './mixins.scss' as swiperMix;
 
   .swiper {
-    @include swiper-wrapper();
+    @include swiperMix.swiper-wrapper();
 
     ::v-deep(.swiper-slide) {
-      @include swiper-slide();
+      @include swiperMix.swiper-slide();
     }
   }
 </style>

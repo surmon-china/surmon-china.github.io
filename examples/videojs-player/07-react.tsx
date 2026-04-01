@@ -45,9 +45,7 @@ const ReactBasicPlayer = () => {
         </div>
       )}
       <VideoPlayer
-        className={`video-player vjs-big-play-centered ${style.videoPlayer} ${
-          playerState?.playing ? 'playing' : ''
-        }`}
+        className={`video-player vjs-big-play-centered ${style.videoPlayer} ${playerState?.playing ? 'playing' : ''}`}
         height={320}
         crossorigin="anonymous"
         playsinline
@@ -89,7 +87,11 @@ const ReactBasicPlayer = () => {
             <button
               className={style.item}
               onClick={() => {
-                state.isInPictureInPicture ? player.exitPictureInPicture() : player.requestPictureInPicture()
+                if (state.isInPictureInPicture) {
+                  player.exitPictureInPicture()
+                } else {
+                  player.requestPictureInPicture()
+                }
               }}
             >
               📺 {state.isInPictureInPicture ? 'Exit' : 'Enter'} PIP
@@ -97,7 +99,11 @@ const ReactBasicPlayer = () => {
             <button
               className={style.item}
               onClick={() => {
-                state.isFullscreen ? player.exitFullscreen() : player.requestFullscreen()
+                if (state.isFullscreen) {
+                  player.exitFullscreen()
+                } else {
+                  player.requestFullscreen()
+                }
               }}
             >
               {state.isFullscreen ? '🖥 Exit' : '💻 Enter'} FS
@@ -113,6 +119,5 @@ const ReactBasicPlayer = () => {
 export default transformReactComponentToVue({
   name: 'react-player-example',
   title: 'Example player (React)',
-  url: import.meta.url,
   component: ReactBasicPlayer
 })

@@ -70,7 +70,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
+  @use '@/styles/variables.scss' as *;
 
   .custom-controls {
     height: 2.6rem;

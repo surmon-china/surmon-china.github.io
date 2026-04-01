@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
-@import 'variables.scss';
-@import 'mixins.scss';
-@import 'iconfont.scss';
-@import 'common.scss';
-@import 'widget.scss';
+@use './variables.scss' as *;
+@use './mixins.scss' as *;
+@use './iconfont.scss' as *;
+@use './webfont.scss' as *;
+@use './universal.scss' as *;
+@use './widget.scss' as *;

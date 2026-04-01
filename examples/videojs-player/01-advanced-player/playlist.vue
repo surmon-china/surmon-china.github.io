@@ -11,8 +11,8 @@
         @click="$emit('update:index', i)"
       >
         <span class="playing" v-if="index === i">
-          Now Playing
           <span class="dot"></span>
+          Now Playing
         </span>
         <span class="duration" v-else-if="media.duration">{{ humanizeDuration(media.duration) }}</span>
         <span class="name">{{ media.name }}</span>
@@ -46,8 +46,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .medias {
     margin: 0;
@@ -60,7 +60,7 @@
 
     .item {
       height: 6rem;
-      border-radius: $lg-radius;
+      border-radius: $radius-sm;
       overflow: hidden;
       background-size: cover;
       background-position: center;
@@ -69,7 +69,7 @@
       user-select: none;
       cursor: pointer;
       opacity: 0.7;
-      @include visibility-transition();
+      @include mix.visibility-transition();
       &:hover,
       &.active {
         opacity: 1;
@@ -79,10 +79,10 @@
       .name {
         position: absolute;
         left: 1em;
-        bottom: 0.8em;
+        bottom: 0.8rem;
         display: inline-block;
         max-width: 86%;
-        @include text-overflow();
+        @include mix.text-overflow();
         color: $white;
         text-shadow:
           1px 1px 2px #000,
@@ -99,15 +99,15 @@
         height: 1.8em;
         display: flex;
         align-items: center;
-        padding: 0 0.4em;
-        border-radius: $lg-radius;
+        padding: 0 0.4rem;
+        border-radius: $radius-xs;
         font-size: $font-size-small;
       }
 
       .duration {
         color: $black;
         background-color: $white;
-        font-weight: bold;
+        font-weight: 500;
       }
 
       .playing {
@@ -115,12 +115,12 @@
         background-color: $black;
 
         .dot {
-          width: 6px;
-          height: 6px;
+          width: 8px;
+          height: 8px;
           border-radius: 100%;
           display: inline-block;
-          margin-left: 4px;
-          background-color: green;
+          margin-right: $gap-xs;
+          background-color: lawngreen;
         }
       }
     }

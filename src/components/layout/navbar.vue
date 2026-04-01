@@ -2,7 +2,7 @@
   import GH_LANG_COLORS from 'gh-lang-colors'
   import { ref, computed } from 'vue'
   import { useGlobalStore } from '@/store'
-  import { useTheme, Theme, THEMES } from '@/composables/theme'
+  import { useTheme, Theme } from '@/composables/theme'
   import { numberSplit, countToK } from '@/transforms/unit'
   import { getGitHubRepositoryURL, getNPMHomepageURL } from '@/transforms/url'
   import * as CONFIG from '@/config'
@@ -15,18 +15,9 @@
 
   const store = useGlobalStore()
   const theme = useTheme()
-  const toggleTheme = () => {
-    const currentIndex = THEMES.indexOf(theme.theme.value)
-    const newIndex = currentIndex === THEMES.length - 1 ? 0 : currentIndex + 1
-    theme.setTheme(THEMES[newIndex])
-  }
 
   const activatedTheme = computed(() => {
     const iconInfoMap = {
-      [Theme.System]: {
-        icon: 'icon-system-theme',
-        name: 'System theme'
-      },
       [Theme.Light]: {
         icon: 'icon-sun',
         name: 'Light theme'
@@ -101,7 +92,7 @@
         </ulink>
       </div>
       <div class="right">
-        <button class="item theme" :title="activatedTheme.name" @click="toggleTheme">
+        <button class="item theme" :title="activatedTheme.name" @click="theme.toggleTheme">
           <i class="iconfont" :class="activatedTheme.icon"></i>
         </button>
         <div class="item project">
@@ -215,8 +206,8 @@
 
 <style lang="scss" scoped>
   @use 'sass:math';
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .navbar {
     height: $navbar-height;
@@ -241,7 +232,7 @@
         height: 100%;
 
         .dot {
-          margin: 0 $xs-gap;
+          margin: 0 $gap-sm;
           color: $text-disabled;
         }
 
@@ -257,19 +248,21 @@
 
           > .text {
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 400;
           }
 
           &.github {
             .iconfont {
-              margin-right: $xs-gap;
+              margin-right: $gap-xs;
             }
           }
+
           &.repository {
             font-size: 95%;
           }
+
           &.theme {
-            margin-right: $xs-gap;
+            margin-right: $gap-sm;
             cursor: pointer;
             background: none;
             border: 0;
@@ -283,12 +276,12 @@
         &:hover {
           .mask,
           .projects {
-            @include visible();
+            @include mix.visible();
           }
         }
 
         > .text {
-          margin: 0 $xs-gap;
+          margin: 0 $gap-xs;
         }
 
         .mask {
@@ -301,8 +294,8 @@
           height: 100vh;
           backdrop-filter: blur(5px);
           pointer-events: none;
-          @include hidden();
-          @include visibility-transition();
+          @include mix.hidden();
+          @include mix.visibility-transition();
         }
 
         .projects {
@@ -315,15 +308,18 @@
           padding: $gap 0;
           border-bottom: 1px solid $border-color;
           background-color: $banner-bg;
-          @include hidden();
-          @include visibility-transition();
+          @include mix.hidden();
+          @include mix.visibility-transition();
 
           $min-height: $banner-height - $gap * 2;
+
           .container {
             min-height: $min-height;
             max-height: 68vh;
             overflow-y: auto;
+            overscroll-behavior-y: none;
           }
+
           .loading {
             width: 100%;
             min-height: $min-height;
@@ -332,7 +328,7 @@
           .topics {
             padding: 0;
             margin: 0;
-            margin-bottom: $sm-gap;
+            margin-bottom: $gap-sm;
 
             .item {
               display: inline-block;
@@ -341,8 +337,8 @@
               margin-bottom: $gap;
               height: 2rem;
               line-height: 2rem;
-              padding: 0 0.6em;
-              border-radius: $sm-radius;
+              padding: 0 0.6rem;
+              border-radius: $radius-sm;
               border: 1px solid transparent;
               background: $header-bg;
               color: $text-secondary;
@@ -358,7 +354,7 @@
               &.activated {
                 color: $text-color;
                 border-color: $text-secondary;
-                font-weight: bold;
+                font-weight: 500;
               }
             }
           }
@@ -376,8 +372,9 @@
 
             > .item {
               border: 1px solid $border-color;
-              border-radius: $lg-radius;
-              padding: $gap;
+              border-radius: $radius-md;
+              padding-inline: $gap;
+              padding-block: $gap;
               overflow: hidden;
               user-select: none;
               &.activated {
@@ -399,7 +396,7 @@
                 width: 100%;
                 height: 20px;
                 line-height: 20px;
-                margin-bottom: $sm-gap;
+                margin-bottom: $gap-sm;
 
                 .link {
                   max-width: 30%;
@@ -408,22 +405,23 @@
                   text-decoration: none;
                   text-underline-offset: 2px;
                   font-size: $font-size-base + 2;
-                  font-weight: 600;
-                  @include text-overflow();
+                  font-weight: 400;
+                  @include mix.text-overflow();
                   &:hover {
                     color: $link-color;
                     text-decoration: underline;
                   }
 
                   &.archived {
+                    color: $text-secondary;
                     text-decoration: line-through;
-                    text-decoration-thickness: inherit;
+                    text-decoration-thickness: 1px;
                   }
                 }
 
                 .repo-icon {
                   font-size: $font-size-base + 1;
-                  margin-right: $xs-gap;
+                  margin-right: $gap-xs;
                   margin-left: -2px;
                 }
 
@@ -432,7 +430,7 @@
                 }
 
                 .archived-icon {
-                  margin-left: $xs-gap;
+                  margin-left: $gap-xs;
                   padding: 0 2px;
                   opacity: 0.6;
                   color: $github-attention;
@@ -444,7 +442,7 @@
                 margin-bottom: $gap;
                 font-size: $font-size-small;
                 color: $text-secondary;
-                @include text-overflow();
+                @include mix.text-overflow();
               }
 
               .meta {
@@ -470,7 +468,7 @@
                   }
 
                   .iconfont {
-                    margin-right: $xs-gap;
+                    margin-right: $gap-xs;
                   }
 
                   &.npm {
@@ -485,7 +483,7 @@
                       width: 8px;
                       height: 8px;
                       border-radius: 50%;
-                      margin-right: $xs-gap;
+                      margin-right: $gap-xs;
                     }
                   }
                 }
@@ -498,8 +496,8 @@
                   }
 
                   .text {
-                    font-weight: bold;
-                    margin-left: $xs-gap;
+                    font-weight: 400;
+                    margin-left: $gap-xs;
                   }
                 }
               }

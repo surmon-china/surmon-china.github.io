@@ -1,9 +1,9 @@
 <script lang="ts" setup>
   import { PROJECTS } from '@/config'
-  import { useSeoMeta } from '@unhead/vue'
-  import { getExampleComponent } from '@/transforms/example'
+  import { usePageSeo } from '@/composables/head'
+  import { normalizeExample } from '@/transforms/example'
   import { getPageURL, getLegacyPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
-  import { getMetaTitle, getMetaKeywords, getMetaDescription, normalizeSeoMetaObject } from '@/transforms/meta'
+  import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import { MammonProvider } from '@/components/mammon'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
@@ -12,23 +12,22 @@
   import exampleComponent from '@examples/vue-codemirror/index.vue'
 
   const { repository, route, packages } = PROJECTS.VueCodemirror
-  const example = getExampleComponent({
+  const example = normalizeExample({
     component: exampleComponent,
     raw: '',
-    language: 'vue'
+    language: 'vue',
+    path: 'examples/vue-codemirror/index.vue'
   })
 
-  useSeoMeta(
-    normalizeSeoMetaObject({
-      title: getMetaTitle(repository),
-      keywords: getMetaKeywords(repository).join(','),
-      description: getMetaDescription(repository),
-      ogUrl: getPageURL(route),
-      ogImage: getGitHubOpenGraphImageURL(repository),
-      ogImageWidth: 1200,
-      ogImageHeight: 600
-    })
-  )
+  usePageSeo({
+    title: getMetaTitle(repository),
+    keywords: getMetaKeywords(repository).join(','),
+    description: getMetaDescription(repository),
+    ogUrl: getPageURL(route),
+    ogImage: getGitHubOpenGraphImageURL(repository),
+    ogImageWidth: 1200,
+    ogImageHeight: 600
+  })
 </script>
 
 <template>
@@ -42,7 +41,6 @@
       </template>
       <template #content>
         <homepage-card :title="example.title || example.name" :title-link="example.url">
-          <template #actions>❤︎</template>
           <component :is="example.component" />
         </homepage-card>
       </template>

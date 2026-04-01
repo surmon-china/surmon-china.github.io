@@ -1,55 +1,10 @@
-<template>
-  <div class="example">
-    <div class="toolbar">
-      <label class="case">
-        Select a case:
-        <select class="select" name="case" id="case" v-model="caseIndex">
-          <option :value="index" :key="index" v-for="(e, index) in cases">
-            {{ e.name }}
-          </option>
-        </select>
-      </label>
-      <div class="right">
-        <button class="button" @click="runClassifier" :disabled="loading">
-          <i class="iconfont icon-play"></i>
-          <span>Run code</span>
-          <span v-if="loading">&nbsp;(loading tokenizer...)</span>
-        </button>
-        <button class="button" @click="clearLog">
-          <i class="iconfont icon-close"></i>
-          <span>Clear logs</span>
-        </button>
-        <button class="button" @click="clearCode">
-          <i class="iconfont icon-close"></i>
-          <span>Clear code</span>
-        </button>
-      </div>
-    </div>
-    <div class="divider"></div>
-    <codemirror v-model="codes.disabled" :style="{ height: 'auto' }" :extensions="editorExtensions" disabled />
-    <div class="divider"></div>
-    <codemirror
-      v-model="codes.enabled"
-      :extensions="editorExtensions"
-      :style="{ minHeight: '20em', maxHeight: '40em' }"
-      autofocus
-      @ready="handleEditorReady"
-    />
-    <div class="divider"></div>
-    <div class="output">
-      <p class="title">Console</p>
-      <pre class="result">{{ log || '-' }}</pre>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
   import dedent from 'dedent'
   import { defineComponent, reactive, ref, computed, nextTick, onMounted, watch } from 'vue'
   import { Codemirror } from 'vue-codemirror'
   import { javascript } from '@codemirror/lang-javascript'
   import { oneDark } from '@codemirror/theme-one-dark'
-  import { useTheme, Theme } from '@/composables/theme'
+  import { useTheme } from '@/composables/theme'
   import case1 from './01-base'
   import case2 from './02-spam'
   import case3 from './03-news'
@@ -60,11 +15,12 @@
   export default defineComponent({
     name: 'naivebayes-example-base',
     title: 'NaiveBayes Web example',
-    url: import.meta.url,
     components: {
       Codemirror
     },
     setup() {
+      const theme = useTheme()
+
       const cases = [case1, case2, case3, case4]
       const caseIndex = ref(0)
       const codes = reactive({
@@ -89,7 +45,7 @@
       }
 
       const editorExtensions = computed(() => {
-        return [javascript(), useTheme().currentTheme.value === Theme.Dark ? oneDark : []]
+        return [javascript(), theme.isDark.value ? oneDark : []]
       })
 
       const loading = ref(false)
@@ -151,9 +107,54 @@
   })
 </script>
 
+<template>
+  <div class="example">
+    <div class="toolbar">
+      <label class="case">
+        Select a case:
+        <select class="select" name="case" id="case" v-model="caseIndex">
+          <option :value="index" :key="index" v-for="(e, index) in cases">
+            {{ e.name }}
+          </option>
+        </select>
+      </label>
+      <div class="right">
+        <button class="button" @click="runClassifier" :disabled="loading">
+          <i class="iconfont icon-play"></i>
+          <span>Run code</span>
+          <span v-if="loading">&nbsp;(loading tokenizer...)</span>
+        </button>
+        <button class="button" @click="clearLog">
+          <i class="iconfont icon-close"></i>
+          <span>Clear logs</span>
+        </button>
+        <button class="button" @click="clearCode">
+          <i class="iconfont icon-close"></i>
+          <span>Clear code</span>
+        </button>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <codemirror v-model="codes.disabled" :style="{ height: 'auto' }" :extensions="editorExtensions" disabled />
+    <div class="divider"></div>
+    <codemirror
+      v-model="codes.enabled"
+      :extensions="editorExtensions"
+      :style="{ minHeight: '20em', maxHeight: '40em' }"
+      autofocus
+      @ready="handleEditorReady"
+    />
+    <div class="divider"></div>
+    <div class="output">
+      <p class="title">Console</p>
+      <pre class="result">{{ log || '-' }}</pre>
+    </div>
+  </div>
+</template>
+
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .toolbar {
     height: 3rem;
@@ -170,13 +171,13 @@
     .button {
       margin-left: $gap;
       border: 1px solid $text-disabled;
-      border-radius: 2px;
+      border-radius: $radius-xs;
       display: inline-flex;
       align-items: center;
       background: none;
       color: $text-secondary;
       .iconfont {
-        margin-right: $xs-gap;
+        margin-right: $gap-xs;
       }
       &[disabled] {
         cursor: no-drop;
@@ -192,7 +193,7 @@
 
   .divider {
     height: 1px;
-    background-color: $border-color;
+    background-color: $border-color-secondary;
   }
 
   .output {

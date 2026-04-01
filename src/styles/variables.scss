@@ -1,7 +1,7 @@
 @use 'sass:math';
 
 // layout
-$navbar-height: 3rem;
+$navbar-height: 3.2rem;
 $banner-height: 25rem;
 $footbar-height: 4rem;
 $container-width: 960px;
@@ -24,6 +24,7 @@ $header-bg: var(--theme-header);
 $banner-bg: var(--theme-banner);
 $body-bg: var(--theme-body);
 $border-color: var(--theme-border);
+$border-color-secondary: var(--theme-border-secondary);
 
 $link-color: var(--link-color);
 $text-color: var(--text-color);
@@ -31,22 +32,46 @@ $text-secondary: var(--text-secondary);
 $text-disabled: var(--text-disabled);
 $text-divider: var(--text-divider);
 
-// sizes
-$xs-radius: 1px;
-$sm-radius: 2px;
-$lg-radius: 4px;
+// radius
+$radius-tiny: 2px;
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 12px;
 
 // times
-$transition-time: 0.15s;
+$motion-duration: 0.15s;
 
 // gaps
 $gap: 1rem; // ~14px
-$sm-gap: $gap * 0.618; // ~8.6px
-$xs-gap: math.div($sm-gap, 2); // ~4.4px
-$lg-gap: $sm-gap * 2; // ~17px
+$gap-sm: $gap * 0.618; // ~8.6px
+$gap-xs: math.div($gap-sm, 2); // ~4.4px
+$gap-lg: $gap-sm * 2; // ~17px
 
 // fonts
 $font-size-small: 12px;
 $font-size-base: 14px;
 $font-size-large: 18px;
 $font-size-huge: 22px;
+
+// font
+$global-font-weight: 300;
+$global-font-family:
+  'Lexend',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  'Noto Sans',
+  Helvetica,
+  Arial,
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji';
+
+$code-font-family:
+  ui-monospace,
+  SFMono-Regular,
+  SF Mono,
+  Menlo,
+  Consolas,
+  Liberation Mono,
+  monospace;

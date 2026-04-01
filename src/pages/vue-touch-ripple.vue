@@ -1,9 +1,9 @@
 <script lang="ts" setup>
   import { PROJECTS } from '@/config'
-  import { useSeoMeta } from '@unhead/vue'
+  import { usePageSeo } from '@/composables/head'
   import { getPageURL, getLegacyPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
-  import { getMetaTitle, getMetaKeywords, getMetaDescription, normalizeSeoMetaObject } from '@/transforms/meta'
-  import { getExampleComponent } from '@/transforms/example'
+  import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
+  import { normalizeExample } from '@/transforms/example'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
   import HomepageLink from '@/components/homepage/link.vue'
@@ -11,19 +11,17 @@
   import exampleComponents from '@examples/vue-touch-ripple'
 
   const { repository, route, packages } = PROJECTS.VueTouchRipple
-  const examples = exampleComponents.map(getExampleComponent)
+  const examples = exampleComponents.map(normalizeExample)
 
-  useSeoMeta(
-    normalizeSeoMetaObject({
-      title: getMetaTitle(repository),
-      keywords: getMetaKeywords(repository).join(','),
-      description: getMetaDescription(repository),
-      ogUrl: getPageURL(route),
-      ogImage: getGitHubOpenGraphImageURL(repository),
-      ogImageWidth: 1200,
-      ogImageHeight: 600
-    })
-  )
+  usePageSeo({
+    title: getMetaTitle(repository),
+    keywords: getMetaKeywords(repository).join(','),
+    description: getMetaDescription(repository),
+    ogUrl: getPageURL(route),
+    ogImage: getGitHubOpenGraphImageURL(repository),
+    ogImageWidth: 1200,
+    ogImageHeight: 600
+  })
 </script>
 
 <template>

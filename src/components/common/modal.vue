@@ -44,8 +44,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .modal {
     z-index: 9;
@@ -63,7 +63,7 @@
     .wrapper {
       width: 60em;
       max-width: 68vw;
-      border-radius: $sm-radius;
+      border-radius: $radius-sm;
       overflow: hidden;
 
       .title {
@@ -86,7 +86,7 @@
 
           .iconfont {
             font-size: $font-size-small;
-            margin-left: $xs-gap;
+            margin-left: $gap-xs;
           }
         }
 
@@ -107,8 +107,9 @@
         padding: 0;
         min-height: 10rem;
         max-height: 70vh;
-        overflow-y: auto;
         background-color: $banner-bg;
+        overflow-y: auto;
+        overscroll-behavior-y: none;
 
         .loading {
           height: 10rem;

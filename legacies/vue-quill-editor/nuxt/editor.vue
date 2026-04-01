@@ -16,7 +16,7 @@
 <script>
   export default {
     name: 'quill-example-nuxt',
-    data () {
+    data() {
       return {
         content: '<p>I am Example</p>',
         editorOption: {

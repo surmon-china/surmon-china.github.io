@@ -1,3 +1,14 @@
+<script lang="ts" setup>
+  import 'video.js/dist/video-js.css'
+
+  const config = defineModel<any>('config', { required: true })
+  const enabledCustomControls = defineModel<any>('enabledCustomControls', { required: true })
+
+  const props = defineProps<{
+    playbackRatesOptions: number[][]
+  }>()
+</script>
+
 <template>
   <div class="config-controls">
     <div class="item">
@@ -58,50 +69,17 @@
       <input class="value" type="checkbox" v-model="config.controls" />
     </label>
     <label class="item inline">
-      <span class="name">
-        custom controls (<code>{{ enabledCustomControls }}</code
+      <span class="name"
+        >custom controls (<code>{{ enabledCustomControls }}</code
         >)
       </span>
-      <input
-        class="value"
-        type="checkbox"
-        :checked="enabledCustomControls"
-        @change="$emit('update:enabledCustomControls', ($event.target as HTMLInputElement)?.checked)"
-      />
+      <input class="value" type="checkbox" v-model="enabledCustomControls" />
     </label>
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent, PropType } from 'vue'
-  import 'video.js/dist/video-js.css'
-
-  export const playbackRatesOptions = [
-    [1, 2, 3],
-    [0.5, 1.5, 2.5]
-  ]
-
-  export default defineComponent({
-    props: {
-      config: {
-        type: Object as PropType<any>,
-        required: true
-      },
-      enabledCustomControls: {
-        type: Boolean,
-        required: true
-      }
-    },
-    setup() {
-      return {
-        playbackRatesOptions
-      }
-    }
-  })
-</script>
-
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
+  @use '@/styles/variables.scss' as *;
 
   .config-controls {
     padding: 1rem;

@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Lexend';
+  src:
+    url('/fonts/Lexend/Lexend-VariableFont_wght.woff2') format('woff2 supports variations'),
+    url('/fonts/Lexend/Lexend-VariableFont_wght.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+// @font-face {
+//   font-family: 'Ubuntu Sans';
+//   src:
+//     url('/fonts/UbuntuSans/UbuntuSans-VariableFont_wdth,wght.woff2') format('woff2 supports variations'),
+//     url('/fonts/UbuntuSans/UbuntuSans-VariableFont_wdth,wght.woff2') format('woff2-variations');
+//   font-weight: 100 800;
+//   font-style: normal;
+//   font-display: swap;
+// }
+
+// // https://github.com/github/mona-sans
+// @font-face {
+//   font-family: 'Mona Sans';
+//   src:
+//     url('/fonts/MonaSans/MonaSansVF[wght,opsz,ital].woff2') format('woff2 supports variations'),
+//     url('/fonts/MonaSans/MonaSansVF[wght,opsz,ital].woff2') format('woff2-variations');
+//   font-weight: 200 900;
+//   font-style: normal italic;
+//   font-optical-sizing: auto;
+//   font-display: swap;
+// }

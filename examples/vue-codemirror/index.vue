@@ -23,7 +23,7 @@
 
 <script lang="ts">
   import { defineComponent, reactive, computed, shallowRef, onBeforeMount } from 'vue'
-  import { Theme, useTheme } from '@/composables/theme'
+  import { useTheme } from '@/composables/theme'
   import Loading from '@/components/common/loading.vue'
   import languages from './languages'
   import * as themes from './themes'
@@ -33,13 +33,13 @@
   export default defineComponent({
     name: 'vue-codemirror-example',
     title: 'Example Source Code',
-    url: import.meta.url,
     components: {
       Loading,
       Toolbar,
       Editor
     },
     setup() {
+      const theme = useTheme()
       const config = reactive({
         disabled: false,
         indentWithTab: true,
@@ -47,7 +47,7 @@
         autofocus: true,
         height: 'auto',
         language: 'javascript',
-        theme: useTheme().theme.value === Theme.Dark ? 'oneDark' : 'default'
+        theme: theme.isDark.value ? 'oneDark' : 'default'
       })
 
       const loading = shallowRef(false)
@@ -91,12 +91,12 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
+  @use '@/styles/variables.scss' as *;
 
   .example {
     .divider {
       height: 1px;
-      background-color: $border-color;
+      background-color: $border-color-secondary;
     }
 
     .loading-box {

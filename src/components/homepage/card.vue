@@ -10,10 +10,10 @@
   <div class="homepage-card">
     <div class="header" v-if="title">
       <ulink v-if="titleLink" :href="titleLink" class="link">
-        <span>{{ title }}</span>
+        <span class="text">{{ title }}</span>
         <i class="iconfont icon-link-external"></i>
       </ulink>
-      <span v-else>{{ title }}</span>
+      <span class="text" v-else>{{ title }}</span>
       <slot name="actions"></slot>
     </div>
     <div class="content" :class="contentClass">
@@ -23,8 +23,8 @@
 </template>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .homepage-card {
     margin-top: 2rem;
@@ -32,17 +32,20 @@
     height: auto;
     border: none;
     overflow: hidden;
-    border-radius: $sm-radius;
+    border-radius: $radius-sm;
     background-color: $banner-bg;
 
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 3.2rem;
-      border-bottom: 1px solid $border-color;
-      background-color: $header-bg;
-      padding: 0 $lg-gap;
+      height: 3rem;
+      border-bottom: 1px solid $border-color-secondary;
+      padding: 0 $gap-lg;
+
+      .text {
+        font-weight: 400;
+      }
 
       .link {
         text-decoration: none;
@@ -52,13 +55,12 @@
 
         .iconfont {
           font-size: $font-size-small;
-          margin-left: $xs-gap;
+          margin-left: $gap-xs;
         }
       }
     }
 
     .content {
-      background-color: $banner-bg;
       overflow: hidden;
     }
   }

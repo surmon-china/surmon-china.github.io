@@ -1,3 +1,5 @@
+@use './variables.scss' as *;
+
 input[type='checkbox'] {
   appearance: none;
   margin: 0;
@@ -6,7 +8,7 @@ input[type='checkbox'] {
   height: 1em;
   color: currentColor;
   border: 0.15em solid $text-secondary;
-  border-radius: 1px;
+  border-radius: $radius-tiny;
   cursor: pointer;
   font: inherit;
   display: inline-grid;
@@ -53,7 +55,7 @@ select {
   margin: 0;
   background-color: transparent;
   border: 1px solid $text-secondary;
-  border-radius: 1px;
+  border-radius: $radius-tiny;
   padding: 1px 0.2em;
   color: $text-color;
   cursor: pointer;

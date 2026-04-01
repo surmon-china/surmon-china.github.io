@@ -14,8 +14,8 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '@/styles/variables.scss';
-  @import '@/styles/mixins.scss';
+  @use '@/styles/variables.scss' as *;
+  @use '@/styles/mixins.scss' as mix;
 
   .loading {
     width: 100%;
@@ -41,13 +41,15 @@
       }
 
       div {
-        width: 18px;
-        height: 18px;
-        margin: 0 $xs-gap;
-        border-radius: $sm-radius;
+        $size: 1.6rem;
+        width: $size;
+        height: $size;
+        margin: 0 $gap-sm;
+        border-radius: $radius-xs;
         background: $body-bg;
         animation: animation 2s linear infinite;
       }
+
       div:nth-child(1) {
         animation-delay: 0s;
       }

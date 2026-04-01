@@ -1,9 +1,9 @@
 <script lang="ts" setup>
   import { PROJECTS } from '@/config'
-  import { useSeoMeta } from '@unhead/vue'
-  import { getExampleComponent } from '@/transforms/example'
+  import { usePageSeo } from '@/composables/head'
+  import { normalizeExample } from '@/transforms/example'
   import { getPageURL, getGitHubOpenGraphImageURL } from '@/transforms/url'
-  import { getMetaTitle, getMetaKeywords, getMetaDescription, normalizeSeoMetaObject } from '@/transforms/meta'
+  import { getMetaTitle, getMetaKeywords, getMetaDescription } from '@/transforms/meta'
   import { MammonProvider } from '@/components/mammon'
   import VueRenderer from '@/components/renderer/vue.vue'
   import Homepage from '@/components/homepage/index.vue'
@@ -12,19 +12,17 @@
   import exampleComponents from '@examples/videojs-player'
 
   const { repository, route, packages } = PROJECTS.VideoJsPlayer
-  const examples = exampleComponents.map(getExampleComponent)
+  const examples = exampleComponents.map(normalizeExample)
 
-  useSeoMeta(
-    normalizeSeoMetaObject({
-      title: getMetaTitle(repository),
-      keywords: getMetaKeywords(repository).join(','),
-      description: getMetaDescription(repository),
-      ogUrl: getPageURL(route),
-      ogImage: getGitHubOpenGraphImageURL(repository),
-      ogImageWidth: 1200,
-      ogImageHeight: 600
-    })
-  )
+  usePageSeo({
+    title: getMetaTitle(repository),
+    keywords: getMetaKeywords(repository).join(','),
+    description: getMetaDescription(repository),
+    ogUrl: getPageURL(route),
+    ogImage: getGitHubOpenGraphImageURL(repository),
+    ogImageWidth: 1200,
+    ogImageHeight: 600
+  })
 </script>
 
 <template>
