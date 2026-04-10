@@ -51,7 +51,7 @@
     "gh-lang-colors": "^0.1.x",
     "highlight.js": "^11.x",
     "js-base64": "^3.7.x",
-    "lodash": "^4.17.x",
+    "lodash": "^4.18.x",
     "naivebayes": "^0.5.0",
     "pinia": "^3.x",
     "react": "^19.x",
